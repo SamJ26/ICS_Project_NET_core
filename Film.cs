@@ -165,7 +165,7 @@ namespace Project_filmManagment
         /// </summary>
         public void ReadActersOfFilm()
         {
-            for (int i = 0; i < 3; ++i)
+            for (int i = 0; !String.IsNullOrEmpty(actors[i]); ++i)
                 Console.WriteLine($"{i + 1}. actor: {actors[i]}");
         }
 
