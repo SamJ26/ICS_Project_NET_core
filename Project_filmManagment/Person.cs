@@ -38,6 +38,7 @@ namespace Project_filmManagment
         // TODO: Photography ????
         // TODO: link to his profil on wiki ???
 
+        public List<Film> Movies { get; set; }
         // Default constructor which sets the values to properties when new object is created
         public Person()
         {
@@ -49,6 +50,11 @@ namespace Project_filmManagment
             moviesAsDirector = new string[10];          // Default length is 10 because of simplicity of code
             moviesAsActor_index = 0;
             moviesAsDirector_index = 0;
+            Movies.Add(new Film()
+            {
+                Director = "gdffdgf",
+                 
+            });
         }
 
         #region Properties
