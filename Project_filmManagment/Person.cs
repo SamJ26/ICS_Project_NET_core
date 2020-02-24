@@ -111,9 +111,6 @@ namespace Project_filmManagment
 
         #endregion
 
-        // TODO: write a method for reading from array moviesAsActor according to index -- probably not needed
-        // TODO: write a method for removing actors from the array moviesAsActor
-
         // TODO: write a method for reading from array moviesAsDirector according to index -- probably not needed
         // TODO: write a method for removing actors from the array moviesAsDirector
 
