@@ -4,24 +4,7 @@ using System.Text;
 
 namespace Project_filmManagment
 {
-    // TODO: where to place this enum variable ???
-    /// <summary>
-    /// Enum type for genres
-    /// </summary>
-    enum Genre
-    {
-        Undefined,
-        ActionFilm,
-        AdventureFilm,
-        ComedyFilm,
-        HorrorFilm,
-        HistoricalFilm,
-        DocumentaryFilm,
-        DramaFilm,
-        ScienceFilm,
-        WarFilm
-    }
-
+   
     /// <summary>
     /// This class contains all informations about film
     /// For every new film, new object from this class need to be created
@@ -33,19 +16,22 @@ namespace Project_filmManagment
         string czechName;
         Genre genreOfFilm;
         int lengthInMinutes;
+        string directorsName;
         string countryOfOrigin;
         string description;
-        object rating;                  // This reference variable will point at description which belongs to the film
-        int numberOfRatings;            // When new rating to the film is added, this variable will be incremented
-        int sumOfAllAddedRatings;       // This varaible holds sum of all added ratings in percent
-        int overallRatingInPercents;    // This variable is overall rating and is always changed when new rating to the film is added
-                                        // overallRatingInPercents = sumOfAllAddedRatings / numberOfRatigns
-                                        // e.g.: 85% = ( 80% + 90% ) / 2
+        int numberOfRatings;                            // When new rating to the film is added, this variable will be incremented
+        int sumOfAllAddedRatings;                       // This varaible holds sum of all added ratings in percent
+        int overallRatingInPercents;                    // This variable is overall rating and is always changed when new rating to the film is added
+                                                        // overallRatingInPercents = sumOfAllAddedRatings / numberOfRatigns
+                                                        // e.g.: 85% = ( 80% + 90% ) / 2
+        
 
-        string[] actors;                // In this array will be stored all actors, which played in the film       
-        int actors_index;               // Keep track of index in array actors
+        // TODO: After creating new class Actor uncomment this line of code
+        // Auto properties
+        //public List<Actor> Actors { get; set; }       // This list contains all actors which played in the film
 
-        string director;                // TODO: could be there more than one director ???
+        // TODO: will be there just one rating to one film or more ?
+        //public List<Rating> Ratings { get; set; }     // This list contains all ratings of the film
 
         // Default constructor
         public Film()
@@ -54,12 +40,9 @@ namespace Project_filmManagment
             czechName = string.Empty;
             genreOfFilm = Genre.Undefined;
             lengthInMinutes = 0;
+            directorsName = string.Empty;
             countryOfOrigin = string.Empty;
             description = string.Empty;
-            rating = null;
-            actors = new string[10];                // Default length is 10 because of simplicity of code
-            actors_index = 0;
-            director = string.Empty;
             numberOfRatings = 0;
             sumOfAllAddedRatings = 0;
             overallRatingInPercents = 0;
@@ -70,104 +53,74 @@ namespace Project_filmManagment
         // Methods for getting and setting the content of orignalName
         public string OriginalName
         {
-            get { return orignalName; }
-            set { orignalName = value; }
+            get => orignalName;
+            set => orignalName = value;
         }
 
         // Methods for getting and setting the content of czechName
         public string CzechName
         {
-            get { return czechName; }
-            set { czechName = value; }
+            get => czechName;
+            set => czechName = value;
         }
 
         // Methods for getting and setting the content of genreOfFilm
         public Genre GenreOfFilm
         {
-            get { return genreOfFilm; }
-            set { genreOfFilm = value; }
+            get => genreOfFilm;
+            set => genreOfFilm = value;
         }
 
         // Methods for getting and setting the value of lengthInMinutes
         public int LengthInMinutes
         {
-            get { return lengthInMinutes; }
-            set { lengthInMinutes = value; }
+            get => lengthInMinutes;
+            set => lengthInMinutes = value;
+        }
+
+        // Methods for getting and setting the content of director
+        public string DirectorsName
+        {
+            get => directorsName;
+            set => directorsName = value;
         }
 
         // Methods for getting and setting the content of countryOfOrigin
         public string CountryOfOrigin
         {
-            get { return countryOfOrigin; }
-            set { countryOfOrigin = value; }
+            get => countryOfOrigin;
+            set => countryOfOrigin = value;
         }
 
         // Methods for getting and setting the content of description
         public string Description
         {
-            get { return description; }
-            set { description = value; }
-        }
-
-        // Method for getting and setting the content of rating
-        // If rating to film is added, new object from class Ratings is created and reference to this object is saved
-        public object Rating
-        {
-            get { return rating; }
-            set { rating = value; }
-        }
-
-        // Method for setting the content of array actors
-        public string Actors
-        {
-            set
-            {
-                if (actors_index >= 0 && actors_index < actors.Length)
-                    actors[actors_index] = value;
-                ++actors_index;
-            }
-        }
-
-        // Methods for getting and setting the content of director
-        public string Director
-        {
-            get { return director; }
-            set { director = value; }
+            get => description;
+            set => description = value;
         }
 
         // Methods for getting and setting the value of numberOfRatings
         public int NumberOfRatings
         {
-            get { return numberOfRatings; }
-            set { numberOfRatings = value; }
+            get => numberOfRatings;
+            set => numberOfRatings = value;
         }
 
         // Methods for getting and setting the value of overallRatingInPercents
         public int OverallRatingInPercents
         {
-            get { return overallRatingInPercents; }
-            set { overallRatingInPercents = value; }
+            get => overallRatingInPercents;
+            set => overallRatingInPercents = value;
         }
 
         // Methods for getting and setting the value of sumOfAllAddedRatings
         public int SumOfAllAddedRatings
         {
-            get { return sumOfAllAddedRatings; }
-            set { sumOfAllAddedRatings = value; }
+            get => sumOfAllAddedRatings;
+            set => sumOfAllAddedRatings = value;
         }
 
         #endregion
-
-        // TODO: These functions are always created when new film is added and that is not very effective ... any improvement ???
-
-        /// <summary>
-        /// Method for printing out names of actors of chosen film
-        /// </summary>
-        public void ReadActersOfFilm()
-        {
-            for (int i = 0; !String.IsNullOrEmpty(actors[i]); ++i)
-                Console.WriteLine($"{i + 1}. actor: {actors[i]}");
-        }
 
         /// <summary>
         /// Method for calculation of overall rating of the film
@@ -181,8 +134,8 @@ namespace Project_filmManagment
             return sumOfAllAddedRatings / numberOfRatings;
         }
 
-        // TODO: write a method for reading from array actors according to index
-        // TODO: write a method for removing actors from the array actors
+        // TODO: write a method for reading from list Actors according to index
+        // TODO: write a method for removing actors from the list Actors
 
     }
 }

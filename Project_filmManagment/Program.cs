@@ -16,21 +16,18 @@ namespace Project_filmManagment
             Film_1.GenreOfFilm = Genre.ComedyFilm;
             Film_1.LengthInMinutes = 95;
             Film_1.Description = "Uzasny film plny konov a psov";
-            Film_1.Director = "Alfonz Hlina";
+            Film_1.DirectorsName = "Alfonz Hlina";
 
-            // Adding actors to Film_1
-            Film_1.Actors = "Actor_1";
-            Film_1.Actors = "Actor_2";
-            Film_1.Actors = "Actor_3";
+            // TODO: Adding actors to Film_1
 
-            // Adding rating of the film
-            Ratings Film_1_rating = new Ratings();
-            Film_1.Rating = Film_1_rating;
-            Film_1_rating.RatingInPercents = 80;
-            Film_1_rating.TextRating = "It was really amazing film";
-            Film_1.NumberOfRatings++;
-            Film_1.SumOfAllAddedRatings += Film_1_rating.RatingInPercents;
-            Film_1.OverallRatingInPercents = Film_1.CalculateOverallRating();
+            //// Adding rating of the film
+            //Rating Film_1_rating = new Rating();
+            //Film_1.Rating = Film_1_rating;
+            //Film_1_rating.RatingInPercents = 80;
+            //Film_1_rating.TextRating = "It was really amazing film";
+            //Film_1.NumberOfRatings++;
+            //Film_1.SumOfAllAddedRatings += Film_1_rating.RatingInPercents;
+            //Film_1.OverallRatingInPercents = Film_1.CalculateOverallRating();
 
             // Creating new object ( person ) for director "Alfonz Hlina"
             Person Director_AlfonzHlina = new Person();
@@ -44,7 +41,6 @@ namespace Project_filmManagment
             Director_AlfonzHlina.MoviesAsDirector = "Nejaky dalsi film ktory reziroval";
 
             // Testing printout of actors, which played in Film_1:
-            Film_1.ReadActersOfFilm();
             Console.ReadKey();
 
             // CONTINUE: write a class GraphicInterface ( maybe ?? ) which will contain two arrays and functions for working with them
