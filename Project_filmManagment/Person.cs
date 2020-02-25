@@ -4,19 +4,9 @@ using System.Text;
 
 namespace Project_filmManagment
 {
-    // TODO: where to place this enum variable ???
-    /// <summary>
-    /// Enum type for determining if the person is actor or director
-    /// Default value which is assing to new person is undefined
-    /// </summary>
-    enum TypeOfPerson
-    {
-        Undefined,
-        Actor,
-        Director
-    }
 
-    // TODO: Using just one class like this ? or two classes  ? or 3 classes and inherit informations from one main class.
+    // TODO: add new class Actor and class Director and use heritage for them
+
     /// <summary>
     /// This class contains all informations about actors and directors
     /// For every new person, new object from this class need to be created
@@ -38,7 +28,6 @@ namespace Project_filmManagment
         // TODO: Photography ????
         // TODO: link to his profil on wiki ???
 
-        public List<Film> Movies { get; set; }
         // Default constructor which sets the values to properties when new object is created
         public Person()
         {
@@ -50,11 +39,6 @@ namespace Project_filmManagment
             moviesAsDirector = new string[10];          // Default length is 10 because of simplicity of code
             moviesAsActor_index = 0;
             moviesAsDirector_index = 0;
-            Movies.Add(new Film()
-            {
-                Director = "gdffdgf",
-                 
-            });
         }
 
         #region Properties
@@ -110,9 +94,6 @@ namespace Project_filmManagment
         }
 
         #endregion
-
-        // TODO: write a method for reading from array moviesAsDirector according to index -- probably not needed
-        // TODO: write a method for removing actors from the array moviesAsDirector
 
     }
 }
