@@ -12,7 +12,7 @@ namespace Project_filmManagment
     /// For every new person, new object from this class need to be created
     /// Both actors and directors have the same class because of simplicity in database mapping
     /// </summary>
-    class Person
+    abstract class Person
     {
         // Private fields of the class ( they are private by default )
         string firstName;
