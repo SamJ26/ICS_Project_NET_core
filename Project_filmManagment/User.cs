@@ -4,17 +4,20 @@ using System.Text;
 
 namespace Project_filmManagment
 {
+    // TODO: add option to choose users defined graphic settings such as colours etc.
 
-    // TODO: add heritage from class Person
-
-    class Users
+    /// <summary>
+    /// This class contains informations about users of application 
+    /// </summary>
+    internal class User : Person
     {
         // Private fields of the class
         string nickName;
         string password;
         
         // Default constructor
-        public Users()
+        // For changing default value null in string to string.Empty
+        public User()
         {
             nickName = string.Empty;
             password = string.Empty;
@@ -37,5 +40,6 @@ namespace Project_filmManagment
         }
 
         #endregion
+
     }
 }

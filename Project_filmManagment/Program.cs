@@ -19,32 +19,9 @@ namespace Project_filmManagment
             Film_1.DirectorsName = "Alfonz Hlina";
 
             // TODO: Adding actors to Film_1
+            // TOOD: Add rating to Film_1
 
-            //// Adding rating of the film
-            //Rating Film_1_rating = new Rating();
-            //Film_1.Rating = Film_1_rating;
-            //Film_1_rating.RatingInPercents = 80;
-            //Film_1_rating.TextRating = "It was really amazing film";
-            //Film_1.NumberOfRatings++;
-            //Film_1.SumOfAllAddedRatings += Film_1_rating.RatingInPercents;
-            //Film_1.OverallRatingInPercents = Film_1.CalculateOverallRating();
-
-            // Creating new object ( person ) for director "Alfonz Hlina"
-            //Person Director_AlfonzHlina = new Person();
-            //Director_AlfonzHlina.PersonsJob = TypeOfPerson.Director;
-            //Director_AlfonzHlina.FirstName = "Alfonz";
-            //Director_AlfonzHlina.SecondName = "Hlina";
-            //Director_AlfonzHlina.Age = 40;
-            //Director_AlfonzHlina.MoviesAsActor = "Nejaky nazov filmu";
-            //Director_AlfonzHlina.MoviesAsActor = "Nejaky druhy nazov filmu";
-            //Director_AlfonzHlina.MoviesAsDirector = Film_1.CzechName;
-            //Director_AlfonzHlina.MoviesAsDirector = "Nejaky dalsi film ktory reziroval";
-
-            // Testing printout of actors, which played in Film_1:
             Console.ReadKey();
-
-            // CONTINUE: write a class GraphicInterface ( maybe ?? ) which will contain two arrays and functions for working with them
-            // TODO: need to be used array to store all films together or it will be managed via database
 
         }
     }
