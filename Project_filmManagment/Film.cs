@@ -40,9 +40,11 @@ namespace Project_filmManagment
             directorsName = string.Empty;
             countryOfOrigin = string.Empty;
             description = string.Empty;
-            numberOfRatings = 0;
             sumOfAllAddedRatings = 0;
             overallRatingInPercents = 0;
+            Actors = new List<Actor>();
+            Ratings = new List<Rating>();
+            numberOfRatings = 0;
         }
 
         #region Properties
@@ -129,6 +131,28 @@ namespace Project_filmManagment
             if (numberOfRatings == 0)
                 return 0;
             return sumOfAllAddedRatings / numberOfRatings;
+        }
+
+        public void ReadInfo()
+        {
+            Console.WriteLine("Originalni nazev filmu: "+OriginalName);
+            Console.WriteLine("Cesky nazev: "+CzechName);
+            Console.WriteLine("Zanr filmu: "+GenreOfFilm);
+            Console.WriteLine("Delka filmu: "+lengthInMinutes);
+            Console.WriteLine("Reziser filmu: "+directorsName);
+            Console.WriteLine("Popis Filmu: "+description); 
+            Console.WriteLine("Pocet recenzi: "+Ratings.Count);
+            Console.WriteLine("Celkove hodnoceni: "+overallRatingInPercents);
+            int NumA = Actors.Count;
+            for (int i = 0; i < NumA; i++)
+            {
+                Console.WriteLine("Herci ve filmu: "+Actors[i].FirstName+" "+Actors[i].SecondName);
+            }
+            int NumR = Ratings.Count;
+            for (int i = 0; i < NumR; i++)
+            {
+                Console.WriteLine("Hodnoceni filmu: " + Ratings[i].RatingInPercents + "% - " + Ratings[i].TextRating);
+            }
         }
 
     }
