@@ -4,7 +4,6 @@ using System.Text;
 
 namespace Project_filmManagment
 {
-   
     /// <summary>
     /// This class contains all informations about film
     /// For every new film, new object from this class need to be created
@@ -25,15 +24,13 @@ namespace Project_filmManagment
                                                         // overallRatingInPercents = sumOfAllAddedRatings / numberOfRatigns
                                                         // e.g.: 85% = ( 80% + 90% ) / 2
         
-
-        // TODO: After creating new class Actor uncomment this line of code
         // Auto properties
-        //public List<Actor> Actors { get; set; }       // This list contains all actors which played in the film
-
-        // TODO: will be there just one rating to one film or more ?
-        //public List<Rating> Ratings { get; set; }     // This list contains all ratings of the film
+        // If you add new actor to the film, new object Actor is created and you can specify details about him/her
+        public List<Actor> Actors { get; set; }
+        public List<Rating> Ratings { get; set; }
 
         // Default constructor
+        // Changes variables of type string from default value null to string.Empty
         public Film()
         {
             orignalName = string.Empty;
@@ -133,9 +130,6 @@ namespace Project_filmManagment
                 return 0;
             return sumOfAllAddedRatings / numberOfRatings;
         }
-
-        // TODO: write a method for reading from list Actors according to index
-        // TODO: write a method for removing actors from the list Actors
 
     }
 }

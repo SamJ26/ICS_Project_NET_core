@@ -4,18 +4,30 @@ using System.Text;
 
 namespace Project_filmManagment
 {
-    class Director : Person
+    /// <summary>
+    /// This class contains informations about added director
+    /// </summary>
+    internal class Director : Person
     {
+        // Private fields
         string urlWiki;
+
         // TODO: Add photography
+
         // Auto properties
         public List<string> DirectedMovies { get; set; }
         public List<string> ActedMovies { get; set; }
+
+        // Default constructor
+        // Changes defualt value in urlWiki from null to string.Empty and creates new lists
         public Director()
         {
             urlWiki = string.Empty;
+            DirectedMovies = new List<string>();
+            ActedMovies = new List<string>();
         }
-        #region properties
+
+        #region Properties
 
         public string UrlWiki
         {
@@ -26,5 +38,4 @@ namespace Project_filmManagment
         #endregion
 
     }
-
 }
