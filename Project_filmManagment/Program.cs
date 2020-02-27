@@ -30,15 +30,15 @@ namespace Project_filmManagment
             //Film_1.OverallRatingInPercents = Film_1.CalculateOverallRating();
 
             // Creating new object ( person ) for director "Alfonz Hlina"
-            Person Director_AlfonzHlina = new Person();
-            Director_AlfonzHlina.PersonsJob = TypeOfPerson.Director;
-            Director_AlfonzHlina.FirstName = "Alfonz";
-            Director_AlfonzHlina.SecondName = "Hlina";
-            Director_AlfonzHlina.Age = 40;
-            Director_AlfonzHlina.MoviesAsActor = "Nejaky nazov filmu";
-            Director_AlfonzHlina.MoviesAsActor = "Nejaky druhy nazov filmu";
-            Director_AlfonzHlina.MoviesAsDirector = Film_1.CzechName;
-            Director_AlfonzHlina.MoviesAsDirector = "Nejaky dalsi film ktory reziroval";
+            //Person Director_AlfonzHlina = new Person();
+            //Director_AlfonzHlina.PersonsJob = TypeOfPerson.Director;
+            //Director_AlfonzHlina.FirstName = "Alfonz";
+            //Director_AlfonzHlina.SecondName = "Hlina";
+            //Director_AlfonzHlina.Age = 40;
+            //Director_AlfonzHlina.MoviesAsActor = "Nejaky nazov filmu";
+            //Director_AlfonzHlina.MoviesAsActor = "Nejaky druhy nazov filmu";
+            //Director_AlfonzHlina.MoviesAsDirector = Film_1.CzechName;
+            //Director_AlfonzHlina.MoviesAsDirector = "Nejaky dalsi film ktory reziroval";
 
             // Testing printout of actors, which played in Film_1:
             Console.ReadKey();
