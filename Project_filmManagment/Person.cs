@@ -7,7 +7,7 @@ namespace Project_filmManagment
     /// <summary>
     /// This is the base class for subclasses Director, Actor and User which inherit from this one
     /// </summary>
-    abstract internal class Person
+    abstract public class Person
     {
         // Private fields of the class ( they are private by default )
         string firstName;

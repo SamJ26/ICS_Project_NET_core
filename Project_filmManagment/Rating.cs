@@ -8,7 +8,7 @@ namespace Project_filmManagment
     /// This class contains user's rating of one film.
     /// For every new film rating, new object from this class need to be created
     /// </summary>
-    internal class Rating
+    public class Rating
     {
         // Private fields of the class ( they are private by default )
         int ratingInPercents;
