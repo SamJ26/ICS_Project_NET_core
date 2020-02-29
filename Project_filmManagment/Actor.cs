@@ -7,7 +7,7 @@ namespace Project_filmManagment
     /// <summary>
     /// This class contains information about added actor
     /// </summary>
-    internal class Actor : Person
+    public class Actor : Person
     {
         // Private fields of the class
         string urlWiki;
@@ -36,6 +36,18 @@ namespace Project_filmManagment
         }
 
         #endregion
+
+        public void ReadInfo()
+        {
+            Console.WriteLine("Jmeno herce:                 " + FirstName + " " + SecondName);
+            Console.WriteLine("Vek herce:                   " + Age);
+            Console.WriteLine("Odkaz na zivotopis rezisera: " + UrlWiki);
+            int AMovies = ActedMovies.Count;
+            for (int i = 0; i < AMovies; i++)
+            {
+                Console.WriteLine("Hral ve filmu:               " + ActedMovies[i]);
+            }
+        }
 
     }
 }

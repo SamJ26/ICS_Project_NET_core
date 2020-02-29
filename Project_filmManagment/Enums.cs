@@ -7,7 +7,7 @@ namespace Project_filmManagment
     /// <summary>
     /// Enum type for genres
     /// </summary>
-    internal enum Genre
+    public enum Genre
     {
         Undefined,
         ActionFilm,
