@@ -38,22 +38,5 @@ namespace Project_filmManagment
 
         #endregion
 
-        public void ReadInfo()
-        {
-            Console.WriteLine("Jmeno rezisera:              " + FirstName + " " + SecondName);
-            Console.WriteLine("Vek rezisera:                " + Age);
-            Console.WriteLine("Odkaz na zivotopis rezisera: " + UrlWiki);
-            int DMovies = DirectedMovies.Count;
-            for (int i = 0; i < DMovies; i++)
-            {
-                Console.WriteLine("Reziroval film:              " + DirectedMovies[i]);
-            }
-            int AMovies = ActedMovies.Count;
-            for (int i = 0; i < AMovies; i++)
-            {
-                Console.WriteLine("Hral ve filmu:               " + ActedMovies[i]);
-            }
-        }
-
     }
 }
