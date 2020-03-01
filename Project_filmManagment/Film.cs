@@ -132,28 +132,5 @@ namespace Project_filmManagment
                 return 0;
             return sumOfAllAddedRatings / numberOfRatings;
         }
-
-        public void ReadInfo()
-        {
-            Console.WriteLine("Originalni nazev filmu: " + OriginalName);
-            Console.WriteLine("Cesky nazev:            " + CzechName);
-            Console.WriteLine("Zanr filmu:             " + GenreOfFilm);
-            Console.WriteLine("Delka filmu:            " + lengthInMinutes);
-            Console.WriteLine("Reziser filmu:          " + directorsName);
-            Console.WriteLine("Popis Filmu:            " + description); 
-            Console.WriteLine("Pocet recenzi:          " + Ratings.Count);
-            Console.WriteLine("Celkove hodnoceni:      " + overallRatingInPercents);
-            int NumA = Actors.Count;
-            for (int i = 0; i < NumA; i++)
-            {
-                Console.WriteLine("Herci ve filmu:         " + Actors[i].FirstName + " " + Actors[i].SecondName);
-            }
-            int NumR = Ratings.Count;
-            for (int i = 0; i < NumR; i++)
-            {
-                Console.WriteLine("Hodnoceni filmu:        " + Ratings[i].RatingInPercents + "% - " + Ratings[i].TextRating);
-            }
-        }
-
     }
 }
