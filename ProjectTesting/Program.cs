@@ -52,7 +52,6 @@ namespace ProjectTesting
             rating_1.TextRating = "Prumerny film";
 
             Film_1.Ratings.Add(rating_1);
-            Film_1.NumberOfRatings++;
             Film_1.SumOfAllAddedRatings += rating_1.RatingInPercents;
             Film_1.SumOfAllAddedRatings = Film_1.CalculateOverallRating();
 
@@ -104,7 +103,6 @@ namespace ProjectTesting
             rating_2.TextRating = "Awesome introduction to Mavrel Cinematic Universe!!!";
 
             Film_2.Ratings.Add(rating_2);
-            Film_2.NumberOfRatings++;
             Film_2.SumOfAllAddedRatings += rating_2.RatingInPercents;
             Film_2.SumOfAllAddedRatings = Film_2.CalculateOverallRating();
 

@@ -8,13 +8,12 @@ namespace Project_filmManagment
     /// This class contains information about added actor
     /// </summary>
     public class Actor : Person
-    {
-        // Private fields of the class
-        string urlWiki;
-
+    {  
+        // Auto properties
+        public string UrlWiki { get; set; }
+       
         // TODO: Add photography
 
-        // Auto property
         // Type is string and not Film beacuse we don't want to create new Film every time we add some to this list
         public List<string> ActedMovies { get; set; }
 
@@ -22,20 +21,8 @@ namespace Project_filmManagment
         // Changes default value null in urlWiki to string.Empty and creates new List
         public Actor()
         {
-            urlWiki = string.Empty;
+            UrlWiki = string.Empty;
             ActedMovies = new List<string>();
         }
-
-        #region Properties
-
-        // Methods for getting and setting the value of variable urlWiki
-        public string UrlWiki
-        {
-            get => urlWiki;
-            set => urlWiki = value;
-        }
-
-        #endregion
-
     }
 }

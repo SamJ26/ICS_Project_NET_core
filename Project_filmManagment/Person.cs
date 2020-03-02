@@ -9,43 +9,17 @@ namespace Project_filmManagment
     /// </summary>
     abstract public class Person
     {
-        // Private fields of the class ( they are private by default )
-        string firstName;
-        string secondName;
-        int age;    
+        // Auto properties
+        public string FirstName { get; set; }
+        public string SecondName { get; set; }
+        public int Age { get; set; }
 
         // Default constructor
         public Person()
         {
-            firstName = string.Empty;
-            secondName = string.Empty;
-            age = 0;        
+            FirstName = string.Empty;
+            SecondName = string.Empty;
+            Age = 0;        
         }
-
-        #region Properties
-
-        // Methods for getting and setting the content of variable firstName
-        public string FirstName
-        {
-            get => firstName;
-            set => firstName = value;
-        }
-
-        // Methods for getting and setting the content of variable secondName
-        public string SecondName
-        {
-            get => secondName; 
-            set => secondName = value; 
-        }
-
-        // Methods for getting and setting the value of variable age
-        public int Age
-        {
-            get => age; 
-            set => age = value; 
-        }
-
-        #endregion
-
     }
 }

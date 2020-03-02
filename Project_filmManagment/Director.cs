@@ -9,34 +9,21 @@ namespace Project_filmManagment
     /// </summary>
     public class Director : Person
     {
-        // Private fields
-        string urlWiki;
-
-        // TODO: Add photography
-
         // Auto properties
+        public string UrlWiki { get; set; }
         public List<string> DirectedMovies { get; set; }
         public List<string> ActedMovies { get; set; }
 
+        // TODO: Add photography
+
+
         // Default constructor
-        // Changes defualt value in urlWiki from null to string.Empty and creates new lists
+        // Changes defualt value in UrlWiki from null to string.Empty and creates new lists
         public Director()
         {
-            urlWiki = string.Empty;
+            UrlWiki = string.Empty;
             DirectedMovies = new List<string>();
             ActedMovies = new List<string>();
         }
-
-        #region Properties
-
-        // Methods for getting and setting the value of variable urlWiki
-        public string UrlWiki
-        {
-            get => urlWiki;
-            set => urlWiki = value;
-        }
-
-        #endregion
-
     }
 }

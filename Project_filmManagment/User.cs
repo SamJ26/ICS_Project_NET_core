@@ -11,35 +11,16 @@ namespace Project_filmManagment
     /// </summary>
     internal class User : Person
     {
-        // Private fields of the class
-        string nickName;
-        string password;
-        
+        // Auto properties
+        public string NickName { get; set; }
+        public string Password { get; set; }
+
         // Default constructor
         // For changing default value null in string to string.Empty
         public User()
         {
-            nickName = string.Empty;
-            password = string.Empty;
+            NickName = string.Empty;
+            Password = string.Empty;
         }
-
-        #region Properties
-
-        // Methods for getting and setting the value of variable nickName
-        public string NickName
-        {
-            get => nickName;
-            set => nickName = value;
-        }
-
-        // Methods for getting and setting the value of variable password
-        public string Password
-        {
-            get => password; 
-            set => password = value; 
-        }
-
-        #endregion
-
     }
 }
