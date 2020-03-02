@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Project_filmManagment
 {
@@ -10,116 +9,40 @@ namespace Project_filmManagment
     /// </summary>
     public class Film
     {
-        // Private fields of the class ( they are private by default )
-        string orignalName;
-        string czechName;
-        Genre genreOfFilm;
-        int lengthInMinutes;
-        string directorsName;
-        string countryOfOrigin;
-        string description;
-        int numberOfRatings;                            // When new rating to the film is added, this variable will be incremented
-        int sumOfAllAddedRatings;                       // This varaible holds sum of all added ratings in percent
-        int overallRatingInPercents;                    // This variable is overall rating and is always changed when new rating to the film is added
-                                                        // overallRatingInPercents = sumOfAllAddedRatings / numberOfRatigns
-                                                        // e.g.: 85% = ( 80% + 90% ) / 2
-        
         // Auto properties
+        public string OriginalName { get; set; }
+        public string CzechName { get; set; }
+        public string DirectorsName { get; set; }
+        public string CountryOfOrigin { get; set; }
+        public string Description { get; set; }
+        public string Image_filePath { get; set; }
+        public Genre GenreOfFilm { get; set; }
+        public int LengthInMinutes { get; set; }
+        public int SumOfAllAddedRatings { get; set; }                       // This varaible holds sum of all added ratings to the film
+        public int OverallRatingInPercents { get; set; }                    // This variable is overall rating and is always changed when new rating to the film is added
+                                                                            // overallRatingInPercents = sumOfAllAddedRatings / Ratings.Count
+
         // If you add new actor to the film, new object Actor is created and you can specify details about him/her
         public List<Actor> Actors { get; set; }
         public List<Rating> Ratings { get; set; }
 
         // Default constructor
-        // Changes variables of type string from default value null to string.Empty
+        // Changes variables of type string from default value null to string.Empty to avoid errors
         public Film()
         {
-            orignalName = string.Empty;
-            czechName = string.Empty;
-            genreOfFilm = Genre.Undefined;
-            lengthInMinutes = 0;
-            directorsName = string.Empty;
-            countryOfOrigin = string.Empty;
-            description = string.Empty;
-            sumOfAllAddedRatings = 0;
-            overallRatingInPercents = 0;
-            Actors = new List<Actor>();
-            Ratings = new List<Rating>();
-            numberOfRatings = 0;
+            OriginalName = string.Empty;
+            CzechName = string.Empty;
+            DirectorsName = string.Empty;
+            CountryOfOrigin = string.Empty;
+            Description = string.Empty;
+            Image_filePath = string.Empty;
+            GenreOfFilm = Genre.Undefined;
+            LengthInMinutes = 0;
+            SumOfAllAddedRatings = 0;
+            OverallRatingInPercents = 0;
+            Actors = new List<Actor>();                                     // Creating new list for actors
+            Ratings = new List<Rating>();                                   // Creating new list for ratings
         }
-
-        #region Properties
-
-        // Methods for getting and setting the content of orignalName
-        public string OriginalName
-        {
-            get => orignalName;
-            set => orignalName = value;
-        }
-
-        // Methods for getting and setting the content of czechName
-        public string CzechName
-        {
-            get => czechName;
-            set => czechName = value;
-        }
-
-        // Methods for getting and setting the content of genreOfFilm
-        public Genre GenreOfFilm
-        {
-            get => genreOfFilm;
-            set => genreOfFilm = value;
-        }
-
-        // Methods for getting and setting the value of lengthInMinutes
-        public int LengthInMinutes
-        {
-            get => lengthInMinutes;
-            set => lengthInMinutes = value;
-        }
-
-        // Methods for getting and setting the content of director
-        public string DirectorsName
-        {
-            get => directorsName;
-            set => directorsName = value;
-        }
-
-        // Methods for getting and setting the content of countryOfOrigin
-        public string CountryOfOrigin
-        {
-            get => countryOfOrigin;
-            set => countryOfOrigin = value;
-        }
-
-        // Methods for getting and setting the content of description
-        public string Description
-        {
-            get => description;
-            set => description = value;
-        }
-
-        // Methods for getting and setting the value of numberOfRatings
-        public int NumberOfRatings
-        {
-            get => numberOfRatings;
-            set => numberOfRatings = value;
-        }
-
-        // Methods for getting and setting the value of overallRatingInPercents
-        public int OverallRatingInPercents
-        {
-            get => overallRatingInPercents;
-            set => overallRatingInPercents = value;
-        }
-
-        // Methods for getting and setting the value of sumOfAllAddedRatings
-        public int SumOfAllAddedRatings
-        {
-            get => sumOfAllAddedRatings;
-            set => sumOfAllAddedRatings = value;
-        }
-
-        #endregion
 
         /// <summary>
         /// Method for calculation of overall rating of the film
@@ -128,9 +51,9 @@ namespace Project_filmManagment
         /// <returns></returns>
         public int CalculateOverallRating()
         {
-            if (numberOfRatings == 0)
+            if (Ratings.Count == 0)
                 return 0;
-            return sumOfAllAddedRatings / numberOfRatings;
+            return SumOfAllAddedRatings / Ratings.Count;
         }
     }
 }
