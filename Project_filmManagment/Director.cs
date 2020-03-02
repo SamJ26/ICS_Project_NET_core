@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Project_filmManagment
 {
@@ -11,17 +10,18 @@ namespace Project_filmManagment
     {
         // Auto properties
         public string UrlWiki { get; set; }
+        public string Photo_filePath { get; set; }
+
+        // Type is string and not Film beacuse we don't want to create and specify new Film every time we add some to this list
         public List<string> DirectedMovies { get; set; }
         public List<string> ActedMovies { get; set; }
-
-        // TODO: Add photography
-
 
         // Default constructor
         // Changes defualt value in UrlWiki from null to string.Empty and creates new lists
         public Director()
         {
             UrlWiki = string.Empty;
+            Photo_filePath = string.Empty;
             DirectedMovies = new List<string>();
             ActedMovies = new List<string>();
         }
