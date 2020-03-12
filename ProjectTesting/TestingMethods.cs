@@ -1,7 +1,6 @@
 ﻿using System;
-using Project_filmManagment;
-using System.Collections.Generic;
-using System.Text;
+using Project_filmManagment.Entities;
+using Project_filmManagment.Enums;
 
 namespace ProjectTesting
 {
@@ -14,7 +13,7 @@ namespace ProjectTesting
         /// Method for printing out informations about the film
         /// </summary>
         /// <param name="aFilm"> Name of the film which you want to know information about </param>
-        public static void ReadInfo_Film(Film aFilm)
+        public static void ReadInfo_Film(FilmEntity aFilm)
         {
             Console.WriteLine("Originalni nazev filmu: " + aFilm.OriginalName);
             Console.WriteLine("Cesky nazev:            " + aFilm.CzechName);
@@ -41,7 +40,7 @@ namespace ProjectTesting
         /// Method for printing out informations about the director
         /// </summary>
         /// <param name="aDirector"> Name of the director which you want to know information about </param>
-        public static void ReadInfo_Director(Director aDirector)
+        public static void ReadInfo_Director(DirectorEntity aDirector)
         {
             Console.WriteLine("Jmeno rezisera:              " + aDirector.FirstName + " " + aDirector.SecondName);
             Console.WriteLine("Vek rezisera:                " + aDirector.Age);
@@ -63,7 +62,7 @@ namespace ProjectTesting
         /// Method for printing out informations about the actor
         /// </summary>
         /// <param name="aActor">  Name of the actor which you want to know information about </param>
-        public static void ReadInfo_Actor(Actor aActor)
+        public static void ReadInfo_Actor(ActorEntity aActor)
         {
             Console.WriteLine("Jmeno herce:                 " + aActor.FirstName + " " + aActor.SecondName);
             Console.WriteLine("Vek herce:                   " + aActor.Age);

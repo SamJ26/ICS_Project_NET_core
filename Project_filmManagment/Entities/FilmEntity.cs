@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using Project_filmManagment.Enums;
 
-namespace Project_filmManagment
+namespace Project_filmManagment.Entities
 {
     /// <summary>
     /// This class contains all informations about film
     /// For every new film, new object from this class need to be created
     /// </summary>
-    public class Film
+    public class FilmEntity: EntityBase
     {
         // Auto properties
         public string OriginalName { get; set; }
@@ -23,12 +24,12 @@ namespace Project_filmManagment
                                                                             // overallRatingInPercents = sumOfAllAddedRatings / Ratings.Count
 
         // If you add new actor to the film, new object Actor is created and you can specify details about him/her
-        public List<Actor> Actors { get; set; }
-        public List<Rating> Ratings { get; set; }
+        public List<ActorEntity> Actors { get; set; }
+        public List<RatingEntity> Ratings { get; set; }
 
         // Default constructor
         // Changes variables of type string from default value null to string.Empty to avoid errors
-        public Film()
+        public FilmEntity()
         {
             OriginalName = string.Empty;
             CzechName = string.Empty;
@@ -40,8 +41,8 @@ namespace Project_filmManagment
             LengthInMinutes = 0;
             SumOfAllAddedRatings = 0;
             OverallRatingInPercents = 0;
-            Actors = new List<Actor>();                                     // Creating new list for actors
-            Ratings = new List<Rating>();                                   // Creating new list for ratings
+            Actors = new List<ActorEntity>();                                     // Creating new list for actors
+            Ratings = new List<RatingEntity>();                                   // Creating new list for ratings
         }
 
         /// <summary>

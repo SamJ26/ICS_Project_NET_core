@@ -1,4 +1,6 @@
 ﻿using Project_filmManagment;
+using Project_filmManagment.Entities;
+using Project_filmManagment.Enums;
 using System;
 
 namespace ProjectTesting
@@ -10,7 +12,7 @@ namespace ProjectTesting
             // ---- FILM_1 ----
 
             // Creating a new film called Film_1
-            Film Film_1 = new Film();
+            FilmEntity Film_1 = new FilmEntity();
 
             // Adding specification to Film_1
             Film_1.CountryOfOrigin = "Hungary";
@@ -21,7 +23,7 @@ namespace ProjectTesting
             Film_1.Description = "Uzasny film plny konov a psov";
 
             // Creating a new Director to film Film_1
-            Director director_1 = new Director();
+            DirectorEntity director_1 = new DirectorEntity();
 
             // Adding specification of Director to film Film_1
             director_1.FirstName = "Jon";
@@ -34,7 +36,7 @@ namespace ProjectTesting
             Film_1.DirectorsName = (director_1.FirstName + " " + director_1.SecondName);
 
             // Creating new actor which played in film Film_1 
-            Actor actor_1 = new Actor();
+            ActorEntity actor_1 = new ActorEntity();
 
             // Adding specification of actor_1
             actor_1.FirstName = "John";
@@ -46,7 +48,7 @@ namespace ProjectTesting
             Film_1.Actors.Add(actor_1);
 
             // Creating new rating of Film_1
-            Rating rating_1 = new Rating();
+            RatingEntity rating_1 = new RatingEntity();
 
             rating_1.RatingInPercents = 58;
             rating_1.TextRating = "Prumerny film";
@@ -58,7 +60,7 @@ namespace ProjectTesting
             // ---- FILM_2 ----
 
             // Creating a new film called Film_2
-            Film Film_2 = new Film();
+            FilmEntity Film_2 = new FilmEntity();
 
             // Adding specification of the film
             Film_2.CountryOfOrigin = "USA";
@@ -69,7 +71,7 @@ namespace ProjectTesting
             Film_2.Description = "Genialni film o Marvel Superhrdinovi";
 
             // Creating a new Director to film Film_2
-            Director director_2 = new Director();
+            DirectorEntity director_2 = new DirectorEntity();
 
             // Adding specification of Director to film Film_2
             director_2.FirstName = "Jon";
@@ -83,7 +85,7 @@ namespace ProjectTesting
             Film_2.DirectorsName = (director_2.FirstName + " " + director_2.SecondName);
 
             // Creating new actor which played in film Film_2
-            Actor actor_2 = new Actor();
+            ActorEntity actor_2 = new ActorEntity();
 
             // Adding specification of actor_2
             actor_2.FirstName = "Robert";
@@ -97,7 +99,7 @@ namespace ProjectTesting
             Film_2.Actors.Add(actor_2);
 
             // Creating new rating of Film_2
-            Rating rating_2 = new Rating();
+            RatingEntity rating_2 = new RatingEntity();
 
             rating_2.RatingInPercents = 99;
             rating_2.TextRating = "Awesome introduction to Mavrel Cinematic Universe!!!";

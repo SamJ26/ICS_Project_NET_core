@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Project_filmManagment
+namespace Project_filmManagment.Entities
 {
     /// <summary>
     /// This is the base class for subclasses Director, Actor and User which inherit from this one
     /// </summary>
-    abstract public class Person
+    public abstract class Person : EntityBase
     {
         // Auto properties
         public string FirstName { get; set; }
