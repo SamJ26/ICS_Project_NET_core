@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Project_filmManagment.Entities
+﻿
+namespace Project_filmManagment.DAL.Entities
 {
     /// <summary>
     /// This class contains user's rating of one film.

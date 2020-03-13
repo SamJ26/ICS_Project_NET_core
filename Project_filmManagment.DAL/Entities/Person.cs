@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Project_filmManagment.Entities
+﻿
+namespace Project_filmManagment.DAL.Entities
 {
     /// <summary>
     /// This is the base class for subclasses Director, Actor and User which inherit from this one

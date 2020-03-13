@@ -1,6 +1,6 @@
-﻿using Project_filmManagment;
-using Project_filmManagment.Entities;
-using Project_filmManagment.Enums;
+﻿
+using Project_filmManagment.DAL.Entities;
+using Project_filmManagment.DAL.Enums;
 using System;
 
 namespace ProjectTesting
@@ -29,8 +29,7 @@ namespace ProjectTesting
             director_1.FirstName = "Jon";
             director_1.SecondName = "Mayer";
             director_1.Age = 43;
-            director_1.ActedMovies.Add("Dva Kone a Pes");
-            director_1.DirectedMovies.Add("Tri kone a pes");
+            director_1.DirectedMovies.Add(Film_1);
             director_1.UrlWiki = "Wikipedia";
 
             Film_1.DirectorsName = (director_1.FirstName + " " + director_1.SecondName);
@@ -42,7 +41,7 @@ namespace ProjectTesting
             actor_1.FirstName = "John";
             actor_1.SecondName = "Stone";
             actor_1.Age = 43;
-            actor_1.ActedMovies.Add("Dva Kone a Pes");
+            actor_1.ActedMovies.Add(Film_1);
             actor_1.UrlWiki = "Wikipedia";
 
             Film_1.Actors.Add(actor_1);
@@ -77,9 +76,9 @@ namespace ProjectTesting
             director_2.FirstName = "Jon";
             director_2.SecondName = "Favreau";
             director_2.Age = 53;
-            director_2.ActedMovies.Add("Iron Man");
-            director_2.ActedMovies.Add("Iron Man 2");
-            director_2.DirectedMovies.Add("Iron Man");
+            director_2.ActedMovies.Add(Film_1);
+            director_2.ActedMovies.Add(Film_2);
+            director_2.DirectedMovies.Add(Film_2);
             director_2.UrlWiki = "https://en.wikipedia.org/wiki/Jon_Favreau";
 
             Film_2.DirectorsName = (director_2.FirstName + " " + director_2.SecondName);
@@ -91,9 +90,8 @@ namespace ProjectTesting
             actor_2.FirstName = "Robert";
             actor_2.SecondName = "Downey Jr";
             actor_2.Age = 54;
-            actor_2.ActedMovies.Add("Iron Man");
-            actor_2.ActedMovies.Add("Iron Man 2");
-            actor_2.ActedMovies.Add("Iron Man 3");
+            actor_2.ActedMovies.Add(Film_1);
+            actor_2.ActedMovies.Add(Film_2);
             actor_2.UrlWiki = "https://en.wikipedia.org/wiki/Robert_Downey_Jr.";
 
             Film_2.Actors.Add(actor_2);

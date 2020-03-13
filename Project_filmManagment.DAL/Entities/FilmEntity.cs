@@ -1,8 +1,8 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using Project_filmManagment.Enums;
+using Project_filmManagment.DAL.Enums;
 
-namespace Project_filmManagment.Entities
+namespace Project_filmManagment.DAL.Entities
 {
     /// <summary>
     /// This class contains all informations about film

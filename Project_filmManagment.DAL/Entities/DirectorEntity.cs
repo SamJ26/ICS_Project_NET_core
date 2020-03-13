@@ -1,7 +1,7 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
 
-namespace Project_filmManagment.Entities
+namespace Project_filmManagment.DAL.Entities
 {
     /// <summary>
     /// This class contains informations about added director
@@ -12,9 +12,8 @@ namespace Project_filmManagment.Entities
         public string UrlWiki { get; set; }
         public string Photo_filePath { get; set; }
 
-        // Type is string and not Film beacuse we don't want to create and specify new Film every time we add some to this list
-        public List<string> DirectedMovies { get; set; }
-        public List<string> ActedMovies { get; set; }
+        public List<FilmEntity> DirectedMovies { get; set; }
+        public List<FilmEntity> ActedMovies { get; set; }
 
         // Default constructor
         // Changes defualt value in UrlWiki from null to string.Empty and creates new lists
@@ -22,8 +21,8 @@ namespace Project_filmManagment.Entities
         {
             UrlWiki = string.Empty;
             Photo_filePath = string.Empty;
-            DirectedMovies = new List<string>();
-            ActedMovies = new List<string>();
+            DirectedMovies = new List<FilmEntity>();
+            ActedMovies = new List<FilmEntity>();
         }
     }
 }

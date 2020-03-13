@@ -1,5 +1,5 @@
 ﻿
-namespace Project_filmManagment.Enums
+namespace Project_filmManagment.DAL.Enums
 {
     /// <summary>
     /// Enum type for genres

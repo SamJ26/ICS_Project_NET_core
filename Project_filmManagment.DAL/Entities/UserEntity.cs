@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Project_filmManagment.Entities
+﻿
+namespace Project_filmManagment.DAL.Entities
 {
     // TODO: add option to choose users defined graphic settings such as colours etc.
 
     /// <summary>
     /// This class contains informations about users of application 
     /// </summary>
-    internal class UserEntity : Person
+    public class UserEntity : Person
     {
         // Auto properties
         public string NickName { get; set; }

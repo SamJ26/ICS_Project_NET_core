@@ -1,6 +1,6 @@
-﻿using System;
-using Project_filmManagment.Entities;
-using Project_filmManagment.Enums;
+﻿
+using System;
+using Project_filmManagment.DAL.Entities;
 
 namespace ProjectTesting
 {
@@ -48,12 +48,12 @@ namespace ProjectTesting
             int DMovies = aDirector.DirectedMovies.Count;
             for (int i = 0; i < DMovies; i++)
             {
-                Console.WriteLine("Reziroval film:              " + aDirector.DirectedMovies[i]);
+                Console.WriteLine("Reziroval film:              " + aDirector.DirectedMovies[i].CzechName);
             }
             int AMovies = aDirector.ActedMovies.Count;
             for (int i = 0; i < AMovies; i++)
             {
-                Console.WriteLine("Hral ve filmu:               " + aDirector.ActedMovies[i]);
+                Console.WriteLine("Hral ve filmu:               " + aDirector.ActedMovies[i].CzechName);
             }
             Console.WriteLine();
         }
@@ -70,7 +70,7 @@ namespace ProjectTesting
             int AMovies = aActor.ActedMovies.Count;
             for (int i = 0; i < AMovies; i++)
             {
-                Console.WriteLine("Hral ve filmu:               " + aActor.ActedMovies[i]);
+                Console.WriteLine("Hral ve filmu:               " + aActor.ActedMovies[i].CzechName);
             }
             Console.WriteLine();
         }
