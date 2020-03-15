@@ -19,7 +19,7 @@ namespace ProjectTesting
             Film_1.CzechName = "Dva Kone a Pes";
             Film_1.OriginalName = "Two Horses and Dog";
             Film_1.GenreOfFilm = Genre.ComedyFilm;
-            Film_1.LengthInMinutes = 95;
+            Film_1.LengthInMinutes = new TimeSpan(1, 20, 0);
             Film_1.Description = "Uzasny film plny konov a psov";
 
             // Creating a new Director to film Film_1
@@ -30,7 +30,7 @@ namespace ProjectTesting
             director_1.SecondName = "Mayer";
             director_1.Age = 43;
             director_1.DirectedMovies.Add(Film_1);
-            director_1.UrlWiki = "Wikipedia";
+            director_1.WikiUrl = "Wikipedia";
 
             Film_1.DirectorsName = (director_1.FirstName + " " + director_1.SecondName);
 
@@ -42,7 +42,7 @@ namespace ProjectTesting
             actor_1.SecondName = "Stone";
             actor_1.Age = 43;
             actor_1.ActedMovies.Add(Film_1);
-            actor_1.UrlWiki = "Wikipedia";
+            actor_1.WikiUrl = "Wikipedia";
 
             Film_1.Actors.Add(actor_1);
 
@@ -53,8 +53,6 @@ namespace ProjectTesting
             rating_1.TextRating = "Prumerny film";
 
             Film_1.Ratings.Add(rating_1);
-            Film_1.SumOfAllAddedRatings += rating_1.RatingInPercents;
-            Film_1.SumOfAllAddedRatings = Film_1.CalculateOverallRating();
 
             // ---- FILM_2 ----
 
@@ -66,7 +64,7 @@ namespace ProjectTesting
             Film_2.CzechName = "Zelezny muz";
             Film_2.OriginalName = "Iron Mans";
             Film_2.GenreOfFilm = Genre.ActionFilm;
-            Film_2.LengthInMinutes = 123;
+            Film_2.LengthInMinutes = new TimeSpan(2, 5, 0);
             Film_2.Description = "Genialni film o Marvel Superhrdinovi";
 
             // Creating a new Director to film Film_2
@@ -79,7 +77,7 @@ namespace ProjectTesting
             director_2.ActedMovies.Add(Film_1);
             director_2.ActedMovies.Add(Film_2);
             director_2.DirectedMovies.Add(Film_2);
-            director_2.UrlWiki = "https://en.wikipedia.org/wiki/Jon_Favreau";
+            director_2.WikiUrl = "https://en.wikipedia.org/wiki/Jon_Favreau";
 
             Film_2.DirectorsName = (director_2.FirstName + " " + director_2.SecondName);
 
@@ -92,7 +90,7 @@ namespace ProjectTesting
             actor_2.Age = 54;
             actor_2.ActedMovies.Add(Film_1);
             actor_2.ActedMovies.Add(Film_2);
-            actor_2.UrlWiki = "https://en.wikipedia.org/wiki/Robert_Downey_Jr.";
+            actor_2.WikiUrl = "https://en.wikipedia.org/wiki/Robert_Downey_Jr.";
 
             Film_2.Actors.Add(actor_2);
 
@@ -103,8 +101,6 @@ namespace ProjectTesting
             rating_2.TextRating = "Awesome introduction to Mavrel Cinematic Universe!!!";
 
             Film_2.Ratings.Add(rating_2);
-            Film_2.SumOfAllAddedRatings += rating_2.RatingInPercents;
-            Film_2.SumOfAllAddedRatings = Film_2.CalculateOverallRating();
 
             // ---- Print out ----
 
@@ -121,7 +117,6 @@ namespace ProjectTesting
             TestingMethods.ReadInfo_Director(director_2);
 
             Console.ReadKey();
-
         }
     }
 }

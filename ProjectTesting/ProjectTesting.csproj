@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Project_filmManagment.DAL\Project_filmManagment.DAL.csproj" />
+    <ProjectReference Include="..\FilmManagment.DAL\FilmManagment.DAL.csproj" />
   </ItemGroup>
 
 </Project>
