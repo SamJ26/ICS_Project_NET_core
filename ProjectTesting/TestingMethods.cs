@@ -22,7 +22,7 @@ namespace ProjectTesting
             Console.WriteLine("Reziser filmu:          " + aFilm.DirectorsName);
             Console.WriteLine("Popis Filmu:            " + aFilm.Description);
             Console.WriteLine("Pocet recenzi:          " + aFilm.Ratings.Count);
-            Console.WriteLine("Celkove hodnoceni:      " + aFilm.OverallRatingInPercents);
+            //Console.WriteLine("Celkove hodnoceni:      " + aFilm.OverallRatingInPercents);
             int NumA = aFilm.Actors.Count;
             for (int i = 0; i < NumA; i++)
             {
@@ -44,7 +44,7 @@ namespace ProjectTesting
         {
             Console.WriteLine("Jmeno rezisera:              " + aDirector.FirstName + " " + aDirector.SecondName);
             Console.WriteLine("Vek rezisera:                " + aDirector.Age);
-            Console.WriteLine("Odkaz na zivotopis rezisera: " + aDirector.UrlWiki);
+            Console.WriteLine("Odkaz na zivotopis rezisera: " + aDirector.WikiUrl);
             int DMovies = aDirector.DirectedMovies.Count;
             for (int i = 0; i < DMovies; i++)
             {
@@ -66,7 +66,7 @@ namespace ProjectTesting
         {
             Console.WriteLine("Jmeno herce:                 " + aActor.FirstName + " " + aActor.SecondName);
             Console.WriteLine("Vek herce:                   " + aActor.Age);
-            Console.WriteLine("Odkaz na zivotopis rezisera: " + aActor.UrlWiki);
+            Console.WriteLine("Odkaz na zivotopis rezisera: " + aActor.WikiUrl);
             int AMovies = aActor.ActedMovies.Count;
             for (int i = 0; i < AMovies; i++)
             {
