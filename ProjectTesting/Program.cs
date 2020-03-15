@@ -54,11 +54,6 @@ namespace ProjectTesting
 
             Film_1.Ratings.Add(rating_1);
 
-            // TODO:
-
-            //Film_1.SumOfAllAddedRatings += rating_1.RatingInPercents;
-            //Film_1.SumOfAllAddedRatings = Film_1.CalculateOverallRating();
-
             // ---- FILM_2 ----
 
             // Creating a new film called Film_2
@@ -107,11 +102,6 @@ namespace ProjectTesting
 
             Film_2.Ratings.Add(rating_2);
 
-            // TODO:
-
-            //Film_2.SumOfAllAddedRatings += rating_2.RatingInPercents;
-            //Film_2.SumOfAllAddedRatings = Film_2.CalculateOverallRating();
-
             // ---- Print out ----
 
             Console.WriteLine("\n ----- Film_1 -----\n");
@@ -127,7 +117,6 @@ namespace ProjectTesting
             TestingMethods.ReadInfo_Director(director_2);
 
             Console.ReadKey();
-
         }
     }
 }

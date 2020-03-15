@@ -1,6 +1,7 @@
 ﻿
 using System.Collections.Generic;
 using Project_filmManagment.DAL.Enums;
+using System.Linq;
 using System;
 
 namespace Project_filmManagment.DAL.Entities
@@ -18,27 +19,9 @@ namespace Project_filmManagment.DAL.Entities
         public string ImageFilePath { get; set; } = string.Empty;
         public Genre GenreOfFilm { get; set; } = Genre.Undefined;
         public TimeSpan LengthInMinutes { get; set; } = TimeSpan.Zero;
-
-        /* TODO
-        public int SumOfAllAddedRatings { get; set; }                       // This varaible holds sum of all added ratings to the film
-        public int OverallRatingInPercents { get; set; }                    // This variable is overall rating and is always changed when new rating to the film is added
-        */
+        public double AvarageRatingInPercents => Ratings.Select(variable => variable.RatingInPercents).DefaultIfEmpty(0).Average();
 
         public List<ActorEntity> Actors { get; set; } = new List<ActorEntity>();
         public List<RatingEntity> Ratings { get; set; } = new List<RatingEntity>();
-
-        /* TODO
-        /// <summary>
-        /// Method for calculation of overall rating of the film
-        /// Useage: OverallRatingInPercents = CalculateOverallRating();
-        /// </summary>
-        /// <returns></returns>
-        public int CalculateOverallRating()
-        {
-            if (Ratings.Count == 0)
-                return 0;
-            return SumOfAllAddedRatings / Ratings.Count;
-        }
-        */
     }
 }

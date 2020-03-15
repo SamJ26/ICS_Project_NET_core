@@ -22,7 +22,7 @@ namespace ProjectTesting
             Console.WriteLine("Reziser filmu:          " + aFilm.DirectorsName);
             Console.WriteLine("Popis Filmu:            " + aFilm.Description);
             Console.WriteLine("Pocet recenzi:          " + aFilm.Ratings.Count);
-            //Console.WriteLine("Celkove hodnoceni:      " + aFilm.OverallRatingInPercents);
+            Console.WriteLine("Prumerne hodnoceni:     " + aFilm.AvarageRatingInPercents);
             int NumA = aFilm.Actors.Count;
             for (int i = 0; i < NumA; i++)
             {
