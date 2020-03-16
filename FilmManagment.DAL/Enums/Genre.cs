@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Project_filmManagment
+﻿
+namespace FilmManagment.DAL.Enums
 {
     /// <summary>
     /// Enum type for genres
