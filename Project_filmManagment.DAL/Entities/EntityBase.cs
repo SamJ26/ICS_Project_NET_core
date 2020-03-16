@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace Project_filmManagment.DAL.Entities
+namespace FilmManagment.DAL.Entities
 {
     public abstract class EntityBase
     {

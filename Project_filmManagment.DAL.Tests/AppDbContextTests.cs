@@ -1,8 +1,8 @@
 ﻿
-using Project_filmManagment.DAL.Entities;
+using FilmManagment.DAL.Entities;
 using System.Collections.Generic;
 
-namespace Project_filmManagment.DAL.Tests
+namespace FilmManagment.DAL.Tests
 {
     public class AppDbContextTests
     {

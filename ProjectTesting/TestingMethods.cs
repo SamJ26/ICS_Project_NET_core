@@ -1,6 +1,6 @@
 ﻿
 using System;
-using Project_filmManagment.DAL.Entities;
+using FilmManagment.DAL.Entities;
 
 namespace ProjectTesting
 {

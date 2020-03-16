@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Project_filmManagment.DAL.Entities
+namespace FilmManagment.DAL.Entities
 {
     /// <summary>
-    /// This class contains information about added actor
+    /// This class contains informations about added actor
     /// </summary>
     public class ActorEntity : Person
     {  
@@ -53,9 +53,15 @@ namespace Project_filmManagment.DAL.Entities
                        string.Equals(x.FirstName, y.FirstName) &&
                        string.Equals(x.SecondName, y.SecondName) &&
                        x.Age.Equals(y.Age) &&
+<<<<<<< Updated upstream:Project_filmManagment.DAL/Entities/ActorEntity.cs
                        string.Equals(x.UrlWiki, y.UrlWiki) &&
                        string.Equals(x.Photo_filePath, y.Photo_filePath) &&
                        x.ActedMovies.SequenceEqual(y.ActedMovies);
+=======
+                       string.Equals(x.WikiUrl, y.WikiUrl) &&
+                       string.Equals(x.PhotoFilePath, y.PhotoFilePath) &&
+                       x.ActedMovies.OrderBy(film => film.Id).SequenceEqual(y.ActedMovies.OrderBy(film => film.Id));            // TODO: consultation with teacher
+>>>>>>> Stashed changes:FilmManagment.DAL/Entities/ActorEntity.cs
             }   
 
             public int GetHashCode(ActorEntity obj)

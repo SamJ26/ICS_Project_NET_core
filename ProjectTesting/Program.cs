@@ -1,6 +1,6 @@
 ﻿
-using Project_filmManagment.DAL.Entities;
-using Project_filmManagment.DAL.Enums;
+using FilmManagment.DAL.Entities;
+using FilmManagment.DAL.Enums;
 using System;
 
 namespace ProjectTesting
