@@ -32,7 +32,7 @@ namespace ProjectTesting
             director_1.DirectedMovies.Add(Film_1);
             director_1.WikiUrl = "Wikipedia";
 
-            Film_1.DirectorsName = (director_1.FirstName + " " + director_1.SecondName);
+            Film_1.Director = director_1;
 
             // Creating new actor which played in film Film_1 
             ActorEntity actor_1 = new ActorEntity();
@@ -79,7 +79,7 @@ namespace ProjectTesting
             director_2.DirectedMovies.Add(Film_2);
             director_2.WikiUrl = "https://en.wikipedia.org/wiki/Jon_Favreau";
 
-            Film_2.DirectorsName = (director_2.FirstName + " " + director_2.SecondName);
+            Film_2.Director = director_2;
 
             // Creating new actor which played in film Film_2
             ActorEntity actor_2 = new ActorEntity();

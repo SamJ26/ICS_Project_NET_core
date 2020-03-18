@@ -8,9 +8,9 @@ namespace FilmManagment.DAL.Seeds
     // TODO: ked budeme seedovat info napr. pre film ... musi byt nova classa FilmSeed a jej vlastny Seed alebo
     //       len premenujem tuto classu napr. na SeedInfo a v nej budu dalsie fieldy napr. Film_1, Director_1 atd a vsetkych
     //       potom dame do jednej spolocnej metody seed() na konci nejako takto:
-    //        modelBuilder.Entity<ActorEntity>().HasData(Actor_1);
-    //        modelBuilder.Entity<ActorEntity>().HasData(Film_1);
-    //        modelBuilder.Entity<ActorEntity>().HasData(Director_1);
+    //       modelBuilder.Entity<ActorEntity>().HasData(Actor_1);
+    //       modelBuilder.Entity<ActorEntity>().HasData(Film_1);
+    //       modelBuilder.Entity<ActorEntity>().HasData(Director_1);
 
     // TODO: ako naseedovat generic listy ?
 
@@ -24,6 +24,9 @@ namespace FilmManagment.DAL.Seeds
             SecondName = "Stone",
             WikiUrl = "wikiurl",
             PhotoFilePath = @"c:/blabla/nic/bla"
+
+            // TODO: add generic lists and other properties
+
         };
 
         // Touto metodou vytvorime model Entity ActorEntity, ktory potom realne zapiseme do databazy pomocou DbContext.OnModelCreating() metody

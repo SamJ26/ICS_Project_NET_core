@@ -59,7 +59,6 @@ namespace FilmManagment.DAL.Entities
             }
         }
 
-        // Property which is used to approach methods for testing in class ActorEqualityComparer
         public static IEqualityComparer<UserEntity> RatingEqualityComparer { get; } = new UsersEqualityComparer();
     }
 }
