@@ -5,7 +5,7 @@ using FilmManagment.DAL.Entities;
 namespace ProjectTesting
 {
     /// <summary>
-    /// This class contains methods for project_filmManagment testing
+    /// This class contains methods for FilmManagment testing
     /// </summary>
     public class TestingMethods
     {
@@ -19,7 +19,7 @@ namespace ProjectTesting
             Console.WriteLine("Cesky nazev:            " + aFilm.CzechName);
             Console.WriteLine("Zanr filmu:             " + aFilm.GenreOfFilm);
             Console.WriteLine("Delka filmu:            " + aFilm.LengthInMinutes);
-            Console.WriteLine("Reziser filmu:          " + aFilm.DirectorsName);
+            Console.WriteLine("Reziser filmu:          " + aFilm.Director.FirstName + " " + aFilm.Director.SecondName);
             Console.WriteLine("Popis Filmu:            " + aFilm.Description);
             Console.WriteLine("Pocet recenzi:          " + aFilm.Ratings.Count);
             Console.WriteLine("Prumerne hodnoceni:     " + aFilm.AvarageRatingInPercents);

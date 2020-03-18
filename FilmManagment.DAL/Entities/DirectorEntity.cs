@@ -45,8 +45,8 @@ namespace FilmManagment.DAL.Entities
                        x.Age.Equals(y.Age) &&
                        string.Equals(x.WikiUrl, y.WikiUrl) &&
                        string.Equals(x.PhotoFilePath, y.PhotoFilePath) &&
-                       x.DirectedMovies.OrderBy(film => film.Id).SequenceEqual(y.DirectedMovies.OrderBy(film => film.Id)); // TODO: consultation with teacher
-                       x.ActedMovies.OrderBy(film => film.Id).SequenceEqual(y.ActedMovies.OrderBy(film => film.Id)); // TODO: consultation with teacher
+                       x.DirectedMovies.OrderBy(film => film.Id).SequenceEqual(y.DirectedMovies.OrderBy(film => film.Id)) &&        // TODO: consultation with teacher
+                       x.ActedMovies.OrderBy(film => film.Id).SequenceEqual(y.ActedMovies.OrderBy(film => film.Id));                // TODO: consultation with teacher
             }
 
             public int GetHashCode(DirectorEntity obj)
@@ -61,15 +61,11 @@ namespace FilmManagment.DAL.Entities
                     hashCode = (hashCode * 397) ^ (obj.PhotoFilePath != null ? obj.PhotoFilePath.GetHashCode() : 0);
                     hashCode = (hashCode * 397) ^ (obj.ActedMovies != null ? obj.ActedMovies.GetHashCode() : 0);
                     hashCode = (hashCode * 397) ^ (obj.DirectedMovies != null ? obj.DirectedMovies.GetHashCode() : 0);
-
                     return hashCode;
                 }
             }
         }
 
-        // Property which is used to approach methods for testing in class DirectorEqualityComparer
         public static IEqualityComparer<DirectorEntity> DirectorEqualityComparer { get; } = new DirectorsEqualityComparer();
     }
-
-}
 }

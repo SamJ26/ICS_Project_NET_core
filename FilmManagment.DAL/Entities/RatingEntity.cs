@@ -10,7 +10,6 @@ namespace FilmManagment.DAL.Entities
         public int RatingInPercents { get; set; } = 0;
         public string TextRating { get; set; } = string.Empty;
 
-
         private sealed class RatingsEqualityComparer : IEqualityComparer<RatingEntity>
         {
             public bool Equals(RatingEntity x, RatingEntity y)
@@ -52,7 +51,6 @@ namespace FilmManagment.DAL.Entities
             }
         }
 
-        // Property which is used to approach methods for testing in class ActorEqualityComparer
         public static IEqualityComparer<RatingEntity> RatingEqualityComparer { get; } = new RatingsEqualityComparer();
     }
 }
