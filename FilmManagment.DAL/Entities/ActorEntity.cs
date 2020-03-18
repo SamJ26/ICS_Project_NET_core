@@ -45,7 +45,7 @@ namespace FilmManagment.DAL.Entities
                        x.Age.Equals(y.Age) &&
                        string.Equals(x.WikiUrl, y.WikiUrl) &&
                        string.Equals(x.PhotoFilePath, y.PhotoFilePath) &&
-                       x.ActedMovies.OrderBy(film => film.Id).SequenceEqual(y.ActedMovies.OrderBy(film => film.Id));            // TODO: consultation with teacher
+                       x.ActedMovies.OrderBy(film => film.Id).SequenceEqual(y.ActedMovies.OrderBy(film => film.Id));  // TODO: consultation with teacher
             }   
 
             public int GetHashCode(ActorEntity obj)
