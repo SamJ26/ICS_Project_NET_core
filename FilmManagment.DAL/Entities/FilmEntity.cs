@@ -20,8 +20,8 @@ namespace FilmManagment.DAL.Entities
         public TimeSpan LengthInMinutes { get; set; } = TimeSpan.Zero;
         public double AvarageRatingInPercents => Ratings.Select(variable => variable.RatingInPercents).DefaultIfEmpty(0).Average();
 
-        public DirectorEntity Director { get; set; } = new DirectorEntity();
-        public List<ActorEntity> Actors { get; set; } = new List<ActorEntity>();
+        public List<DirectorEntity> Directors { get; set; } = new List<DirectorEntity>();
+        public List<FilmActorEntity> Actors { get; set; } = new List<FilmActorEntity>();
         public List<RatingEntity> Ratings { get; set; } = new List<RatingEntity>();
 
         private sealed class FilmsEqualityComparer : IEqualityComparer<FilmEntity>

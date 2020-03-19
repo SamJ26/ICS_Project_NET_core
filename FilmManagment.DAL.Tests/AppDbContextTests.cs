@@ -56,17 +56,19 @@ namespace FilmManagment.DAL.Tests
             appDbContextTestUnit.SaveChanges();
 
             // Tasting of content ( myActor ) which was saved to database
+            
             using ( var tempDbCOntext = dbContextFactory.CreateDbContext())
             {
                 var retrievedActor = tempDbCOntext.Actors.Single(entity => entity.Id == myActor.Id);
                 Assert.Equal(myActor, retrievedActor, ActorEntity.ActorEqualityComparer);
+                
             }
 
         }
 
         public void Dispose()
         {
-            appDbContextTestUnit.Dispose();
+            appDbContextTestUnit?.Dispose();
         }
     }
 }
