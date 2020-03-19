@@ -12,9 +12,9 @@ namespace FilmManagment.DAL.Tests
     public class AppDbContextTests : IDisposable
     {
         private readonly DbContextInMemoryFactory dbContextFactory;
-        private readonly AppDbContext appDbContextTestUnit;                     // TODO: Is it a good name ??
+        private readonly AppDbContext appDbContextTestUnit;
 
-        public AppDbContextTests()                                              // TODO: pre istotu vysvetlit tento kus kodu
+        public AppDbContextTests()
         {
             dbContextFactory = new DbContextInMemoryFactory(nameof(AppDbContext));
             appDbContextTestUnit = dbContextFactory.CreateDbContext();
@@ -33,37 +33,24 @@ namespace FilmManagment.DAL.Tests
                 Age = 43,
                 WikiUrl = "Wikipedia",
                 PhotoFilePath = "Some_path",
-                ActedMovies =
-                {
-                    new FilmEntity
-                    {
-                        CzechName = "Mackopes",
-                        OriginalName = "Catdog",
-                        CountryOfOrigin = "Canada",
-                        Description = "Film about strange animal",
-                        ImageFilePath = "filePath",
-                        GenreOfFilm = Genre.ComedyFilm,
-                        LengthInMinutes = new TimeSpan(1, 20, 5),
-                        // TODO: add director
-                        // TODO: add actors
-                        // TODO: add directors
-                    }
-                }
+                
+                // TODO: add all properties
+
             };
 
             // Adding myActor to database
             appDbContextTestUnit.Actors.Add(myActor);
             appDbContextTestUnit.SaveChanges();
 
-            // Tasting of content ( myActor ) which was saved to database
-            
+            // Tasting of content ( myActor ) which was saved to database           
             using ( var tempDbCOntext = dbContextFactory.CreateDbContext())
             {
                 var retrievedActor = tempDbCOntext.Actors.Single(entity => entity.Id == myActor.Id);
-                Assert.Equal(myActor, retrievedActor, ActorEntity.ActorEqualityComparer);
-                
-            }
 
+                // TODO: add proper EC in Assert func.
+
+                //Assert.Equal(myActor, retrievedActor, ActorEntity.ActorEqualityComparer);        
+            }
         }
 
         public void Dispose()

@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿
+using System;
 
 namespace FilmManagment.DAL.Entities
 {
+    /// <summary>
+    /// This class works as transition table for many-to-many relationship between FilmEntity and ActorEntity
+    /// </summary>
     public class FilmActorEntity : EntityBase
     {
         public Guid FilmId { get; set; }
@@ -11,5 +13,7 @@ namespace FilmManagment.DAL.Entities
 
         public FilmEntity Film { get; set; }
         public ActorEntity Actor { get; set; }
+
+        // TODO: add EC
     }
 }
