@@ -13,7 +13,7 @@ namespace FilmManagment.DAL.Tests
             dbName = databaseName;
         }
 
-        public AppDbContext CreateDbContext()                                               // TODO: vysvetlit tento kus kodu
+        public AppDbContext CreateDbContext()
         {
             var contextOptionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             contextOptionsBuilder.UseInMemoryDatabase(dbName);

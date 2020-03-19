@@ -22,8 +22,10 @@ namespace FilmManagment.DAL
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            // TODO: add all entities
+
             modelBuilder.Entity<ActorEntity>()
-                        .HasMany<FilmEntity>();             // TODO: je treba onDelete ?
+                        .HasMany<FilmEntity>();
 
             ActorSeed.Seed(modelBuilder);
 
