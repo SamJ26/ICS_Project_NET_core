@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace FilmManagment.DAL.Entities
 {
@@ -14,6 +15,27 @@ namespace FilmManagment.DAL.Entities
         public FilmEntity Film { get; set; }
         public ActorEntity Actor { get; set; }
 
-        // TODO: add EC
+        private sealed class FilmActorEntityEqualityComparer : IEqualityComparer<FilmActorEntity>
+        {
+            public bool Equals(FilmActorEntity x, FilmActorEntity y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, null)) return false;
+                if (ReferenceEquals(y, null)) return false;
+                if (x.GetType() != y.GetType()) return false;
+                return x.Id == y.Id
+                       && x.FilmId.Equals(y.FilmId) 
+                       && x.ActorId.Equals(y.ActorId) 
+                       && Equals(x.Film, y.Film) 
+                       && Equals(x.Actor, y.Actor);
+            }
+
+            public int GetHashCode(FilmActorEntity obj)
+            {
+                return HashCode.Combine(obj.Id, obj.FilmId, obj.ActorId, obj.Film, obj.Actor);
+            }
+        }
+
+        public static IEqualityComparer<FilmActorEntity> FilmActorEntityComparer { get; } = new FilmActorEntityEqualityComparer();
     }
 }

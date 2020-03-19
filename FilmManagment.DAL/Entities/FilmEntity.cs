@@ -24,6 +24,110 @@ namespace FilmManagment.DAL.Entities
         public List<FilmActorEntity> Actors { get; set; } = new List<FilmActorEntity>();
         public List<RatingEntity> Ratings { get; set; } = new List<RatingEntity>();
 
-        // TODO: add EC
+        private sealed class FilmEntityEqualityComparer : IEqualityComparer<FilmEntity>
+        {
+            public bool Equals(FilmEntity x, FilmEntity y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, null)) return false;
+                if (ReferenceEquals(y, null)) return false;
+                if (x.GetType() != y.GetType()) return false;
+                return x.Id == y.Id
+                       && x.OriginalName == y.OriginalName 
+                       && x.CzechName == y.CzechName 
+                       && x.CountryOfOrigin == y.CountryOfOrigin 
+                       && x.Description == y.Description 
+                       && x.ImageFilePath == y.ImageFilePath 
+                       && x.GenreOfFilm == y.GenreOfFilm 
+                       && x.LengthInMinutes.Equals(y.LengthInMinutes) 
+                       && Equals(x.Directors, y.Directors) 
+                       && Equals(x.Actors, y.Actors) 
+                       && Equals(x.Ratings, y.Ratings);
+            }
+
+            public int GetHashCode(FilmEntity obj)
+            {
+                    var hashCode = new HashCode();
+                    hashCode.Add(obj.Id);
+                    hashCode.Add(obj.OriginalName);
+                    hashCode.Add(obj.CzechName);
+                    hashCode.Add(obj.CountryOfOrigin);
+                    hashCode.Add(obj.Description);
+                    hashCode.Add(obj.ImageFilePath);
+                    hashCode.Add((int)obj.GenreOfFilm);
+                    hashCode.Add(obj.LengthInMinutes);
+                    hashCode.Add(obj.Directors);
+                    hashCode.Add(obj.Actors);
+                    hashCode.Add(obj.Ratings);
+                    return hashCode.ToHashCode();
+            }
+        }
+
+        public static IEqualityComparer<FilmEntity> FilmEntityComparer { get; } = new FilmEntityEqualityComparer();
+
+        private sealed class FilmEntityEqualityComparerEqualityComparerWithoutRating : IEqualityComparer<FilmEntity>
+        {
+            public bool Equals(FilmEntity x, FilmEntity y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, null)) return false;
+                if (ReferenceEquals(y, null)) return false;
+                if (x.GetType() != y.GetType()) return false;
+                return x.Id == y.Id 
+                       && x.OriginalName == y.OriginalName 
+                       && x.CzechName == y.CzechName 
+                       && x.CountryOfOrigin == y.CountryOfOrigin 
+                       && x.Description == y.Description 
+                       && x.ImageFilePath == y.ImageFilePath 
+                       && x.GenreOfFilm == y.GenreOfFilm 
+                       && x.LengthInMinutes.Equals(y.LengthInMinutes) 
+                       && Equals(x.Directors, y.Directors) 
+                       && Equals(x.Actors, y.Actors);
+            }
+
+            public int GetHashCode(FilmEntity obj)
+            {
+                var hashCode = new HashCode();
+                hashCode.Add(obj.Id);
+                hashCode.Add(obj.OriginalName);
+                hashCode.Add(obj.CzechName);
+                hashCode.Add(obj.CountryOfOrigin);
+                hashCode.Add(obj.Description);
+                hashCode.Add(obj.ImageFilePath);
+                hashCode.Add((int) obj.GenreOfFilm);
+                hashCode.Add(obj.LengthInMinutes);
+                hashCode.Add(obj.Directors);
+                hashCode.Add(obj.Actors);
+                return hashCode.ToHashCode();
+            }
+        }
+
+        public static IEqualityComparer<FilmEntity> FilmEntityEqualityComparerComparer { get; } = new FilmEntityEqualityComparerEqualityComparerWithoutRating();
+
+        private sealed class FilmEntityEqualityComparerEqualityComparerWithoutLists : IEqualityComparer<FilmEntity>
+        {
+            public bool Equals(FilmEntity x, FilmEntity y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, null)) return false;
+                if (ReferenceEquals(y, null)) return false;
+                if (x.GetType() != y.GetType()) return false;
+                return x.Id == y.Id 
+                       && x.OriginalName == y.OriginalName 
+                       && x.CzechName == y.CzechName 
+                       && x.CountryOfOrigin == y.CountryOfOrigin
+                       && x.Description == y.Description 
+                       && x.ImageFilePath == y.ImageFilePath 
+                       && x.GenreOfFilm == y.GenreOfFilm 
+                       && x.LengthInMinutes.Equals(y.LengthInMinutes);
+            }
+
+            public int GetHashCode(FilmEntity obj)
+            {
+                return HashCode.Combine(obj.Id ,obj.OriginalName, obj.CzechName, obj.CountryOfOrigin, obj.Description, obj.ImageFilePath, (int) obj.GenreOfFilm, obj.LengthInMinutes);
+            }
+        }
+
+        public static IEqualityComparer<FilmEntity> FilmEntityEqualityComparerWithoutAllListsComparer { get; } = new FilmEntityEqualityComparerEqualityComparerWithoutLists();
     }
 }
