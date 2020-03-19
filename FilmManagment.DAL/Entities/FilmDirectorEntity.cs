@@ -15,6 +15,27 @@ namespace FilmManagment.DAL.Entities
         public FilmEntity Film { get; set; }
         public DirectorEntity Director { get; set; }
 
-        // TODO: add EC
+        private sealed class FilmDirectorEntityEqualityComparer : IEqualityComparer<FilmDirectorEntity>
+        {
+            public bool Equals(FilmDirectorEntity x, FilmDirectorEntity y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, null)) return false;
+                if (ReferenceEquals(y, null)) return false;
+                if (x.GetType() != y.GetType()) return false;
+                return x.Id == y.Id
+                       && x.FilmId.Equals(y.FilmId) 
+                       && x.DirectorId.Equals(y.DirectorId) 
+                       && Equals(x.Film, y.Film) 
+                       && Equals(x.Director, y.Director);
+            }
+
+            public int GetHashCode(FilmDirectorEntity obj)
+            {
+                return HashCode.Combine(obj.Id ,obj.FilmId, obj.DirectorId, obj.Film, obj.Director);
+            }
+        }
+
+        public static IEqualityComparer<FilmDirectorEntity> FilmDirectorEntityComparer { get; } = new FilmDirectorEntityEqualityComparer();
     }
 }

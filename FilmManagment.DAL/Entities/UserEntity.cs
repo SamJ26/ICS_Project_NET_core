@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace FilmManagment.DAL.Entities
 {
@@ -12,6 +13,25 @@ namespace FilmManagment.DAL.Entities
         public string NickName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
 
-        // TODO: add EC
+        private sealed class NickNamePasswordEqualityComparer : IEqualityComparer<UserEntity>
+        {
+            public bool Equals(UserEntity x, UserEntity y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, null)) return false;
+                if (ReferenceEquals(y, null)) return false;
+                if (x.GetType() != y.GetType()) return false;
+                return x.Id == y.Id
+                       && x.NickName == y.NickName 
+                       && x.Password == y.Password;
+            }
+
+            public int GetHashCode(UserEntity obj)
+            {
+                return HashCode.Combine(obj.Id,obj.NickName, obj.Password);
+            }
+        }
+
+        public static IEqualityComparer<UserEntity> NickNamePasswordComparer { get; } = new NickNamePasswordEqualityComparer();
     }
 }
