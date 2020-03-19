@@ -1,4 +1,4 @@
-﻿
+﻿    
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,7 +12,7 @@ namespace FilmManagment.DAL.Entities
         public string WikiUrl { get; set; } = string.Empty;
         public string PhotoFilePath { get; set; } = string.Empty;
 
-        public List<FilmEntity> ActedMovies { get; set; } = new List<FilmEntity>();
+        public List<FilmActorEntity> ActedMovies { get; set; } = new List<FilmActorEntity>();
 
         // Class which contains methods for testing of ActorEntity in database
         private sealed class ActorsEqualityComparer : IEqualityComparer<ActorEntity>

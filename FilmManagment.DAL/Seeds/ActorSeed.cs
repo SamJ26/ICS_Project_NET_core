@@ -17,7 +17,7 @@ namespace FilmManagment.DAL.Seeds
     public class ActorSeed
     {
         // Vytvorime noveho herca a dame mu nejake informacie
-        public static readonly ActorEntity Actor_1 = new ActorEntity()
+        public static ActorEntity Actor_1 { get; } = new ActorEntity()
         {
             Id = Guid.Parse("818f1def-204e-44da-b764-ca28c75e2acc"),
             FirstName = "John",
