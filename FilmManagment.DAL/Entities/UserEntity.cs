@@ -22,13 +22,16 @@ namespace FilmManagment.DAL.Entities
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
                 return x.Id == y.Id
+                       && x.FirstName == y.FirstName
+                       && x.SecondName == y.SecondName
+                       && x.Age == y.Age
                        && x.NickName == y.NickName 
                        && x.Password == y.Password;
             }
 
             public int GetHashCode(UserEntity obj)
             {
-                return HashCode.Combine(obj.Id,obj.NickName, obj.Password);
+                return HashCode.Combine(obj.Id, obj.FirstName, obj.SecondName, obj.Age, obj.NickName, obj.Password);
             }
         }
 

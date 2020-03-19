@@ -40,9 +40,9 @@ namespace FilmManagment.DAL.Entities
                        && x.ImageFilePath == y.ImageFilePath 
                        && x.GenreOfFilm == y.GenreOfFilm 
                        && x.LengthInMinutes.Equals(y.LengthInMinutes) 
-                       && Equals(x.Directors, y.Directors) 
-                       && Equals(x.Actors, y.Actors) 
-                       && Equals(x.Ratings, y.Ratings);
+                       && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorEntity.FilmDirectorEntityComparer)
+                       && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorEntity.FilmActorEntityComparer)
+                       && Equals(x.Ratings, y.Ratings);                                                                                                 // How to test one to many ?
             }
 
             public int GetHashCode(FilmEntity obj)
@@ -65,7 +65,7 @@ namespace FilmManagment.DAL.Entities
 
         public static IEqualityComparer<FilmEntity> FilmEntityComparer { get; } = new FilmEntityEqualityComparer();
 
-        private sealed class FilmEntityEqualityComparerEqualityComparerWithoutRating : IEqualityComparer<FilmEntity>
+        private sealed class FilmEntityEqualityComparerWithoutRating : IEqualityComparer<FilmEntity>
         {
             public bool Equals(FilmEntity x, FilmEntity y)
             {
@@ -102,9 +102,9 @@ namespace FilmManagment.DAL.Entities
             }
         }
 
-        public static IEqualityComparer<FilmEntity> FilmEntityEqualityComparerComparer { get; } = new FilmEntityEqualityComparerEqualityComparerWithoutRating();
+        public static IEqualityComparer<FilmEntity> FilmEntityEqualityComparerWithoutRatingComparer { get; } = new FilmEntityEqualityComparerWithoutRating();
 
-        private sealed class FilmEntityEqualityComparerEqualityComparerWithoutLists : IEqualityComparer<FilmEntity>
+        private sealed class FilmEntityEqualityComparerrWithoutLists : IEqualityComparer<FilmEntity>
         {
             public bool Equals(FilmEntity x, FilmEntity y)
             {
@@ -128,6 +128,6 @@ namespace FilmManagment.DAL.Entities
             }
         }
 
-        public static IEqualityComparer<FilmEntity> FilmEntityEqualityComparerWithoutAllListsComparer { get; } = new FilmEntityEqualityComparerEqualityComparerWithoutLists();
+        public static IEqualityComparer<FilmEntity> FilmEntityEqualityComparerWithoutAllListsComparer { get; } = new FilmEntityEqualityComparerrWithoutLists();
     }
 }

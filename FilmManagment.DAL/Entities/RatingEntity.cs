@@ -12,6 +12,9 @@ namespace FilmManagment.DAL.Entities
         public int RatingInPercents { get; set; } = 0;
         public string TextRating { get; set; } = string.Empty;
 
+        public Guid FilmId { get; set; }
+        public FilmEntity Film { get; set; }
+
         private sealed class RatingInPercentsTextRatingEqualityComparer : IEqualityComparer<RatingEntity>
         {
             public bool Equals(RatingEntity x, RatingEntity y)
@@ -21,13 +24,15 @@ namespace FilmManagment.DAL.Entities
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
                 return x.Id == y.Id 
+                       && x.FilmId == y.FilmId
+                       && Equals(x.Film, y.Film)
                        && x.RatingInPercents == y.RatingInPercents 
                        && x.TextRating == y.TextRating;
             }
 
             public int GetHashCode(RatingEntity obj)
             {
-                return HashCode.Combine(obj.Id, obj.RatingInPercents, obj.TextRating);
+                return HashCode.Combine(obj.Id, obj.FilmId, obj.Film, obj.RatingInPercents, obj.TextRating);
             }
         }
 

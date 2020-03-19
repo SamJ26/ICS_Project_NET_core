@@ -33,8 +33,8 @@ namespace FilmManagment.DAL.Entities
                        && x.Age == y.Age 
                        && x.WikiUrl == y.WikiUrl
                        && x.PhotoFilePath == y.PhotoFilePath 
-                       && Equals(x.DirectedMovies, y.DirectedMovies) 
-                       && Equals(x.ActedMovies, y.ActedMovies);
+                       && Equals(x.DirectedMovies, y.DirectedMovies)        // TODO: add EC 
+                       && Equals(x.ActedMovies, y.ActedMovies);             // TODO: add EC
             }
 
             public int GetHashCode(DirectorEntity obj)
@@ -58,8 +58,8 @@ namespace FilmManagment.DAL.Entities
                        && x.SecondName == y.SecondName 
                        && x.Age == y.Age 
                        && x.WikiUrl == y.WikiUrl 
-                       && x.PhotoFilePath == y.PhotoFilePath 
-                       && Equals(x.DirectedMovies, y.DirectedMovies);
+                       && x.PhotoFilePath == y.PhotoFilePath
+                       && x.DirectedMovies.OrderBy(i => i.Id).SequenceEqual(y.DirectedMovies.OrderBy(i => i.Id), FilmDirectorEntity.FilmDirectorEntityComparer);
             }
 
             public int GetHashCode(DirectorEntity obj)

@@ -23,13 +23,13 @@ namespace FilmManagment.DAL.Entities
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.Id == y.Id 
-                       && x.FirstName == y.FirstName 
-                       && x.SecondName == y.SecondName 
-                       && x.Age == y.Age 
-                       && x.WikiUrl == y.WikiUrl 
-                       && x.PhotoFilePath == y.PhotoFilePath 
-                       && Equals(x.ActedMovies, y.ActedMovies);
+                return x.Id == y.Id
+                       && x.FirstName == y.FirstName
+                       && x.SecondName == y.SecondName
+                       && x.Age == y.Age
+                       && x.WikiUrl == y.WikiUrl
+                       && x.PhotoFilePath == y.PhotoFilePath
+                       && x.ActedMovies.OrderBy(i => i.Id).SequenceEqual(y.ActedMovies.OrderBy(i => i.Id), FilmActorEntity.FilmActorEntityComparer);
             }
 
             public int GetHashCode(ActorEntity obj)
