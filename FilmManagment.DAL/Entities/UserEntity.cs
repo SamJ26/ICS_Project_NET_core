@@ -13,7 +13,7 @@ namespace FilmManagment.DAL.Entities
         public string NickName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
 
-        private sealed class NickNamePasswordEqualityComparer : IEqualityComparer<UserEntity>
+        private sealed class UserEntityEqualityComparer : IEqualityComparer<UserEntity>
         {
             public bool Equals(UserEntity x, UserEntity y)
             {
@@ -22,16 +22,19 @@ namespace FilmManagment.DAL.Entities
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
                 return x.Id == y.Id
+                       && x.FirstName == y.FirstName
+                       && x.SecondName == y.SecondName
+                       && x.Age == y.Age
                        && x.NickName == y.NickName 
                        && x.Password == y.Password;
             }
 
             public int GetHashCode(UserEntity obj)
             {
-                return HashCode.Combine(obj.Id,obj.NickName, obj.Password);
+                return HashCode.Combine(obj.Id, obj.FirstName, obj.SecondName, obj.Age, obj.NickName, obj.Password);
             }
         }
 
-        public static IEqualityComparer<UserEntity> NickNamePasswordComparer { get; } = new NickNamePasswordEqualityComparer();
+        public static IEqualityComparer<UserEntity> UserEntityComparer { get; } = new UserEntityEqualityComparer();
     }
 }

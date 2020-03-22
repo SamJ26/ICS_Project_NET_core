@@ -3,7 +3,6 @@ using System;
 using System.Linq;
 using FilmManagment.DAL.Entities;
 using FilmManagment.DAL.Enums;
-using FilmManagment.DAL.Seeds;
 using Microsoft.EntityFrameworkCore;
 using Xunit;
 
@@ -21,35 +20,66 @@ namespace FilmManagment.DAL.Tests
             appDbContextTestUnit.Database.EnsureCreated();
         }
 
-        // Attribute which indicates that it is a fact that should be run by the test runner
         [Fact]
-        public void AddNewActor()
+        public void AddNewFilm()
         {
-            // Creating new entity for testing called myActor
-            var myActor = new ActorEntity()
+            var myNewFilm = new FilmEntity()
             {
-                FirstName = "John",
-                SecondName = "Stone",
-                Age = 43,
-                WikiUrl = "Wikipedia",
-                PhotoFilePath = "Some_path",
-                
-                // TODO: add all properties
+                OriginalName = "Iron Man",
+                CzechName = "Zelezny muz",
+                CountryOfOrigin = "Canada",
+                GenreOfFilm = Genre.ActionFilm,
+                Directors =
+                {
+                    new FilmDirectorEntity
+                    {
+                        Director = new DirectorEntity
+                        {
+                            FirstName = "John",
+                            SecondName = "Mayer",
+                            Age = 55
+                        }
+                    }
+                },
+                Actors =
+                {
+                    new FilmActorEntity
+                    {
+                        Actor = new ActorEntity
+                        {
+                            FirstName = "Jacob",
+                            SecondName = "King",
+                            Age = 18
+                        }
+                    }
+                },
+                Ratings =
+                {
+                    new RatingEntity
+                    {
+                        RatingInPercents = 90,
+                        TextRating = "Very good film"
+                    }
 
+                }
             };
 
-            // Adding myActor to database
-            appDbContextTestUnit.Actors.Add(myActor);
+            // Adding myNewFilm to database
+            appDbContextTestUnit.Films.Add(myNewFilm);
             appDbContextTestUnit.SaveChanges();
 
-            // Tasting of content ( myActor ) which was saved to database           
-            using ( var tempDbCOntext = dbContextFactory.CreateDbContext())
+            // Assert         
+            using (var tempDbContext = dbContextFactory.CreateDbContext())
             {
-                var retrievedActor = tempDbCOntext.Actors.Single(entity => entity.Id == myActor.Id);
+                var retrievedFilm = tempDbContext.Films
+                    .Include(entity => entity.Directors)
+                        .ThenInclude(connectionTable => connectionTable.Director)
+                    .Include(entity => entity.Actors)
+                        .ThenInclude(connectionTable => connectionTable.Actor)
+                    .Include(entity => entity.Ratings)
+                    .Single(entity => entity.Id == myNewFilm.Id);
 
-                // TODO: add proper EC in Assert func.
-
-                //Assert.Equal(myActor, retrievedActor, ActorEntity.ActorEqualityComparer);        
+                Assert.Equal(myNewFilm,retrievedFilm, FilmEntity.FilmEntityComparer);
             }
         }
 

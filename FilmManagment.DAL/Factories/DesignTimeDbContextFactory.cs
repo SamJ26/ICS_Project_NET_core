@@ -11,7 +11,7 @@ namespace FilmManagment.DAL.Factories
         {
             var builder = new DbContextOptionsBuilder<AppDbContext>();
             builder.UseSqlServer( @"Data Source=(LocalDB)\MSSQLLocalDB;
-                                    Initial Catalog = CookBook;
+                                    Initial Catalog = FilmManagmentDB;
                                     MultipleActiveResultSets = True;
                                     Integrated Security = True; ");
 

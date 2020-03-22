@@ -12,7 +12,10 @@ namespace FilmManagment.DAL.Entities
         public int RatingInPercents { get; set; } = 0;
         public string TextRating { get; set; } = string.Empty;
 
-        private sealed class RatingInPercentsTextRatingEqualityComparer : IEqualityComparer<RatingEntity>
+        public Guid FilmId { get; set; }
+        public FilmEntity Film { get; set; }
+
+        private sealed class RatingEntityEqualityComparer : IEqualityComparer<RatingEntity>
         {
             public bool Equals(RatingEntity x, RatingEntity y)
             {
@@ -21,17 +24,22 @@ namespace FilmManagment.DAL.Entities
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
                 return x.Id == y.Id 
+                       && x.FilmId == y.FilmId
                        && x.RatingInPercents == y.RatingInPercents 
                        && x.TextRating == y.TextRating;
+
+                // TODO: testy prechadzaju jedine ak tu nepouzivame Equals(x.Film, y.Film)
+                //       Dovod je ten ze Equals porovnava referencie a nie jednotlive property v classach
+                //       Je to tu vobec nutne ked Rating je viazany s filmom uz cez premennu FilmId ?
             }
 
             public int GetHashCode(RatingEntity obj)
             {
-                return HashCode.Combine(obj.Id, obj.RatingInPercents, obj.TextRating);
+                return HashCode.Combine(obj.Id, obj.FilmId, obj.Film, obj.RatingInPercents, obj.TextRating);
             }
         }
 
-        public static IEqualityComparer<RatingEntity> RatingInPercentsTextRatingComparer { get; } = new RatingInPercentsTextRatingEqualityComparer();
+        public static IEqualityComparer<RatingEntity> RatingEntityComparer { get; } = new RatingEntityEqualityComparer();
     }
 }
 
