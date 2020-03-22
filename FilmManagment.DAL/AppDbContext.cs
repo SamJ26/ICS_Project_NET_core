@@ -61,8 +61,6 @@ namespace FilmManagment.DAL
                         .HasForeignKey(i => i.DirectorId)
                         .OnDelete(DeleteBehavior.Cascade);
 
-            // TODO: add all relationships
-
             DataSeed.Seed(modelBuilder);
 
             base.OnModelCreating(modelBuilder);

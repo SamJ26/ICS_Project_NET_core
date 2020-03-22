@@ -15,7 +15,7 @@ namespace FilmManagment.DAL.Entities
         public Guid FilmId { get; set; }
         public FilmEntity Film { get; set; }
 
-        private sealed class RatingInPercentsTextRatingEqualityComparer : IEqualityComparer<RatingEntity>
+        private sealed class RatingEntityEqualityComparer : IEqualityComparer<RatingEntity>
         {
             public bool Equals(RatingEntity x, RatingEntity y)
             {
@@ -36,7 +36,7 @@ namespace FilmManagment.DAL.Entities
             }
         }
 
-        public static IEqualityComparer<RatingEntity> RatingInPercentsTextRatingComparer { get; } = new RatingInPercentsTextRatingEqualityComparer();
+        public static IEqualityComparer<RatingEntity> RatingEntityComparer { get; } = new RatingEntityEqualityComparer();
     }
 }
 

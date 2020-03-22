@@ -13,7 +13,7 @@ namespace FilmManagment.DAL.Entities
         public string NickName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
 
-        private sealed class NickNamePasswordEqualityComparer : IEqualityComparer<UserEntity>
+        private sealed class UserEntityEqualityComparer : IEqualityComparer<UserEntity>
         {
             public bool Equals(UserEntity x, UserEntity y)
             {
@@ -35,6 +35,6 @@ namespace FilmManagment.DAL.Entities
             }
         }
 
-        public static IEqualityComparer<UserEntity> NickNamePasswordComparer { get; } = new NickNamePasswordEqualityComparer();
+        public static IEqualityComparer<UserEntity> UserEntityComparer { get; } = new UserEntityEqualityComparer();
     }
 }

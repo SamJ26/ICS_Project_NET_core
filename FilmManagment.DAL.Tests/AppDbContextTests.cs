@@ -68,16 +68,16 @@ namespace FilmManagment.DAL.Tests
             appDbContextTestUnit.Films.Add(myNewFilm);
             appDbContextTestUnit.SaveChanges();
 
-            // Tasting of content ( myNewFilm ) which was saved to database           
-            using (var tempDbCOntext = dbContextFactory.CreateDbContext())
+            // Assert         
+            using (var tempDbContext = dbContextFactory.CreateDbContext())
             {
-                var retrievedFilm = tempDbCOntext.Films
+                var retrievedFilm = tempDbContext.Films
                     .Include(entity => entity.Directors)
                         .ThenInclude(connectionTable => connectionTable.Director)
                     .Include(entity => entity.Actors)
                         .ThenInclude(connectionTable => connectionTable.Actor)
                     .Include(entity => entity.Ratings)
-                    .Single(entity => entity.Id == myNewFilm.Id);                    // ako mozu byt tieto dve IDcka porovnavane ??
+                    .Single(entity => entity.Id == myNewFilm.Id);
 
                 Assert.Equal(myNewFilm,retrievedFilm, FilmEntity.FilmEntityComparer);
             }

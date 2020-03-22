@@ -9,9 +9,10 @@ namespace FilmManagment.DAL.Seeds
     {
         public static ActorEntity Actor_1 { get; } = new ActorEntity()
         {
-            Id = Guid.Parse("818f1def-204e-44da-b764-ca28c75e2acc"),
+            Id = Guid.Parse("63156919-53f4-4a7a-b099-1c57bace2307"),
             FirstName = "John",
             SecondName = "Stone",
+            Age = 40,
             WikiUrl = "wikiurl",
             PhotoFilePath = @"c:/blabla/nic/bla"
 
@@ -39,9 +40,9 @@ namespace FilmManagment.DAL.Seeds
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ActorEntity>().HasData(Actor_1);
-            modelBuilder.Entity<ActorEntity>().HasData(Director_1);
-            modelBuilder.Entity<ActorEntity>().HasData(Rating_1);
-            modelBuilder.Entity<ActorEntity>().HasData(Film_1);
+            //modelBuilder.Entity<ActorEntity>().HasData(Director_1);
+            //modelBuilder.Entity<ActorEntity>().HasData(Rating_1);
+            //modelBuilder.Entity<ActorEntity>().HasData(Film_1);
         }
     }
 }

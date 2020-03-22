@@ -15,10 +15,6 @@ namespace FilmManagment.DAL.Entities
 
         public List<FilmDirectorEntity> DirectedMovies { get; set; } = new List<FilmDirectorEntity>();
 
-        // TODO: resolve relationship between director and actors in Film entity
-
-        public List<FilmEntity> ActedMovies { get; set; } = new List<FilmEntity>();
-
         private sealed class DirectorEntityEqualityComparer : IEqualityComparer<DirectorEntity>
         {
             public bool Equals(DirectorEntity x, DirectorEntity y)
@@ -27,39 +23,13 @@ namespace FilmManagment.DAL.Entities
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.Id == y.Id 
+                return x.Id == y.Id
                        && x.FirstName == y.FirstName
                        && x.SecondName == y.SecondName
-                       && x.Age == y.Age 
+                       && x.Age == y.Age
                        && x.WikiUrl == y.WikiUrl
-                       && x.PhotoFilePath == y.PhotoFilePath 
-                       && Equals(x.DirectedMovies, y.DirectedMovies)        // TODO: add EC 
-                       && Equals(x.ActedMovies, y.ActedMovies);             // TODO: add EC
-            }
-
-            public int GetHashCode(DirectorEntity obj)
-            {
-                return HashCode.Combine(obj.Id, obj.FirstName, obj.SecondName, obj.Age, obj.WikiUrl, obj.PhotoFilePath, obj.DirectedMovies, obj.ActedMovies);
-            }
-        }
-
-        public static IEqualityComparer<DirectorEntity> DirectorEntityComparer { get; } = new DirectorEntityEqualityComparer();
-
-        private sealed class DirectorEntityEqualityComparerWithoutActedMovies : IEqualityComparer<DirectorEntity>
-        {
-            public bool Equals(DirectorEntity x, DirectorEntity y)
-            {
-                if (ReferenceEquals(x, y)) return true;
-                if (ReferenceEquals(x, null)) return false;
-                if (ReferenceEquals(y, null)) return false;
-                if (x.GetType() != y.GetType()) return false;
-                return x.Id == y.Id 
-                       && x.FirstName == y.FirstName 
-                       && x.SecondName == y.SecondName 
-                       && x.Age == y.Age 
-                       && x.WikiUrl == y.WikiUrl 
                        && x.PhotoFilePath == y.PhotoFilePath
-                       && x.DirectedMovies.OrderBy(i => i.Id).SequenceEqual(y.DirectedMovies.OrderBy(i => i.Id), FilmDirectorEntity.FilmDirectorEntityComparer);
+                       && Equals(x.DirectedMovies, y.DirectedMovies);       // TODO: add EC 
             }
 
             public int GetHashCode(DirectorEntity obj)
@@ -68,6 +38,30 @@ namespace FilmManagment.DAL.Entities
             }
         }
 
-        public static IEqualityComparer<DirectorEntity> DirectorEntityEqualityComparerWithoutActedMoviesComparer { get; } = new DirectorEntityEqualityComparerWithoutActedMovies();
+        public static IEqualityComparer<DirectorEntity> DirectorEntityComparer { get; } = new DirectorEntityEqualityComparer();
+
+        private sealed class DirectorEntityEqualityComparerWithoutList : IEqualityComparer<DirectorEntity>
+        {
+            public bool Equals(DirectorEntity x, DirectorEntity y)
+            {
+                if (ReferenceEquals(x, y)) return true;
+                if (ReferenceEquals(x, null)) return false;
+                if (ReferenceEquals(y, null)) return false;
+                if (x.GetType() != y.GetType()) return false;
+                return x.Id == y.Id
+                       && x.FirstName == y.FirstName
+                       && x.SecondName == y.SecondName
+                       && x.Age == y.Age
+                       && x.WikiUrl == y.WikiUrl
+                       && x.PhotoFilePath == y.PhotoFilePath;
+            }
+
+            public int GetHashCode(DirectorEntity obj)
+            {
+                return HashCode.Combine(obj.Id, obj.FirstName, obj.SecondName, obj.Age, obj.WikiUrl, obj.PhotoFilePath);
+            }
+        }
+
+        public static IEqualityComparer<DirectorEntity> DirectorEntityWithoutListComparer { get; } = new DirectorEntityEqualityComparerWithoutList();
     }
 }

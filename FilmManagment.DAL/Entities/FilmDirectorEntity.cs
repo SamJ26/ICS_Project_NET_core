@@ -24,15 +24,13 @@ namespace FilmManagment.DAL.Entities
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
                 return x.Id == y.Id
-                       && x.FilmId.Equals(y.FilmId) 
-                       && x.DirectorId.Equals(y.DirectorId) 
-                       && Equals(x.Film, y.Film) 
-                       && Equals(x.Director, y.Director);
+                       && DirectorEntity.DirectorEntityWithoutListComparer.Equals(x.Director, y.Director)
+                       && FilmEntity.FilmEntityWithoutAllListsComparer.Equals(x.Film, y.Film);
             }
 
             public int GetHashCode(FilmDirectorEntity obj)
             {
-                return HashCode.Combine(obj.Id ,obj.FilmId, obj.DirectorId, obj.Film, obj.Director);
+                return HashCode.Combine(obj.Id, obj.Film, obj.Director);
             }
         }
 
