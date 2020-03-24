@@ -3,7 +3,7 @@ using System;
 
 namespace FilmManagment.DAL.Entities
 {
-    public abstract class EntityBase
+    public abstract class EntityBase : IEntityBase
     {
         public Guid Id { get; set; }
     }
