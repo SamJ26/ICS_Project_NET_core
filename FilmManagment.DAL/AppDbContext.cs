@@ -19,6 +19,8 @@ namespace FilmManagment.DAL
         public DbSet<FilmEntity> Films { get; set; }
         public DbSet<RatingEntity> Ratings { get; set; }
         public DbSet<UserEntity> Users { get; set; }
+        public DbSet<FilmActorEntity> FilmsActorsEntity { get; set; }
+        public DbSet<FilmDirectorEntity> FilmsDirectorsEntity { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
