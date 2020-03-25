@@ -8,6 +8,12 @@ namespace FilmManagment.BL.Mapper
 {
     public class FilmMapper : IMapper<FilmEntity, FilmListModel, FilmDetailModel>
     {
+        public FilmDirectorMapper FilmDirectorMapper { get; set; } = new FilmDirectorMapper();
+        public FilmActorMapper FilmActorMapper { get; set; } = new FilmActorMapper();
+
+        // Is this dependency injection ??
+        public IMapper<RatingEntity, RatingListModel, RatingDetailModel> RatingMapper { get; set; }
+
         public IEnumerable<FilmListModel> Map(IQueryable<FilmEntity> entities)
         {
             return entities?.Select(entity => new FilmListModel()
@@ -32,9 +38,9 @@ namespace FilmManagment.BL.Mapper
                 GenreOfFilm = entity.GenreOfFilm,
                 LengthInMinutes = entity.LengthInMinutes,
                 AvarageRatingInPercents = entity.AvarageRatingInPercents,
-                Directors =         // TODO: add mapping of list property
-                Actors =            // TODO: add mapping of list property
-                Ratings =           // TODO: add mapping of list property
+                Directors = FilmDirectorMapper.Map(entity.Directors.Select(i => i.Director)).ToList(),
+                Actors = FilmActorMapper.Map(entity.Actors.Select(i => i.Actor)).ToList(),
+                Ratings = RatingMapper.Map(entity.Ratings.AsQueryable()).ToList()
             };
         }
 
