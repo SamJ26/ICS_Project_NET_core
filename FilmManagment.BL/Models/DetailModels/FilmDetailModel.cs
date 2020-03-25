@@ -16,9 +16,9 @@ namespace FilmManagment.BL.Models.DetailModels
         public TimeSpan LengthInMinutes { get; set; }
         public double AvarageRatingInPercents { get; set; }
 
-        public List<FilmDirectorListModel> Directors { get; set; }
-        public List<FilmActorListModel> Actors { get; set; }
-        public List<RatingListModel> Ratings { get; set; }
+        public ICollection<FilmDirectorListModel> Directors { get; set; }
+        public ICollection<FilmActorListModel> Actors { get; set; }
+        public ICollection<RatingListModel> Ratings { get; set; }
 
         // TODO: add EC
 

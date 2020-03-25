@@ -1,12 +1,12 @@
 ﻿using FilmManagment.DAL.Entities;
+using FilmManagment.DAL.Factories;
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
-using System.Collections.Generic;
-using FilmManagment.DAL.Factories;
-using System.Linq;
 using FilmManagment.BL.Factories;
+using System.Collections.Generic;
+using System.Linq;
 
-namespace FilmManagment.BL.Mapper
+namespace FilmManagment.BL.Mappers
 {
     public class FilmMapper : IMapper<FilmEntity, FilmListModel, FilmDetailModel>
     {
@@ -53,6 +53,7 @@ namespace FilmManagment.BL.Mapper
         {
             var newEntity = (entityFactory ??= new CreateNewEntityFactory()).Create<FilmEntity>(detailModel.Id);
 
+            newEntity.Id = detailModel.Id;
             newEntity.OriginalName = detailModel.OriginalName;
             newEntity.CzechName = detailModel.CzechName;
             newEntity.CountryOfOrigin = detailModel.CountryOfOrigin;
@@ -67,6 +68,9 @@ namespace FilmManagment.BL.Mapper
                 return newFilmActorEntity;
 
             }).ToList();
+
+            // TODO: add Directors
+            // TODO: add Ratings
 
             return newEntity;
         }

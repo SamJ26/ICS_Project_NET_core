@@ -1,9 +1,9 @@
-﻿using FilmManagment.BL.Models.ListModels;
-using FilmManagment.DAL.Entities;
+﻿using FilmManagment.DAL.Entities;
+using FilmManagment.BL.Models.ListModels;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FilmManagment.BL.Mapper
+namespace FilmManagment.BL.Mappers
 {
     public class FilmActorMapper
     {

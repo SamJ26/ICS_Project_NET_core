@@ -6,6 +6,7 @@ namespace FilmManagment.DAL.UnitOfWork
     public class UnitOfWork : IDisposable
     {
         public DbContext WorkingDbContext { get; }
+        public object DbContext { get; set; }
 
         public UnitOfWork(DbContext dbContext)
         {

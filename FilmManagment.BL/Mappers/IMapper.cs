@@ -1,10 +1,10 @@
-﻿using FilmManagment.BL.Models;
-using FilmManagment.DAL.Entities;
+﻿using FilmManagment.DAL.Entities;
 using FilmManagment.DAL.Factories;
+using FilmManagment.BL.Models;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace FilmManagment.BL.Mapper
+namespace FilmManagment.BL.Mappers
 {
     public interface IMapper<TEntity, out TListModel, TDetailModel>
         where TEntity : class, IEntityBase, new()

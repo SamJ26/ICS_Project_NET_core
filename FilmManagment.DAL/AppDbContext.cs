@@ -1,5 +1,4 @@
-﻿
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using FilmManagment.DAL.Entities;
 using FilmManagment.DAL.Seeds;
 

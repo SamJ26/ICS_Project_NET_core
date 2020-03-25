@@ -13,7 +13,7 @@ namespace FilmManagment.BL.Models.DetailModels
         public string WikiUrl { get; set; }
         public string PhotoFilePath { get; set; }
 
-        public List<FilmDirectorListModel> DirectedMovies { get; set; }
+        public ICollection<FilmDirectorListModel> DirectedMovies { get; set; }
 
         // TODO: add EC
 

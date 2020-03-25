@@ -13,7 +13,7 @@ namespace FilmManagment.DAL.Entities
         public string WikiUrl { get; set; } = string.Empty;
         public string PhotoFilePath { get; set; } = string.Empty;
 
-        public List<FilmDirectorEntity> DirectedMovies { get; set; } = new List<FilmDirectorEntity>();
+        public ICollection<FilmDirectorEntity> DirectedMovies { get; set; } = new List<FilmDirectorEntity>();
 
         private sealed class DirectorEntityEqualityComparer : IEqualityComparer<DirectorEntity>
         {
