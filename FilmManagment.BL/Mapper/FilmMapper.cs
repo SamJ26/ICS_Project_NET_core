@@ -2,7 +2,9 @@
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using System.Collections.Generic;
+using FilmManagment.DAL.Factories;
 using System.Linq;
+using FilmManagment.BL.Factories;
 
 namespace FilmManagment.BL.Mapper
 {
@@ -12,6 +14,8 @@ namespace FilmManagment.BL.Mapper
         public FilmActorMapper FilmActorMapper { get; set; } = new FilmActorMapper();
 
         // Is this dependency injection ??
+        public IMapper<DirectorEntity, DirectorListModel, DirectorDetailModel> DirectorMapper { get; set; }
+        public IMapper<ActorEntity, ActorListModel, ActorDetailModel> ActorgMapper { get; set; }
         public IMapper<RatingEntity, RatingListModel, RatingDetailModel> RatingMapper { get; set; }
 
         public IEnumerable<FilmListModel> Map(IQueryable<FilmEntity> entities)
@@ -28,7 +32,7 @@ namespace FilmManagment.BL.Mapper
 
         public FilmDetailModel Map(FilmEntity entity)
         {
-            return entity == null ? null : new FilmDetailModel
+            return entity == null ? null : new FilmDetailModel()
             {
                 OriginalName = entity.OriginalName,
                 CzechName = entity.CzechName,
@@ -44,21 +48,27 @@ namespace FilmManagment.BL.Mapper
             };
         }
 
-        public FilmEntity Map(FilmDetailModel detailModel)
+        // TODO: vysvetlit celu metodu !!!!!!!!!!! 
+        public FilmEntity Map(FilmDetailModel detailModel, IEntityFactory entityFactory)
         {
-            return new FilmEntity
+            var newEntity = (entityFactory ??= new CreateNewEntityFactory()).Create<FilmEntity>(detailModel.Id);
+
+            newEntity.OriginalName = detailModel.OriginalName;
+            newEntity.CzechName = detailModel.CzechName;
+            newEntity.CountryOfOrigin = detailModel.CountryOfOrigin;
+            newEntity.Description = detailModel.Description;
+            newEntity.ImageFilePath = detailModel.ImageFilePath;
+            newEntity.LengthInMinutes = detailModel.LengthInMinutes;
+            newEntity.Actors = detailModel.Actors.Select(model =>
             {
-                OriginalName = detailModel.OriginalName,
-                CzechName = detailModel.CzechName,
-                CountryOfOrigin = detailModel.CountryOfOrigin,
-                Description = detailModel.Description,
-                ImageFilePath = detailModel.ImageFilePath,
-                GenreOfFilm = detailModel.GenreOfFilm,
-                LengthInMinutes = detailModel.LengthInMinutes,
-                Directors =         // TODO: add mapping of list property
-                Actors =            // TODO: add mapping of list property
-                Ratings =           // TODO: add mapping of list property
-            };
+                var newFilmActorEntity = entityFactory.Create<FilmActorEntity>(model.FilmId);
+                newFilmActorEntity.FilmId = detailModel.Id;
+                newFilmActorEntity.ActorId = model.ActorId;
+                return newFilmActorEntity;
+
+            }).ToList();
+
+            return newEntity;
         }
     }
 }

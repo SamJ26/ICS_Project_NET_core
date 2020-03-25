@@ -1,5 +1,6 @@
 ﻿using FilmManagment.BL.Models;
 using FilmManagment.DAL.Entities;
+using FilmManagment.DAL.Factories;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,6 +13,6 @@ namespace FilmManagment.BL.Mapper
     {
         IEnumerable<TListModel> Map(IQueryable<TEntity> entities);
         TDetailModel Map(TEntity entity);
-        TEntity Map(TDetailModel detailModel);
+        TEntity Map(TDetailModel detailModel, IEntityFactory entityFactory);
     }
 }
