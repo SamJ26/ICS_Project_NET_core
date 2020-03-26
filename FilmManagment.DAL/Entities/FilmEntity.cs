@@ -20,9 +20,9 @@ namespace FilmManagment.DAL.Entities
         public TimeSpan LengthInMinutes { get; set; } = TimeSpan.Zero;
         public double AvarageRatingInPercents => Ratings.Select(variable => variable.RatingInPercents).DefaultIfEmpty(0).Average();
 
-        public List<FilmDirectorEntity> Directors { get; set; } = new List<FilmDirectorEntity>();
-        public List<FilmActorEntity> Actors { get; set; } = new List<FilmActorEntity>();
-        public List<RatingEntity> Ratings { get; set; } = new List<RatingEntity>();
+        public ICollection<FilmDirectorEntity> Directors { get; set; } = new List<FilmDirectorEntity>();
+        public ICollection<FilmActorEntity> Actors { get; set; } = new List<FilmActorEntity>();
+        public ICollection<RatingEntity> Ratings { get; set; } = new List<RatingEntity>();
 
         private sealed class FilmEntityEqualityComparer : IEqualityComparer<FilmEntity>
         {
@@ -42,7 +42,7 @@ namespace FilmManagment.DAL.Entities
                        && x.LengthInMinutes.Equals(y.LengthInMinutes)
                        && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorEntity.FilmDirectorEntityComparer)
                        && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorEntity.FilmActorEntityComparer)
-                       && x.Ratings.OrderBy(i => i.Id).SequenceEqual(y.Ratings.OrderBy(i => i.Id), RatingEntity.RatingEntityComparer);                                                                                                // How to test one to many ?
+                       && x.Ratings.OrderBy(i => i.Id).SequenceEqual(y.Ratings.OrderBy(i => i.Id), RatingEntity.RatingEntityComparer);
             }
 
             public int GetHashCode(FilmEntity obj)
