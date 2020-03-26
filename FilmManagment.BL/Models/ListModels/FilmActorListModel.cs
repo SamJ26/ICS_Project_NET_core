@@ -9,6 +9,8 @@ namespace FilmManagment.BL.Models.ListModels
         public Guid FilmId { get; set; }
         public Guid ActorId { get; set; }
 
+        // TODO: add name of actor
+
         // TODO: add EC
 
     }

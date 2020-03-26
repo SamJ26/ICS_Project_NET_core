@@ -35,8 +35,6 @@ namespace FilmManagment.DAL.Seeds
             // TODO: add informations
         };
 
-        // Touto metodou vytvorime model danych entit, ktory potom realne zapiseme do databazy pomocou DbContext.OnModelCreating() metody
-        // Metodu OnModelCreating() musime najskor overridenut v AppDbContext, pricom jej nadefinujeme vztahy medzi tabulkami v DB
         public static void Seed(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ActorEntity>().HasData(Actor_1);

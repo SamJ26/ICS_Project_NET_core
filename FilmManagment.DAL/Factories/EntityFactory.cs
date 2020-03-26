@@ -9,16 +9,13 @@ namespace FilmManagment.DAL.Factories
     {
         private readonly ChangeTracker localChangeTracker;
 
-        // Constructor
         public EntityFactory(ChangeTracker changeTracker) => localChangeTracker = changeTracker;
 
-        // TODO: vysvetlit tento kus kodu
         public TEntity Create<TEntity>(Guid id) where TEntity : class, IEntityBase, new()
         {
             TEntity entity = null;
             if (id != Guid.Empty)
             {
-                // TODO: podrobne prejst tento kusok kodu
                 entity = localChangeTracker?.Entries<TEntity>().SingleOrDefault(i => i.Entity.Id == id)?.Entity;
                 if (entity == null)
                 {

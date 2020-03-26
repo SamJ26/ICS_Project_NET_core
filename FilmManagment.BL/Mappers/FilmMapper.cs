@@ -13,12 +13,11 @@ namespace FilmManagment.BL.Mappers
         public FilmDirectorMapper FilmDirectorMapper { get; set; } = new FilmDirectorMapper();
         public FilmActorMapper FilmActorMapper { get; set; } = new FilmActorMapper();
 
-        // Is this dependency injection ??
         public IMapper<DirectorEntity, DirectorListModel, DirectorDetailModel> DirectorMapper { get; set; }
         public IMapper<ActorEntity, ActorListModel, ActorDetailModel> ActorgMapper { get; set; }
         public IMapper<RatingEntity, RatingListModel, RatingDetailModel> RatingMapper { get; set; }
 
-        public IEnumerable<FilmListModel> Map(IQueryable<FilmEntity> entities)
+        public IEnumerable<FilmListModel> Map(IEnumerable<FilmEntity> entities)
         {
             return entities?.Select(entity => new FilmListModel()
             {
@@ -44,11 +43,10 @@ namespace FilmManagment.BL.Mappers
                 AvarageRatingInPercents = entity.AvarageRatingInPercents,
                 Directors = FilmDirectorMapper.Map(entity.Directors.Select(i => i.Director)).ToList(),
                 Actors = FilmActorMapper.Map(entity.Actors.Select(i => i.Actor)).ToList(),
-                Ratings = RatingMapper.Map(entity.Ratings.AsQueryable()).ToList()
+                Ratings = RatingMapper.Map(entity.Ratings).ToList()
             };
         }
 
-        // TODO: vysvetlit celu metodu !!!!!!!!!!! 
         public FilmEntity Map(FilmDetailModel detailModel, IEntityFactory entityFactory)
         {
             var newEntity = (entityFactory ??= new CreateNewEntityFactory()).Create<FilmEntity>(detailModel.Id);
@@ -68,9 +66,14 @@ namespace FilmManagment.BL.Mappers
                 return newFilmActorEntity;
 
             }).ToList();
+            newEntity.Directors = detailModel.Directors.Select(model =>
+            {
+                var newFilmDirectorEntity = entityFactory.Create<FilmDirectorEntity>(model.FilmId);
+                newFilmDirectorEntity.FilmId = detailModel.Id;
+                newFilmDirectorEntity.DirectorId = model.DirectorId;
+                return newFilmDirectorEntity;
 
-            // TODO: add Directors
-            // TODO: add Ratings
+            }).ToList();
 
             return newEntity;
         }

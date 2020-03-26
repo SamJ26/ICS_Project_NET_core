@@ -42,7 +42,7 @@ namespace FilmManagment.DAL.Entities
                        && x.LengthInMinutes.Equals(y.LengthInMinutes)
                        && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorEntity.FilmDirectorEntityComparer)
                        && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorEntity.FilmActorEntityComparer)
-                       && x.Ratings.OrderBy(i => i.Id).SequenceEqual(y.Ratings.OrderBy(i => i.Id), RatingEntity.RatingEntityComparer);                                                                                                // How to test one to many ?
+                       && x.Ratings.OrderBy(i => i.Id).SequenceEqual(y.Ratings.OrderBy(i => i.Id), RatingEntity.RatingEntityComparer);
             }
 
             public int GetHashCode(FilmEntity obj)

@@ -10,7 +10,7 @@ namespace FilmManagment.BL.Mappers
 {
     public class ActorMapper : IMapper<ActorEntity, ActorListModel, ActorDetailModel>
     {
-        public IEnumerable<ActorListModel> Map(IQueryable<ActorEntity> entities)
+        public IEnumerable<ActorListModel> Map(IEnumerable<ActorEntity> entities)
         {
             return entities?.Select(entity => new ActorListModel()
             {

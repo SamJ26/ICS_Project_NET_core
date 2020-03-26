@@ -10,7 +10,7 @@ namespace FilmManagment.BL.Mappers
 {
     public class DirectorMapper : IMapper<DirectorEntity, DirectorListModel, DirectorDetailModel>
     {
-        public IEnumerable<DirectorListModel> Map(IQueryable<DirectorEntity> entities)
+        public IEnumerable<DirectorListModel> Map(IEnumerable<DirectorEntity> entities)
         {
             return entities?.Select(entity => new DirectorListModel()
             {

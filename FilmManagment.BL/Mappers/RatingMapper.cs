@@ -10,7 +10,7 @@ namespace FilmManagment.BL.Mappers
 {
     public class RatingMapper : IMapper<RatingEntity, RatingListModel, RatingDetailModel>
     {
-        public IEnumerable<RatingListModel> Map(IQueryable<RatingEntity> entities)
+        public IEnumerable<RatingListModel> Map(IEnumerable<RatingEntity> entities)
         {
             return entities?.Select(entity => new RatingListModel()
             {

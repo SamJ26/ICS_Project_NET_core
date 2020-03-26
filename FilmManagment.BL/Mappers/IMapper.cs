@@ -11,7 +11,7 @@ namespace FilmManagment.BL.Mappers
         where TListModel : ModelBase, new()
         where TDetailModel : ModelBase, new()
     {
-        IEnumerable<TListModel> Map(IQueryable<TEntity> entities);
+        IEnumerable<TListModel> Map(IEnumerable<TEntity> entities);
         TDetailModel Map(TEntity entity);
         TEntity Map(TDetailModel detailModel, IEntityFactory entityFactory);
     }

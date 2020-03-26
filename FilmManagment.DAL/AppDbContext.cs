@@ -6,13 +6,10 @@ namespace FilmManagment.DAL
 {
     public class AppDbContext : DbContext
     {
-        // Ked budeme vytvarat novy AppDbContext tak musime dat ctoru parameter contextOptions, ktory obsahuje info potrebne k vytvoreniu DBcontextu
-        // DbContextOptions musime niekde inde nadefinovat ! ( v DesignTimeDbContextFactory )
         public AppDbContext(DbContextOptions contextOptions) : base(contextOptions)
         {
         }
 
-        // Podla tychto propert nam EF vytvori tabulky v DB a zaroven tieto property sluzia na pristup k nim
         public DbSet<ActorEntity> Actors { get; set; }
         public DbSet<DirectorEntity> Directors { get; set; }
         public DbSet<FilmEntity> Films { get; set; }

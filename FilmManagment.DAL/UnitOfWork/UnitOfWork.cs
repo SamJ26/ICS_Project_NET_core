@@ -5,17 +5,16 @@ namespace FilmManagment.DAL.UnitOfWork
 {
     public class UnitOfWork : IDisposable
     {
-        public DbContext WorkingDbContext { get; }
-        public object DbContext { get; set; }
+        public DbContext DbContext { get; set; }
 
         public UnitOfWork(DbContext dbContext)
         {
-            WorkingDbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+            DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
 
-        public void Dispose() => WorkingDbContext.Dispose();
+        public void Dispose() => DbContext.Dispose();
 
-        public void Commit() => WorkingDbContext.SaveChanges();
+        public void Commit() => DbContext.SaveChanges();
 
     }
 }
