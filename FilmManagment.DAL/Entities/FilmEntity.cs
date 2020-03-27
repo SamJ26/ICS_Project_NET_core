@@ -73,16 +73,16 @@ namespace FilmManagment.DAL.Entities
                 if (ReferenceEquals(x, null)) return false;
                 if (ReferenceEquals(y, null)) return false;
                 if (x.GetType() != y.GetType()) return false;
-                return x.Id == y.Id 
-                       && x.OriginalName == y.OriginalName 
-                       && x.CzechName == y.CzechName 
-                       && x.CountryOfOrigin == y.CountryOfOrigin 
-                       && x.Description == y.Description 
-                       && x.ImageFilePath == y.ImageFilePath 
-                       && x.GenreOfFilm == y.GenreOfFilm 
-                       && x.LengthInMinutes.Equals(y.LengthInMinutes) 
-                       && Equals(x.Directors, y.Directors) 
-                       && Equals(x.Actors, y.Actors);
+                return x.Id == y.Id
+                       && x.OriginalName == y.OriginalName
+                       && x.CzechName == y.CzechName
+                       && x.CountryOfOrigin == y.CountryOfOrigin
+                       && x.Description == y.Description
+                       && x.ImageFilePath == y.ImageFilePath
+                       && x.GenreOfFilm == y.GenreOfFilm
+                       && x.LengthInMinutes.Equals(y.LengthInMinutes)
+                       && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorEntity.FilmDirectorEntityComparer)
+                       && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorEntity.FilmActorEntityComparer);
             }
 
             public int GetHashCode(FilmEntity obj)
