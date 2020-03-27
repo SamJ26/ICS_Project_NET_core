@@ -29,7 +29,7 @@ namespace FilmManagment.DAL.Entities
                        && x.Age == y.Age
                        && x.WikiUrl == y.WikiUrl
                        && x.PhotoFilePath == y.PhotoFilePath
-                       && Equals(x.DirectedMovies, y.DirectedMovies);       // TODO: add EC 
+	                   && x.DirectedMovies.OrderBy(i => i.Id).SequenceEqual(y.DirectedMovies.OrderBy(i => i.Id), FilmDirectorEntity.FilmDirectorEntityComparer);
             }
 
             public int GetHashCode(DirectorEntity obj)
