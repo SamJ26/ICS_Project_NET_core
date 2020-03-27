@@ -25,12 +25,10 @@ namespace FilmManagment.DAL.Entities
                 if (x.GetType() != y.GetType()) return false;
                 return x.Id == y.Id 
                        && x.FilmId == y.FilmId
-                       && x.RatingInPercents == y.RatingInPercents 
+                       && x.RatingInPercents == y.RatingInPercents
+                       && FilmEntity.FilmEntityWithoutRatingComparer.Equals(x.Film,y.Film)
                        && x.TextRating == y.TextRating;
 
-                // TODO: testy prechadzaju jedine ak tu nepouzivame Equals(x.Film, y.Film)
-                //       Dovod je ten ze Equals porovnava referencie a nie jednotlive property v classach
-                //       Je to tu vobec nutne ked Rating je viazany s filmom uz cez premennu FilmId ?
             }
 
             public int GetHashCode(RatingEntity obj)
