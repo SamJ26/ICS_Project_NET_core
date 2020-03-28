@@ -124,6 +124,7 @@ namespace FilmManagment.DAL.Tests
                     }
                 }
             };
+
             appDbContextTestUnit.Directors.Add(myNewDirector);
             appDbContextTestUnit.SaveChanges();
 
@@ -180,6 +181,7 @@ namespace FilmManagment.DAL.Tests
                     }
                 }
             };
+
             appDbContextTestUnit.Actors.Add(myNewActor);
             appDbContextTestUnit.SaveChanges();
 

@@ -12,11 +12,12 @@ namespace FilmManagment.BL.Mappers
 
         private IEnumerable<FilmDirectorListModel> MapDirector(DirectorEntity directorEntity)
         {
-            return directorEntity?.DirectedMovies.Select(filmEmtity => new FilmDirectorListModel()
+            return directorEntity?.DirectedMovies.Select(filmEntity => new FilmDirectorListModel()
             {
-                Id = filmEmtity.Id,
-                FilmId = filmEmtity.FilmId,
-                DirectorId = filmEmtity.DirectorId
+                Id = filmEntity.Id,
+                FilmId = filmEntity.FilmId,
+                DirectorId = filmEntity.DirectorId,
+                DirectorName = string.Concat(filmEntity.Director.FirstName, " ", filmEntity.Director.SecondName)
             }).ToArray();
         }
     }
