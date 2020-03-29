@@ -29,7 +29,7 @@ namespace FilmManagment.BL.Models.DetailModels
 		               && x.Age == y.Age
 		               && x.WikiUrl == y.WikiUrl
 		               && x.PhotoFilePath == y.PhotoFilePath
-		               && x.ActedMovies.OrderBy(i => i.Id).SequenceEqual(y.ActedMovies.OrderBy(i => i.Id));
+		               && x.ActedMovies.OrderBy(i => i.Id).SequenceEqual(y.ActedMovies.OrderBy(i => i.Id), FilmActorListModel.FilmIdActorIdActorNameComparer);
 	        }
 
 	        public int GetHashCode(ActorDetailModel obj)
