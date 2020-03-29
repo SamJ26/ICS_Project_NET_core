@@ -114,9 +114,9 @@ namespace FilmManagment.BL.Models.DetailModels
 		               && x.GenreOfFilm == y.GenreOfFilm
 		               && x.LengthInMinutes.Equals(y.LengthInMinutes)
 		               && x.AvarageRatingInPercents.Equals(y.AvarageRatingInPercents)
-		               && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id))
-		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id));
-	        }
+					   && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorListModel.FilmIdDirectorIdDirectorNameComparer)
+		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorListModel.FilmIdActorIdActorNameComparer);
+			}
 
 	        public int GetHashCode(FilmDetailModel obj)
 	        {
