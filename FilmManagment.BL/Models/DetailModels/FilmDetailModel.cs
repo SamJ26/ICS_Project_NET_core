@@ -38,9 +38,9 @@ namespace FilmManagment.BL.Models.DetailModels
 		               && x.GenreOfFilm == y.GenreOfFilm
 		               && x.LengthInMinutes.Equals(y.LengthInMinutes)
 		               && x.AvarageRatingInPercents.Equals(y.AvarageRatingInPercents)
-		               && x.Directors.OrderBy(i => i.Id).Equals(y.Directors.OrderBy(i => i.Id))
-		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id))
-		               && x.Ratings.OrderBy(i => i.Id).SequenceEqual(y.Ratings.OrderBy(i => i.Id));
+		               && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorListModel.FilmIdDirectorIdDirectorNameComparer)
+		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorListModel.FilmIdActorIdActorNameComparer)
+		               && x.Ratings.OrderBy(i => i.Id).SequenceEqual(y.Ratings.OrderBy(i => i.Id), RatingListModel.RatingInPercentsFilmIdComparer);
 	        }
 
 	        public int GetHashCode(FilmDetailModel obj)
@@ -114,9 +114,9 @@ namespace FilmManagment.BL.Models.DetailModels
 		               && x.GenreOfFilm == y.GenreOfFilm
 		               && x.LengthInMinutes.Equals(y.LengthInMinutes)
 		               && x.AvarageRatingInPercents.Equals(y.AvarageRatingInPercents)
-		               && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id))
-		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id));
-	        }
+					   && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorListModel.FilmIdDirectorIdDirectorNameComparer)
+		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorListModel.FilmIdActorIdActorNameComparer);
+			}
 
 	        public int GetHashCode(FilmDetailModel obj)
 	        {
