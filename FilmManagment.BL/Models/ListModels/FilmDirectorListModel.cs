@@ -11,7 +11,26 @@ namespace FilmManagment.BL.Models.ListModels
 
         public string DirectorName { get; set; }
 
-        // TODO: add EC
+        private sealed class FilmIdDirectorIdDirectorNameEqualityComparer : IEqualityComparer<FilmDirectorListModel>
+        {
+	        public bool Equals(FilmDirectorListModel x, FilmDirectorListModel y)
+	        {
+		        if (ReferenceEquals(x, y)) return true;
+		        if (ReferenceEquals(x, null)) return false;
+		        if (ReferenceEquals(y, null)) return false;
+		        if (x.GetType() != y.GetType()) return false;
+		        return x.Id == y.Id
+		               && x.FilmId.Equals(y.FilmId)
+		               && x.DirectorId.Equals(y.DirectorId)
+		               && x.DirectorName == y.DirectorName;
+	        }
 
+	        public int GetHashCode(FilmDirectorListModel obj)
+	        {
+		        return HashCode.Combine(obj.FilmId, obj.DirectorId, obj.DirectorName);
+	        }
+        }
+
+        public static IEqualityComparer<FilmDirectorListModel> FilmIdDirectorIdDirectorNameComparer { get; } = new FilmIdDirectorIdDirectorNameEqualityComparer();
     }
 }
