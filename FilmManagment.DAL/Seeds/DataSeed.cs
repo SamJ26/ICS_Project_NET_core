@@ -15,9 +15,6 @@ namespace FilmManagment.DAL.Seeds
             Age = 40,
             WikiUrl = "wikiurl",
             PhotoFilePath = @"c:/blabla/nic/bla"
-
-            // TODO: add generic lists and other properties
-
         };
 
         public static DirectorEntity Director_1 { get; } = new DirectorEntity()
