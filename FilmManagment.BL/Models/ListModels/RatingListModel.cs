@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FilmManagment.BL.Models.ListModels
 {
@@ -9,7 +8,7 @@ namespace FilmManagment.BL.Models.ListModels
         public int RatingInPercents { get; set; }
         public Guid FilmId { get; set; }
 
-        private sealed class RatingInPercentsFilmIdEqualityComparer : IEqualityComparer<RatingListModel>
+        private sealed class RatingListModelEqualityComparer : IEqualityComparer<RatingListModel>
         {
 	        public bool Equals(RatingListModel x, RatingListModel y)
 	        {
@@ -27,6 +26,6 @@ namespace FilmManagment.BL.Models.ListModels
 	        }
         }
 
-        public static IEqualityComparer<RatingListModel> RatingInPercentsFilmIdComparer { get; } = new RatingInPercentsFilmIdEqualityComparer();
+        public static IEqualityComparer<RatingListModel> RatingListModelComparer { get; } = new RatingListModelEqualityComparer();
     }
 }

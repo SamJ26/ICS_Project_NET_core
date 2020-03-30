@@ -4,14 +4,16 @@ using FilmManagment.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FilmManagment.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200330141936_AddedFirstSeed_Migration")]
+    partial class AddedFirstSeed_Migration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,15 +49,6 @@ namespace FilmManagment.DAL.Migrations
                             PhotoFilePath = "c:/blabla/nic/bla/JohnStone",
                             SecondName = "Stone",
                             WikiUrl = "wikiurlJS"
-                        },
-                        new
-                        {
-                            Id = new Guid("562ed03a-dc26-41cf-8a01-ee78afd22541"),
-                            Age = 50,
-                            FirstName = "Axel",
-                            PhotoFilePath = "c:/blabla/nic/bla/AxelBrown",
-                            SecondName = "Brown",
-                            WikiUrl = "wikiurlAB"
                         });
                 });
 
@@ -87,15 +80,6 @@ namespace FilmManagment.DAL.Migrations
                             PhotoFilePath = "c:/blabla/nic/bla/AdamSilver",
                             SecondName = "Silver",
                             WikiUrl = "wikiurlAS"
-                        },
-                        new
-                        {
-                            Id = new Guid("d4a48f01-c183-4b22-a4a7-5fdf1fa2634f"),
-                            Age = 60,
-                            FirstName = "George",
-                            PhotoFilePath = "c:/blabla/nic/bla/GeorgeBlack",
-                            SecondName = "Black",
-                            WikiUrl = "wikiurlGB"
                         });
                 });
 
@@ -119,12 +103,6 @@ namespace FilmManagment.DAL.Migrations
                             FilmId = new Guid("07cab248-0bcf-4e36-a954-b4f8f619579e"),
                             ActorId = new Guid("63156915-53f4-4a7a-b099-1c57bace2307"),
                             Id = new Guid("5c0154f3-6f6a-473c-8904-1a56dc39eb96")
-                        },
-                        new
-                        {
-                            FilmId = new Guid("5729a349-b4ec-4c7e-ab3b-86ae981003d9"),
-                            ActorId = new Guid("562ed03a-dc26-41cf-8a01-ee78afd22541"),
-                            Id = new Guid("4117bfcc-b81f-4e73-b8cc-af8a14135621")
                         });
                 });
 
@@ -148,12 +126,6 @@ namespace FilmManagment.DAL.Migrations
                             FilmId = new Guid("07cab248-0bcf-4e36-a954-b4f8f619579e"),
                             DirectorId = new Guid("880c8cf4-21cd-4c7a-a4a9-917502bd7db4"),
                             Id = new Guid("8805e086-0206-4b9e-8fba-031a2f04092a")
-                        },
-                        new
-                        {
-                            FilmId = new Guid("5729a349-b4ec-4c7e-ab3b-86ae981003d9"),
-                            DirectorId = new Guid("d4a48f01-c183-4b22-a4a7-5fdf1fa2634f"),
-                            Id = new Guid("9e00af51-7eba-496a-9e72-254eaa9b674d")
                         });
                 });
 
@@ -191,28 +163,6 @@ namespace FilmManagment.DAL.Migrations
                             ImageFilePath = "c:/blabla/nic/bla/WhiteHouse",
                             LengthInMinutes = new TimeSpan(0, 2, 56, 30, 0),
                             OriginalName = "Bily dum"
-                        },
-                        new
-                        {
-                            Id = new Guid("5729a349-b4ec-4c7e-ab3b-86ae981003d9"),
-                            CountryOfOrigin = "Denmark",
-                            CzechName = "Dansky hrdina",
-                            Description = "Film about Danish Hero",
-                            GenreOfFilm = 2,
-                            ImageFilePath = "c:/blabla/nic/bla/DanishHero",
-                            LengthInMinutes = new TimeSpan(0, 2, 56, 30, 0),
-                            OriginalName = "Danish Hero"
-                        },
-                        new
-                        {
-                            Id = new Guid("03b8ccb9-c1c2-4251-b86e-4a2a0baccfc7"),
-                            CountryOfOrigin = "England",
-                            CzechName = "Velký návrat",
-                            Description = "Movie about one of the best sport comeback",
-                            GenreOfFilm = 7,
-                            ImageFilePath = "c:/blabla/nic/bla/BigComeback",
-                            LengthInMinutes = new TimeSpan(0, 2, 56, 30, 0),
-                            OriginalName = "Big Comeback"
                         });
                 });
 
@@ -240,13 +190,6 @@ namespace FilmManagment.DAL.Migrations
                             FilmId = new Guid("07cab248-0bcf-4e36-a954-b4f8f619579e"),
                             RatingInPercents = 87,
                             TextRating = "Best movie I have seen so far"
-                        },
-                        new
-                        {
-                            Id = new Guid("2ed269bc-2c39-457e-bf7c-96258b3d247a"),
-                            FilmId = new Guid("5729a349-b4ec-4c7e-ab3b-86ae981003d9"),
-                            RatingInPercents = 50,
-                            TextRating = "Pretty average"
                         });
                 });
 

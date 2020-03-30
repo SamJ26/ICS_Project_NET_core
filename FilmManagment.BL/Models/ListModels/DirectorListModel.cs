@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FilmManagment.BL.Models.ListModels
 {
@@ -9,7 +8,7 @@ namespace FilmManagment.BL.Models.ListModels
         public string FirstName { get; set; }
         public string SecondName { get; set; }
 
-        private sealed class FirstNameSecondNameEqualityComparer : IEqualityComparer<DirectorListModel>
+        private sealed class DirectorListModelEqualityComparer : IEqualityComparer<DirectorListModel>
         {
 	        public bool Equals(DirectorListModel x, DirectorListModel y)
 	        {
@@ -28,6 +27,6 @@ namespace FilmManagment.BL.Models.ListModels
 	        }
         }
 
-        public static IEqualityComparer<DirectorListModel> FirstNameSecondNameComparer { get; } = new FirstNameSecondNameEqualityComparer();
+        public static IEqualityComparer<DirectorListModel> DirectorListModelComparer { get; } = new DirectorListModelEqualityComparer();
     }
 }

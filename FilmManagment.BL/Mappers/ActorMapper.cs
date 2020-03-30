@@ -34,6 +34,7 @@ namespace FilmManagment.BL.Mappers
                 {
                     FilmId = filmEntity.Id,
                     ActorId = filmEntity.ActorId,
+                    ActorName = string.Concat(filmEntity.Actor.FirstName, " ", filmEntity.Actor.SecondName)
                 }).ToArray()
             };
         }
