@@ -31,6 +31,7 @@ namespace FilmManagment.DAL.Seeds
             ActedMovies = new List<FilmActorEntity>()
         };
 
+        // Free = not seeded
         public static readonly ActorEntity Actor_MicalMorris = new ActorEntity()
         {
             Id = Guid.Parse("5aae9cc3-b880-441c-b88e-ca00242db99f"),
@@ -42,6 +43,7 @@ namespace FilmManagment.DAL.Seeds
             ActedMovies = new List<FilmActorEntity>()
         };
 
+        // Free = not seeded
         public static readonly ActorEntity Actor_GarrethClark = new ActorEntity()
         {
             Id = Guid.Parse("7793e739-6940-4c51-9f37-340be6e613a9"),
@@ -77,6 +79,7 @@ namespace FilmManagment.DAL.Seeds
             DirectedMovies = new List<FilmDirectorEntity>()
         };
 
+        // Free = not seeded
         public static readonly DirectorEntity Director_RorySabatini = new DirectorEntity()
         {
             Id = Guid.Parse("011a72e9-827c-48e4-ac61-da46ab5756e3"),
@@ -88,6 +91,7 @@ namespace FilmManagment.DAL.Seeds
             DirectedMovies = new List<FilmDirectorEntity>()
         };
 
+        // Free = not seeded
         public static readonly DirectorEntity Director_PaulGasol = new DirectorEntity()
         {
             Id = Guid.Parse("9033b72b-6340-4667-8a14-b6aed51697b6"),
@@ -131,6 +135,7 @@ namespace FilmManagment.DAL.Seeds
             Directors = new List<FilmDirectorEntity>(),
             Ratings = new List<RatingEntity>()
         };
+
         public static readonly FilmEntity Film_DanishHero = new FilmEntity()
         {
             Id = Guid.Parse("5729a349-b4ec-4c7e-ab3b-86ae981003d9"),
@@ -203,6 +208,8 @@ namespace FilmManagment.DAL.Seeds
 
         static DataSeeds()
         {
+            // Seeding Film_WhiteHouse + Director_AdamSilver + Actor_JohnStone
+
             Film_WhiteHouse.Directors.Add(FilmDirector_WhiteHouse);
             Film_WhiteHouse.Actors.Add(FilmActor_WhiteHouse);
             Film_WhiteHouse.Ratings.Add(Rating_1);
@@ -210,6 +217,7 @@ namespace FilmManagment.DAL.Seeds
             Director_AdamSilver.DirectedMovies.Add(FilmDirector_WhiteHouse);
             Actor_JohnStone.ActedMovies.Add(FilmActor_WhiteHouse);
 
+            // Seeding Film_DanishHero + Director_GeorgeBlack + Actor_AxelBrown
 
             Film_DanishHero.Directors.Add(FilmDirector_DanishHero);
             Film_DanishHero.Actors.Add(FilmActor_DanishHero);
