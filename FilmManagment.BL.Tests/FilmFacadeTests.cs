@@ -64,9 +64,7 @@ namespace FilmManagment.BL.Tests
                     // Adding Actor_1 from DataSeed class
                     new FilmActorListModel()
                     {
-                        // No need to use FilmId ?
-                        ActorId = DataSeed.Actor_1.Id,
-                        ActorName = string.Concat(DataSeed.Actor_1.FirstName, " ", DataSeed.Actor_1.SecondName)
+                        // TODO: add existing actor from DB
                     }
                 }
             };

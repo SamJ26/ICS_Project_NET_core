@@ -59,7 +59,7 @@ namespace FilmManagment.DAL
                         .HasForeignKey(i => i.DirectorId)
                         .OnDelete(DeleteBehavior.Cascade);
 
-            DataSeed.Seed(modelBuilder);
+            SeedData.SeedAllData(modelBuilder);
 
             base.OnModelCreating(modelBuilder);
         }
