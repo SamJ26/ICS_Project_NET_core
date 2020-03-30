@@ -30,7 +30,7 @@ namespace FilmManagment.BL.Models.DetailModels
 		               && x.Age == y.Age
 		               && x.WikiUrl == y.WikiUrl
 		               && x.PhotoFilePath == y.PhotoFilePath
-		               && x.DirectedMovies.OrderBy(i => i.Id).SequenceEqual(y.DirectedMovies.OrderBy(i => i.Id), FilmDirectorListModel.FilmIdDirectorIdDirectorNameComparer);
+		               && x.DirectedMovies.OrderBy(i => i.Id).SequenceEqual(y.DirectedMovies.OrderBy(i => i.Id), FilmDirectorListModel.FilmDirectorListModelComparer);
 	        }
 
 	        public int GetHashCode(DirectorDetailModel obj)
@@ -40,6 +40,7 @@ namespace FilmManagment.BL.Models.DetailModels
         }
 
         public static IEqualityComparer<DirectorDetailModel> DirectorDetailModelComparer { get; } = new DirectorDetailModelEqualityComparer();
+
         private sealed class DirectorDetailModelEqualityComparerWithoutList : IEqualityComparer<DirectorDetailModel>
         {
 	        public bool Equals(DirectorDetailModel x, DirectorDetailModel y)

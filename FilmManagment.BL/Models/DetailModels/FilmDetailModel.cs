@@ -38,9 +38,9 @@ namespace FilmManagment.BL.Models.DetailModels
 		               && x.GenreOfFilm == y.GenreOfFilm
 		               && x.LengthInMinutes.Equals(y.LengthInMinutes)
 		               && x.AvarageRatingInPercents.Equals(y.AvarageRatingInPercents)
-		               && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorListModel.FilmIdDirectorIdDirectorNameComparer)
-		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorListModel.FilmIdActorIdActorNameComparer)
-		               && x.Ratings.OrderBy(i => i.Id).SequenceEqual(y.Ratings.OrderBy(i => i.Id), RatingListModel.RatingInPercentsFilmIdComparer);
+		               && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorListModel.FilmDirectorListModelComparer)
+		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorListModel.FilmActorListModelComparer)
+		               && x.Ratings.OrderBy(i => i.Id).SequenceEqual(y.Ratings.OrderBy(i => i.Id), RatingListModel.RatingListModelComparer);
 	        }
 
 	        public int GetHashCode(FilmDetailModel obj)
@@ -60,7 +60,9 @@ namespace FilmManagment.BL.Models.DetailModels
 		        return hashCode.ToHashCode();
 	        }
         }
+
         public static IEqualityComparer<FilmDetailModel> FilmDetailModelComparer { get; } = new FilmDetailModelEqualityComparer();
+
         private sealed class FilmDetailModelEqualityComparerWithoutLists : IEqualityComparer<FilmDetailModel>
         {
 	        public bool Equals(FilmDetailModel x, FilmDetailModel y)
@@ -114,8 +116,8 @@ namespace FilmManagment.BL.Models.DetailModels
 		               && x.GenreOfFilm == y.GenreOfFilm
 		               && x.LengthInMinutes.Equals(y.LengthInMinutes)
 		               && x.AvarageRatingInPercents.Equals(y.AvarageRatingInPercents)
-					   && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorListModel.FilmIdDirectorIdDirectorNameComparer)
-		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorListModel.FilmIdActorIdActorNameComparer);
+					   && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorListModel.FilmDirectorListModelComparer)
+		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorListModel.FilmActorListModelComparer);
 			}
 
 	        public int GetHashCode(FilmDetailModel obj)

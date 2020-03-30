@@ -11,7 +11,7 @@ namespace FilmManagment.BL.Models.ListModels
 
         public string ActorName { get; set; }
 
-        private sealed class FilmIdActorIdActorNameEqualityComparer : IEqualityComparer<FilmActorListModel>
+        private sealed class FilmActorListModelEqualityComparer : IEqualityComparer<FilmActorListModel>
         {
 	        public bool Equals(FilmActorListModel x, FilmActorListModel y)
 	        {
@@ -31,6 +31,6 @@ namespace FilmManagment.BL.Models.ListModels
 	        }
         }
 
-        public static IEqualityComparer<FilmActorListModel> FilmIdActorIdActorNameComparer { get; } = new FilmIdActorIdActorNameEqualityComparer();
+        public static IEqualityComparer<FilmActorListModel> FilmActorListModelComparer { get; } = new FilmActorListModelEqualityComparer();
     }
 }

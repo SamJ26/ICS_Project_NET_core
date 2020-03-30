@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using FilmManagment.BL.Models.ListModels;
-using System.Text;
-using FilmManagment.DAL.Entities;
 
 namespace FilmManagment.BL.Models.DetailModels
 {
@@ -13,7 +11,7 @@ namespace FilmManagment.BL.Models.DetailModels
 
         public FilmListModel Film { get; set; }
 
-        private sealed class RatingInPercentsTextRatingFilmEqualityComparer : IEqualityComparer<RatingDetailModel>
+        private sealed class RatingDetailModelEqualityComparer : IEqualityComparer<RatingDetailModel>
         {
 	        public bool Equals(RatingDetailModel x, RatingDetailModel y)
 	        {
@@ -33,6 +31,6 @@ namespace FilmManagment.BL.Models.DetailModels
 	        }
         }
 
-        public static IEqualityComparer<RatingDetailModel> RatingInPercentsTextRatingFilmComparer { get; } = new RatingInPercentsTextRatingFilmEqualityComparer();
+        public static IEqualityComparer<RatingDetailModel> RatingDetailModelComparer { get; } = new RatingDetailModelEqualityComparer();
     }
 }

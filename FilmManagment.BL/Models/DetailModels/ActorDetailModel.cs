@@ -29,7 +29,7 @@ namespace FilmManagment.BL.Models.DetailModels
 		               && x.Age == y.Age
 		               && x.WikiUrl == y.WikiUrl
 		               && x.PhotoFilePath == y.PhotoFilePath
-		               && x.ActedMovies.OrderBy(i => i.Id).SequenceEqual(y.ActedMovies.OrderBy(i => i.Id), FilmActorListModel.FilmIdActorIdActorNameComparer);
+		               && x.ActedMovies.OrderBy(i => i.Id).SequenceEqual(y.ActedMovies.OrderBy(i => i.Id), FilmActorListModel.FilmActorListModelComparer);
 	        }
 
 	        public int GetHashCode(ActorDetailModel obj)
@@ -39,7 +39,8 @@ namespace FilmManagment.BL.Models.DetailModels
         }
 
         public static IEqualityComparer<ActorDetailModel> ActorDetailModelComparer { get; } = new ActorDetailModelEqualityComparer();
-        private sealed class ActorDetailModelWithoutListEqualityComparer : IEqualityComparer<ActorDetailModel>
+
+        private sealed class ActorDetailModelEqualityComparerWithoutList : IEqualityComparer<ActorDetailModel>
         {
 	        public bool Equals(ActorDetailModel x, ActorDetailModel y)
 	        {
@@ -61,6 +62,6 @@ namespace FilmManagment.BL.Models.DetailModels
 	        }
         }
 
-        public static IEqualityComparer<ActorDetailModel> ActorDetailModelWithoutListComparer { get; } = new ActorDetailModelWithoutListEqualityComparer();
+        public static IEqualityComparer<ActorDetailModel> ActorDetailModelComparerWithoutList { get; } = new ActorDetailModelEqualityComparerWithoutList();
 	}
 }
