@@ -145,6 +145,16 @@ namespace FilmManagment.DAL.Seeds
                             GenreOfFilm = DataSeeds.Film_BigComeback.GenreOfFilm,
                             LengthInMinutes = DataSeeds.Film_BigComeback.LengthInMinutes,
                         });
+
+            // Seeding rest of Actors
+
+            modelBuilder.Entity<ActorEntity>().HasData(DataSeeds.Actor_MicalMorris);
+            modelBuilder.Entity<ActorEntity>().HasData(DataSeeds.Actor_GarrethClark);
+
+            // Seeding rest of Directors
+
+            modelBuilder.Entity<DirectorEntity>().HasData(DataSeeds.Director_RorySabatini);
+            modelBuilder.Entity<DirectorEntity>().HasData(DataSeeds.Director_PaulGasol);
         }
     }
 }

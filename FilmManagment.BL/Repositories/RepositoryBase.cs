@@ -26,6 +26,8 @@ namespace FilmManagment.BL.Repositories
 
         public void DeleteById(Guid entityId)
         {
+            // Vysvetlit: preco sa tu vytvara nova entita ?
+
             var entity = new TEntity { Id = entityId };
             Delete(entity);
         }

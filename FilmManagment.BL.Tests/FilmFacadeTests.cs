@@ -35,6 +35,8 @@ namespace FilmManagment.BL.Tests
             facadeTestUnit = new FilmFacade(unitOfWork, repository, mapper, entityFactory);
         }
 
+        // TODO: resolve bug
+
         [Fact]
         public void NewFilmWithoutRating_InsertOrUpdate()
         {
