@@ -10,6 +10,7 @@ using FilmManagment.BL.Repositories;
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using System.Collections.Generic;
+using System.Linq;
 using System;
 using Xunit;
 
@@ -73,9 +74,8 @@ namespace FilmManagment.BL.Tests
             // No need to Dispose UnitOfWork here ?
         }
 
-        // TODO: resolve bug in this test
         [Fact]
-        public void InsertNewActorWithoutFilms()
+        public void Insert_NewActorWithoutFilms()
         {
             var actorDetailModel = new ActorDetailModel()
             {
@@ -89,9 +89,29 @@ namespace FilmManagment.BL.Tests
 
             var returnedDetailModel = facadeTestUnit.Save(actorDetailModel);
 
+            // Synchronizing Ids
+            actorDetailModel.Id = returnedDetailModel.Id;
+
+            Assert.NotNull(returnedDetailModel);
             Assert.Equal(actorDetailModel, returnedDetailModel, ActorDetailModel.ActorDetailModelComparer);
 
-            facadeTestUnit.Delete(actorDetailModel);
+            // No need to Dispose UnitOfWork here ?
+        }
+
+        // TODO: resolve bug with tracking entities
+
+        [Fact]
+        public void Delete_NewActorWithoutFilms()
+        {
+            // Get all actors from table Actors
+            var arrayOfActorListModels = facadeTestUnit.GetAllList();
+
+            // Find added actor according to name
+            var foundActorListModel = arrayOfActorListModels.Single(listModel => listModel.FirstName == "Emil_test");
+
+            facadeTestUnit.Delete(foundActorListModel);
+
+            // No need to Dispose UnitOfWork here ?
         }
     }
 }

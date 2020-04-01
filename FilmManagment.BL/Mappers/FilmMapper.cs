@@ -57,6 +57,7 @@ namespace FilmManagment.BL.Mappers
             newEntity.CountryOfOrigin = detailModel.CountryOfOrigin;
             newEntity.Description = detailModel.Description;
             newEntity.ImageFilePath = detailModel.ImageFilePath;
+            newEntity.GenreOfFilm = detailModel.GenreOfFilm;
             newEntity.LengthInMinutes = detailModel.LengthInMinutes;
             newEntity.Actors = detailModel.Actors.Select(model =>
             {

@@ -39,8 +39,8 @@ namespace FilmManagment.BL.Repositories
 
         public TEntity InsertOrUpdate(TEntity entity)
         {
-            localUnitOfWork.DbContext.Update<TEntity>(entity);
-            return entity;
+            localUnitOfWork.DbContext.Update<TEntity>(entity);      // Entity with Id = Guid.Empty enters the method
+            return entity;                                          // Entity with Id = RandomValue returns from method
         }
 
         public IQueryable<TEntity> GetAll()

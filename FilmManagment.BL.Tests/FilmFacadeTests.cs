@@ -35,17 +35,11 @@ namespace FilmManagment.BL.Tests
             facadeTestUnit = new FilmFacade(unitOfWork, repository, mapper, entityFactory);
         }
 
-        // TODO: resolve bug
-
         [Fact]
-        public void NewFilmWithoutRating_InsertOrUpdate()
+        public void Insert_NewFilmWithoutLists()
         {
             var filmDetail = new FilmDetailModel()
             {
-                // TODO: Here should be also Id when it is a new film ? 
-
-                Id = Guid.Parse("7a82f38f-2626-4155-a287-7985e60a9f96"),
-
                 OriginalName = "Resident Evil 5",
                 CzechName = "Resident Evil 5",
                 CountryOfOrigin = "USA",
@@ -53,46 +47,20 @@ namespace FilmManagment.BL.Tests
                 ImageFilePath = "C:/users/photo/ResidentEvilPhoto",
                 GenreOfFilm = Genre.ActionFilm,
                 LengthInMinutes = new TimeSpan(1, 35, 0),
-
-                // Using existing Director from seeds
-                Directors = new List<FilmDirectorListModel>()
-                {
-                    new FilmDirectorListModel()
-                    {                   
-                        // TODO: No need to use FilmId ?
-
-                        DirectorId = DataSeeds.Director_AdamSilver.Id,
-                        DirectorName = string.Concat(DataSeeds.Director_AdamSilver.FirstName, " ", DataSeeds.Director_AdamSilver.SecondName)
-                    }
-                },
-
-                // Using existing Actor from seeds
-                Actors = new List<FilmActorListModel>()
-                {
-                    new FilmActorListModel()
-                    {
-                        // TODO: No need to use FilmId ?
-
-                        ActorId = DataSeeds.Actor_JohnStone.Id,
-                        ActorName = string.Concat(DataSeeds.Actor_JohnStone.FirstName, " ", DataSeeds.Actor_JohnStone.SecondName)
-                    }
-                }
-
-                // Here we are not able to add Rating !
-                // New rating need to be added to existing film separately
+                Directors = new List<FilmDirectorListModel>(),
+                Actors = new List<FilmActorListModel>(),
+                Ratings = new List<RatingListModel>()
             };
 
-            filmDetail = facadeTestUnit.Save(filmDetail);
+            var returnedDetailModel = facadeTestUnit.Save(filmDetail);
 
-            // This should be null beacause such a film does not exist in DB yet
-            // We should probably assing new Giud to the film on line 44
-            Assert.NotEqual(Guid.Empty, filmDetail.Id);
-            Assert.NotEqual(Guid.Empty, filmDetail.Id);
-            
-            // filmDetail.Id is prob. default value ( zeros )
-            var entityFromDb = repository.GetById(filmDetail.Id);
+            // Synchronizing Ids
+            filmDetail.Id = returnedDetailModel.Id;
 
-            Assert.Equal(filmDetail, mapper.Map(entityFromDb), FilmDetailModel.FilmDetailModelComparer);
+            Assert.NotNull(returnedDetailModel);
+            Assert.Equal(filmDetail, returnedDetailModel, FilmDetailModel.FilmDetailModelComparer);
+
+            // No need to Dispose UnitOfWork here ?;
         }
     }
 }
