@@ -18,7 +18,7 @@ namespace FilmManagment.DAL.Entities
         public string ImageFilePath { get; set; } = string.Empty;
         public Genre GenreOfFilm { get; set; } = Genre.Undefined;
         public TimeSpan LengthInMinutes { get; set; } = TimeSpan.Zero;
-        public double AvarageRatingInPercents => Ratings.Select(variable => variable.RatingInPercents).DefaultIfEmpty(0).Average();
+        public double AverageRatingInPercents => Ratings.Select(variable => variable.RatingInPercents).DefaultIfEmpty(0).Average();
 
         public ICollection<FilmDirectorEntity> Directors { get; set; } = new List<FilmDirectorEntity>();
         public ICollection<FilmActorEntity> Actors { get; set; } = new List<FilmActorEntity>();

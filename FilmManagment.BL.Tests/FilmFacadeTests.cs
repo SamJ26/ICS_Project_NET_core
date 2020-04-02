@@ -35,6 +35,19 @@ namespace FilmManagment.BL.Tests
             facadeTestUnit = new FilmFacade(unitOfWork, repository, mapper, entityFactory);
         }
 
+        // TODO: resolve bugs
+
+        [Fact]
+        public void GetById_Film_BigComeback()
+        {
+            var returnedDetailModel = facadeTestUnit.GetById(DataSeeds.Film_BigComeback.Id);
+            Assert.Equal(returnedDetailModel, mapper.Map(DataSeeds.Film_BigComeback), FilmDetailModel.FilmDetailModelComparer);
+
+            // No need to Dispose UnitOfWork here ?
+        }
+
+        // TODO: resolve bugs
+
         [Fact]
         public void Insert_NewFilmWithoutLists()
         {

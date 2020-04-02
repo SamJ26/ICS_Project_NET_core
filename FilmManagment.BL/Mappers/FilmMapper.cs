@@ -14,7 +14,7 @@ namespace FilmManagment.BL.Mappers
         public FilmActorMapper FilmActorMapper { get; set; } = new FilmActorMapper();
 
         public IMapper<DirectorEntity, DirectorListModel, DirectorDetailModel> DirectorMapper { get; set; }
-        public IMapper<ActorEntity, ActorListModel, ActorDetailModel> ActorgMapper { get; set; }
+        public IMapper<ActorEntity, ActorListModel, ActorDetailModel> ActorMapper { get; set; }
         public IMapper<RatingEntity, RatingListModel, RatingDetailModel> RatingMapper { get; set; }
 
         public IEnumerable<FilmListModel> Map(IEnumerable<FilmEntity> entities)
@@ -40,11 +40,13 @@ namespace FilmManagment.BL.Mappers
                 ImageFilePath = entity.ImageFilePath,
                 GenreOfFilm = entity.GenreOfFilm,
                 LengthInMinutes = entity.LengthInMinutes,
-                AvarageRatingInPercents = entity.AvarageRatingInPercents,
+                AverageRatingInPercents = entity.AverageRatingInPercents,
                 Directors = FilmDirectorMapper.Map(entity.Directors.Select(i => i.Director)).ToList(),
                 Actors = FilmActorMapper.Map(entity.Actors.Select(i => i.Actor)).ToList(),
-                Ratings = RatingMapper.Map(entity.Ratings).ToList()
-            };
+                Ratings = RatingMapper.Map(entity.Ratings.AsQueryable()).ToList()                                 // TODO: here it drops
+            };  // Exception: FilmManagment.BL.Mappers.FilmMapper.RatingMapper.get returned null.
+                // Object reference not set to an instance of an object. - System.NullReferenceException
+
         }
 
         public FilmEntity Map(FilmDetailModel detailModel, IEntityFactory entityFactory)

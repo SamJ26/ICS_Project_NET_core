@@ -58,8 +58,7 @@ namespace FilmManagment.BL.Tests
         public void Update_Actor_GarrethClark()
         {
             // Get existing actor from DB to detailModel
-            var actorDetailModel = new ActorDetailModel();
-            actorDetailModel = mapper.Map(DataSeeds.Actor_GarrethClark);
+            var actorDetailModel = mapper.Map(DataSeeds.Actor_GarrethClark);
 
             // Update his informations on detailModel
             actorDetailModel.FirstName += "_Update";
