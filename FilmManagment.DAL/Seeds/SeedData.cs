@@ -28,7 +28,8 @@ namespace FilmManagment.DAL.Seeds
                             Id = DataSeeds.Rating_1.Id,
                             RatingInPercents = DataSeeds.Rating_1.RatingInPercents,
                             TextRating = DataSeeds.Rating_1.TextRating,
-                            FilmId = DataSeeds.Film_WhiteHouse.Id
+                            FilmId = DataSeeds.Film_WhiteHouse.Id,
+                            //Film = DataSeeds.FilmActor_WhiteHouse                           // Added
                         });
 
             modelBuilder.Entity<DirectorEntity>()
@@ -90,7 +91,8 @@ namespace FilmManagment.DAL.Seeds
                             Id = DataSeeds.Rating_2.Id,
                             RatingInPercents = DataSeeds.Rating_2.RatingInPercents,
                             TextRating = DataSeeds.Rating_2.TextRating,
-                            FilmId = DataSeeds.Film_DanishHero.Id
+                            FilmId = DataSeeds.Film_DanishHero.Id,
+                            //Film = DataSeeds.Film_DanishHero                            // Added
                         });
 
             modelBuilder.Entity<DirectorEntity>()
@@ -145,6 +147,16 @@ namespace FilmManagment.DAL.Seeds
                             GenreOfFilm = DataSeeds.Film_BigComeback.GenreOfFilm,
                             LengthInMinutes = DataSeeds.Film_BigComeback.LengthInMinutes,
                         });
+
+            // Seeding rest of Actors
+
+            modelBuilder.Entity<ActorEntity>().HasData(DataSeeds.Actor_MicalMorris);
+            modelBuilder.Entity<ActorEntity>().HasData(DataSeeds.Actor_GarrethClark);
+
+            // Seeding rest of Directors
+
+            modelBuilder.Entity<DirectorEntity>().HasData(DataSeeds.Director_RorySabatini);
+            modelBuilder.Entity<DirectorEntity>().HasData(DataSeeds.Director_PaulGasol);
         }
     }
 }

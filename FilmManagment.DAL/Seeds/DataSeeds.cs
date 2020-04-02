@@ -31,7 +31,6 @@ namespace FilmManagment.DAL.Seeds
             ActedMovies = new List<FilmActorEntity>()
         };
 
-        // Free = not seeded
         public static readonly ActorEntity Actor_MicalMorris = new ActorEntity()
         {
             Id = Guid.Parse("5aae9cc3-b880-441c-b88e-ca00242db99f"),
@@ -43,7 +42,6 @@ namespace FilmManagment.DAL.Seeds
             ActedMovies = new List<FilmActorEntity>()
         };
 
-        // Free = not seeded
         public static readonly ActorEntity Actor_GarrethClark = new ActorEntity()
         {
             Id = Guid.Parse("7793e739-6940-4c51-9f37-340be6e613a9"),
@@ -79,7 +77,6 @@ namespace FilmManagment.DAL.Seeds
             DirectedMovies = new List<FilmDirectorEntity>()
         };
 
-        // Free = not seeded
         public static readonly DirectorEntity Director_RorySabatini = new DirectorEntity()
         {
             Id = Guid.Parse("011a72e9-827c-48e4-ac61-da46ab5756e3"),
@@ -91,7 +88,6 @@ namespace FilmManagment.DAL.Seeds
             DirectedMovies = new List<FilmDirectorEntity>()
         };
 
-        // Free = not seeded
         public static readonly DirectorEntity Director_PaulGasol = new DirectorEntity()
         {
             Id = Guid.Parse("9033b72b-6340-4667-8a14-b6aed51697b6"),

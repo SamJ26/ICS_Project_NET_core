@@ -15,7 +15,7 @@ namespace FilmManagment.BL.Models.DetailModels
         public string ImageFilePath { get; set; }
         public Genre GenreOfFilm { get; set; }
         public TimeSpan LengthInMinutes { get; set; }
-        public double AvarageRatingInPercents { get; set; }
+        public double AverageRatingInPercents { get; set; }
 
         public ICollection<FilmDirectorListModel> Directors { get; set; }
         public ICollection<FilmActorListModel> Actors { get; set; }
@@ -37,7 +37,7 @@ namespace FilmManagment.BL.Models.DetailModels
 		               && x.ImageFilePath == y.ImageFilePath
 		               && x.GenreOfFilm == y.GenreOfFilm
 		               && x.LengthInMinutes.Equals(y.LengthInMinutes)
-		               && x.AvarageRatingInPercents.Equals(y.AvarageRatingInPercents)
+		               && x.AverageRatingInPercents.Equals(y.AverageRatingInPercents)
 		               && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorListModel.FilmDirectorListModelComparer)
 		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorListModel.FilmActorListModelComparer)
 		               && x.Ratings.OrderBy(i => i.Id).SequenceEqual(y.Ratings.OrderBy(i => i.Id), RatingListModel.RatingListModelComparer);
@@ -53,7 +53,7 @@ namespace FilmManagment.BL.Models.DetailModels
 		        hashCode.Add(obj.ImageFilePath);
 		        hashCode.Add((int) obj.GenreOfFilm);
 		        hashCode.Add(obj.LengthInMinutes);
-		        hashCode.Add(obj.AvarageRatingInPercents);
+		        hashCode.Add(obj.AverageRatingInPercents);
 		        hashCode.Add(obj.Directors);
 		        hashCode.Add(obj.Actors);
 		        hashCode.Add(obj.Ratings);
@@ -79,7 +79,7 @@ namespace FilmManagment.BL.Models.DetailModels
 		               && x.ImageFilePath == y.ImageFilePath
 		               && x.GenreOfFilm == y.GenreOfFilm
 		               && x.LengthInMinutes.Equals(y.LengthInMinutes)
-		               && x.AvarageRatingInPercents.Equals(y.AvarageRatingInPercents);
+		               && x.AverageRatingInPercents.Equals(y.AverageRatingInPercents);
 	        }
 
 	        public int GetHashCode(FilmDetailModel obj)
@@ -92,7 +92,7 @@ namespace FilmManagment.BL.Models.DetailModels
 		        hashCode.Add(obj.ImageFilePath);
 		        hashCode.Add((int)obj.GenreOfFilm);
 		        hashCode.Add(obj.LengthInMinutes);
-		        hashCode.Add(obj.AvarageRatingInPercents);
+		        hashCode.Add(obj.AverageRatingInPercents);
 		        return hashCode.ToHashCode();
 	        }
         }
@@ -115,7 +115,7 @@ namespace FilmManagment.BL.Models.DetailModels
 		               && x.ImageFilePath == y.ImageFilePath
 		               && x.GenreOfFilm == y.GenreOfFilm
 		               && x.LengthInMinutes.Equals(y.LengthInMinutes)
-		               && x.AvarageRatingInPercents.Equals(y.AvarageRatingInPercents)
+		               && x.AverageRatingInPercents.Equals(y.AverageRatingInPercents)
 					   && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorListModel.FilmDirectorListModelComparer)
 		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorListModel.FilmActorListModelComparer);
 			}
@@ -130,7 +130,7 @@ namespace FilmManagment.BL.Models.DetailModels
 		        hashCode.Add(obj.ImageFilePath);
 		        hashCode.Add((int)obj.GenreOfFilm);
 		        hashCode.Add(obj.LengthInMinutes);
-		        hashCode.Add(obj.AvarageRatingInPercents);
+		        hashCode.Add(obj.AverageRatingInPercents);
 		        hashCode.Add(obj.Directors);
 		        hashCode.Add(obj.Actors);
 		        return hashCode.ToHashCode();

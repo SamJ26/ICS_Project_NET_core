@@ -9,7 +9,7 @@ namespace FilmManagment.BL.Models.DetailModels
         public int RatingInPercents { get; set; }
         public string TextRating { get; set; }
 
-        public FilmListModel Film { get; set; }
+		public Guid FilmId { get; set; }
 
         private sealed class RatingDetailModelEqualityComparer : IEqualityComparer<RatingDetailModel>
         {
@@ -19,15 +19,15 @@ namespace FilmManagment.BL.Models.DetailModels
 		        if (ReferenceEquals(x, null)) return false;
 		        if (ReferenceEquals(y, null)) return false;
 		        if (x.GetType() != y.GetType()) return false;
-		        return x.Id == y.Id
-		               && x.RatingInPercents == y.RatingInPercents 
-		               && x.TextRating == y.TextRating 
-		               && FilmListModel.FilmListModelComparer.Equals(x.Film, y.Film);
+				return x.Id == y.Id
+					   && x.RatingInPercents == y.RatingInPercents
+					   && x.TextRating == y.TextRating
+					   && x.FilmId == y.FilmId;
 	        }
 
 	        public int GetHashCode(RatingDetailModel obj)
 	        {
-		        return HashCode.Combine(obj.RatingInPercents, obj.TextRating, obj.Film);
+		        return HashCode.Combine(obj.RatingInPercents, obj.TextRating, obj.FilmId);
 	        }
         }
 
