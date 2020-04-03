@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using FilmManagment.BL.Models.ListModels;
-using System.Text;
 
 namespace FilmManagment.BL.Models.DetailModels
 {

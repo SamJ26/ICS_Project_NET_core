@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace FilmManagment.DAL.Entities
@@ -28,7 +27,6 @@ namespace FilmManagment.DAL.Entities
                        && x.RatingInPercents == y.RatingInPercents
                        && FilmEntity.FilmEntityWithoutRatingComparer.Equals(x.Film,y.Film)
                        && x.TextRating == y.TextRating;
-
             }
 
             public int GetHashCode(RatingEntity obj)

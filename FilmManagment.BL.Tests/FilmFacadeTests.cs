@@ -74,7 +74,7 @@ namespace FilmManagment.BL.Tests
             };
 
             var returnedDetailModel = facadeTestUnit.Save(filmDetail);
-            // TODO: FilmActorEntity ( transsition table ) has still Id = Guid.Empty ( zeros )
+            // TODO: FilmActorEntity ( transition table ) has still Id = Guid.Empty ( zeros )
 
             // Synchronizing informations which are automatically assigned by EF during updating DB
             filmDetail.Id = returnedDetailModel.Id;

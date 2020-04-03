@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FilmManagment.DAL.Enums;
 using System.Linq;
 using System;

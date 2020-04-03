@@ -1,10 +1,8 @@
-﻿
-using Microsoft.EntityFrameworkCore.Design;
+﻿using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
 
 namespace FilmManagment.DAL.Factories
 {
-    // V tejto classe musime implementovat metodu CreateDbContext ktora je z IDesignTimeDbContextFactory interfacu
     public class DesignTimeDbContextFactory : IDesignTimeDbContextFactory<AppDbContext>
     {
         public AppDbContext CreateDbContext(string[] args)

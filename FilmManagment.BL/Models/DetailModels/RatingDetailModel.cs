@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using FilmManagment.BL.Models.ListModels;
 
 namespace FilmManagment.BL.Models.DetailModels
 {
