@@ -36,20 +36,27 @@ namespace FilmManagment.BL.Tests
         }
 
         // TODO: resolve bugs
-
+        // This film has empty collections
         [Fact]
         public void GetById_Film_BigComeback()
         {
             var returnedDetailModel = facadeTestUnit.GetById(DataSeeds.Film_BigComeback.Id);
             Assert.Equal(returnedDetailModel, mapper.Map(DataSeeds.Film_BigComeback), FilmDetailModel.FilmDetailModelComparer);
+        }
 
-            // No need to Dispose UnitOfWork here ?
+        // TODO: resolve bugs
+        // This film has one Director, Actor and Rating
+        [Fact]
+        public void GetById_Film_WhiteHouse()
+        {
+            var returnedDetailModel = facadeTestUnit.GetById(DataSeeds.Film_WhiteHouse.Id);
+            Assert.Equal(returnedDetailModel, mapper.Map(DataSeeds.Film_WhiteHouse), FilmDetailModel.FilmDetailModelComparer);
         }
 
         // TODO: resolve bugs
 
         [Fact]
-        public void Insert_NewFilmWithoutLists()
+        public void Insert_NewFilmWithActor()
         {
             var filmDetail = new FilmDetailModel()
             {
@@ -61,7 +68,13 @@ namespace FilmManagment.BL.Tests
                 GenreOfFilm = Genre.ActionFilm,
                 LengthInMinutes = new TimeSpan(1, 35, 0),
                 Directors = new List<FilmDirectorListModel>(),
-                Actors = new List<FilmActorListModel>(),
+                Actors = new List<FilmActorListModel>()
+                {
+                    new FilmActorListModel()
+                    {
+                        ActorId = DataSeeds.Actor_GarrethClark.Id
+                    }
+                },
                 Ratings = new List<RatingListModel>()
             };
 
@@ -72,8 +85,6 @@ namespace FilmManagment.BL.Tests
 
             Assert.NotNull(returnedDetailModel);
             Assert.Equal(filmDetail, returnedDetailModel, FilmDetailModel.FilmDetailModelComparer);
-
-            // No need to Dispose UnitOfWork here ?;
         }
     }
 }

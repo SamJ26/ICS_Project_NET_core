@@ -5,10 +5,10 @@ namespace FilmManagment.BL.Models.ListModels
 {
     public class DirectorListModel : ModelBase
     {
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+		public string SecondName { get; set; } = string.Empty;
 
-        private sealed class DirectorListModelEqualityComparer : IEqualityComparer<DirectorListModel>
+		private sealed class DirectorListModelEqualityComparer : IEqualityComparer<DirectorListModel>
         {
 	        public bool Equals(DirectorListModel x, DirectorListModel y)
 	        {

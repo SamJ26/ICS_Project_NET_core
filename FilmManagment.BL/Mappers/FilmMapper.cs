@@ -43,7 +43,7 @@ namespace FilmManagment.BL.Mappers
                 AverageRatingInPercents = entity.AverageRatingInPercents,
                 Directors = FilmDirectorMapper.Map(entity.Directors.Select(i => i.Director)).ToList(),
                 Actors = FilmActorMapper.Map(entity.Actors.Select(i => i.Actor)).ToList(),
-                Ratings = RatingMapper.Map(entity.Ratings.AsQueryable()).ToList()                                 // TODO: here it drops
+                Ratings = RatingMapper.Map(entity.Ratings).ToList()                                 // TODO: here it drops
             };  // Exception: FilmManagment.BL.Mappers.FilmMapper.RatingMapper.get returned null.
                 // Object reference not set to an instance of an object. - System.NullReferenceException
 

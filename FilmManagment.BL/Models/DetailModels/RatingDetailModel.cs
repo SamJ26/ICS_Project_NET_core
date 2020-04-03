@@ -7,7 +7,7 @@ namespace FilmManagment.BL.Models.DetailModels
     public class RatingDetailModel : ModelBase
     {
         public int RatingInPercents { get; set; }
-        public string TextRating { get; set; }
+        public string TextRating { get; set; } = string.Empty;
 
 		public Guid FilmId { get; set; }
 

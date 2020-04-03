@@ -29,7 +29,7 @@ namespace FilmManagment.BL.Facades
         {
             entities => entities.Include(i => i.Directors),
             entities => entities.Include(i => i.Actors),
-            entities => entities.Include(i => i.Ratings),
+            entities => entities.Include(i => i.Ratings)
         };
     }
 }

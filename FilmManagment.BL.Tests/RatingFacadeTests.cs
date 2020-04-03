@@ -37,24 +37,24 @@ namespace FilmManagment.BL.Tests
         }
 
         [Fact]
-        public void GetById_RatingFromSeeds()
+        public void GetById_Rating_1()
         {
+            // Retrieving rating_1 from DB according to Id from Seeds.
             var detailModel = facadeTestUnit.GetById(DataSeeds.Rating_1.Id);
-            Assert.Equal(detailModel, mapper.Map(DataSeeds.Rating_1), RatingDetailModel.RatingDetailModelComparer);
 
-            // No need to Dispose UnitOfWork here ?
+            // Mapping entity of Rating_1 from Seeds to detailModel
+            var ratingFromSeed = mapper.Map(DataSeeds.Rating_1);
+
+            // Synchronizing FilmId because Rating_1 entity in Seeds has not this property assinged yet 
+            ratingFromSeed.FilmId = detailModel.FilmId;
+
+            Assert.Equal(detailModel, ratingFromSeed, RatingDetailModel.RatingDetailModelComparer);
         }
 
         [Fact]
-        public void Update_RatingFromSeeds()
+        public void Delete_Rating_2()
         {
-            var detailRatingModel = facadeTestUnit.GetById(DataSeeds.Rating_2.Id);
-
-            detailRatingModel.TextRating = "New updated text rating";
-
-            var returnedRatingModel = facadeTestUnit.Save(detailRatingModel);
-
-            Assert.Equal(detailRatingModel, returnedRatingModel, RatingDetailModel.RatingDetailModelComparer);
+            facadeTestUnit.Delete(DataSeeds.Rating_2.Id);
         }
     }
 }

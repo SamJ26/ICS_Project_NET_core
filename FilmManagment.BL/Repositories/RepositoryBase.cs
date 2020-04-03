@@ -26,8 +26,6 @@ namespace FilmManagment.BL.Repositories
 
         public void DeleteById(Guid entityId)
         {
-            // Vysvetlit: preco sa tu vytvara nova entita ?
-
             var entity = new TEntity { Id = entityId };
             Delete(entity);
         }
@@ -39,8 +37,8 @@ namespace FilmManagment.BL.Repositories
 
         public TEntity InsertOrUpdate(TEntity entity)
         {
-            localUnitOfWork.DbContext.Update<TEntity>(entity);      // Entity with Id = Guid.Empty enters the method
-            return entity;                                          // Entity with Id = RandomValue returns from method
+            localUnitOfWork.DbContext.Update<TEntity>(entity);
+            return entity;
         }
 
         public IQueryable<TEntity> GetAll()
