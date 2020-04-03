@@ -1,19 +1,19 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace FilmManagment.DAL.UnitOfWork
 {
-    public class UnitOfWork : IDisposable
-    {
-        public DbContext DbContext { get; set; }
+	public class UnitOfWork : IDisposable
+	{
+		public DbContext DbContext { get; set; }
 
-        public UnitOfWork(DbContext dbContext)
-        {
-            DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
-        }
+		public UnitOfWork(DbContext dbContext)
+		{
+			DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+		}
 
-        public void Dispose() => DbContext.Dispose();
+		public void Dispose() => DbContext.Dispose();
 
-        public void Commit() => DbContext.SaveChanges();
-    }
+		public void Commit() => DbContext.SaveChanges();
+	}
 }
