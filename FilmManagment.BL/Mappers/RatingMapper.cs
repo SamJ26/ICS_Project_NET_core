@@ -12,14 +12,11 @@ namespace FilmManagment.BL.Mappers
     {
         public IEnumerable<RatingListModel> Map(IEnumerable<RatingEntity> entities)
         {
-            if (entities.Any())
-                return entities?.Select(entity => new RatingListModel()
-                {
-                    Id = entity.Id,
-                    RatingInPercents = entity.RatingInPercents
-                }).ToArray();
-            else 
-                return null;
+            return entities?.Select(entity => new RatingListModel()
+            {
+                Id = entity.Id,
+                RatingInPercents = entity.RatingInPercents
+            }).ToArray();
         }
 
         public RatingDetailModel Map(RatingEntity entity)

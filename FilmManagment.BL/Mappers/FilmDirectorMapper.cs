@@ -8,7 +8,7 @@ namespace FilmManagment.BL.Mappers
     public class FilmDirectorMapper
     {
         public IEnumerable<FilmDirectorListModel> Map(IEnumerable<DirectorEntity> entities)
-            => entities?.SelectMany(MapDirector).ToArray();
+            => entities?.SelectMany(e=> MapDirector(e)).ToArray();
 
         private IEnumerable<FilmDirectorListModel> MapDirector(DirectorEntity directorEntity)
         {

@@ -13,9 +13,9 @@ namespace FilmManagment.BL.Mappers
         public FilmDirectorMapper FilmDirectorMapper { get; set; } = new FilmDirectorMapper();
         public FilmActorMapper FilmActorMapper { get; set; } = new FilmActorMapper();
 
-        public IMapper<DirectorEntity, DirectorListModel, DirectorDetailModel> DirectorMapper { get; set; }
-        public IMapper<ActorEntity, ActorListModel, ActorDetailModel> ActorMapper { get; set; }
-        public IMapper<RatingEntity, RatingListModel, RatingDetailModel> RatingMapper { get; set; }
+        public IMapper<DirectorEntity, DirectorListModel, DirectorDetailModel> DirectorMapper { get; set; } = new DirectorMapper();
+        public IMapper<ActorEntity, ActorListModel, ActorDetailModel> ActorMapper { get; set; } = new ActorMapper();
+        public IMapper<RatingEntity, RatingListModel, RatingDetailModel> RatingMapper { get; set; } = new RatingMapper();
 
         public IEnumerable<FilmListModel> Map(IEnumerable<FilmEntity> entities)
         {
@@ -33,6 +33,7 @@ namespace FilmManagment.BL.Mappers
         {
             return entity == null ? null : new FilmDetailModel()
             {
+                Id = entity.Id,
                 OriginalName = entity.OriginalName,
                 CzechName = entity.CzechName,
                 CountryOfOrigin = entity.CountryOfOrigin,
@@ -41,12 +42,10 @@ namespace FilmManagment.BL.Mappers
                 GenreOfFilm = entity.GenreOfFilm,
                 LengthInMinutes = entity.LengthInMinutes,
                 AverageRatingInPercents = entity.AverageRatingInPercents,
-                Directors = FilmDirectorMapper.Map(entity.Directors.Select(i => i.Director)).ToList(),
+                Ratings = RatingMapper.Map(entity.Ratings).ToList(),
                 Actors = FilmActorMapper.Map(entity.Actors.Select(i => i.Actor)).ToList(),
-                Ratings = RatingMapper.Map(entity.Ratings).ToList()                                 // TODO: here it drops
-            };  // Exception: FilmManagment.BL.Mappers.FilmMapper.RatingMapper.get returned null.
-                // Object reference not set to an instance of an object. - System.NullReferenceException
-
+                Directors = FilmDirectorMapper.Map(entity.Directors.Select(i => i.Director)).ToList()
+            };
         }
 
         public FilmEntity Map(FilmDetailModel detailModel, IEntityFactory entityFactory)

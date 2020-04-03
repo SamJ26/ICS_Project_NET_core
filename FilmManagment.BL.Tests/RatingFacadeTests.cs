@@ -2,16 +2,11 @@
 using FilmManagment.DAL.Tests;
 using FilmManagment.DAL.UnitOfWork;
 using FilmManagment.DAL.Factories;
-using FilmManagment.DAL.Enums;
 using FilmManagment.DAL.Seeds;
 using FilmManagment.BL.Facades;
 using FilmManagment.BL.Mappers;
 using FilmManagment.BL.Repositories;
 using FilmManagment.BL.Models.DetailModels;
-using FilmManagment.BL.Models.ListModels;
-using System.Collections.Generic;
-using System.Linq;
-using System;
 using Xunit;
 
 namespace FilmManagment.BL.Tests

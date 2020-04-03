@@ -2,7 +2,6 @@
 using FilmManagment.DAL.Tests;
 using FilmManagment.DAL.UnitOfWork;
 using FilmManagment.DAL.Factories;
-using FilmManagment.DAL.Enums;
 using FilmManagment.DAL.Seeds;
 using FilmManagment.BL.Facades;
 using FilmManagment.BL.Mappers;
@@ -10,8 +9,6 @@ using FilmManagment.BL.Repositories;
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using System.Collections.Generic;
-using System.Linq;
-using System;
 using Xunit;
 
 namespace FilmManagment.BL.Tests
@@ -92,9 +89,6 @@ namespace FilmManagment.BL.Tests
         [Fact]
         public void Delete_Actor_AxelBrown()
         {
-            // Padalo to lebo sme sa pokusili najskor Actora vyhladat v DB pomocou GetAllList() pricom nam zavolanie metody
-            // vratilo entitu daneho actora z DB a my sme sa potom pri DeleteById() pokusli vytvorit znovu tu istu entitu entitu.
-
             facadeTestUnit.Delete(DataSeeds.Actor_AxelBrown.Id);
         }
     }

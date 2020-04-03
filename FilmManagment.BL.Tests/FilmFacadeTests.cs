@@ -10,6 +10,7 @@ using FilmManagment.BL.Repositories;
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using System.Collections.Generic;
+using System.Linq;
 using System;
 using Xunit;
 
@@ -35,8 +36,6 @@ namespace FilmManagment.BL.Tests
             facadeTestUnit = new FilmFacade(unitOfWork, repository, mapper, entityFactory);
         }
 
-        // TODO: resolve bugs
-        // This film has empty collections
         [Fact]
         public void GetById_Film_BigComeback()
         {
@@ -44,16 +43,12 @@ namespace FilmManagment.BL.Tests
             Assert.Equal(returnedDetailModel, mapper.Map(DataSeeds.Film_BigComeback), FilmDetailModel.FilmDetailModelComparer);
         }
 
-        // TODO: resolve bugs
-        // This film has one Director, Actor and Rating
         [Fact]
         public void GetById_Film_WhiteHouse()
         {
             var returnedDetailModel = facadeTestUnit.GetById(DataSeeds.Film_WhiteHouse.Id);
             Assert.Equal(returnedDetailModel, mapper.Map(DataSeeds.Film_WhiteHouse), FilmDetailModel.FilmDetailModelComparer);
         }
-
-        // TODO: resolve bugs
 
         [Fact]
         public void Insert_NewFilmWithActor()
@@ -79,9 +74,13 @@ namespace FilmManagment.BL.Tests
             };
 
             var returnedDetailModel = facadeTestUnit.Save(filmDetail);
+            // TODO: FilmActorEntity ( transsition table ) has still Id = Guid.Empty ( zeros )
 
-            // Synchronizing Ids
+            // Synchronizing informations which are automatically assigned by EF during updating DB
             filmDetail.Id = returnedDetailModel.Id;
+            filmDetail.Actors.ElementAt(0).FilmId = returnedDetailModel.Actors.ElementAt(0).FilmId;
+            filmDetail.Actors.ElementAt(0).ActorName = returnedDetailModel.Actors.ElementAt(0).ActorName;
+            filmDetail.Actors.ElementAt(0).FilmName = returnedDetailModel.Actors.ElementAt(0).FilmName;
 
             Assert.NotNull(returnedDetailModel);
             Assert.Equal(filmDetail, returnedDetailModel, FilmDetailModel.FilmDetailModelComparer);
