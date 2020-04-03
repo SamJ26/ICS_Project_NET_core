@@ -5,12 +5,12 @@ namespace FilmManagment.BL.Models.ListModels
 {
     public class FilmListModel : ModelBase
     {
-        public string OriginalName { get; set; }
-        public string CzechName { get; set; }
-        public string CountryOfOrigin { get; set; }
-        public string Description { get; set; }
+		public string OriginalName { get; set; } = string.Empty;
+        public string CzechName { get; set; } = string.Empty;
+		public string CountryOfOrigin { get; set; } = string.Empty;
+		public string Description { get; set; } = string.Empty;
 
-        private sealed class FilmListModelEqualityComparer : IEqualityComparer<FilmListModel>
+		private sealed class FilmListModelEqualityComparer : IEqualityComparer<FilmListModel>
         {
 	        public bool Equals(FilmListModel x, FilmListModel y)
 	        {

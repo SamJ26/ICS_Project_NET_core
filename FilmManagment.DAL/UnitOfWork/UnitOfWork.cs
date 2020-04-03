@@ -15,6 +15,5 @@ namespace FilmManagment.DAL.UnitOfWork
         public void Dispose() => DbContext.Dispose();
 
         public void Commit() => DbContext.SaveChanges();
-
     }
 }

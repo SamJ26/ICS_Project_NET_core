@@ -10,6 +10,7 @@ using FilmManagment.BL.Repositories;
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using System.Collections.Generic;
+using System.Linq;
 using System;
 using Xunit;
 
@@ -35,21 +36,22 @@ namespace FilmManagment.BL.Tests
             facadeTestUnit = new FilmFacade(unitOfWork, repository, mapper, entityFactory);
         }
 
-        // TODO: resolve bugs
-
         [Fact]
         public void GetById_Film_BigComeback()
         {
             var returnedDetailModel = facadeTestUnit.GetById(DataSeeds.Film_BigComeback.Id);
             Assert.Equal(returnedDetailModel, mapper.Map(DataSeeds.Film_BigComeback), FilmDetailModel.FilmDetailModelComparer);
-
-            // No need to Dispose UnitOfWork here ?
         }
 
-        // TODO: resolve bugs
+        [Fact]
+        public void GetById_Film_WhiteHouse()
+        {
+            var returnedDetailModel = facadeTestUnit.GetById(DataSeeds.Film_WhiteHouse.Id);
+            Assert.Equal(returnedDetailModel, mapper.Map(DataSeeds.Film_WhiteHouse), FilmDetailModel.FilmDetailModelComparer);
+        }
 
         [Fact]
-        public void Insert_NewFilmWithoutLists()
+        public void Insert_NewFilmWithActor()
         {
             var filmDetail = new FilmDetailModel()
             {
@@ -61,19 +63,27 @@ namespace FilmManagment.BL.Tests
                 GenreOfFilm = Genre.ActionFilm,
                 LengthInMinutes = new TimeSpan(1, 35, 0),
                 Directors = new List<FilmDirectorListModel>(),
-                Actors = new List<FilmActorListModel>(),
+                Actors = new List<FilmActorListModel>()
+                {
+                    new FilmActorListModel()
+                    {
+                        ActorId = DataSeeds.Actor_GarrethClark.Id
+                    }
+                },
                 Ratings = new List<RatingListModel>()
             };
 
             var returnedDetailModel = facadeTestUnit.Save(filmDetail);
+            // TODO: FilmActorEntity ( transition table ) has still Id = Guid.Empty ( zeros )
 
-            // Synchronizing Ids
+            // Synchronizing informations which are automatically assigned by EF during updating DB
             filmDetail.Id = returnedDetailModel.Id;
+            filmDetail.Actors.ElementAt(0).FilmId = returnedDetailModel.Actors.ElementAt(0).FilmId;
+            filmDetail.Actors.ElementAt(0).ActorName = returnedDetailModel.Actors.ElementAt(0).ActorName;
+            filmDetail.Actors.ElementAt(0).FilmName = returnedDetailModel.Actors.ElementAt(0).FilmName;
 
             Assert.NotNull(returnedDetailModel);
             Assert.Equal(filmDetail, returnedDetailModel, FilmDetailModel.FilmDetailModelComparer);
-
-            // No need to Dispose UnitOfWork here ?;
         }
     }
 }

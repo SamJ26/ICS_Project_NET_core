@@ -29,7 +29,6 @@ namespace FilmManagment.DAL.Seeds
                             RatingInPercents = DataSeeds.Rating_1.RatingInPercents,
                             TextRating = DataSeeds.Rating_1.TextRating,
                             FilmId = DataSeeds.Film_WhiteHouse.Id,
-                            //Film = DataSeeds.FilmActor_WhiteHouse                           // Added
                         });
 
             modelBuilder.Entity<DirectorEntity>()
@@ -92,7 +91,6 @@ namespace FilmManagment.DAL.Seeds
                             RatingInPercents = DataSeeds.Rating_2.RatingInPercents,
                             TextRating = DataSeeds.Rating_2.TextRating,
                             FilmId = DataSeeds.Film_DanishHero.Id,
-                            //Film = DataSeeds.Film_DanishHero                            // Added
                         });
 
             modelBuilder.Entity<DirectorEntity>()
@@ -134,19 +132,8 @@ namespace FilmManagment.DAL.Seeds
                         });
 
             // Seeding Film_BigComeback without Actors, Directors and Ratings
-
-            modelBuilder.Entity<FilmEntity>()
-                        .HasData(new
-                        {
-                            Id = DataSeeds.Film_BigComeback.Id,
-                            OriginalName = DataSeeds.Film_BigComeback.OriginalName,
-                            CzechName = DataSeeds.Film_BigComeback.CzechName,
-                            CountryOfOrigin = DataSeeds.Film_BigComeback.CountryOfOrigin,
-                            Description = DataSeeds.Film_BigComeback.Description,
-                            ImageFilePath = DataSeeds.Film_BigComeback.ImageFilePath,
-                            GenreOfFilm = DataSeeds.Film_BigComeback.GenreOfFilm,
-                            LengthInMinutes = DataSeeds.Film_BigComeback.LengthInMinutes,
-                        });
+        
+            modelBuilder.Entity<FilmEntity>().HasData(DataSeeds.Film_BigComeback);
 
             // Seeding rest of Actors
 

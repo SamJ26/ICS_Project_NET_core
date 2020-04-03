@@ -46,7 +46,7 @@ namespace FilmManagment.BL.Facades
                 query = include(query);
             }
 
-            return mapper.Map(query.SingleOrDefault(i => i.Id.Equals(id)));  // Inspect
+            return mapper.Map(query.SingleOrDefault(i => i.Id.Equals(id)));
         }
 
         public void Delete(Guid id)
@@ -63,8 +63,8 @@ namespace FilmManagment.BL.Facades
         {
             var _ = GetById(model.Id);                              //To fill the DbContext Identity Cache
 
-            var entity = mapper.Map(model, entityFactory);          // Entity with Id = Guid.Empty is passed as argument
-            entity = repository.InsertOrUpdate(entity);             // Here is returned entity with new Id !!!
+            var entity = mapper.Map(model, entityFactory);
+            entity = repository.InsertOrUpdate(entity);
             unitOfWork.Commit();
 
             return GetById(entity.Id);                              //To fill properties not mapped from model to entity

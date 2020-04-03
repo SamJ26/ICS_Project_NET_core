@@ -10,20 +10,14 @@ namespace FilmManagment.BL.Mappers
 {
     public class RatingMapper : IMapper<RatingEntity, RatingListModel, RatingDetailModel>
     {
-        // Changed when trying to solve bug
         public IEnumerable<RatingListModel> Map(IEnumerable<RatingEntity> entities)
         {
-            return entities?.Select(entity => MapToListModel(entity)).ToArray();
-        }
-
-        public RatingListModel MapToListModel(RatingEntity entity)
-        {
-            return new RatingListModel()
+            return entities?.Select(entity => new RatingListModel()
             {
                 Id = entity.Id,
                 RatingInPercents = entity.RatingInPercents
-            };
-        }    
+            }).ToArray();
+        }
 
         public RatingDetailModel Map(RatingEntity entity)
         {

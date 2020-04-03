@@ -8,13 +8,13 @@ namespace FilmManagment.BL.Models.DetailModels
 {
     public class FilmDetailModel : ModelBase
     {
-        public string OriginalName { get; set; }
-        public string CzechName { get; set; }
-        public string CountryOfOrigin { get; set; }
-        public string Description { get; set; }
-        public string ImageFilePath { get; set; }
-        public Genre GenreOfFilm { get; set; }
-        public TimeSpan LengthInMinutes { get; set; }
+        public string OriginalName { get; set; } = string.Empty;
+		public string CzechName { get; set; } = string.Empty;
+		public string CountryOfOrigin { get; set; } = string.Empty;
+		public string Description { get; set; } = string.Empty;
+		public string ImageFilePath { get; set; } = string.Empty;
+		public Genre GenreOfFilm { get; set; } = Genre.Undefined;
+		public TimeSpan LengthInMinutes { get; set; } = TimeSpan.Zero;
         public double AverageRatingInPercents { get; set; }
 
         public ICollection<FilmDirectorListModel> Directors { get; set; }
@@ -29,17 +29,17 @@ namespace FilmManagment.BL.Models.DetailModels
 		        if (ReferenceEquals(x, null)) return false;
 		        if (ReferenceEquals(y, null)) return false;
 		        if (x.GetType() != y.GetType()) return false;
-		        return x.Id == y.Id
-		               && x.OriginalName == y.OriginalName
-		               && x.CzechName == y.CzechName
-		               && x.CountryOfOrigin == y.CountryOfOrigin
-		               && x.Description == y.Description
-		               && x.ImageFilePath == y.ImageFilePath
-		               && x.GenreOfFilm == y.GenreOfFilm
-		               && x.LengthInMinutes.Equals(y.LengthInMinutes)
-		               && x.AverageRatingInPercents.Equals(y.AverageRatingInPercents)
-		               && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorListModel.FilmDirectorListModelComparer)
-		               && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorListModel.FilmActorListModelComparer)
+				return x.Id == y.Id
+					   && x.OriginalName == y.OriginalName
+					   && x.CzechName == y.CzechName
+					   && x.CountryOfOrigin == y.CountryOfOrigin
+					   && x.Description == y.Description
+					   && x.ImageFilePath == y.ImageFilePath
+					   && x.GenreOfFilm == y.GenreOfFilm
+					   && x.LengthInMinutes.Equals(y.LengthInMinutes)
+					   && x.AverageRatingInPercents.Equals(y.AverageRatingInPercents)
+					   && x.Directors.OrderBy(i => i.Id).SequenceEqual(y.Directors.OrderBy(i => i.Id), FilmDirectorListModel.FilmDirectorListModelComparer)
+					   && x.Actors.OrderBy(i => i.Id).SequenceEqual(y.Actors.OrderBy(i => i.Id), FilmActorListModel.FilmActorListModelComparer)
 		               && x.Ratings.OrderBy(i => i.Id).SequenceEqual(y.Ratings.OrderBy(i => i.Id), RatingListModel.RatingListModelComparer);
 	        }
 

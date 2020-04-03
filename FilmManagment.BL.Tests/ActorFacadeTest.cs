@@ -2,7 +2,6 @@
 using FilmManagment.DAL.Tests;
 using FilmManagment.DAL.UnitOfWork;
 using FilmManagment.DAL.Factories;
-using FilmManagment.DAL.Enums;
 using FilmManagment.DAL.Seeds;
 using FilmManagment.BL.Facades;
 using FilmManagment.BL.Mappers;
@@ -10,8 +9,6 @@ using FilmManagment.BL.Repositories;
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using System.Collections.Generic;
-using System.Linq;
-using System;
 using Xunit;
 
 namespace FilmManagment.BL.Tests
@@ -41,8 +38,6 @@ namespace FilmManagment.BL.Tests
         {
             var detailModel = facadeTestUnit.GetById(DataSeeds.Actor_JohnStone.Id);
             Assert.Equal(detailModel, mapper.Map(DataSeeds.Actor_JohnStone), ActorDetailModel.ActorDetailModelComparer);
-
-            // No need to Dispose UnitOfWork here ?
         }
 
         [Fact]
@@ -50,8 +45,6 @@ namespace FilmManagment.BL.Tests
         {
             var detailModel = facadeTestUnit.GetById(DataSeeds.Actor_MicalMorris.Id);
             Assert.Equal(detailModel, mapper.Map(DataSeeds.Actor_MicalMorris), ActorDetailModel.ActorDetailModelComparer);
-
-            // No need to Dispose UnitOfWork here ?
         }
 
         [Fact]
@@ -69,8 +62,6 @@ namespace FilmManagment.BL.Tests
 
             // Assert testing
             Assert.Equal(actorDetailModel, returnedDetailModel, ActorDetailModel.ActorDetailModelComparer);
-
-            // No need to Dispose UnitOfWork here ?
         }
 
         [Fact]
@@ -93,24 +84,12 @@ namespace FilmManagment.BL.Tests
 
             Assert.NotNull(returnedDetailModel);
             Assert.Equal(actorDetailModel, returnedDetailModel, ActorDetailModel.ActorDetailModelComparer);
-
-            // No need to Dispose UnitOfWork here ?
         }
 
-        // TODO: resolve bug with tracking entities
-
         [Fact]
-        public void Delete_NewActorWithoutFilms()
+        public void Delete_Actor_AxelBrown()
         {
-            // Get all actors from table Actors
-            var arrayOfActorListModels = facadeTestUnit.GetAllList();
-
-            // Find added actor according to name
-            var foundActorListModel = arrayOfActorListModels.Single(listModel => listModel.FirstName == "Emil_test");
-
-            facadeTestUnit.Delete(foundActorListModel);
-
-            // No need to Dispose UnitOfWork here ?
+            facadeTestUnit.Delete(DataSeeds.Actor_AxelBrown.Id);
         }
     }
 }

@@ -8,7 +8,7 @@ namespace FilmManagment.DAL.Entities
     /// <summary>
     /// This class contains informations about users of application 
     /// </summary>
-    public class UserEntity : Person
+    public class UserEntity : PersonBase
     {
         public string NickName { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;

@@ -7,13 +7,13 @@ namespace FilmManagment.BL.Models.DetailModels
 {
     public class ActorDetailModel : ModelBase
     {
-        public string FirstName { get; set; }
-        public string SecondName { get; set; }
-        public int Age { get; set; }
-        public string WikiUrl { get; set; }
-        public string PhotoFilePath { get; set; }
+        public string FirstName { get; set; } = string.Empty;
+		public string SecondName { get; set; } = string.Empty;
+		public int Age { get; set; }
+        public string WikiUrl { get; set; } = string.Empty;
+		public string PhotoFilePath { get; set; } = string.Empty;
 
-        public ICollection<FilmActorListModel> ActedMovies { get; set; }
+		public ICollection<FilmActorListModel> ActedMovies { get; set; }
 
         private sealed class ActorDetailModelEqualityComparer : IEqualityComparer<ActorDetailModel>
         {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace FilmManagment.BL.Models.ListModels
 {
@@ -9,9 +8,10 @@ namespace FilmManagment.BL.Models.ListModels
         public Guid FilmId { get; set; }
         public Guid ActorId { get; set; }
 
-        public string ActorName { get; set; }
+		public string ActorName { get; set; } = string.Empty;
+		public string FilmName { get; set; } = string.Empty;
 
-        private sealed class FilmActorListModelEqualityComparer : IEqualityComparer<FilmActorListModel>
+		private sealed class FilmActorListModelEqualityComparer : IEqualityComparer<FilmActorListModel>
         {
 	        public bool Equals(FilmActorListModel x, FilmActorListModel y)
 	        {
@@ -22,12 +22,13 @@ namespace FilmManagment.BL.Models.ListModels
 		        return x.Id == y.Id
 		               && x.FilmId.Equals(y.FilmId)
 		               && x.ActorId.Equals(y.ActorId)
-		               && x.ActorName == y.ActorName;
-	        }
+		               && x.ActorName.Equals(y.ActorName)
+					   && x.FilmName.Equals(y.FilmName);
+			}
 
 	        public int GetHashCode(FilmActorListModel obj)
 	        {
-		        return HashCode.Combine(obj.FilmId, obj.ActorId, obj.ActorName);
+		        return HashCode.Combine(obj.FilmId, obj.ActorId, obj.ActorName, obj.FilmName);
 	        }
         }
 
