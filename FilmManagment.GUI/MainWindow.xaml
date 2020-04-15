@@ -7,83 +7,111 @@
         xmlns:local="clr-namespace:FilmManagment.GUI"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    
-        <Grid x:Name="MainViewLayout"
-              Background="#FF353C4D">
-            
-            <Grid.RowDefinitions>
-                <RowDefinition Height="110*" />
-                <RowDefinition Height="60"/>
-                <RowDefinition Height="230"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
 
+    <Border Padding="2">
+        <StackPanel Background="#FF353C4D">
+
+            <!-- Label -->
             <TextBlock FontSize="50"
                        Grid.ColumnSpan="3"
                        HorizontalAlignment="Center"
-                       VerticalAlignment="Center">  
+                       VerticalAlignment="Center"
+                       Margin="0 20 0 20">  
                 <Bold Foreground="Orange"> VUT Film database </Bold>
             </TextBlock>
 
-            <!-- TODO: Add serching tool -->
+            <!-- Searching box -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="1">
+                    <TextBox Padding="2" Background="#EEEE" Margin=" 0 0 0 10">
+                        What are you looking for?
+                    </TextBox>
+                </StackPanel>
+            </Grid>
 
-            <!-- TODO: Add command to execute action after pushing -->
-            <Button x:Name="Actors_b"
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    Margin="10"
-                    Background="Bisque">
-                <TextBlock FontSize="35"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center">
-                   <Bold Foreground="Black"> Actors </Bold>
-                </TextBlock>
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius"
-                                Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+            <!-- ComboBox and search button-->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <!-- TODO: Add command to execute action after pushing -->
-            <Button x:Name="Films_b"
-                    Grid.Row="2"
-                    Grid.Column="1"
-                    Margin="10"
-                    Background="Bisque">
-                <TextBlock FontSize="35"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center">
-                   <Bold Foreground="Black"> Films </Bold>
-                </TextBlock>
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius"
-                                Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            
-            <!-- TODO: Add command to execute action after pushing -->
-            <Button x:Name="Directors_b"
-                    Grid.Row="2" Grid.Column="2"
-                    Margin="10" Background="Bisque">
-                <TextBlock FontSize="35"
-                           HorizontalAlignment="Center"
-                           VerticalAlignment="Center">
-                   <Bold Foreground="Black"> Directors </Bold>
-                </TextBlock>
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius"
-                                Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-        </Grid>
+                <StackPanel Grid.Column="1">
+                    <ComboBox SelectedIndex="0" Padding="2">
+                        <ComboBoxItem>All</ComboBoxItem>
+                        <ComboBoxItem>Films</ComboBoxItem>
+                        <ComboBoxItem>Actors</ComboBoxItem>
+                        <ComboBoxItem>Directros</ComboBoxItem>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Margin="10 0 0 20">
+                    <Button Content="Search"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Buttons definition -->
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Actor button -->
+                <Button Grid.Column="0" Margin="10" Background="Bisque">
+                    <TextBlock FontSize="35"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center">
+                        <Bold Foreground="Black"> Actors </Bold>
+                    </TextBlock>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius"
+                                    Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <!-- Film button -->
+                <Button Grid.Column="1" Margin="10" Background="Bisque">
+                    <TextBlock FontSize="35"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center">
+                        <Bold Foreground="Black"> Films </Bold>
+                    </TextBlock>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius"
+                                    Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <!-- Actor button -->
+                <Button Grid.Column="2" Margin="10" Background="Bisque">
+                    <TextBlock FontSize="35"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center">
+                        <Bold Foreground="Black"> Actors </Bold>
+                    </TextBlock>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius"
+                                    Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </Grid>
+        </StackPanel>
+    </Border>
 </Window>
