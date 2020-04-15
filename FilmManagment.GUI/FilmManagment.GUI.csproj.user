@@ -7,7 +7,7 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="MainWindow.xaml">
+    <Page Update="Styles\SearchBox.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
