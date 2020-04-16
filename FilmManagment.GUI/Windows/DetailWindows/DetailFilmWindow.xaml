@@ -137,7 +137,7 @@
             Background="#FF72747C"
             Grid.RowSpan="1"
             Margin="5,5,5,5">
-            <StackPanel Name=""/>
+            <StackPanel/>
             <!-- TODO: adding elements from database -->
         </ScrollViewer>
 
