@@ -7,7 +7,6 @@ namespace FilmManagment.GUI.Services
 {
     public class Mediator : IMediator
     {
-        // Dictionary obsahuje jednotlive typy sprav a k nim priradene operacie ktore sa maju vykonat
         private readonly Dictionary<Type, List<Delegate>> registeredActions = new Dictionary<Type, List<Delegate>>();
 
         public void Register<TMessage>(Action<TMessage> action) where TMessage : IMessage

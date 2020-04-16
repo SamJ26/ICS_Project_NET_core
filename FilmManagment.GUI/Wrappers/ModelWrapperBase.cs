@@ -1,20 +1,22 @@
-﻿using FilmManagment.GUI.ViewModels;
+﻿using FilmManagment.BL.Models;
+using FilmManagment.GUI.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace FilmManagment.GUI.Wrappers
 {
-    public abstract class ModelWrapperBase<T> : ViewModelBase
+    public abstract class ModelWrapperBase<TModel> : ViewModelBase where TModel: ModelBase
     {
-        public T localModel { get; }
+        public TModel usedModel { get; }
 
-        protected ModelWrapperBase(T model)
+        protected ModelWrapperBase(TModel model)
         {
             if (model == null)
                 throw new ArgumentException("Null reference: " + nameof(model));
-            localModel = model;
+            usedModel = model;
         }
 
         public Guid Id
@@ -25,21 +27,33 @@ namespace FilmManagment.GUI.Wrappers
 
         protected PropertyType GetValue<PropertyType>([CallerMemberName] string propertyName = null)
         {
-            var propertyInfo = localModel.GetType().GetProperty(propertyName);
-            return (PropertyType)propertyInfo.GetValue(localModel);
+            var propertyInfo = usedModel.GetType().GetProperty(propertyName);
+            return (PropertyType)propertyInfo.GetValue(usedModel);
         }
 
         protected void SetValue<PropertyType>(PropertyType value, [CallerMemberName] string propertyName = null)
         {
-            var propertyInfo = localModel.GetType().GetProperty(propertyName);
-            var propertyValue = propertyInfo.GetValue(localModel);
+            var propertyInfo = usedModel.GetType().GetProperty(propertyName);
+            var propertyValue = propertyInfo.GetValue(usedModel);
             if ( !Equals(propertyInfo,propertyValue))
             {
-                propertyInfo.SetValue(localModel, value);
+                propertyInfo.SetValue(usedModel, value);
                 OnPropertyChanged();
             }
         }
 
-        // TODO: Add RegisterCollection method
+        protected void RegisterCollection<TWrappedCollection, T_BLmodel>(ObservableCollection<TWrappedCollection> wrappedCollection,
+                                                                         ICollection<T_BLmodel> modelCollection) 
+                                                                         where TWrappedCollection : ModelWrapperBase<T_BLmodel> where T_BLmodel : ModelBase
+        {
+            wrappedCollection.CollectionChanged += (s, e) =>
+            {
+                modelCollection.Clear();
+                foreach (var model in wrappedCollection.Select(i => i.usedModel))
+                {
+                    modelCollection.Add(model);
+                }
+            };
+        }
     }
 }

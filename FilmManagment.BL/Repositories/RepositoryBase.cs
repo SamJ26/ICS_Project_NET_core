@@ -44,7 +44,6 @@ namespace FilmManagment.BL.Repositories
 			return localUnitOfWork.DbContext.Set<TEntity>();
 		}
 
-		// TODO: check this by teacher
 		public void DisposeDb()
 		{
 			localUnitOfWork.Dispose();
