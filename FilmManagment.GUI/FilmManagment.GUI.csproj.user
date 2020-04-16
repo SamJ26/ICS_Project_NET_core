@@ -6,4 +6,17 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
   </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Windows\DetailWindows\DetailFilmWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Styles\SearchBox.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Windows\DetailWindows\DetailFilmWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
 </Project>
