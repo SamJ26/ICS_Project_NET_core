@@ -48,7 +48,7 @@
                         <ComboBoxItem>All</ComboBoxItem>
                         <ComboBoxItem>Films</ComboBoxItem>
                         <ComboBoxItem>Actors</ComboBoxItem>
-                        <ComboBoxItem>Directros</ComboBoxItem>
+                        <ComboBoxItem>Directors</ComboBoxItem>
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Grid.Column="2" Margin="10 0 0 20">
@@ -97,12 +97,12 @@
                     </Button.Resources>
                 </Button>
 
-                <!-- Actor button -->
+                <!-- Director button -->
                 <Button Grid.Column="2" Margin="10" Background="Bisque">
                     <TextBlock FontSize="35"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center">
-                        <Bold Foreground="Black"> Actors </Bold>
+                        <Bold Foreground="Black"> Directors </Bold>
                     </TextBlock>
                     <Button.Resources>
                         <Style TargetType="Border">

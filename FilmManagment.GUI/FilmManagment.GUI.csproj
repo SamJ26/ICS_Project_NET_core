@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Views\" />
+    <ProjectReference Include="..\FilmManagment.BL\FilmManagment.BL.csproj" />
+    <ProjectReference Include="..\FilmManagment.DAL\FilmManagment.DAL.csproj" />
   </ItemGroup>
 
 </Project>
