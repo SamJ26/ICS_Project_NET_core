@@ -13,7 +13,7 @@ namespace FilmManagment.GUI.Wrappers
         {     
         }
 
-        // TODO: here must be probably also TextRating property
+        // TODO: here must be probably also TextRating property !
 
         #region Wrapping properties
 
@@ -24,5 +24,9 @@ namespace FilmManagment.GUI.Wrappers
         }
 
         #endregion
+
+        public static implicit operator RatingWrappedListModel(RatingListModel listModel) => new RatingWrappedListModel(listModel);
+
+        public static implicit operator RatingListModel(RatingWrappedListModel wrappedModel) => wrappedModel.usedModel;
     }
 }

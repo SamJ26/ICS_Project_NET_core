@@ -1,4 +1,5 @@
 ﻿using FilmManagment.BL.Models.DetailModels;
+using System;
 
 namespace FilmManagment.GUI.Wrappers
 {
@@ -22,8 +23,16 @@ namespace FilmManagment.GUI.Wrappers
             set => SetValue(value);
         }
 
+        public Guid FilmId
+        {
+            get => GetValue<Guid>();
+            set => SetValue(value);
+        }
+
         #endregion
 
-        // Id from detail model is not used here
+        public static implicit operator RatingWrappedModel(RatingDetailModel detailModel) => new RatingWrappedModel(detailModel);
+
+        public static implicit operator RatingDetailModel(RatingWrappedModel wrappedModel) => wrappedModel.usedModel;
     }
 }

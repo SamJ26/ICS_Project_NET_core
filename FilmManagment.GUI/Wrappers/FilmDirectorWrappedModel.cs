@@ -37,5 +37,9 @@ namespace FilmManagment.GUI.Wrappers
         }
 
         #endregion
+
+        public static implicit operator FilmDirectorWrappedModel(FilmDirectorListModel listModel) => new FilmDirectorWrappedModel(listModel);
+
+        public static implicit operator FilmDirectorListModel(FilmDirectorWrappedModel wrappedModel) => wrappedModel.usedModel;
     }
 }

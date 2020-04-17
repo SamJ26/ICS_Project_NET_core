@@ -58,5 +58,9 @@ namespace FilmManagment.GUI.Wrappers
 
             RegisterCollection(DirectedMovies, directorDetailModel.DirectedMovies);
         }
+
+        public static implicit operator DirectorWrappedModel(DirectorDetailModel detailModel) => new DirectorWrappedModel(detailModel);
+
+        public static implicit operator DirectorDetailModel(DirectorWrappedModel wrappedModel) => wrappedModel.usedModel;
     }
 }
