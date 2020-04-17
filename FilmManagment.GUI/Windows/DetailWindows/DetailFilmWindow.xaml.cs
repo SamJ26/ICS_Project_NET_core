@@ -12,9 +12,6 @@ using System.Windows.Shapes;
 
 namespace FilmManagment.GUI.Windows.DetailWindows
 {
-	/// <summary>
-	/// Interakční logika pro DetailFilmWindow.xaml
-	/// </summary>
 	public partial class DetailFilmWindow : Window
 	{
 		public DetailFilmWindow()

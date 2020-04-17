@@ -12,9 +12,6 @@ using System.Windows.Shapes;
 
 namespace FilmManagment.GUI
 {
-	/// <summary>
-	/// Interakční logika pro ListDirectorWindow.xaml
-	/// </summary>
 	public partial class ListDirectorWindow : Window
 	{
 		public ListDirectorWindow()

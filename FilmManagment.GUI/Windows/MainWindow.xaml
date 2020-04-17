@@ -4,9 +4,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:FilmManagment.GUI.Windows"
         xmlns:local="clr-namespace:FilmManagment.GUI"
+        xmlns:viewModels="clr-namespace:FilmManagment.GUI.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+        Title="MainWindow"
+        Height="450"
+        Width="800">
 
     <Border Padding="2">
         <StackPanel Background="#FF353C4D">
