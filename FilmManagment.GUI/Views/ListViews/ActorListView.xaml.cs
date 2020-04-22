@@ -8,15 +8,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FilmManagment.GUI
+namespace FilmManagment.GUI.Views.ListViews
 {
-	public partial class ListActorWindow : Window
-	{
-		public ListActorWindow()
-		{
-			InitializeComponent();
-		}
-	}
+    /// <summary>
+    /// Interaction logic for ActorListView.xaml
+    /// </summary>
+    public partial class ActorListView : Page
+    {
+        public ActorListView()
+        {
+            InitializeComponent();
+        }
+    }
 }

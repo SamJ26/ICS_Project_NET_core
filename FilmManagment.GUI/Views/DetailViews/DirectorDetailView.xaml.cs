@@ -8,17 +8,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FilmManagment.GUI.Views.ListViews
+namespace FilmManagment.GUI.Views.DetailViews
 {
     /// <summary>
-    /// Interaction logic for DirectorListView.xaml
+    /// Interaction logic for DirectorDetailView.xaml
     /// </summary>
-    public partial class DirectorListView : Page
+    public partial class DirectorDetailView : Window
     {
-        public DirectorListView()
+        public DirectorDetailView()
         {
             InitializeComponent();
         }

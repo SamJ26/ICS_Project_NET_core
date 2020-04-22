@@ -10,13 +10,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace FilmManagment.GUI.Windows.DetailWindows
+namespace FilmManagment.GUI.Views.DetailViews
 {
-	public partial class DetailFilmWindow : Window
-	{
-		public DetailFilmWindow()
-		{
-			InitializeComponent();
-		}
-	}
+    /// <summary>
+    /// Interaction logic for FilmDetailView.xaml
+    /// </summary>
+    public partial class FilmDetailView : Window
+    {
+        public FilmDetailView()
+        {
+            InitializeComponent();
+        }
+    }
 }

@@ -7,18 +7,48 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\DetailViews\ActorDetailView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\DetailViews\DirectorDetailView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\DetailViews\FilmDetailView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\HomeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\ListViews\ActorListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListViews\DirectorListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ListViews\FilmListView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Update="Views\DetailViews\ActorDetailView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DetailViews\DirectorDetailView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\DetailViews\FilmDetailView.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\HomeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ListViews\ActorListView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ListViews\DirectorListView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ListViews\FilmListView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

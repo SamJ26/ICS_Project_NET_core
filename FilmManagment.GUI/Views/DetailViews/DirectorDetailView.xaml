@@ -1,0 +1,126 @@
+﻿<Window x:Class="FilmManagment.GUI.Views.DetailViews.DirectorDetailView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FilmManagment.GUI.Views.DetailViews"
+        mc:Ignorable="d"
+        Title="DirectorDetailView" Height="450" Width="800">
+    <Grid x:Name="DetailActorLayout"
+          Background="#FF353C4D">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="1"
+                   FontSize="30"
+                   HorizontalAlignment="Center"
+                   Grid.ColumnSpan="2"
+                   VerticalAlignment="Center">
+            <Bold Foreground="Orange">Director</Bold>
+        </TextBlock>
+
+        <TextBlock FontSize="20"
+                 TextAlignment="Left"
+                 Grid.Column="0"
+                 TextWrapping="Wrap"
+                 Background="#FF72747C"
+                 Margin="5,5,5,5">
+            <Bold Foreground="#FFD19220" >First name</Bold>
+        </TextBlock>
+
+        <TextBlock FontSize="20"
+                 TextAlignment="Left"
+                 Grid.Column="0"
+                 Grid.Row="1"
+                 TextWrapping="Wrap"
+                 Background="#FF72747C"
+                 Margin="5,5,5,5">
+            <Bold Foreground="#FFD19220" >Last name</Bold>
+        </TextBlock>
+
+        <TextBlock FontSize="20"
+                 TextAlignment="Left"
+                 Grid.Row="2"
+                 Grid.Column="0"
+                 TextWrapping="Wrap"    
+                 Background="#FF72747C"
+                 Margin="5,5,5,5">
+            <Bold Foreground="#FFD19220" >Age</Bold>
+        </TextBlock>
+
+        <TextBlock FontSize="20"
+                 TextAlignment="Left"
+                 Grid.Row="3"
+                 Grid.Column="0"
+                 TextWrapping="Wrap"    
+                 Background="#FF72747C"
+                 Margin="5,5,5,5">
+            <Bold Foreground="#FFD19220" >Wiki Url</Bold>
+        </TextBlock>
+
+        <ScrollViewer Grid.Row="5"
+            Background="#FF72747C"
+            Grid.RowSpan="2"
+            Margin="5,5,5,5">
+            <StackPanel/>
+            <!-- TODO: adding elements from database -->
+        </ScrollViewer>
+
+        <TextBlock
+                   Grid.Row="4"
+                   FontSize="20"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center" Margin="10,0,0,0" Height="27" Width="49">
+            <Bold Foreground="Orange">Films</Bold>
+        </TextBlock>
+
+        <Image Grid.Column="1" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="5"/>
+
+        <Button Grid.Column="1" 
+                Grid.Row="6" 
+                Margin="5" 
+                Background="Bisque">
+            <TextBlock FontSize="20"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                   <Bold Foreground="Black"> Edit </Bold>
+            </TextBlock>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" 
+                            Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+        <Button Grid.Column="2" 
+                Grid.Row="6" 
+                Margin="5" 
+                Background="Bisque">
+            <TextBlock FontSize="20"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center">
+                   <Bold Foreground="Black"> Back </Bold>
+            </TextBlock>
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" 
+                            Value="10"/>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+    </Grid>
+</Window>
