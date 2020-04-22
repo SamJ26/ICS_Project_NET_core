@@ -8,10 +8,10 @@ namespace FilmManagment.GUI.Windows
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow(MainViewModel viewModel)
+        public MainWindow(MainViewModel mainViewModel)
         {
             InitializeComponent();
-            DataContext = viewModel;
+            DataContext = mainViewModel;
         }
     }
 }

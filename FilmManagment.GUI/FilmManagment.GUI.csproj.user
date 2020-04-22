@@ -7,12 +7,18 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Windows\DetailWindows\DetailFilmWindow.xaml.cs">
+    <Compile Update="Views\DetailViews\FilmDetailView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\HomeView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Windows\DetailWindows\DetailFilmWindow.xaml">
+    <Page Update="Views\DetailViews\FilmDetailView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\HomeView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
