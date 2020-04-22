@@ -11,7 +11,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace FilmManagment.GUI.Windows
+namespace FilmManagment.GUI.Views
 {
     /// <summary>
     /// Interaction logic for HomeView.xaml

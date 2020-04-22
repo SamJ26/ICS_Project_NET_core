@@ -1,5 +1,5 @@
 ﻿<Window 
-        x:Class="FilmManagment.GUI.Windows.MainWindow"
+        x:Class="FilmManagment.GUI.Views.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -30,7 +30,9 @@
             <!-- Home button -->
             <Button Grid.Column="0"
                     Margin="2"
-                    Background="Bisque">
+                    Background="Bisque"
+                    Command="{Binding HomeButtonCommand}"
+                    CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">
@@ -47,7 +49,9 @@
             <!-- Films button -->
             <Button Grid.Column="1"
                     Margin="2"
-                    Background="Bisque">
+                    Background="Bisque"
+                    Command="{Binding FilmsButtonCommand}"
+                    CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">
@@ -94,6 +98,9 @@
                     </Style>
                 </Button.Resources>
             </Button>
+
+            <ContentControl Grid.Row="1"
+                            Content="{Binding SelectedView}"/>
 
         </Grid>
     </Grid>

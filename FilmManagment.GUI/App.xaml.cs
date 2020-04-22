@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows;
 using FilmManagment.GUI.Services;
 using FilmManagment.GUI.ViewModels;
-using FilmManagment.GUI.Windows;
+using FilmManagment.GUI.ViewModels.Interfaces;
+using FilmManagment.GUI.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -34,6 +30,11 @@ namespace FilmManagment.GUI
             services.AddSingleton<IMediator, Mediator>();
 
             services.AddSingleton<MainViewModel>();
+
+            services.AddSingleton<IHomeViewModel, HomeViewModel>();
+            services.AddSingleton<IFilmListViewModel, FilmListViewModel>();
+            services.AddSingleton<IActorListViewModel, ActorListViewModel>();
+            services.AddSingleton<IDirectorListViewModel, DirectorListViewModel>();
 
             // TODO: add rest of ViewModels
             // TODO: add rest of services ( messenger )

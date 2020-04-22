@@ -2,9 +2,9 @@
 
 namespace FilmManagment.GUI.ViewModels
 {
-    public class ActorListViewModel : ViewModelBase, IActorListViewModel
+    public class HomeViewModel : ViewModelBase, IHomeViewModel
     {
-        public ActorListViewModel()
+        public HomeViewModel()
         {
             // TODO: continue
         }

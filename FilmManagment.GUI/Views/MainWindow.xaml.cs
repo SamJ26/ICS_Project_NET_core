@@ -1,7 +1,7 @@
 ﻿using FilmManagment.GUI.ViewModels;
 using System.Windows;
 
-namespace FilmManagment.GUI.Windows
+namespace FilmManagment.GUI.Views
 { 
     /// <summary>
     /// Starting window of application
