@@ -6,121 +6,102 @@
         xmlns:local="clr-namespace:FilmManagment.GUI.Views.DetailViews"
         mc:Ignorable="d"
         Title="ActorDetailView" Height="450" Width="800">
+
     <Grid x:Name="DetailActorLayout"
           Background="#FF353C4D">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="2*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="2*"/>
-        </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="1"
-                   FontSize="30"
-                   HorizontalAlignment="Center"
-                   Grid.ColumnSpan="2"
-                   VerticalAlignment="Center">
-            <Bold Foreground="Orange">Actor</Bold>
-        </TextBlock>
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="240"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-        <TextBlock FontSize="20"
-                 TextAlignment="Left"
-                 Grid.Column="0"
-                 TextWrapping="Wrap"
-                 Background="#FF72747C"
-                 Margin="5,5,5,5">
-            <Bold Foreground="#FFD19220" >First name</Bold>
-        </TextBlock>
+            <StackPanel Grid.Column="0"
+                        Grid.Row="0">
 
-        <TextBlock FontSize="20"
-                 TextAlignment="Left"
-                 Grid.Column="0"
-                 Grid.Row="1"
-                 TextWrapping="Wrap"
-                 Background="#FF72747C"
-                 Margin="5,5,5,5">
-            <Bold Foreground="#FFD19220" >Last name</Bold>
-        </TextBlock>
+                <TextBlock Foreground="Orange" Margin="10 15 0 2"> First Name</TextBlock>
+                <!-- TODO: Binging to FirstName-->
+                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
 
-        <TextBlock FontSize="20"
-                 TextAlignment="Left"
-                 Grid.Row="2"
-                 Grid.Column="0"
-                 TextWrapping="Wrap"    
-                 Background="#FF72747C"
-                 Margin="5,5,5,5">
-            <Bold Foreground="#FFD19220" >Age</Bold>
-        </TextBlock>
+                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Second Name</TextBlock>
+                <!-- TODO: Binging to SecondName-->
+                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
 
-        <TextBlock FontSize="20"
-                 TextAlignment="Left"
-                 Grid.Row="3"
-                 Grid.Column="0"
-                 TextWrapping="Wrap"    
-                 Background="#FF72747C"
-                 Margin="5,5,5,5">
-            <Bold Foreground="#FFD19220" >Wiki Url</Bold>
-        </TextBlock>
+                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Age</TextBlock>
+                <!-- TODO: Binging to Age-->
+                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
 
-        <ScrollViewer Grid.Row="5"
-            Background="#FF72747C"
-            Grid.RowSpan="2"
-            Margin="5,5,5,5">
-            <StackPanel/>
-            <!-- TODO: adding elements from database -->
-        </ScrollViewer>
+                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Wiki</TextBlock>
+                <!-- TODO: Binging to WikiUrl-->
+                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
 
-        <TextBlock
-                   Grid.Row="4"
-                   FontSize="20"
-                   HorizontalAlignment="Left"
-                   VerticalAlignment="Center" Margin="10,0,0,0" Height="27" Width="49">
-            <Bold Foreground="Orange">Films</Bold>
-        </TextBlock>
+                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Acted films</TextBlock>
 
-        <Image Grid.Column="1" Grid.Row="1" Grid.RowSpan="5" Grid.ColumnSpan="2" Margin="5"/>
+            </StackPanel>
 
-        <Button Grid.Column="1" 
-                Grid.Row="6" 
-                Margin="5" 
-                Background="Bisque">
-            <TextBlock FontSize="20"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center">
-                   <Bold Foreground="Black"> Edit </Bold>
-            </TextBlock>
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" 
-                            Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+            <ScrollViewer Grid.Row="1"
+                          Background="#FF72747C"
+                          VerticalAlignment="Stretch"
+                          Margin="10 0 10 20">
+                <!-- TODO: adding elements from database -->
+            </ScrollViewer>
+        </Grid>
 
-        <Button Grid.Column="2" 
-                Grid.Row="6" 
-                Margin="5" 
-                Background="Bisque">
-            <TextBlock FontSize="20"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center">
-                   <Bold Foreground="Black"> Back </Bold>
-            </TextBlock>
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" 
-                            Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
+            <!-- TODO: Add binging to PhotoFilePath -->
+            <Image Margin="10"/>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- Edit button -->
+                <Button Grid.Column="0"
+                        Margin="5 5 5 20" 
+                        Background="Bisque">
+                    <TextBlock FontSize="20"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center">
+                            <Bold Foreground="Black"> Edit </Bold>
+                    </TextBlock>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" 
+                                    Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+                <!-- Save button -->
+                <Button Grid.Column="1"
+                        Margin="5 5 10 20" 
+                        Background="Bisque">
+                    <TextBlock FontSize="20"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center">
+                            <Bold Foreground="Black"> Save </Bold>
+                    </TextBlock>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" 
+                                    Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+
+            </Grid>
+        </Grid>
     </Grid>
 </Window>
