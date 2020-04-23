@@ -12,92 +12,131 @@
           Background="#FF353C4D">
 
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="6*"/>
+            <RowDefinition Height="10"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="3*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
-        <ScrollViewer Grid.RowSpan="4">
-            <StackPanel Name="sp1"/>
-            <!-- TODO: adding elements from database -->
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="Orange" />
+
+        <Grid Grid.Row="2"
+              Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="0.5*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <!-- Add button -->
+            <Button Grid.Column="1" 
+                    Grid.Row="0" 
+                    Margin="8" 
+                    Background="Bisque">
+                <!-- TODO: binding to ViewModel -->
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                       <Bold Foreground="Black"> Add </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Delete button -->
+            <Button Grid.Column="1" 
+                    Grid.Row="1" 
+                    Margin="8" 
+                    Background="Bisque">
+                <!-- TODO: binding to ViewModel -->
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                       <Bold Foreground="Black"> Delete </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Detail button -->
+            <Button Grid.Column="1" 
+                    Grid.Row="2" 
+                    Margin="8" 
+                    Background="Bisque">
+                <!-- TODO: binding to ViewModel -->
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                       <Bold Foreground="Black"> Detail </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            
+            <!-- Searching box -->
+            <TextBox Grid.Column="1" 
+                     Grid.Row="4"
+                     Padding="5"
+                     Background="#EEEE"
+                     Margin="8 5 8 5">
+                What are you looking for?
+            </TextBox>
+
+            <!-- Combo box -->
+            <ComboBox Grid.Column="1" 
+                      Grid.Row="5"
+                      Padding="5"
+                      Background="#EEEE"
+                      Margin="8 5 8 5">
+                <ComboBoxItem>All</ComboBoxItem>
+                <ComboBoxItem>First name</ComboBoxItem>
+                <ComboBoxItem>Second name</ComboBoxItem>
+            </ComboBox>
+
+            <!-- Search button -->
+            <Button Grid.Column="1" 
+                    Grid.Row="6" 
+                    Margin="8" 
+                    Background="Bisque">
+                <!-- TODO: binding to ViewModel -->
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                       <Bold Foreground="Black"> Search </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+        </Grid>
+
+        <ScrollViewer Grid.Row="2">
+            <!-- TODO: binding to ViewModel -->
         </ScrollViewer>
-
-        <TextBlock Grid.Column="1"
-                   FontSize="30"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Grid.ColumnSpan="2">
-            <Bold Foreground="Orange">Actors</Bold>
-        </TextBlock>
-
-        <Button Grid.Column="1" 
-                Grid.Row="1" 
-                Margin="8" 
-                Background="Bisque">
-            <TextBlock FontSize="20"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center">
-                   <Bold Foreground="Black"> Add </Bold>
-            </TextBlock>
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" 
-                            Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-
-        <Button Grid.Column="2" 
-                Grid.Row="1" 
-                Margin="8" 
-                Background="Bisque">
-            <TextBlock FontSize="20"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center">
-                   <Bold Foreground="Black"> Delete </Bold>
-            </TextBlock>
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" 
-                            Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
-
-        <TextBox Grid.Column="1" 
-                 Grid.Row="2" 
-                 Margin="8" 
-                 Background="Bisque">
-            <TextBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" 
-                            Value="10"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
-
-        <Button Grid.Column="2" 
-                Grid.Row="2" 
-                Margin="8" 
-                Background="Bisque">
-            <TextBlock FontSize="20"
-                       HorizontalAlignment="Center"
-                       VerticalAlignment="Center">
-                   <Bold Foreground="Black"> Search </Bold>
-            </TextBlock>
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" 
-                            Value="10"/>
-                </Style>
-            </Button.Resources>
-        </Button>
 
     </Grid>
 </Page>
