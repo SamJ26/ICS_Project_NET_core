@@ -4,7 +4,8 @@ using System.Text;
 
 namespace FilmManagment.GUI.ViewModels.Interfaces
 {
-    public interface IFilmListViewModel : IListViewModel
+    public interface IListViewModel : IViewModel
     {
+        void Load();
     }
 }

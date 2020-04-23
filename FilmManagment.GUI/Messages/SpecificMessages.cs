@@ -1,25 +1,20 @@
-﻿using FilmManagment.BL.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FilmManagment.BL;
 
 namespace FilmManagment.GUI.Messages
-{
-    // TODO: not sure if it works with ModelBase
-
-    public class NewMessage<TwrappedModel>: Message<TwrappedModel> where TwrappedModel : ModelBase
+{ 
+    public class NewMessage<TwrappedModel>: Message<TwrappedModel> where TwrappedModel : IId
     {
     }
-
-    public class UpdateMessage<TwrappedModel> : Message<TwrappedModel> where TwrappedModel : ModelBase
+    
+    public class UpdateMessage<TwrappedModel> : Message<TwrappedModel> where TwrappedModel : IId
     {
     }
-
-    public class DeleteMessage<TwrappedModel> : Message<TwrappedModel> where TwrappedModel : ModelBase
+    
+    public class DeleteMessage<TwrappedModel> : Message<TwrappedModel> where TwrappedModel : IId
     {
     }
-
-    public class SelectMessage<TwrappedModel> : Message<TwrappedModel> where TwrappedModel : ModelBase
+    
+    public class SelectedMessage<TwrappedModel> : Message<TwrappedModel> where TwrappedModel : IId
     {
     }
 }

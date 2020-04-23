@@ -14,6 +14,7 @@
         <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
             <views:HomeView/>
         </DataTemplate>
+        
         <DataTemplate DataType="{x:Type viewModels:ActorListViewModel}">
             <listViews:ActorListView/>
         </DataTemplate>
@@ -23,7 +24,17 @@
         <DataTemplate DataType="{x:Type viewModels:FilmListViewModel}">
             <listViews:FilmListView/>
         </DataTemplate>
-        
+
+        <DataTemplate DataType="{x:Type viewModels:ActorDetailViewModel}">
+            <detailViews:ActorDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:DirectorDetailViewModel}">
+            <detailViews:DirectorDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:FimDetailViewModel}">
+            <detailViews:FilmDetailView/>
+        </DataTemplate>
+
     </Application.Resources>
     
 </Application>

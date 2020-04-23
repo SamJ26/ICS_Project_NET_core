@@ -59,7 +59,7 @@ namespace FilmManagment.GUI.ViewModels
         {
             if (parameter is IFilmListViewModel filmListViewModel)
             {
-                SelectedView = new FilmListViewModel();
+                //SelectedView = new FilmListViewModel();
             }
         }
     }

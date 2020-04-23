@@ -1,4 +1,5 @@
-﻿using FilmManagment.BL.Models;
+﻿using FilmManagment.BL;
+using FilmManagment.BL.Models;
 using FilmManagment.GUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Runtime.CompilerServices;
 
 namespace FilmManagment.GUI.Wrappers
 {
-    public abstract class ModelWrapperBase<TModel> : ViewModelBase where TModel: ModelBase
+    public abstract class ModelWrapperBase<TModel> : ViewModelBase, IId where TModel : IId
     {
         public TModel usedModel { get; }
 
@@ -44,7 +45,7 @@ namespace FilmManagment.GUI.Wrappers
 
         protected void RegisterCollection<TWrappedCollection, T_BLmodel>(ObservableCollection<TWrappedCollection> wrappedCollection,
                                                                          ICollection<T_BLmodel> modelCollection) 
-                                                                         where TWrappedCollection : ModelWrapperBase<T_BLmodel> where T_BLmodel : ModelBase
+                                                                         where TWrappedCollection : ModelWrapperBase<T_BLmodel>, IId where T_BLmodel : IId
         {
             wrappedCollection.CollectionChanged += (s, e) =>
             {

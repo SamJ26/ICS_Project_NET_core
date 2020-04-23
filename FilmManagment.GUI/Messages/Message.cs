@@ -1,13 +1,9 @@
-﻿using FilmManagment.BL.Models;
+﻿using FilmManagment.BL;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace FilmManagment.GUI.Messages
 {
-    // TODO: ModelWrapperBase instead of ModelBase ?
- 
-    public abstract class Message<TwrappedModel> : IMessage where TwrappedModel : ModelBase
+    public abstract class Message<TwrappedModel> : IMessage where TwrappedModel : IId
     {
         // TODO: is this ID of sender object ?
         private Guid? id;

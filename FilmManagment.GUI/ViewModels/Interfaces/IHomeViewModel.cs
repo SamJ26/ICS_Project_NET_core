@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FilmManagment.GUI.ViewModels.Interfaces
 {
-    public interface IHomeViewModel
+    public interface IHomeViewModel : IViewModel
     {
     }
 }

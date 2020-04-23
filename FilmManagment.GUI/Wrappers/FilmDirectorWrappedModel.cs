@@ -2,6 +2,7 @@
 using FilmManagment.DAL.Enums;
 using System;
 using System.Collections.ObjectModel;
+
 namespace FilmManagment.GUI.Wrappers
 {
     public class FilmDirectorWrappedModel : ModelWrapperBase<FilmDirectorListModel>

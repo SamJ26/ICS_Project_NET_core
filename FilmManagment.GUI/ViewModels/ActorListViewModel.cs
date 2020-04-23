@@ -8,5 +8,10 @@ namespace FilmManagment.GUI.ViewModels
         {
             // TODO: continue
         }
+
+        public void Load()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
