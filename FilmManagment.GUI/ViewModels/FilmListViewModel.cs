@@ -38,6 +38,11 @@ namespace FilmManagment.GUI.ViewModels
         private void FilmSelected(FilmListModel filmListModel) => usedMediator.Send(new SelectedMessage<FilmWrappedModel> { Id = filmListModel.Id });
         private void FilmNew() => usedMediator.Send(new NewMessage<FilmWrappedModel>());
 
+        private void OnDetailButtonCommandExecute(object parameter)
+        {
+
+        }
+
         public void Load()
         {
             Films.Clear();

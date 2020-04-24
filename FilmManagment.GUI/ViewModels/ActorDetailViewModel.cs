@@ -1,10 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FilmManagment.GUI.Services;
+using FilmManagment.GUI.ViewModels.Interfaces;
+using FilmManagment.GUI.Wrappers;
+using System;
+using System.Windows.Input;
 
 namespace FilmManagment.GUI.ViewModels
 {
-    class ActorDetailViewModel
+    public class ActorDetailViewModel : ViewModelBase, IActorDetailViewModel
     {
+        public ActorDetailViewModel()
+        {
+
+        }
+
+        public ActorWrappedModel Model { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public void Load(Guid id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

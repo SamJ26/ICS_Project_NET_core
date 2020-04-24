@@ -7,6 +7,9 @@ using FilmManagment.GUI.Views;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using FilmManagment.BL.Facades;
+using FilmManagment.BL.Repositories;
+using FilmManagment.DAL.UnitOfWork;
 
 namespace FilmManagment.GUI
 {
@@ -34,6 +37,17 @@ namespace FilmManagment.GUI
             services.AddSingleton<IFilmListViewModel, FilmListViewModel>();
             services.AddSingleton<IActorListViewModel, ActorListViewModel>();
             services.AddSingleton<IDirectorListViewModel, DirectorListViewModel>();
+
+            //services.AddSingleton<IFilmDetailViewModel, FilmDetailViewModel>();
+            services.AddSingleton<IActorDetailViewModel, ActorDetailViewModel>();
+            services.AddSingleton<IDirectorDetailViewModel, DirectorDetailViewModel>();
+
+            services.AddSingleton<UnitOfWork>();
+
+            services.AddSingleton<ActorFacade>();
+            services.AddSingleton<FilmFacade>();
+            services.AddSingleton<DirectorFacade>();
+            services.AddSingleton<RatingFacade>();
 
             // TODO: add rest of ViewModels
             // TODO: add rest of services ( messenger )
