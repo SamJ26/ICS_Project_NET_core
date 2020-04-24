@@ -2,7 +2,7 @@
 
 namespace FilmManagment.GUI.ViewModels
 {
-    class DirectorListViewModel : ViewModelBase, IDirectorListViewModel
+    public class DirectorListViewModel : ViewModelBase, IDirectorListViewModel
     {
         public DirectorListViewModel()
         {

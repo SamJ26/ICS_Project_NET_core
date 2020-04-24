@@ -2,16 +2,11 @@
 
 namespace FilmManagment.GUI.ViewModels
 {
-    public class FimDetailViewModel : ViewModelBase, IFilmListViewModel
+    public class FimDetailViewModel : ViewModelBase
     {
         public FimDetailViewModel()
         {
 
-        }
-
-        public void Load()
-        {
-            throw new System.NotImplementedException();
         }
     }
 }

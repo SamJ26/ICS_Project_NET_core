@@ -1,12 +1,12 @@
 ﻿using FilmManagment.GUI.Commands;
 using FilmManagment.GUI.ViewModels.Interfaces;
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 
 namespace FilmManagment.GUI.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-
         public MainViewModel(IHomeViewModel homeViewModel,
                              IFilmListViewModel filmListViewModel,
                              IActorListViewModel actorListViewModel,
@@ -19,17 +19,19 @@ namespace FilmManagment.GUI.ViewModels
 
             HomeButtonCommand = new RelayCommand(OnHomeButtonCommandExecute);
             FilmsButtonCommand = new RelayCommand(OnFilmsButtonCommandExecute);
+            ActorsButtonCommand = new RelayCommand(OnActorsButtonCommandExecute);
+            DirectorsButtonCommand = new RelayCommand(OnDirectorsButtonCommandExecute);
 
-            SelectedView = new HomeViewModel();
+            selectedView = HomeViewModel;
         }
 
-        public ViewModelBase SelectedView
+        private IViewModel selectedView;
+        public IViewModel SelectedView
         {
-            get { return SelectedView; }
+            get { return selectedView; }
             set
             {
-                // ERROR: System.StackOverflowException
-                SelectedView = value;
+                selectedView = value;
                 OnPropertyChanged(nameof(SelectedView));
             }
         }
@@ -46,21 +48,40 @@ namespace FilmManagment.GUI.ViewModels
         public IActorListViewModel ActorListViewModel { get;  }
         public IDirectorListViewModel DirectorListViewModel { get;  }
 
-        // Button actions
+        #region Button actions to execute
+
         private void OnHomeButtonCommandExecute(object parameter)
         {
-            if (parameter is IHomeViewModel homeViewModel)
+            if (parameter is MainViewModel)
             {
-                SelectedView = new HomeViewModel();
+                SelectedView = HomeViewModel;
             }
         }
 
         private void OnFilmsButtonCommandExecute(object parameter)
         {
-            if (parameter is IFilmListViewModel filmListViewModel)
+            if (parameter is MainViewModel)
             {
-                //SelectedView = new FilmListViewModel();
+                SelectedView = FilmListViewModel;
             }
         }
+
+        private void OnActorsButtonCommandExecute(object parameter)
+        {
+            if (parameter is MainViewModel)
+            {
+                SelectedView = ActorListViewModel;
+            }
+        }
+
+        private void OnDirectorsButtonCommandExecute(object parameter)
+        {
+            if (parameter is MainViewModel)
+            {
+                SelectedView = DirectorListViewModel;
+            }
+        }
+
+        #endregion
     }
 }

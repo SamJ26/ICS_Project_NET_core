@@ -26,10 +26,9 @@ namespace FilmManagment.GUI
         public void ConfigureServicesToContainer(IConfiguration configuration, IServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
+            services.AddSingleton<MainViewModel>();
 
             services.AddSingleton<IMediator, Mediator>();
-
-            services.AddSingleton<MainViewModel>();
 
             services.AddSingleton<IHomeViewModel, HomeViewModel>();
             services.AddSingleton<IFilmListViewModel, FilmListViewModel>();

@@ -5,6 +5,7 @@ using FilmManagment.GUI.Messages;
 using FilmManagment.GUI.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using FilmManagment.GUI.Commands;
 
 namespace FilmManagment.GUI.ViewModels
 {
@@ -18,9 +19,11 @@ namespace FilmManagment.GUI.ViewModels
         {
             usedMediator = mediator;
             // TODO: assigment to usedFacade
-        }
 
-        public ObservableCollection<FilmListModel> Films { get; } = new ObservableCollection<FilmListModel>();
+            FilmSelectedCommand = new RelayCommand<FilmListModel>(FilmSelected);
+            AddButtonCommand = new RelayCommand(FilmNew);
+
+        }
 
         // Commands
         public ICommand FilmSelectedCommand { get; }
@@ -30,12 +33,12 @@ namespace FilmManagment.GUI.ViewModels
 
         // TODO: resolve DeleteButton
 
-        //private void FilmSelected(FilmListModel filmListModel) => usedMediator.Send(new SelectedMessage<FilmWrappedModel> { Id = filmListModel.Id });
+        private void FilmSelected(FilmListModel filmListModel) => usedMediator.Send(new SelectedMessage<FilmWrappedModel> { Id = filmListModel.Id });
+        private void FilmNew() => usedMediator.Send(new NewMessage<FilmWrappedModel>());
 
         public void Load()
         {
-            Films.Clear();
-            // TODO: Get all fims from DB and load them to List
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -5,8 +5,12 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:FilmManagment.GUI.ViewModels"
+        xmlns:views="clr-namespace:FilmManagment.GUI.Views"
+        xmlns:detailViews="clr-namespace:FilmManagment.GUI.Views.DetailViews"
+        xmlns:listViews="clr-namespace:FilmManagment.GUI.Views.ListViews"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+        DataContext="{Binding MainViewModel}"
         Title="MainWindow"
         Height="450"
         Width="800">
@@ -68,7 +72,9 @@
             <!-- Actor button -->
             <Button Grid.Column="2"
                     Margin="2"
-                    Background="Bisque">
+                    Background="Bisque"
+                    Command="{Binding ActorsButtonCommand}"
+                    CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">
@@ -85,7 +91,9 @@
             <!-- Director button -->
             <Button Grid.Column="3"
                     Margin="2"
-                    Background="Bisque">
+                    Background="Bisque"
+                    Command="{Binding DirectorsButtonCommand}"
+                    CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">
@@ -99,9 +107,12 @@
                 </Button.Resources>
             </Button>
 
-            <ContentControl Grid.Row="1"
-                            Content="{Binding SelectedView}"/>
 
         </Grid>
+
+        <ContentControl Grid.Row="1"
+                        Grid.Column="0"
+                        Content="{Binding SelectedView}"/>
+
     </Grid>
 </Window>

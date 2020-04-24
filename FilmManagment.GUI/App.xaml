@@ -8,13 +8,13 @@
              xmlns:viewModels="clr-namespace:FilmManagment.GUI.ViewModels" 
              Startup="Application_start"
              Exit="Application_exit">
-    
+
     <Application.Resources>
 
         <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
             <views:HomeView/>
         </DataTemplate>
-        
+
         <DataTemplate DataType="{x:Type viewModels:ActorListViewModel}">
             <listViews:ActorListView/>
         </DataTemplate>
@@ -36,5 +36,5 @@
         </DataTemplate>
 
     </Application.Resources>
-    
+
 </Application>
