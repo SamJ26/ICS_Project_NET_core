@@ -1,4 +1,5 @@
 ﻿using FilmManagment.GUI.ViewModels.Interfaces;
+using System.Windows.Input;
 
 namespace FilmManagment.GUI.ViewModels
 {
@@ -8,5 +9,8 @@ namespace FilmManagment.GUI.ViewModels
         {
             // TODO: continue
         }
+
+        public ICommand SearchButtonCommand { get; }
+
     }
 }

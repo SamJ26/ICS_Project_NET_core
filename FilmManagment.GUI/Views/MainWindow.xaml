@@ -34,7 +34,7 @@
             <!-- Home button -->
             <Button Grid.Column="0"
                     Margin="2"
-                    Background="Bisque"
+                    Background="Gray"
                     Command="{Binding HomeButtonCommand}"
                     CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
@@ -42,18 +42,12 @@
                            VerticalAlignment="Center">
                     <Bold Foreground="Black"> Home </Bold>
                 </TextBlock>
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius"
-                                Value="10"/>
-                    </Style>
-                </Button.Resources>
             </Button>
 
             <!-- Films button -->
             <Button Grid.Column="1"
                     Margin="2"
-                    Background="Bisque"
+                    Background="Gray"
                     Command="{Binding FilmsButtonCommand}"
                     CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
@@ -61,18 +55,12 @@
                            VerticalAlignment="Center">
                     <Bold Foreground="Black"> Films </Bold>
                 </TextBlock>
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius"
-                                Value="10"/>
-                    </Style>
-                </Button.Resources>
             </Button>
 
             <!-- Actor button -->
             <Button Grid.Column="2"
                     Margin="2"
-                    Background="Bisque"
+                    Background="Gray"
                     Command="{Binding ActorsButtonCommand}"
                     CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
@@ -80,18 +68,12 @@
                            VerticalAlignment="Center">
                     <Bold Foreground="Black"> Actors </Bold>
                 </TextBlock>
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius"
-                                Value="10"/>
-                    </Style>
-                </Button.Resources>
             </Button>
 
             <!-- Director button -->
             <Button Grid.Column="3"
                     Margin="2"
-                    Background="Bisque"
+                    Background="Gray"
                     Command="{Binding DirectorsButtonCommand}"
                     CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
@@ -99,15 +81,8 @@
                            VerticalAlignment="Center">
                     <Bold Foreground="Black"> Directors </Bold>
                 </TextBlock>
-                <Button.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="CornerRadius"
-                                Value="10"/>
-                    </Style>
-                </Button.Resources>
             </Button>
-
-
+            
         </Grid>
 
         <ContentControl Grid.Row="1"

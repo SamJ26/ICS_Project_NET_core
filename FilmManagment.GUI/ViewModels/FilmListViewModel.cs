@@ -33,12 +33,15 @@ namespace FilmManagment.GUI.ViewModels
 
         // TODO: resolve DeleteButton
 
+        public ObservableCollection<FilmListModel> Films { get; } = new ObservableCollection<FilmListModel>();
+
         private void FilmSelected(FilmListModel filmListModel) => usedMediator.Send(new SelectedMessage<FilmWrappedModel> { Id = filmListModel.Id });
         private void FilmNew() => usedMediator.Send(new NewMessage<FilmWrappedModel>());
 
         public void Load()
         {
-            throw new System.NotImplementedException();
+            Films.Clear();
+            // TODO: continue
         }
     }
 }
