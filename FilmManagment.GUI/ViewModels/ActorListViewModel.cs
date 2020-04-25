@@ -22,6 +22,7 @@ namespace FilmManagment.GUI.ViewModels
 
             ActorSelectedCommand = new RelayCommand<ActorListModel>(ActorSelected);
             AddButtonCommand = new RelayCommand(ActorNew);
+            DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute);
 
         }
 
@@ -37,6 +38,11 @@ namespace FilmManagment.GUI.ViewModels
 
         private void ActorSelected(ActorListModel actorListModel) => usedMediator.Send(new SelectedMessage<ActorWrappedModel> { Id = actorListModel.Id });
         private void ActorNew() => usedMediator.Send(new NewMessage<ActorWrappedModel>());
+
+        private void OnDetailButtonCommandExecute(object parameter)
+        {
+            usedMediator.Send(new DetailButtonPushedMessage<ActorWrappedModel>());
+        }
 
         public void Load()
         {

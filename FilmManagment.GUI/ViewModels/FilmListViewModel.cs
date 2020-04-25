@@ -15,13 +15,14 @@ namespace FilmManagment.GUI.ViewModels
         // TODO: private prop. of type IFilmFacade
 
         public FilmListViewModel(IMediator mediator)
-        // TODO: also Facade need to be passed as argument
+            // TODO: also Facade need to be passed as argument
         {
             usedMediator = mediator;
             // TODO: assigment to usedFacade
 
             FilmSelectedCommand = new RelayCommand<FilmListModel>(FilmSelected);
             AddButtonCommand = new RelayCommand(FilmNew);
+            DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute);
 
         }
 
@@ -40,7 +41,7 @@ namespace FilmManagment.GUI.ViewModels
 
         private void OnDetailButtonCommandExecute(object parameter)
         {
-
+            usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
         }
 
         public void Load()

@@ -5,7 +5,6 @@ namespace FilmManagment.GUI.Messages
 {
     public abstract class Message<TwrappedModel> : IMessage where TwrappedModel : IId
     {
-        // TODO: is this ID of sender object ?
         private Guid? id;
 
         public TwrappedModel Model;

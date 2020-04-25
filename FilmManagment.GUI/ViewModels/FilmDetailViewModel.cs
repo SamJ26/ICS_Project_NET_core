@@ -6,13 +6,13 @@ using System.Windows.Input;
 
 namespace FilmManagment.GUI.ViewModels
 {
-    public class FimDetailViewModel : ViewModelBase, IFilmDetailViewModel
+    public class FilmDetailViewModel : ViewModelBase, IFilmDetailViewModel
     {
         private readonly IMediator usedMediator;
-        // TODO: private prop.of type IFilmFacade
+        // TODO: property for FilmFacade
 
-        public FimDetailViewModel(IMediator mediator)
-            // TODO: also FilmFacade need to be passed here
+        public FilmDetailViewModel(IMediator mediator)
+            // TODO: injection of FilmFacade
         {
             usedMediator = mediator;
         }

@@ -15,13 +15,14 @@ namespace FilmManagment.GUI.ViewModels
         // TODO: private prop. of type IDirectorFacade
 
         public DirectorListViewModel(IMediator mediator)
-        // TODO: also Facade need to be passed as argument
+            // TODO: also Facade need to be passed as argument
         {
             usedMediator = mediator;
             // TODO: assigment to usedFacade
 
             DirectorSelectedCommand = new RelayCommand<DirectorListModel>(DirectorSelected);
             AddButtonCommand = new RelayCommand(DirectorNew);
+            DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute);
 
         }
 
@@ -37,6 +38,11 @@ namespace FilmManagment.GUI.ViewModels
 
         private void DirectorSelected(DirectorListModel directorListModel) => usedMediator.Send(new SelectedMessage<DirectorWrappedModel> { Id = directorListModel.Id });
         private void DirectorNew() => usedMediator.Send(new NewMessage<DirectorWrappedModel>());
+
+        private void OnDetailButtonCommandExecute(object parameter)
+        {
+            usedMediator.Send(new DetailButtonPushedMessage<DirectorWrappedModel>());
+        }
 
         public void Load()
         {

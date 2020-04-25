@@ -38,7 +38,7 @@ namespace FilmManagment.GUI
             services.AddSingleton<IActorListViewModel, ActorListViewModel>();
             services.AddSingleton<IDirectorListViewModel, DirectorListViewModel>();
 
-            //services.AddSingleton<IFilmDetailViewModel, FilmDetailViewModel>();
+            services.AddSingleton<IFilmDetailViewModel, FilmDetailViewModel>();
             services.AddSingleton<IActorDetailViewModel, ActorDetailViewModel>();
             services.AddSingleton<IDirectorDetailViewModel, DirectorDetailViewModel>();
 

@@ -77,8 +77,9 @@
             <Button Grid.Column="1" 
                     Grid.Row="2" 
                     Margin="8" 
-                    Background="Bisque">
-                <!-- TODO: binding to ViewModel -->
+                    Background="Bisque"
+                    Command="{Binding DetailButtonCommand}"
+                    CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">

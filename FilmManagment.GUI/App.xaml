@@ -31,7 +31,7 @@
         <DataTemplate DataType="{x:Type viewModels:DirectorDetailViewModel}">
             <detailViews:DirectorDetailView/>
         </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModels:FimDetailViewModel}">
+        <DataTemplate DataType="{x:Type viewModels:FilmDetailViewModel}">
             <detailViews:FilmDetailView/>
         </DataTemplate>
 

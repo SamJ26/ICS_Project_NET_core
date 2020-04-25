@@ -15,7 +15,7 @@ namespace FilmManagment.GUI.Views.DetailViews
     /// <summary>
     /// Interaction logic for DirectorDetailView.xaml
     /// </summary>
-    public partial class DirectorDetailView : Window
+    public partial class DirectorDetailView : UserControl
     {
         public DirectorDetailView()
         {
