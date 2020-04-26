@@ -6,19 +6,21 @@ using FilmManagment.GUI.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using FilmManagment.GUI.Commands;
+using FilmManagment.BL.Facades;
+using FilmManagment.GUI.Extensions;
 
 namespace FilmManagment.GUI.ViewModels
 {
     public class FilmListViewModel : ViewModelBase, IFilmListViewModel
     {
         private readonly IMediator usedMediator;
-        // TODO: private prop. of type IFilmFacade
+        //private readonly FilmFacade usedFacade;
 
         public FilmListViewModel(IMediator mediator)
-            // TODO: also Facade need to be passed as argument
+            // TODO: inject facade
         {
             usedMediator = mediator;
-            // TODO: assigment to usedFacade
+            //usedFacade = facade;
 
             FilmSelectedCommand = new RelayCommand<FilmListModel>(FilmSelected);
             AddButtonCommand = new RelayCommand(FilmNew);
@@ -29,10 +31,10 @@ namespace FilmManagment.GUI.ViewModels
         // Commands
         public ICommand FilmSelectedCommand { get; }
         public ICommand AddButtonCommand { get; }
+        public ICommand DeleteButtonCommand { get; }
         public ICommand DetailButtonCommand { get; }
         public ICommand SearchButtonCommand { get; }
 
-        // TODO: resolve DeleteButton
 
         public ObservableCollection<FilmListModel> Films { get; } = new ObservableCollection<FilmListModel>();
 
@@ -47,7 +49,8 @@ namespace FilmManagment.GUI.ViewModels
         public void Load()
         {
             Films.Clear();
-            // TODO: continue
+            //var filmsFromDB = usedFacade.GetAllList();
+            //Films.AddList(filmsFromDB);
         }
     }
 }

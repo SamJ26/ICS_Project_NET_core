@@ -10,6 +10,9 @@ using Microsoft.Extensions.Hosting;
 using FilmManagment.BL.Facades;
 using FilmManagment.BL.Repositories;
 using FilmManagment.DAL.UnitOfWork;
+using FilmManagment.DAL.Entities;
+using FilmManagment.DAL.Factories;
+using FilmManagment.DAL;
 
 namespace FilmManagment.GUI
 {
@@ -22,11 +25,16 @@ namespace FilmManagment.GUI
 
         public App()
         {
-            host = new HostBuilder().ConfigureServices((context, services) => { ConfigureServicesToContainer(context.Configuration, services); })
+            host = new HostBuilder().ConfigureAppConfiguration((context, configurationBuilder) =>
+                                    {
+                                        configurationBuilder.SetBasePath(context.HostingEnvironment.ContentRootPath);
+                                        configurationBuilder.AddJsonFile(@"AppSettings.json", false, true);
+                                    })
+                                    .ConfigureServices((context, services) => { ConfigureServicesToContainer(context.Configuration, services); })
                                     .Build();
         }
 
-        public void ConfigureServicesToContainer(IConfiguration configuration, IServiceCollection services)
+        private void ConfigureServicesToContainer(IConfiguration configuration, IServiceCollection services)
         {
             services.AddSingleton<MainWindow>();
             services.AddSingleton<MainViewModel>();
@@ -42,16 +50,19 @@ namespace FilmManagment.GUI
             services.AddSingleton<IActorDetailViewModel, ActorDetailViewModel>();
             services.AddSingleton<IDirectorDetailViewModel, DirectorDetailViewModel>();
 
-            services.AddSingleton<UnitOfWork>();
+            //services.AddTransient<UnitOfWork>();
 
-            services.AddSingleton<ActorFacade>();
-            services.AddSingleton<FilmFacade>();
-            services.AddSingleton<DirectorFacade>();
-            services.AddSingleton<RatingFacade>();
+            //services.AddTransient<ActorFacade>();
+            //services.AddTransient<FilmFacade>();
+            //services.AddTransient<DirectorFacade>();
+            //services.AddTransient<RatingFacade>();
 
-            // TODO: add rest of ViewModels
-            // TODO: add rest of services ( messenger )
-            // TODO: add Facade + repository + DbFactory + unitOfWOrk
+            //services.AddTransient<Repository<FilmEntity>>();
+            //services.AddTransient<Repository<ActorEntity>>();
+            //services.AddTransient<Repository<DirectorEntity>>();
+            //services.AddTransient<Repository<RatingEntity>>();
+
+            //services.AddSingleton<IDbContextFactory<AppDbContext>>(provider => new DbContextFactory(configuration.GetConnectionString("DefaultConnection")));
         }
 
         private async void Application_start(object sender, StartupEventArgs args)

@@ -16,7 +16,7 @@ namespace FilmManagment.BL.Tests
 	public class ActorFacadeTest
 	{
 		private readonly ActorFacade facadeTestUnit;
-		private readonly RepositoryBase<ActorEntity> repository;
+		private readonly Repository<ActorEntity> repository;
 		private readonly ActorMapper mapper;
 
 		public ActorFacadeTest()
@@ -26,7 +26,7 @@ namespace FilmManagment.BL.Tests
 			dbx.Database.EnsureCreated();
 
 			var unitOfWork = new UnitOfWork(dbx);
-			repository = new RepositoryBase<ActorEntity>(unitOfWork);
+			repository = new Repository<ActorEntity>(unitOfWork);
 			mapper = new ActorMapper();
 			var entityFactory = new EntityFactory(dbx.ChangeTracker);
 

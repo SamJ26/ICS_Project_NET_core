@@ -19,7 +19,7 @@ namespace FilmManagment.BL.Tests
 	public class FilmFacadeTests
 	{
 		private readonly FilmFacade facadeTestUnit;
-		private readonly RepositoryBase<FilmEntity> repository;
+		private readonly Repository<FilmEntity> repository;
 		private readonly FilmMapper mapper;
 
 		public FilmFacadeTests()
@@ -29,7 +29,7 @@ namespace FilmManagment.BL.Tests
 			dbx.Database.EnsureCreated();
 
 			var unitOfWork = new UnitOfWork(dbx);
-			repository = new RepositoryBase<FilmEntity>(unitOfWork);
+			repository = new Repository<FilmEntity>(unitOfWork);
 			mapper = new FilmMapper();
 			var entityFactory = new EntityFactory(dbx.ChangeTracker);
 
