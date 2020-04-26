@@ -1,0 +1,40 @@
+﻿<Application x:Class="FilmManagment.GUI.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:FilmManagment.GUI"
+             xmlns:views="clr-namespace:FilmManagment.GUI.Views"
+             xmlns:detailViews="clr-namespace:FilmManagment.GUI.Views.DetailViews"
+             xmlns:listViews="clr-namespace:FilmManagment.GUI.Views.ListViews"
+             xmlns:viewModels="clr-namespace:FilmManagment.GUI.ViewModels" 
+             Startup="Application_start"
+             Exit="Application_exit">
+
+    <Application.Resources>
+
+        <DataTemplate DataType="{x:Type viewModels:HomeViewModel}">
+            <views:HomeView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ActorListViewModel}">
+            <listViews:ActorListView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:DirectorListViewModel}">
+            <listViews:DirectorListView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:FilmListViewModel}">
+            <listViews:FilmListView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:ActorDetailViewModel}">
+            <detailViews:ActorDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:DirectorDetailViewModel}">
+            <detailViews:DirectorDetailView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModels:FilmDetailViewModel}">
+            <detailViews:FilmDetailView/>
+        </DataTemplate>
+
+    </Application.Resources>
+
+</Application>

@@ -10,12 +10,10 @@ namespace FilmManagment.BL.Mappers
 {
 	public class FilmMapper : IMapper<FilmEntity, FilmListModel, FilmDetailModel>
 	{
-		public FilmDirectorMapper FilmDirectorMapper { get; set; } = new FilmDirectorMapper();
-		public FilmActorMapper FilmActorMapper { get; set; } = new FilmActorMapper();
+		private FilmDirectorMapper FilmDirectorMapper { get; set; } = new FilmDirectorMapper();
+		private FilmActorMapper FilmActorMapper { get; set; } = new FilmActorMapper();
 
-		public IMapper<DirectorEntity, DirectorListModel, DirectorDetailModel> DirectorMapper { get; set; } = new DirectorMapper();
-		public IMapper<ActorEntity, ActorListModel, ActorDetailModel> ActorMapper { get; set; } = new ActorMapper();
-		public IMapper<RatingEntity, RatingListModel, RatingDetailModel> RatingMapper { get; set; } = new RatingMapper();
+		private IMapper<RatingEntity, RatingListModel, RatingDetailModel> RatingMapper { get; set; } = new RatingMapper();
 
 		public IEnumerable<FilmListModel> Map(IEnumerable<FilmEntity> entities)
 		{

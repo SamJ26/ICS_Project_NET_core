@@ -1,0 +1,93 @@
+﻿<Window 
+        x:Class="FilmManagment.GUI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:FilmManagment.GUI.ViewModels"
+        xmlns:views="clr-namespace:FilmManagment.GUI.Views"
+        xmlns:detailViews="clr-namespace:FilmManagment.GUI.Views.DetailViews"
+        xmlns:listViews="clr-namespace:FilmManagment.GUI.Views.ListViews"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
+        DataContext="{Binding MainViewModel}"
+        Title="MainWindow"
+        Height="450"
+        Width="800">
+
+    <Grid Background="#FF353C4D">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Grid.ColumnDefinitions >
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Home button -->
+            <Button Grid.Column="0"
+                    Margin="2"
+                    Background="Gray"
+                    Command="{Binding HomeButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Home </Bold>
+                </TextBlock>
+            </Button>
+
+            <!-- Films button -->
+            <Button Grid.Column="1"
+                    Margin="2"
+                    Background="Gray"
+                    Command="{Binding FilmsButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Films </Bold>
+                </TextBlock>
+            </Button>
+
+            <!-- Actor button -->
+            <Button Grid.Column="2"
+                    Margin="2"
+                    Background="Gray"
+                    Command="{Binding ActorsButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Actors </Bold>
+                </TextBlock>
+            </Button>
+
+            <!-- Director button -->
+            <Button Grid.Column="3"
+                    Margin="2"
+                    Background="Gray"
+                    Command="{Binding DirectorsButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Directors </Bold>
+                </TextBlock>
+            </Button>
+            
+        </Grid>
+
+        <ContentControl Grid.Row="1"
+                        Grid.Column="0"
+                        Content="{Binding SelectedView}"/>
+
+    </Grid>
+</Window>

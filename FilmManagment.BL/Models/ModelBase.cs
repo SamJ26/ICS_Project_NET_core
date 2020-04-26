@@ -2,7 +2,7 @@
 
 namespace FilmManagment.BL.Models
 {
-	public abstract class ModelBase
+	public abstract class ModelBase : IId
 	{
 		public Guid Id { get; set; }
 	}

@@ -9,10 +9,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmManagment.DAL.Tests", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmManagment.BL", "FilmManagment.BL\FilmManagment.BL.csproj", "{EF7A7446-824F-40BF-A592-1D29015815E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmManagment.BL.Tests", "FilmManagment.BL.Tests\FilmManagment.BL.Tests.csproj", "{60E022EF-E11F-44BE-A61E-B6EBF33BB5A7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilmManagment.BL.Tests", "FilmManagment.BL.Tests\FilmManagment.BL.Tests.csproj", "{60E022EF-E11F-44BE-A61E-B6EBF33BB5A7}"
 	ProjectSection(ProjectDependencies) = postProject
 		{EF7A7446-824F-40BF-A592-1D29015815E5} = {EF7A7446-824F-40BF-A592-1D29015815E5}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FilmManagment.GUI", "FilmManagment.GUI\FilmManagment.GUI.csproj", "{D35814D1-BFAE-488A-AC17-7A9C1940E19F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 		{60E022EF-E11F-44BE-A61E-B6EBF33BB5A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60E022EF-E11F-44BE-A61E-B6EBF33BB5A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60E022EF-E11F-44BE-A61E-B6EBF33BB5A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D35814D1-BFAE-488A-AC17-7A9C1940E19F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D35814D1-BFAE-488A-AC17-7A9C1940E19F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D35814D1-BFAE-488A-AC17-7A9C1940E19F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D35814D1-BFAE-488A-AC17-7A9C1940E19F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

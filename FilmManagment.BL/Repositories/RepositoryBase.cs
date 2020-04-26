@@ -43,5 +43,10 @@ namespace FilmManagment.BL.Repositories
 		{
 			return localUnitOfWork.DbContext.Set<TEntity>();
 		}
+
+		public void DisposeDb()
+		{
+			localUnitOfWork.Dispose();
+		}
 	}
 }
