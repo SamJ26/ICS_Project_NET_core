@@ -1,7 +1,7 @@
-﻿using FilmManagment.GUI.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using FilmManagment.GUI.Commands;
+using FilmManagment.GUI.ViewModels;
+using FilmManagment.GUI.Messages;
+using FilmManagment.GUI.Wrappers;
 using System.Windows.Input;
 
 namespace FilmManagment.GUI.Services.WarningMessageService
@@ -13,6 +13,9 @@ namespace FilmManagment.GUI.Services.WarningMessageService
         public WarningViewModel(IMediator mediator)
         {
             usedMediator = mediator;
+
+            YesButtonCommand = new RelayCommand(OnYesButtonCommandExecute);
+            NoButtonCommand = new RelayCommand(OnNoButtonCommandExecute);
         }
 
         public ICommand YesButtonCommand { get; }
@@ -20,12 +23,14 @@ namespace FilmManagment.GUI.Services.WarningMessageService
 
         private void OnYesButtonCommandExecute(object parameter)
         {
-
+            usedMediator.Send(new YES_WarningResultMessage<FilmWrappedModel>());
+            // TODO: resolve closing of warning window
         }
 
         private void OnNoButtonCommandExecute(object parameter)
         {
-
+            usedMediator.Send(new NO_WarningResultMessage<FilmWrappedModel>());
+            // TODO: resolve closing of warning window
         }
     }
 }

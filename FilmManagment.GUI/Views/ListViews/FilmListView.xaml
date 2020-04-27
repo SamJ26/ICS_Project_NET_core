@@ -3,11 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:interactions="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:FilmManagment.GUI.Views.ListViews"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
     <Grid x:Name="ListActorLayout"
           Background="#FF353C4D">
 
@@ -139,16 +139,35 @@
 
         </Grid>
 
-        <ScrollViewer Grid.Row="2">
-            <ListBox Background="#FF353C4D"
-                     ItemsSource="{Binding Films}">
-                <interactions:Interaction.Triggers>
-                    <interactions:EventTrigger EventName="SelectionChanged">
-                        <interactions:InvokeCommandAction Command="{Binding FilmSelectedCommand}"/>
-                    </interactions:EventTrigger>
-                </interactions:Interaction.Triggers>
-            </ListBox>
+        <ScrollViewer Grid.Row="2"
+                      Background="#EEEE">
+
+            <DataGrid x:Name="FilmsDataGrid"
+                      ItemsSource="{Binding Films}"
+                      AutoGenerateColumns="False"
+                      Background="#FF353C4D">
+                
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding FilmSelectedCommand}"
+                                               CommandParameter="{Binding ElementName=FilmsDataGrid, Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Original Name"
+                                        Width="*"
+                                        Binding="{Binding OriginalName}"/>
+                    <DataGridTextColumn Header="Czech Name"
+                                        Width="*"
+                                        Binding="{Binding CzechName}"/>
+                    <DataGridTextColumn Header="Country Of Origin"
+                                        Width="*"
+                                        Binding="{Binding CountryOfOrigin}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
         </ScrollViewer>
-        
+
     </Grid>
 </UserControl>

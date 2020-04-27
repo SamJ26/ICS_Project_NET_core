@@ -26,11 +26,15 @@ namespace FilmManagment.GUI.ViewModels
             usedWarningService = warningService;
             usedFacade = facade;
 
+            mediator.Register<YES_WarningResultMessage<FilmWrappedModel>>(DeleteFilm);
+            mediator.Register<NO_WarningResultMessage<FilmWrappedModel>>(UpdateFilms);
+
             FilmSelectedCommand = new RelayCommand<FilmListModel>(FilmSelected);
             AddButtonCommand = new RelayCommand(FilmNew);
             DeleteButtonCommand = new RelayCommand(OnDeleteButtonCommandExecute);
             DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute);
 
+            Load();
         }
 
         // Commands
@@ -43,24 +47,39 @@ namespace FilmManagment.GUI.ViewModels
 
         public ObservableCollection<FilmListModel> Films { get; } = new ObservableCollection<FilmListModel>();
 
-        private void FilmSelected(FilmListModel filmListModel) => usedMediator.Send(new SelectedMessage<FilmWrappedModel> { Id = filmListModel.Id });
+        private FilmListModel selectedFilm;
+
+        private void FilmSelected(FilmListModel filmListModel)
+        {
+            usedMediator.Send(new SelectedMessage<FilmWrappedModel> { Id = filmListModel.Id });
+            selectedFilm = filmListModel;
+        }
+
         private void FilmNew() => usedMediator.Send(new NewMessage<FilmWrappedModel>());
 
-        private void OnDetailButtonCommandExecute(object parameter)
-        {
-            usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
-        }
+        private void OnDetailButtonCommandExecute(object parameter) => usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
 
         private void OnDeleteButtonCommandExecute(object parameter)
         {
             usedWarningService.ShowWarning($"Are you sure ?");
         }
 
+        private void DeleteFilm(YES_WarningResultMessage<FilmWrappedModel> _)
+        {
+            usedFacade.Delete(selectedFilm.Id);
+            Load();
+        }
+
+        private void UpdateFilms(NO_WarningResultMessage<FilmWrappedModel> _)
+        {
+
+        }
+
         public void Load()
         {
             Films.Clear();
-            //var filmsFromDB = usedFacade.GetAllList();
-            //Films.AddList(filmsFromDB);
+            var filmsFromDB = usedFacade.GetAllList();
+            Films.AddList(filmsFromDB);
         }
     }
 }

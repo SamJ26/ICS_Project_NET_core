@@ -16,7 +16,9 @@
 
         <TextBlock Grid.Row="0"
                    Margin="10"
-                   Text="{Binding WarningMessage, Mode=OneWay}">
+                   Text="Are your sure?"
+                   FontSize="25"
+                   HorizontalAlignment="Center">
         </TextBlock>
 
         <Grid Grid.Row="1">
@@ -29,13 +31,15 @@
             <Button Grid.Column="0"
                     Margin="10"
                     Content="YES"
-                    Command="{Binding YesButtonCommand}"/>
+                    Command="{Binding YesButtonCommand, Mode=OneWay}"
+                    CommandParameter="{Binding ElementName=WarningWindow}"/>
 
             <!-- NO button -->
             <Button Grid.Column="1"
                     Margin="10"
                     Content="NO"
-                    Command="{Binding NoButtonCommand}"/>
+                    Command="{Binding NoButtonCommand, Mode=OneWay}"
+                    CommandParameter="{Binding ElementName=WarningWindow}"/>
 
         </Grid>
     </Grid>
