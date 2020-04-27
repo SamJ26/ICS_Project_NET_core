@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using FilmManagment.GUI.Services;
+using FilmManagment.GUI.Services.WarningMessageService;
 using FilmManagment.GUI.ViewModels;
 using FilmManagment.GUI.ViewModels.Interfaces;
 using FilmManagment.GUI.Views;
@@ -13,6 +14,11 @@ using FilmManagment.DAL.UnitOfWork;
 using FilmManagment.DAL.Entities;
 using FilmManagment.DAL.Factories;
 using FilmManagment.DAL;
+using Microsoft.EntityFrameworkCore;
+using FilmManagment.BL.Mappers;
+using FilmManagment.BL.Models.DetailModels;
+using FilmManagment.BL.Models.ListModels;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace FilmManagment.GUI
 {
@@ -41,6 +47,9 @@ namespace FilmManagment.GUI
 
             services.AddSingleton<IMediator, Mediator>();
 
+            services.AddSingleton<IWarningViewModel, WarningViewModel>();
+            services.AddSingleton<IWarningService, WarningService>();
+
             services.AddSingleton<IHomeViewModel, HomeViewModel>();
             services.AddSingleton<IFilmListViewModel, FilmListViewModel>();
             services.AddSingleton<IActorListViewModel, ActorListViewModel>();
@@ -50,19 +59,23 @@ namespace FilmManagment.GUI
             services.AddSingleton<IActorDetailViewModel, ActorDetailViewModel>();
             services.AddSingleton<IDirectorDetailViewModel, DirectorDetailViewModel>();
 
-            //services.AddTransient<UnitOfWork>();
+            services.AddSingleton<IMapper<FilmEntity, FilmListModel, FilmDetailModel>, FilmMapper>();
+            services.AddSingleton<IEntityFactory, EntityFactory>();
 
-            //services.AddTransient<ActorFacade>();
-            //services.AddTransient<FilmFacade>();
-            //services.AddTransient<DirectorFacade>();
-            //services.AddTransient<RatingFacade>();
+            services.AddTransient<UnitOfWork>();
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            //services.AddTransient<Repository<FilmEntity>>();
-            //services.AddTransient<Repository<ActorEntity>>();
-            //services.AddTransient<Repository<DirectorEntity>>();
-            //services.AddTransient<Repository<RatingEntity>>();
+            services.AddTransient<ActorFacade>();
+            services.AddTransient<FilmFacade>();
+            services.AddTransient<DirectorFacade>();
+            services.AddTransient<RatingFacade>();
 
-            //services.AddSingleton<IDbContextFactory<AppDbContext>>(provider => new DbContextFactory(configuration.GetConnectionString("DefaultConnection")));
+            services.AddTransient<Repository<FilmEntity>>();
+            services.AddTransient<Repository<ActorEntity>>();
+            services.AddTransient<Repository<DirectorEntity>>();
+            services.AddTransient<Repository<RatingEntity>>();
+
+            services.AddSingleton<IDbContextFactory<AppDbContext>>(provider => new DbContextFactory(configuration.GetConnectionString("DefaultConnection")));
         }
 
         private async void Application_start(object sender, StartupEventArgs args)

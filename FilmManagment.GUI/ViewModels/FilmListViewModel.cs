@@ -1,5 +1,6 @@
 ﻿using FilmManagment.BL.Models.ListModels;
 using FilmManagment.GUI.Services;
+using FilmManagment.GUI.Services.WarningMessageService;
 using FilmManagment.GUI.Wrappers;
 using FilmManagment.GUI.Messages;
 using FilmManagment.GUI.ViewModels.Interfaces;
@@ -14,16 +15,20 @@ namespace FilmManagment.GUI.ViewModels
     public class FilmListViewModel : ViewModelBase, IFilmListViewModel
     {
         private readonly IMediator usedMediator;
-        //private readonly FilmFacade usedFacade;
+        private readonly IWarningService usedWarningService;
+        private readonly FilmFacade usedFacade;
 
-        public FilmListViewModel(IMediator mediator)
-            // TODO: inject facade
+        public FilmListViewModel(IMediator mediator,
+                                 IWarningService warningService,
+                                 FilmFacade facade)
         {
             usedMediator = mediator;
-            //usedFacade = facade;
+            usedWarningService = warningService;
+            usedFacade = facade;
 
             FilmSelectedCommand = new RelayCommand<FilmListModel>(FilmSelected);
             AddButtonCommand = new RelayCommand(FilmNew);
+            DeleteButtonCommand = new RelayCommand(OnDeleteButtonCommandExecute);
             DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute);
 
         }
@@ -44,6 +49,11 @@ namespace FilmManagment.GUI.ViewModels
         private void OnDetailButtonCommandExecute(object parameter)
         {
             usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
+        }
+
+        private void OnDeleteButtonCommandExecute(object parameter)
+        {
+            usedWarningService.ShowWarning($"Are you sure ?");
         }
 
         public void Load()

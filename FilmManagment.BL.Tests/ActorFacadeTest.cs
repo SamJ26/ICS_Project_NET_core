@@ -28,7 +28,7 @@ namespace FilmManagment.BL.Tests
 			var unitOfWork = new UnitOfWork(dbx);
 			repository = new Repository<ActorEntity>(unitOfWork);
 			mapper = new ActorMapper();
-			var entityFactory = new EntityFactory(dbx.ChangeTracker);
+			var entityFactory = new EntityFactory(dbx);
 
 			facadeTestUnit = new ActorFacade(unitOfWork, repository, mapper, entityFactory);
 		}

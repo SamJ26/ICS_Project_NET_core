@@ -9,7 +9,7 @@ namespace FilmManagment.DAL.Factories
 	{
 		private readonly ChangeTracker localChangeTracker;
 
-		public EntityFactory(ChangeTracker changeTracker) => localChangeTracker = changeTracker;
+		public EntityFactory(AppDbContext dbContext) => localChangeTracker = dbContext.ChangeTracker;
 
 		public TEntity Create<TEntity>(Guid id) where TEntity : class, IEntityBase, new()
 		{
