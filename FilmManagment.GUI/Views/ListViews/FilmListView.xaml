@@ -2,11 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:local="clr-namespace:FilmManagment.GUI.Views.ListViews"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    
+
     <Grid x:Name="ListActorLayout"
           Background="#FF353C4D">
 
@@ -39,8 +40,9 @@
             <Button Grid.Column="1" 
                     Grid.Row="0" 
                     Margin="8" 
-                    Background="Bisque">
-                <!-- TODO: binding to ViewModel -->
+                    Background="Bisque"
+                    Command="{Binding AddButtonCommand}"
+                    CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">
@@ -58,8 +60,9 @@
             <Button Grid.Column="1" 
                     Grid.Row="1" 
                     Margin="8" 
-                    Background="Bisque">
-                <!-- TODO: binding to ViewModel -->
+                    Background="Bisque"
+                    Command="{Binding DeleteButtonCommand}"
+                    CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">
@@ -118,8 +121,9 @@
             <Button Grid.Column="1" 
                     Grid.Row="6" 
                     Margin="8" 
-                    Background="Bisque">
-                <!-- TODO: binding to ViewModel -->
+                    Background="Bisque"
+                    Command="{Binding SearchButtonCommand}"
+                    CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">
@@ -135,9 +139,35 @@
 
         </Grid>
 
-        <ScrollViewer Grid.Row="2">
-            <!-- TODO: binding to ViewModel -->
+        <ScrollViewer Grid.Row="2"
+                      Background="#EEEE">
+
+            <DataGrid x:Name="FilmsDataGrid"
+                      ItemsSource="{Binding Films}"
+                      AutoGenerateColumns="False"
+                      Background="#FF353C4D">
+                
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="SelectionChanged">
+                        <i:InvokeCommandAction Command="{Binding FilmSelectedCommand}"
+                                               CommandParameter="{Binding ElementName=FilmsDataGrid, Path=SelectedItem}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Original Name"
+                                        Width="*"
+                                        Binding="{Binding OriginalName}"/>
+                    <DataGridTextColumn Header="Czech Name"
+                                        Width="*"
+                                        Binding="{Binding CzechName}"/>
+                    <DataGridTextColumn Header="Country Of Origin"
+                                        Width="*"
+                                        Binding="{Binding CountryOfOrigin}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
         </ScrollViewer>
-        
+
     </Grid>
 </UserControl>

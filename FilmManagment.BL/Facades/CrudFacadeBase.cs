@@ -18,11 +18,11 @@ namespace FilmManagment.BL.Facades
 	{
 		private readonly IMapper<TEntity, TListModel, TDetailModel> mapper;
 		private readonly IEntityFactory entityFactory;
-		private readonly RepositoryBase<TEntity> repository;
+		private readonly Repository<TEntity> repository;
 		private readonly UnitOfWork unitOfWork;
 
 		protected CrudFacadeBase(UnitOfWork aUnitOfWork,
-								  RepositoryBase<TEntity> aRepository,
+								  Repository<TEntity> aRepository,
 								  IMapper<TEntity, TListModel, TDetailModel> aMapper,
 								  IEntityFactory aEntityFactory)
 		{

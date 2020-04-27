@@ -15,7 +15,7 @@ namespace FilmManagment.BL.Facades
 	public class DirectorFacade : CrudFacadeBase<DirectorEntity, DirectorListModel, DirectorDetailModel>
 	{
 		public DirectorFacade(UnitOfWork aUnitOfWork,
-							  RepositoryBase<DirectorEntity> aRepository,
+							  Repository<DirectorEntity> aRepository,
 							  IMapper<DirectorEntity, DirectorListModel, DirectorDetailModel> aMapper,
 							  IEntityFactory aEntityFactory)
 							  : base(aUnitOfWork, aRepository, aMapper, aEntityFactory)

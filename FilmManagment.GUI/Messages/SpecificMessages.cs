@@ -24,4 +24,18 @@ namespace FilmManagment.GUI.Messages
     public class DetailButtonPushedMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
     {
     }
+
+    /// <summary>
+    /// This message will be sent from WarningViewModel to specific ListViewModel to aprrove deletion
+    /// </summary>
+    public class YES_WarningResultMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
+    {
+    }
+
+    /// <summary>
+    /// This message will be sent from WarningViewModel to specific ListViewModel to reject deletion
+    /// </summary>
+    public class NO_WarningResultMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
+    {
+    }
 }

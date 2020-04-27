@@ -8,11 +8,11 @@ namespace FilmManagment.BL.Repositories
 	/// <summary>
 	/// This class represents generic repository with basic CRUD methods
 	/// </summary>
-	public class RepositoryBase<TEntity> where TEntity : class, IEntityBase, new()
+	public class Repository<TEntity> where TEntity : class, IEntityBase, new()
 	{
 		private readonly UnitOfWork localUnitOfWork;
 
-		public RepositoryBase(UnitOfWork unitOfWork)
+		public Repository(UnitOfWork unitOfWork)
 		{
 			this.localUnitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
 		}

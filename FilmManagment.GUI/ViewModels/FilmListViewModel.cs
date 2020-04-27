@@ -1,53 +1,85 @@
 ﻿using FilmManagment.BL.Models.ListModels;
 using FilmManagment.GUI.Services;
+using FilmManagment.GUI.Services.WarningMessageService;
 using FilmManagment.GUI.Wrappers;
 using FilmManagment.GUI.Messages;
 using FilmManagment.GUI.ViewModels.Interfaces;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using FilmManagment.GUI.Commands;
+using FilmManagment.BL.Facades;
+using FilmManagment.GUI.Extensions;
 
 namespace FilmManagment.GUI.ViewModels
 {
     public class FilmListViewModel : ViewModelBase, IFilmListViewModel
     {
         private readonly IMediator usedMediator;
-        // TODO: private prop. of type IFilmFacade
+        private readonly IWarningService usedWarningService;
+        private readonly FilmFacade usedFacade;
 
-        public FilmListViewModel(IMediator mediator)
-            // TODO: also Facade need to be passed as argument
+        public FilmListViewModel(IMediator mediator,
+                                 IWarningService warningService,
+                                 FilmFacade facade)
         {
             usedMediator = mediator;
-            // TODO: assigment to usedFacade
+            usedWarningService = warningService;
+            usedFacade = facade;
+
+            mediator.Register<YES_WarningResultMessage<FilmWrappedModel>>(DeleteFilm);
+            mediator.Register<NO_WarningResultMessage<FilmWrappedModel>>(UpdateFilms);
 
             FilmSelectedCommand = new RelayCommand<FilmListModel>(FilmSelected);
             AddButtonCommand = new RelayCommand(FilmNew);
+            DeleteButtonCommand = new RelayCommand(OnDeleteButtonCommandExecute);
             DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute);
 
+            Load();
         }
 
         // Commands
         public ICommand FilmSelectedCommand { get; }
         public ICommand AddButtonCommand { get; }
+        public ICommand DeleteButtonCommand { get; }
         public ICommand DetailButtonCommand { get; }
         public ICommand SearchButtonCommand { get; }
 
-        // TODO: resolve DeleteButton
 
         public ObservableCollection<FilmListModel> Films { get; } = new ObservableCollection<FilmListModel>();
 
-        private void FilmSelected(FilmListModel filmListModel) => usedMediator.Send(new SelectedMessage<FilmWrappedModel> { Id = filmListModel.Id });
+        private FilmListModel selectedFilm;
+
+        private void FilmSelected(FilmListModel filmListModel)
+        {
+            usedMediator.Send(new SelectedMessage<FilmWrappedModel> { Id = filmListModel.Id });
+            selectedFilm = filmListModel;
+        }
+
         private void FilmNew() => usedMediator.Send(new NewMessage<FilmWrappedModel>());
 
-        private void OnDetailButtonCommandExecute(object parameter)
+        private void OnDetailButtonCommandExecute(object parameter) => usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
+
+        private void OnDeleteButtonCommandExecute(object parameter)
         {
-            usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
+            usedWarningService.ShowWarning($"Are you sure ?");
+        }
+
+        private void DeleteFilm(YES_WarningResultMessage<FilmWrappedModel> _)
+        {
+            usedFacade.Delete(selectedFilm.Id);
+            Load();
+        }
+
+        private void UpdateFilms(NO_WarningResultMessage<FilmWrappedModel> _)
+        {
+
         }
 
         public void Load()
         {
             Films.Clear();
-            // TODO: continue
+            var filmsFromDB = usedFacade.GetAllList();
+            Films.AddList(filmsFromDB);
         }
     }
 }

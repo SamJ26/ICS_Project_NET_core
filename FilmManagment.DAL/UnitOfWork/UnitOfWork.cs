@@ -7,7 +7,7 @@ namespace FilmManagment.DAL.UnitOfWork
 	{
 		public DbContext DbContext { get; set; }
 
-		public UnitOfWork(DbContext dbContext)
+		public UnitOfWork(AppDbContext dbContext)
 		{
 			DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
 		}

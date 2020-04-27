@@ -1,0 +1,46 @@
+﻿<Window x:Class="FilmManagment.GUI.Services.WarningMessageService.WarningWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FilmManagment.GUI.Services.WarningMessageService"
+        mc:Ignorable="d"
+        Title="WarningWindow" Height="150" Width="400">
+
+    <Grid Background="Gray">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Margin="10"
+                   Text="Are your sure?"
+                   FontSize="25"
+                   HorizontalAlignment="Center">
+        </TextBlock>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            
+            <!-- YES button -->
+            <Button Grid.Column="0"
+                    Margin="10"
+                    Content="YES"
+                    Command="{Binding YesButtonCommand, Mode=OneWay}"
+                    CommandParameter="{Binding ElementName=WarningWindow}"/>
+
+            <!-- NO button -->
+            <Button Grid.Column="1"
+                    Margin="10"
+                    Content="NO"
+                    Command="{Binding NoButtonCommand, Mode=OneWay}"
+                    CommandParameter="{Binding ElementName=WarningWindow}"/>
+
+        </Grid>
+    </Grid>
+</Window>
