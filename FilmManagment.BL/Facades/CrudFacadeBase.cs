@@ -19,40 +19,52 @@ namespace FilmManagment.BL.Facades
 		private readonly IMapper<TEntity, TListModel, TDetailModel> mapper;
 		private readonly IEntityFactory entityFactory;
 		private readonly Repository<TEntity> repository;
-		private readonly UnitOfWork unitOfWork;
+		private readonly UnitOfWork usedUnitOfWork;
 
 		protected CrudFacadeBase(UnitOfWork aUnitOfWork,
-								  Repository<TEntity> aRepository,
-								  IMapper<TEntity, TListModel, TDetailModel> aMapper,
-								  IEntityFactory aEntityFactory)
+								 Repository<TEntity> aRepository,
+								 IMapper<TEntity, TListModel, TDetailModel> aMapper,
+								 IEntityFactory aEntityFactory)
 		{
 			mapper = aMapper;
 			entityFactory = aEntityFactory;
 			repository = aRepository;
-			unitOfWork = aUnitOfWork;
+			usedUnitOfWork = aUnitOfWork;
 		}
 
 		protected virtual Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>[] Includes { get; } = { };
 
-		public IEnumerable<TListModel> GetAllList() => mapper.Map(repository.GetAll());
+		public IEnumerable<TListModel> GetAllList()
+		{
+			using (var unitOfWork = usedUnitOfWork.Create())
+			{
+				return mapper.Map(repository.GetAll());
+			}
+		}
 
 		public TDetailModel GetById(Guid id)
 		{
-			var query = repository.GetAll();
-
-			// ReSharper disable once LoopCanBeConvertedToQuery
-			foreach (var include in Includes)
+			using (var unitOfWork = usedUnitOfWork.Create())
 			{
-				query = include(query);
-			}
+				var query = repository.GetAll();
 
-			return mapper.Map(query.SingleOrDefault(i => i.Id.Equals(id)));
+				// ReSharper disable once LoopCanBeConvertedToQuery
+				foreach (var include in Includes)
+				{
+					query = include(query);
+				}
+
+				return mapper.Map(query.SingleOrDefault(i => i.Id.Equals(id)));
+			}
 		}
 
 		public void Delete(Guid id)
 		{
-			repository.DeleteById(id);
-			unitOfWork.Commit();
+			using (var unitOfWork = usedUnitOfWork.Create())
+			{
+				repository.DeleteById(id);
+				usedUnitOfWork.Commit();
+			}
 		}
 
 		public void Delete(TListModel model) => Delete(model.Id);
@@ -61,13 +73,14 @@ namespace FilmManagment.BL.Facades
 
 		public TDetailModel Save(TDetailModel model)
 		{
-			var _ = GetById(model.Id);                              //To fill the DbContext Identity Cache
+			using (var unitOfWork = usedUnitOfWork.Create())
+			{
+				var entity = mapper.Map(model, entityFactory);
+				entity = repository.InsertOrUpdate(entity);
+				usedUnitOfWork.Commit();
 
-			var entity = mapper.Map(model, entityFactory);
-			entity = repository.InsertOrUpdate(entity);
-			unitOfWork.Commit();
-
-			return GetById(entity.Id);                              //To fill properties not mapped from model to entity
+				return GetById(entity.Id);							//To fill properties not mapped from model to entity
+			}
 		}
 	}
 }

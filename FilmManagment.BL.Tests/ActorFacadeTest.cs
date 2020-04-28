@@ -3,6 +3,8 @@ using FilmManagment.BL.Mappers;
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using FilmManagment.BL.Repositories;
+using FilmManagment.BL.Factories;
+using FilmManagment.DAL;
 using FilmManagment.DAL.Entities;
 using FilmManagment.DAL.Factories;
 using FilmManagment.DAL.Seeds;
@@ -22,13 +24,10 @@ namespace FilmManagment.BL.Tests
 		public ActorFacadeTest()
 		{
 			var dbContextFactory = new DbContextInMemoryFactory(nameof(ActorFacadeTest));
-			var dbx = dbContextFactory.CreateDbContext();
-			dbx.Database.EnsureCreated();
-
-			var unitOfWork = new UnitOfWork(dbx);
+			var unitOfWork = new UnitOfWork(dbContextFactory);
 			repository = new Repository<ActorEntity>(unitOfWork);
 			mapper = new ActorMapper();
-			var entityFactory = new EntityFactory(dbx);
+			var entityFactory = new CreateNewEntityFactory();
 
 			facadeTestUnit = new ActorFacade(unitOfWork, repository, mapper, entityFactory);
 		}
@@ -51,7 +50,7 @@ namespace FilmManagment.BL.Tests
 		public void Update_Actor_GarrethClark()
 		{
 			// Get existing actor from DB to detailModel
-			var actorDetailModel = mapper.Map(DataSeeds.Actor_GarrethClark);
+			var actorDetailModel = facadeTestUnit.GetById(DataSeeds.Actor_GarrethClark.Id);
 
 			// Update his informations on detailModel
 			actorDetailModel.FirstName += "_Update";

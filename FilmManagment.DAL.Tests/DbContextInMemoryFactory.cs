@@ -17,7 +17,9 @@ namespace FilmManagment.DAL.Tests
 		{
 			var contextOptionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
 			contextOptionsBuilder.UseInMemoryDatabase(dbName);
-			return new AppDbContext(contextOptionsBuilder.Options);
+			var createdDbContext = new AppDbContext(contextOptionsBuilder.Options);
+			createdDbContext.Database.EnsureCreated();
+			return createdDbContext;
 		}
 	}
 }

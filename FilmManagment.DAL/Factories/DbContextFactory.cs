@@ -15,7 +15,9 @@ namespace FilmManagment.DAL.Factories
         {
             var optionsBuilder = new DbContextOptionsBuilder<AppDbContext>();
             optionsBuilder.UseSqlServer(connectionString);
-            return new AppDbContext(optionsBuilder.Options);
+            var createdDbContext = new AppDbContext(optionsBuilder.Options);
+            createdDbContext.Database.EnsureCreated();
+            return createdDbContext;
         }
     }
 }

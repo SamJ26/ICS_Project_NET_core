@@ -1,7 +1,9 @@
 ﻿using FilmManagment.BL.Facades;
+using FilmManagment.BL.Factories;
 using FilmManagment.BL.Mappers;
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Repositories;
+using FilmManagment.DAL;
 using FilmManagment.DAL.Entities;
 using FilmManagment.DAL.Factories;
 using FilmManagment.DAL.Seeds;
@@ -19,14 +21,11 @@ namespace FilmManagment.BL.Tests
 
 		public RatingFacadeTests()
 		{
-			var dbContextFactory = new DbContextInMemoryFactory(nameof(RatingFacadeTests));
-			var dbx = dbContextFactory.CreateDbContext();
-			dbx.Database.EnsureCreated();
-
-			var unitOfWork = new UnitOfWork(dbx);
+			var dbContextFactory = new DbContextInMemoryFactory(nameof(ActorFacadeTest));
+			var unitOfWork = new UnitOfWork(dbContextFactory);
 			repository = new Repository<RatingEntity>(unitOfWork);
 			mapper = new RatingMapper();
-			var entityFactory = new EntityFactory(dbx);
+			var entityFactory = new CreateNewEntityFactory();
 
 			facadeTestUnit = new RatingFacade(unitOfWork, repository, mapper, entityFactory);
 		}
