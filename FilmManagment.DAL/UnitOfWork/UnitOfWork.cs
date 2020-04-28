@@ -15,6 +15,12 @@ namespace FilmManagment.DAL.UnitOfWork
 			localDbContextFactory = dbContextFactory;
 		}
 
+		public UnitOfWork Create()
+		{
+			DbContext = localDbContextFactory.CreateDbContext();
+			return this;
+		}
+
 		public void Dispose() => DbContext.Dispose();
 
 		public void Commit() => DbContext.SaveChanges();

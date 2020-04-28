@@ -23,10 +23,6 @@ namespace FilmManagment.BL.Tests
 
 		public DirectorFacadeTests()
 		{
-			//var dbContextFactory = new DbContextInMemoryFactory(nameof(DirectorFacadeTests));
-			//var dbx = dbContextFactory.CreateDbContext();
-			//dbx.Database.EnsureCreated();
-
 			var dbContextFactory = new DbContextInMemoryFactory(nameof(ActorFacadeTest));
 			var unitOfWork = new UnitOfWork(dbContextFactory);
 			repository = new Repository<DirectorEntity>(unitOfWork);

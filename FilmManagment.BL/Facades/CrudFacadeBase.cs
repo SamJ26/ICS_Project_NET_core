@@ -36,7 +36,7 @@ namespace FilmManagment.BL.Facades
 
 		public IEnumerable<TListModel> GetAllList()
 		{
-			using (usedUnitOfWork.DbContext = usedUnitOfWork.localDbContextFactory.CreateDbContext())
+			using (var unitOfWork = usedUnitOfWork.Create())
 			{
 				return mapper.Map(repository.GetAll());
 			}
@@ -44,7 +44,7 @@ namespace FilmManagment.BL.Facades
 
 		public TDetailModel GetById(Guid id)
 		{
-			using (usedUnitOfWork.DbContext = usedUnitOfWork.localDbContextFactory.CreateDbContext())
+			using (var unitOfWork = usedUnitOfWork.Create())
 			{
 				var query = repository.GetAll();
 
@@ -60,7 +60,7 @@ namespace FilmManagment.BL.Facades
 
 		public void Delete(Guid id)
 		{
-			using (usedUnitOfWork.DbContext = usedUnitOfWork.localDbContextFactory.CreateDbContext())
+			using (var unitOfWork = usedUnitOfWork.Create())
 			{
 				repository.DeleteById(id);
 				usedUnitOfWork.Commit();
@@ -73,15 +73,13 @@ namespace FilmManagment.BL.Facades
 
 		public TDetailModel Save(TDetailModel model)
 		{
-			using (usedUnitOfWork.DbContext = usedUnitOfWork.localDbContextFactory.CreateDbContext())
+			using (var unitOfWork = usedUnitOfWork.Create())
 			{
-				var _ = GetById(model.Id);                              //To fill the DbContext Identity Cache
-
 				var entity = mapper.Map(model, entityFactory);
 				entity = repository.InsertOrUpdate(entity);
 				usedUnitOfWork.Commit();
 
-				return GetById(entity.Id);                              //To fill properties not mapped from model to entity
+				return GetById(entity.Id);							//To fill properties not mapped from model to entity
 			}
 		}
 	}

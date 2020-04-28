@@ -22,7 +22,7 @@ namespace FilmManagment.BL.Mappers
 
 		public ActorDetailModel Map(ActorEntity entity)
 		{
-			return entity == null ? null : new ActorDetailModel		// Error: Entity = null
+			return entity == null ? null : new ActorDetailModel
 			{
 				Id = entity.Id,
 				FirstName = entity.FirstName,

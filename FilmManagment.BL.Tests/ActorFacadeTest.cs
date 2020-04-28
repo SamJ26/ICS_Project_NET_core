@@ -23,10 +23,6 @@ namespace FilmManagment.BL.Tests
 
 		public ActorFacadeTest()
 		{
-			//var dbContextFactory = new DbContextInMemoryFactory(nameof(ActorFacadeTest));
-			//var dbx = dbContextFactory.CreateDbContext();
-			//dbx.Database.EnsureCreated();
-
 			var dbContextFactory = new DbContextInMemoryFactory(nameof(ActorFacadeTest));
 			var unitOfWork = new UnitOfWork(dbContextFactory);
 			repository = new Repository<ActorEntity>(unitOfWork);
@@ -54,7 +50,7 @@ namespace FilmManagment.BL.Tests
 		public void Update_Actor_GarrethClark()
 		{
 			// Get existing actor from DB to detailModel
-			var actorDetailModel = mapper.Map(DataSeeds.Actor_GarrethClark);
+			var actorDetailModel = facadeTestUnit.GetById(DataSeeds.Actor_GarrethClark.Id);
 
 			// Update his informations on detailModel
 			actorDetailModel.FirstName += "_Update";
