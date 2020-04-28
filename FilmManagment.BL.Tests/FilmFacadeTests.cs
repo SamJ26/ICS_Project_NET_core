@@ -1,8 +1,10 @@
 ﻿using FilmManagment.BL.Facades;
+using FilmManagment.BL.Factories;
 using FilmManagment.BL.Mappers;
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using FilmManagment.BL.Repositories;
+using FilmManagment.DAL;
 using FilmManagment.DAL.Entities;
 using FilmManagment.DAL.Enums;
 using FilmManagment.DAL.Factories;
@@ -24,14 +26,15 @@ namespace FilmManagment.BL.Tests
 
 		public FilmFacadeTests()
 		{
-			var dbContextFactory = new DbContextInMemoryFactory(nameof(FilmFacadeTests));
-			var dbx = dbContextFactory.CreateDbContext();
-			dbx.Database.EnsureCreated();
+			//var dbContextFactory = new DbContextInMemoryFactory(nameof(FilmFacadeTests));
+			//var dbx = dbContextFactory.CreateDbContext();
+			//dbx.Database.EnsureCreated();
 
-			var unitOfWork = new UnitOfWork(dbx);
+			var dbContextFactory = new DbContextInMemoryFactory(nameof(ActorFacadeTest));
+			var unitOfWork = new UnitOfWork(dbContextFactory);
 			repository = new Repository<FilmEntity>(unitOfWork);
 			mapper = new FilmMapper();
-			var entityFactory = new EntityFactory(dbx);
+			var entityFactory = new CreateNewEntityFactory();
 
 			facadeTestUnit = new FilmFacade(unitOfWork, repository, mapper, entityFactory);
 		}

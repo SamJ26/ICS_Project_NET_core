@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using FilmManagment.DAL.Factories;
+using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace FilmManagment.DAL.UnitOfWork
@@ -7,9 +8,11 @@ namespace FilmManagment.DAL.UnitOfWork
 	{
 		public DbContext DbContext { get; set; }
 
-		public UnitOfWork(AppDbContext dbContext)
+		public IDbContextFactory<AppDbContext> localDbContextFactory;
+
+		public UnitOfWork(IDbContextFactory<AppDbContext> dbContextFactory)
 		{
-			DbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+			localDbContextFactory = dbContextFactory;
 		}
 
 		public void Dispose() => DbContext.Dispose();

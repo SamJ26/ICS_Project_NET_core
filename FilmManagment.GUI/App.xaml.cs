@@ -62,8 +62,8 @@ namespace FilmManagment.GUI
             services.AddSingleton<IMapper<FilmEntity, FilmListModel, FilmDetailModel>, FilmMapper>();
             services.AddSingleton<IEntityFactory, EntityFactory>();
 
-            services.AddTransient<UnitOfWork>();
-            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            //services.AddTransient<UnitOfWork>();
+            //services.AddDbContext<AppDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<ActorFacade>();
             services.AddTransient<FilmFacade>();

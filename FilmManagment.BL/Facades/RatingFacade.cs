@@ -11,10 +11,10 @@ namespace FilmManagment.BL.Facades
 	public class RatingFacade : CrudFacadeBase<RatingEntity, RatingListModel, RatingDetailModel>
 	{
 		public RatingFacade(UnitOfWork aUnitOfWork,
-							 Repository<RatingEntity> aRepository,
-							 IMapper<RatingEntity, RatingListModel, RatingDetailModel> aMapper,
-							 IEntityFactory aEntityFactory)
-							 : base(aUnitOfWork, aRepository, aMapper, aEntityFactory)
+							Repository<RatingEntity> aRepository,
+							IMapper<RatingEntity, RatingListModel, RatingDetailModel> aMapper,
+							IEntityFactory aEntityFactory)
+							: base(aUnitOfWork, aRepository, aMapper, aEntityFactory)
 		{
 		}
 	}

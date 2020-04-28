@@ -1,4 +1,6 @@
-﻿using FilmManagment.DAL.Entities;
+﻿using FilmManagment.DAL;
+using FilmManagment.DAL.Entities;
+using FilmManagment.DAL.Factories;
 using FilmManagment.DAL.UnitOfWork;
 using System;
 using System.Linq;
@@ -10,16 +12,16 @@ namespace FilmManagment.BL.Repositories
 	/// </summary>
 	public class Repository<TEntity> where TEntity : class, IEntityBase, new()
 	{
-		private readonly UnitOfWork localUnitOfWork;
+		private readonly UnitOfWork usedUnitOfWork;
 
 		public Repository(UnitOfWork unitOfWork)
 		{
-			this.localUnitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
+			usedUnitOfWork = unitOfWork ?? throw new ArgumentNullException(nameof(unitOfWork));
 		}
 
 		public void Delete(TEntity entity)
 		{
-			localUnitOfWork.DbContext.Set<TEntity>().Remove(entity);
+			usedUnitOfWork.DbContext.Set<TEntity>().Remove(entity);
 		}
 
 		public void DeleteById(Guid entityId)
@@ -30,23 +32,18 @@ namespace FilmManagment.BL.Repositories
 
 		public TEntity GetById(Guid entityId)
 		{
-			return localUnitOfWork.DbContext.Set<TEntity>().SingleOrDefault(entity => entity.Id.Equals(entityId));
+			return usedUnitOfWork.DbContext.Set<TEntity>().SingleOrDefault(entity => entity.Id.Equals(entityId));
 		}
 
 		public TEntity InsertOrUpdate(TEntity entity)
 		{
-			localUnitOfWork.DbContext.Update<TEntity>(entity);
+			usedUnitOfWork.DbContext.Update<TEntity>(entity);
 			return entity;
 		}
 
 		public IQueryable<TEntity> GetAll()
 		{
-			return localUnitOfWork.DbContext.Set<TEntity>();
-		}
-
-		public void DisposeDb()
-		{
-			localUnitOfWork.Dispose();
+			return usedUnitOfWork.DbContext.Set<TEntity>();
 		}
 	}
 }
