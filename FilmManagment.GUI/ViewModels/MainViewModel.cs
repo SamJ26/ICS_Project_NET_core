@@ -38,6 +38,8 @@ namespace FilmManagment.GUI.ViewModels
             mediator.Register<DetailButtonPushedMessage<ActorWrappedModel>>(OnActorDetailExecute);
             mediator.Register<DetailButtonPushedMessage<DirectorWrappedModel>>(OnDirectorDetailExecute);
 
+            mediator.Register<NewMessage<FilmWrappedModel>>(AddNewFilm);
+
             selectedView = HomeViewModel;
         }
 
@@ -121,5 +123,11 @@ namespace FilmManagment.GUI.ViewModels
         }
 
         #endregion
+
+
+        private void AddNewFilm(NewMessage<FilmWrappedModel> _)
+        {
+            SelectedView = FilmDetailViewModel;
+        }
     }
 }

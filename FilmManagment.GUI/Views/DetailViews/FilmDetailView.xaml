@@ -3,9 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:FilmManagment.GUI.Views.DetailViews"
+             xmlns:viewModels="clr-namespace:FilmManagment.GUI.ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance viewModels:FilmDetailViewModel}">
 
     <Grid x:Name="DetailFilmLayout"
           Background="#FF353C4D">
@@ -27,16 +29,22 @@
                         Grid.Row="0">
 
                 <TextBlock Foreground="Orange" Margin="10 15 0 2"> Original Name</TextBlock>
-                <!-- TODO: Binging to OriginalName-->
-                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
+                <TextBox Padding="5"
+                         Background="#FF72747C"
+                         Margin="10 0 10 5"
+                         Text="{Binding Model.OriginalName, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock Foreground="Orange" Margin="10 0 0 2"> Czech Name</TextBlock>
-                <!-- TODO: Binging to CzechName-->
-                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
+                <TextBox Padding="5"
+                         Background="#FF72747C"
+                         Margin="10 0 10 5"
+                         Text="{Binding Model.CzechName, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock Foreground="Orange" Margin="10 0 0 2"> Country Of Origin</TextBlock>
-                <!-- TODO: Binging to CountryOfOrigin-->
-                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
+                <TextBox Padding="5"
+                         Background="#FF72747C"
+                         Margin="10 0 10 5"
+                         Text="{Binding Model.CountryOfOrigin, UpdateSourceTrigger=PropertyChanged}"/>
 
             </StackPanel>
 
@@ -44,16 +52,22 @@
                         Grid.Row="0">
 
                 <TextBlock Foreground="Orange" Margin="10 15 0 2"> Genre Of Film</TextBlock>
-                <!-- TODO: Binging to GenreOfFilm-->
-                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
+                <TextBox Padding="5"
+                         Background="#FF72747C"
+                         Margin="10 0 10 5"
+                         Text="{Binding Model.GenreOfFilm, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock Foreground="Orange" Margin="10 0 0 2"> Length In Minutes</TextBlock>
-                <!-- TODO: Binging to LengthInMinutes-->
-                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
+                <TextBox Padding="5"
+                         Background="#FF72747C"
+                         Margin="10 0 10 5"
+                         Text="{Binding Model.LengthInMinutes, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBlock Foreground="Orange" Margin="10 0 0 2"> Average Rating In Percents</TextBlock>
-                <!-- TODO: Binging to AverageRatingInPercents-->
-                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
+                <TextBox Padding="5"
+                         Background="#FF72747C"
+                         Margin="10 0 10 5"
+                         Text="{Binding Model.AverageRatingInPercents, UpdateSourceTrigger=PropertyChanged}"/>
 
             </StackPanel>
 

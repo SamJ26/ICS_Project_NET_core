@@ -9,6 +9,8 @@ using System.Windows.Input;
 using FilmManagment.GUI.Commands;
 using FilmManagment.BL.Facades;
 using FilmManagment.GUI.Extensions;
+using System.Linq;
+using System.Collections.Generic;
 
 namespace FilmManagment.GUI.ViewModels
 {
@@ -33,6 +35,8 @@ namespace FilmManagment.GUI.ViewModels
             AddButtonCommand = new RelayCommand(FilmNew);
             DeleteButtonCommand = new RelayCommand(OnDeleteButtonCommandExecute);
             DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute);
+            SearchButtonCommand = new RelayCommand(OnSearchButtonCommandExecute);
+            RefreshButtonCommand = new RelayCommand(OnRefreshButtonCommandExecute);
 
             Load();
         }
@@ -42,12 +46,17 @@ namespace FilmManagment.GUI.ViewModels
         public ICommand AddButtonCommand { get; }
         public ICommand DeleteButtonCommand { get; }
         public ICommand DetailButtonCommand { get; }
+        public ICommand RefreshButtonCommand { get; }
         public ICommand SearchButtonCommand { get; }
 
 
-        public ObservableCollection<FilmListModel> Films { get; } = new ObservableCollection<FilmListModel>();
+        public ObservableCollection<FilmListModel> Films { get; set; } = new ObservableCollection<FilmListModel>();
 
         private FilmListModel selectedFilm;
+
+        public string SearchedObject { get; set; }
+
+        public string WhereToSearch { get; set; }
 
         private void FilmSelected(FilmListModel filmListModel)
         {
@@ -63,6 +72,7 @@ namespace FilmManagment.GUI.ViewModels
         {
             usedWarningService.ShowWarning($"Are you sure ?");
         }
+        private void OnRefreshButtonCommandExecute() => Load();
 
         private void DeleteFilm(YES_WarningResultMessage<FilmWrappedModel> _)
         {
@@ -72,7 +82,7 @@ namespace FilmManagment.GUI.ViewModels
 
         private void UpdateFilms(NO_WarningResultMessage<FilmWrappedModel> _)
         {
-
+            Load();
         }
 
         public void Load()
@@ -80,6 +90,35 @@ namespace FilmManagment.GUI.ViewModels
             Films.Clear();
             var filmsFromDB = usedFacade.GetAllList();
             Films.AddList(filmsFromDB);
+        }
+
+
+        private ICollection<FilmListModel> foundFilms;
+
+        private void OnSearchButtonCommandExecute()
+        {
+            if ( !string.IsNullOrEmpty(SearchedObject) && !string.IsNullOrWhiteSpace(SearchedObject))
+            {
+                foundFilms = Search();
+                Films = (ObservableCollection<FilmListModel>)foundFilms;
+            }
+        }
+
+        private ICollection<FilmListModel> Search()
+        {
+            var query = usedFacade.GetAllList();
+
+            switch (WhereToSearch)
+            {
+                case ("Czech name"):
+                    return query.Where(film => film.CzechName == SearchedObject).ToList();
+
+                case ("Country of origin"):
+                    return query.Where(film => film.CountryOfOrigin == SearchedObject).ToList();
+
+                default:
+                    return query.Where(film => film.OriginalName == SearchedObject).ToList();
+            }
         }
     }
 }

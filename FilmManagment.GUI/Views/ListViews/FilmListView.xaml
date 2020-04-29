@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:local="clr-namespace:FilmManagment.GUI.Views.ListViews"
+             xmlns:viewModels="clr-namespace:FilmManagment.GUI.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450"
+             d:DesignWidth="800">
 
     <Grid x:Name="ListActorLayout"
           Background="#FF353C4D">
@@ -96,13 +97,33 @@
                 </Button.Resources>
             </Button>
 
+            <!-- Detail button -->
+            <Button Grid.Column="1" 
+                    Grid.Row="3" 
+                    Margin="8" 
+                    Background="Bisque"
+                    Command="{Binding RefreshButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                       <Bold Foreground="Black"> Refresh list </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
             <!-- Searching box -->
             <TextBox Grid.Column="1" 
                      Grid.Row="4"
                      Padding="5"
                      Background="#EEEE"
-                     Margin="8 5 8 5">
-                What are you looking for?
+                     Margin="8 5 8 5"
+                     Text="{Binding SearchedObject, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
 
             <!-- Combo box -->
@@ -111,7 +132,6 @@
                       Padding="5"
                       Background="#EEEE"
                       Margin="8 5 8 5">
-                <ComboBoxItem>All</ComboBoxItem>
                 <ComboBoxItem>Original name</ComboBoxItem>
                 <ComboBoxItem>Czech name</ComboBoxItem>
                 <ComboBoxItem>Country of origin</ComboBoxItem>
