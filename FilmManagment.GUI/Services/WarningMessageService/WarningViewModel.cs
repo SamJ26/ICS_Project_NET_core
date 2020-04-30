@@ -21,16 +21,13 @@ namespace FilmManagment.GUI.Services.WarningMessageService
         public ICommand YesButtonCommand { get; }
         public ICommand NoButtonCommand { get; }
 
-        private void OnYesButtonCommandExecute(object parameter)
-        {
-            usedMediator.Send(new YES_WarningResultMessage<FilmWrappedModel>());
-            // TODO: resolve closing of warning window
-        }
+        private void OnYesButtonCommandExecute(object parameter) => usedMediator.Send(new YES_WarningResultMessage<FilmWrappedModel>());
 
-        private void OnNoButtonCommandExecute(object parameter)
+        private void OnNoButtonCommandExecute(object parameter) => usedMediator.Send(new NO_WarningResultMessage<FilmWrappedModel>());
+
+        public void CloseWindow()
         {
-            usedMediator.Send(new NO_WarningResultMessage<FilmWrappedModel>());
-            // TODO: resolve closing of warning window
+
         }
     }
 }

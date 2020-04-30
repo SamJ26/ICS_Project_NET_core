@@ -166,7 +166,9 @@
             <DataGrid x:Name="FilmsDataGrid"
                       ItemsSource="{Binding Films}"
                       AutoGenerateColumns="False"
-                      Background="#FF353C4D">
+                      ColumnWidth="*"
+                      Background="#FF353C4D"
+                      RowBackground="Black">
                 
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">

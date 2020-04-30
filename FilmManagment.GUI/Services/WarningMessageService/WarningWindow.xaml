@@ -1,5 +1,6 @@
 ﻿<Window x:Class="FilmManagment.GUI.Services.WarningMessageService.WarningWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -28,18 +29,20 @@
             </Grid.ColumnDefinitions>
             
             <!-- YES button -->
-            <Button Grid.Column="0"
+            <Button Click="Close_click"
+                    Grid.Column="0"
                     Margin="10"
                     Content="YES"
-                    Command="{Binding YesButtonCommand, Mode=OneWay}"
-                    CommandParameter="{Binding ElementName=WarningWindow}"/>
+                    Command="{Binding YesButtonCommand, Mode=OneWay}">
+            </Button>
 
             <!-- NO button -->
-            <Button Grid.Column="1"
+            <Button Click="Close_click"
+                    Grid.Column="1"
                     Margin="10"
                     Content="NO"
-                    Command="{Binding NoButtonCommand, Mode=OneWay}"
-                    CommandParameter="{Binding ElementName=WarningWindow}"/>
+                    Command="{Binding NoButtonCommand, Mode=OneWay}">
+            </Button>
 
         </Grid>
     </Grid>

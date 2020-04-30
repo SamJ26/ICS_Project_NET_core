@@ -33,10 +33,10 @@ namespace FilmManagment.GUI.ViewModels
 
             FilmSelectedCommand = new RelayCommand<FilmListModel>(OnFilmSelectedCommandExecute);
             AddButtonCommand = new RelayCommand(OnAddButtonCommandExecute);
-            DeleteButtonCommand = new RelayCommand(OnDeleteButtonCommandExecute);
-            DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute);
-            SearchButtonCommand = new RelayCommand(OnSearchButtonCommandExecute);
+            DeleteButtonCommand = new RelayCommand(OnDeleteButtonCommandExecute, isEnabled_DeleteButton);
+            DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute, isEnabled_DetailButton);
             RefreshButtonCommand = new RelayCommand(OnRefreshButtonCommandExecute);
+            SearchButtonCommand = new RelayCommand(OnSearchButtonCommandExecute);
 
             SearchedObject = "What are you looking for?";
             SearchingOptions = new List<string>() { "Origninal name", "Czech name", "Country of origin" };
@@ -55,12 +55,17 @@ namespace FilmManagment.GUI.ViewModels
 
 
         public ObservableCollection<FilmListModel> Films { get; set; } = new ObservableCollection<FilmListModel>();
-
-        private FilmListModel selectedFilm;
-
         public string SearchedObject { get; set; }
         public List<string> SearchingOptions { get; set; }
         public string SelectedOption { get; set; }
+
+
+        private FilmListModel selectedFilm;
+
+        private ICollection<FilmListModel> foundFilms;
+
+
+        #region Actions triggered by RelayCommand
 
         private void OnFilmSelectedCommandExecute(FilmListModel filmListModel)
         {
@@ -70,33 +75,15 @@ namespace FilmManagment.GUI.ViewModels
 
         private void OnAddButtonCommandExecute() => usedMediator.Send(new NewMessage<FilmWrappedModel>());
 
-        private void OnDetailButtonCommandExecute(object parameter) => usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
+        private void OnDeleteButtonCommandExecute() => usedWarningService.ShowWarning($"Are you sure ?");
 
-        private void OnDeleteButtonCommandExecute(object parameter)
-        {
-            usedWarningService.ShowWarning($"Are you sure ?");
-        }
-        private void OnRefreshButtonCommandExecute() => Load();
+        private void OnDetailButtonCommandExecute() => usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
 
-        private void DeleteFilm(YES_WarningResultMessage<FilmWrappedModel> _)
+        private void OnRefreshButtonCommandExecute()
         {
-            usedFacade.Delete(selectedFilm.Id);
+            selectedFilm = null;
             Load();
-        }
-
-        private void UpdateFilms(NO_WarningResultMessage<FilmWrappedModel> _)
-        {
-            Load();
-        }
-
-        public void Load()
-        {
-            Films.Clear();
-            var filmsFromDB = usedFacade.GetAllList();
-            Films.AddList(filmsFromDB);
-        }
-
-        private ICollection<FilmListModel> foundFilms;
+        } 
 
         private void OnSearchButtonCommandExecute()
         {
@@ -106,6 +93,27 @@ namespace FilmManagment.GUI.ViewModels
                 Films.Clear();
                 Films.AddList(foundFilms);
             }
+        }
+
+        #endregion
+
+        private bool isEnabled_DeleteButton() => selectedFilm == null ? false : true;
+
+        private bool isEnabled_DetailButton() => selectedFilm == null ? false : true;
+
+        private void DeleteFilm(YES_WarningResultMessage<FilmWrappedModel> _)
+        {
+            usedFacade.Delete(selectedFilm.Id);
+            Load();
+        }
+
+        private void UpdateFilms(NO_WarningResultMessage<FilmWrappedModel> _) => Load();
+
+        public void Load()
+        {
+            Films.Clear();
+            var filmsFromDB = usedFacade.GetAllList();
+            Films.AddList(filmsFromDB);
         }
 
         private ICollection<FilmListModel> Search()
