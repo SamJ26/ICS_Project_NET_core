@@ -31,12 +31,16 @@ namespace FilmManagment.GUI.ViewModels
             mediator.Register<YES_WarningResultMessage<FilmWrappedModel>>(DeleteFilm);
             mediator.Register<NO_WarningResultMessage<FilmWrappedModel>>(UpdateFilms);
 
-            FilmSelectedCommand = new RelayCommand<FilmListModel>(FilmSelected);
-            AddButtonCommand = new RelayCommand(FilmNew);
+            FilmSelectedCommand = new RelayCommand<FilmListModel>(OnFilmSelectedCommandExecute);
+            AddButtonCommand = new RelayCommand(OnAddButtonCommandExecute);
             DeleteButtonCommand = new RelayCommand(OnDeleteButtonCommandExecute);
             DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute);
             SearchButtonCommand = new RelayCommand(OnSearchButtonCommandExecute);
             RefreshButtonCommand = new RelayCommand(OnRefreshButtonCommandExecute);
+
+            SearchedObject = "What are you looking for?";
+            SearchingOptions = new List<string>() { "Origninal name", "Czech name", "Country of origin" };
+            SelectedOption = SearchingOptions[0];
 
             Load();
         }
@@ -55,16 +59,16 @@ namespace FilmManagment.GUI.ViewModels
         private FilmListModel selectedFilm;
 
         public string SearchedObject { get; set; }
+        public List<string> SearchingOptions { get; set; }
+        public string SelectedOption { get; set; }
 
-        public string WhereToSearch { get; set; }
-
-        private void FilmSelected(FilmListModel filmListModel)
+        private void OnFilmSelectedCommandExecute(FilmListModel filmListModel)
         {
             usedMediator.Send(new SelectedMessage<FilmWrappedModel> { Id = filmListModel.Id });
             selectedFilm = filmListModel;
         }
 
-        private void FilmNew() => usedMediator.Send(new NewMessage<FilmWrappedModel>());
+        private void OnAddButtonCommandExecute() => usedMediator.Send(new NewMessage<FilmWrappedModel>());
 
         private void OnDetailButtonCommandExecute(object parameter) => usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
 
@@ -92,7 +96,6 @@ namespace FilmManagment.GUI.ViewModels
             Films.AddList(filmsFromDB);
         }
 
-
         private ICollection<FilmListModel> foundFilms;
 
         private void OnSearchButtonCommandExecute()
@@ -100,7 +103,8 @@ namespace FilmManagment.GUI.ViewModels
             if ( !string.IsNullOrEmpty(SearchedObject) && !string.IsNullOrWhiteSpace(SearchedObject))
             {
                 foundFilms = Search();
-                Films = (ObservableCollection<FilmListModel>)foundFilms;
+                Films.Clear();
+                Films.AddList(foundFilms);
             }
         }
 
@@ -108,17 +112,17 @@ namespace FilmManagment.GUI.ViewModels
         {
             var query = usedFacade.GetAllList();
 
-            switch (WhereToSearch)
-            {
-                case ("Czech name"):
-                    return query.Where(film => film.CzechName == SearchedObject).ToList();
+            // Searching according to Czech name
+            if (SelectedOption == SearchingOptions.ElementAt(1))
+                return query.Where(film => film.CzechName == SearchedObject).ToList();
 
-                case ("Country of origin"):
-                    return query.Where(film => film.CountryOfOrigin == SearchedObject).ToList();
+            // Searching according to Country of origin
+            else if(SelectedOption == SearchingOptions.ElementAt(2))
+                return query.Where(film => film.CountryOfOrigin == SearchedObject).ToList();
 
-                default:
-                    return query.Where(film => film.OriginalName == SearchedObject).ToList();
-            }
+            // Default: Searching according to Original name
+            else
+                return query.Where(film => film.OriginalName == SearchedObject).ToList();
         }
     }
 }

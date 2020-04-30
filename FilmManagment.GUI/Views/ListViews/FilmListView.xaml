@@ -131,10 +131,11 @@
                       Grid.Row="5"
                       Padding="5"
                       Background="#EEEE"
-                      Margin="8 5 8 5">
-                <ComboBoxItem>Original name</ComboBoxItem>
-                <ComboBoxItem>Czech name</ComboBoxItem>
-                <ComboBoxItem>Country of origin</ComboBoxItem>
+                      Margin="8 5 8 5"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding SearchingOptions}"
+                      SelectedItem="{Binding SelectedOption, Mode=TwoWay}">
+                
             </ComboBox>
 
             <!-- Search button -->
