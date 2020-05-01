@@ -30,11 +30,12 @@ namespace FilmManagment.GUI.ViewModels
 
             mediator.Register<YES_WarningResultMessage<FilmWrappedModel>>(DeleteFilm);
             mediator.Register<NO_WarningResultMessage<FilmWrappedModel>>(UpdateFilms);
+            mediator.Register<UpdateMessage<FilmWrappedModel>>(UpdateFilms);
 
             FilmSelectedCommand = new RelayCommand<FilmListModel>(OnFilmSelectedCommandExecute);
             AddButtonCommand = new RelayCommand(OnAddButtonCommandExecute);
-            DeleteButtonCommand = new RelayCommand(OnDeleteButtonCommandExecute, isEnabled_DeleteButton);
-            DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute, isEnabled_DetailButton);
+            DeleteButtonCommand = new RelayCommand(OnDeleteButtonCommandExecute, IsEnabled_DeleteButton);
+            DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute, IsEnabled_DetailButton);
             RefreshButtonCommand = new RelayCommand(OnRefreshButtonCommandExecute);
             SearchButtonCommand = new RelayCommand(OnSearchButtonCommandExecute);
 
@@ -73,11 +74,19 @@ namespace FilmManagment.GUI.ViewModels
             selectedFilm = filmListModel;
         }
 
-        private void OnAddButtonCommandExecute() => usedMediator.Send(new NewMessage<FilmWrappedModel>());
+        private void OnAddButtonCommandExecute()
+        {
+            selectedFilm = null;
+            usedMediator.Send(new NewMessage<FilmWrappedModel>());
+        }
 
         private void OnDeleteButtonCommandExecute() => usedWarningService.ShowWarning($"Are you sure ?");
 
-        private void OnDetailButtonCommandExecute() => usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
+        private void OnDetailButtonCommandExecute()
+        {
+            selectedFilm = null;
+            usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
+        }
 
         private void OnRefreshButtonCommandExecute()
         {
@@ -87,6 +96,7 @@ namespace FilmManagment.GUI.ViewModels
 
         private void OnSearchButtonCommandExecute()
         {
+            selectedFilm = null;
             if ( !string.IsNullOrEmpty(SearchedObject) && !string.IsNullOrWhiteSpace(SearchedObject))
             {
                 foundFilms = Search();
@@ -97,20 +107,26 @@ namespace FilmManagment.GUI.ViewModels
 
         #endregion
 
-        private bool isEnabled_DeleteButton() => selectedFilm == null ? false : true;
+        private bool IsEnabled_DeleteButton() => selectedFilm == null ? false : true;
 
-        private bool isEnabled_DetailButton() => selectedFilm == null ? false : true;
+        private bool IsEnabled_DetailButton() => selectedFilm == null ? false : true;
 
         private void DeleteFilm(YES_WarningResultMessage<FilmWrappedModel> _)
         {
             usedFacade.Delete(selectedFilm.Id);
+            selectedFilm = null;
             Load();
         }
 
-        private void UpdateFilms(NO_WarningResultMessage<FilmWrappedModel> _) => Load();
+        private void UpdateFilms(IMessage _)
+        {
+            selectedFilm = null;
+            Load();
+        }   
 
         public void Load()
         {
+            SearchedObject = "What are you looking for?";
             Films.Clear();
             var filmsFromDB = usedFacade.GetAllList();
             Films.AddList(filmsFromDB);

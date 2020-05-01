@@ -32,7 +32,7 @@ namespace FilmManagment.GUI.Wrappers
             set => SetValue(value);
         }
 
-        public string Descriptio
+        public string Description
         {
             get => GetValue<string>();
             set => SetValue(value);

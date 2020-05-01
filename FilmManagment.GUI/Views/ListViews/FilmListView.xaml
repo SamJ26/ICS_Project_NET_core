@@ -123,7 +123,7 @@
                      Padding="5"
                      Background="#EEEE"
                      Margin="8 5 8 5"
-                     Text="{Binding SearchedObject, UpdateSourceTrigger=PropertyChanged}">
+                     Text="{Binding SearchedObject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
 
             <!-- Combo box -->
@@ -160,6 +160,7 @@
 
         </Grid>
 
+        <!-- ScrollViewer with list of films -->
         <ScrollViewer Grid.Row="2"
                       Background="#EEEE">
 
@@ -168,29 +169,31 @@
                       AutoGenerateColumns="False"
                       ColumnWidth="*"
                       Background="#FF353C4D"
-                      RowBackground="Black">
-                
+                      HeadersVisibility="Column"
+                      IsReadOnly="True">
+
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding FilmSelectedCommand}"
                                                CommandParameter="{Binding ElementName=FilmsDataGrid, Path=SelectedItem}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                
+
                 <DataGrid.Columns>
+
                     <DataGridTextColumn Header="Original Name"
                                         Width="*"
                                         Binding="{Binding OriginalName}"/>
+
                     <DataGridTextColumn Header="Czech Name"
                                         Width="*"
                                         Binding="{Binding CzechName}"/>
+
                     <DataGridTextColumn Header="Country Of Origin"
                                         Width="*"
                                         Binding="{Binding CountryOfOrigin}"/>
                 </DataGrid.Columns>
             </DataGrid>
-
         </ScrollViewer>
-
     </Grid>
 </UserControl>
