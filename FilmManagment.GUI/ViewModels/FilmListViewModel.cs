@@ -126,7 +126,6 @@ namespace FilmManagment.GUI.ViewModels
 
         public void Load()
         {
-            SearchedObject = "What are you looking for?";
             Films.Clear();
             var filmsFromDB = usedFacade.GetAllList();
             Films.AddList(filmsFromDB);
