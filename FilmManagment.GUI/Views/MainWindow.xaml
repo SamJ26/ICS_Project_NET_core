@@ -13,7 +13,8 @@
         DataContext="{Binding MainViewModel}"
         Title="MainWindow"
         Height="550"
-        Width="900">
+        Width="900"
+        WindowStartupLocation="CenterScreen">
 
     <Grid Background="#FF353C4D">
 

@@ -6,7 +6,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FilmManagment.GUI.Services.WarningMessageService"
         mc:Ignorable="d"
-        Title="WarningWindow" Height="150" Width="400">
+        Title="WarningWindow"
+        Height="150"
+        Width="400"
+        WindowStartupLocation="CenterScreen">
 
     <Grid Background="Gray">
         
