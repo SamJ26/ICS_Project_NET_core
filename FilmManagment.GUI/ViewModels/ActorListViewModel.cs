@@ -104,7 +104,7 @@ namespace FilmManagment.GUI.ViewModels
         }
 
         // Execute on DeleteButtonCommand
-        private void ExecuteWarning() => usedWarningService.ShowWarning($"Are you sure ?");
+        private void ExecuteWarning() => usedWarningService.ShowWarning(typeof(ActorWrappedModel));
 
         // Execute on DetailButtonCommand
         private void SendDetailButtonPushedMessage()

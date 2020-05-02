@@ -21,7 +21,7 @@ namespace FilmManagment.GUI.Services.WarningMessageService
         {
             InitializeComponent();
         }
-        //DbContextInMemoryFactory
+        
         private void Close_click(object sender, RoutedEventArgs e)
         {
             this.Close();

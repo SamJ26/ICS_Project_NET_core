@@ -13,9 +13,10 @@ namespace FilmManagment.GUI.Services.WarningMessageService
             this.warningViewModel = warningViewModel;
         }
 
-        public void ShowWarning(string warningText)
+        public void ShowWarning(Type messageType)
         {
             var window = new WarningWindow();
+            warningViewModel.MessageType = messageType;
             window.DataContext = warningViewModel;
             window.ShowDialog();
         }

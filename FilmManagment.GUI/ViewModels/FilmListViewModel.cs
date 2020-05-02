@@ -80,7 +80,7 @@ namespace FilmManagment.GUI.ViewModels
             usedMediator.Send(new NewMessage<FilmWrappedModel>());
         }
 
-        private void OnDeleteButtonCommandExecute() => usedWarningService.ShowWarning($"Are you sure ?");
+        private void OnDeleteButtonCommandExecute() => usedWarningService.ShowWarning(typeof(FilmWrappedModel));
 
         private void OnDetailButtonCommandExecute()
         {
