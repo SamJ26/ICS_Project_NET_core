@@ -41,7 +41,7 @@ namespace FilmManagment.GUI.ViewModels
 
             SearchedObject = defaultSearchingBoxMessage;
             SearchingOptions = new List<string>() { "First name", "Second name" };
-            SelectedOption = SearchingOptions[0];
+            SelectedOption = SearchingOptions[1];
 
             Load();
         }
@@ -161,7 +161,7 @@ namespace FilmManagment.GUI.ViewModels
             var query = usedFacade.GetAllList();
 
             // Searching according to First name
-            if (SelectedOption == SearchingOptions.ElementAt(1))
+            if (SelectedOption == SearchingOptions.ElementAt(0))
                 return query.Where(actor => actor.FirstName == SearchedObject).ToList();
 
             // Default: Searching according to Second name

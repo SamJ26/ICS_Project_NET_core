@@ -10,6 +10,9 @@ namespace FilmManagment.GUI.Wrappers
     {
         public FilmWrappedModel(FilmDetailModel detailModel) : base(detailModel)
         {
+            InitializeCollectionActors(detailModel);
+            InitializeCollectionDirectors(detailModel);
+            InitializeCollectionRatings(detailModel);
         }
 
         #region Wrapping properties

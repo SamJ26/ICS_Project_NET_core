@@ -60,8 +60,10 @@ namespace FilmManagment.GUI
             services.AddSingleton<IDirectorDetailViewModel, DirectorDetailViewModel>();
 
             services.AddSingleton<IMapper<FilmEntity, FilmListModel, FilmDetailModel>, FilmMapper>();
-            services.AddSingleton<IEntityFactory, EntityFactory>();
+            services.AddSingleton<IMapper<ActorEntity, ActorListModel, ActorDetailModel>, ActorMapper>();
+            services.AddSingleton<IMapper<DirectorEntity, DirectorListModel, DirectorDetailModel>, DirectorMapper>();
 
+            services.AddSingleton<IEntityFactory, EntityFactory>();
 
             services.AddTransient<ActorFacade>();
             services.AddTransient<FilmFacade>();
