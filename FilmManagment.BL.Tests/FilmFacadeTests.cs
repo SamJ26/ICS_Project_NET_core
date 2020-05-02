@@ -61,7 +61,6 @@ namespace FilmManagment.BL.Tests
 				ImageFilePath = "C:/users/photo/ResidentEvilPhoto",
 				GenreOfFilm = Genre.ActionFilm,
 				LengthInMinutes = new TimeSpan(1, 35, 0),
-				Directors = new List<FilmDirectorListModel>(),
 				Actors = new List<FilmActorListModel>()
 				{
 					new FilmActorListModel()
@@ -69,7 +68,6 @@ namespace FilmManagment.BL.Tests
 						ActorId = DataSeeds.Actor_GarrethClark.Id
 					}
 				},
-				Ratings = new List<RatingListModel>()
 			};
 
 			var returnedDetailModel = facadeTestUnit.Save(filmDetail);

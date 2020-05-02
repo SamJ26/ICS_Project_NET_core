@@ -13,7 +13,7 @@ namespace FilmManagment.BL.Models.DetailModels
 		public string WikiUrl { get; set; } = string.Empty;
 		public string PhotoFilePath { get; set; } = string.Empty;
 
-		public ICollection<FilmActorListModel> ActedMovies { get; set; }
+		public ICollection<FilmActorListModel> ActedMovies { get; set; } = new List<FilmActorListModel>();
 
 		private sealed class ActorDetailModelEqualityComparer : IEqualityComparer<ActorDetailModel>
 		{
