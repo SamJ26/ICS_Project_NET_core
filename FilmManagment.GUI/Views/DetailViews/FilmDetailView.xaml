@@ -17,12 +17,14 @@
             <RowDefinition Height="180"/>
             <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="0.6*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
@@ -72,12 +74,12 @@
                     </ComboBox.ItemContainerStyle>
                 </ComboBox>
 
-                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Length In Minutes</TextBlock>
+                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Length of film </TextBlock>
                 <TextBox Padding="5"
                          Background="#FF72747C"
                          Margin="10 0 10 5"
                          IsReadOnly="{Binding Path=ReadOnlyTextBoxes, Mode=OneWay}"
-                         Text="{Binding Model.LengthInMinutes, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
+                         Text="{Binding FilmLength, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
 
                 <TextBlock Foreground="Orange" Margin="10 0 0 2"> Average Rating In Percents</TextBlock>
                 <TextBox Padding="5"
@@ -88,67 +90,61 @@
 
             </StackPanel>
 
-            <Grid Grid.Row="0"
-                  Grid.Column="2">
-                
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
+            <!-- TODO: Add binging to PhotoFilePath -->
+            <Image Grid.Column="2"
+                   Margin="10"/>
 
-                <!-- TODO: Add binging to PhotoFilePath -->
-                <Image Margin="10"/>
+            <Grid Grid.Column="3">
 
-                <Grid Grid.Column="1">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.8*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
 
-                    <!-- Edit button -->
-                    <Button Grid.Row="0" 
-                            Margin="5 25 10 0" 
-                            Background="Bisque"
-                            Command="{Binding EditButtonCommand}"
-                            CommandParameter="{Binding}">
-                        <TextBlock FontSize="20"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center">
-                            <Bold Foreground="Black"> Edit </Bold>
-                        </TextBlock>
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" 
-                                        Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
+                <!-- Edit button -->
+                <Button Grid.Row="1" 
+                        Margin="10 0 10 10" 
+                        Background="Bisque"
+                        Command="{Binding EditButtonCommand}"
+                        CommandParameter="{Binding}">
+                    <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Edit </Bold>
+                    </TextBlock>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" 
+                                    Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
 
-                    <!-- Save button -->
-                    <Button Grid.Row="1" 
-                            Margin="5 10 10 15" 
-                            Background="Bisque"
-                            Command="{Binding SaveButtonCommand}"
-                            CommandParameter="{Binding}">
-                        <TextBlock FontSize="20"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center">
-                            <Bold Foreground="Black"> Save </Bold>
-                        </TextBlock>
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" 
-                                        Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                    </Button>
-                </Grid>
-                
+                <!-- Save button -->
+                <Button Grid.Row="2" 
+                        Margin="10 0 10 10" 
+                        Background="Bisque"
+                        Command="{Binding SaveButtonCommand}"
+                        CommandParameter="{Binding}">
+                    <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Save </Bold>
+                    </TextBlock>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" 
+                                    Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
             </Grid>
         </Grid>
 
         <Grid Grid.Row="1">
-            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
@@ -158,11 +154,11 @@
             <TextBlock Grid.Column="0" Foreground="Orange" Margin="10 0 0 2"> Ratings</TextBlock>
             <TextBlock Grid.Column="1" Foreground="Orange" Margin="10 0 0 2"> Actors</TextBlock>
             <TextBlock Grid.Column="2" Foreground="Orange" Margin="10 0 0 2"> Directors</TextBlock>
-            
+
         </Grid>
 
         <Grid Grid.Row="2">
-            
+
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
@@ -172,40 +168,40 @@
             <ScrollViewer Grid.Column="0"
                           Background="#FF72747C"
                           Grid.RowSpan="2"
-                          Margin="10 0 10 20">
+                          Margin="10 0 10 5">
 
-                <ListBox x:Name="RatingsListBox"
-                         Background="#FF72747C"
-                         ItemsSource="{Binding Ratings}">
+                <DataGrid x:Name="FilmsDataGrid"
+                          ItemsSource="{Binding Ratings}"
+                          AutoGenerateColumns="False"
+                          ColumnWidth="*"
+                          Background="#FF353C4D"
+                          HeadersVisibility="Column"
+                          IsReadOnly="True">
+                    
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding RatingSelectedCommand}"
                                                    CommandParameter="{Binding ElementName=RatingsListBox, Path=SelectedItem}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="10*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0"
-                                       Content="{Binding RatingInPercents}"/>
-                                <Label Grid.Column="1"
-                                       Content="{Binding TextRating}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                
-                
+                    
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Header="%"
+                                            Width="*"
+                                            Binding="{Binding RatingInPercents}"/>
+
+                        <DataGridTextColumn Header="Text rating"
+                                            Width="9*"
+                                            Binding="{Binding TextRating}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </ScrollViewer>
 
             <ScrollViewer Grid.Column="1"
                           Background="#FF72747C"
                           Grid.RowSpan="2"
-                          Margin="10 0 10 20">
+                          Margin="10 0 10 5">
 
                 <ListBox x:Name="ActorsListBox"
                          Background="#FF72747C"
@@ -231,16 +227,79 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-
             </ScrollViewer>
 
             <ScrollViewer Grid.Column="2"
                           Background="#FF72747C"
                           Grid.RowSpan="2"
-                          Margin="10 0 10 20">
+                          Margin="10 0 10 5">
                 <!-- TODO: adding elements from database -->
             </ScrollViewer>
+        </Grid>
 
+        <Grid Grid.Row="3">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Add Rating button -->
+            <Button Margin="10 0 10 10" 
+                    Background="Gray"
+                    Command="{Binding AddRatingButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Add Rating </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Add Actor button -->
+            <Button Grid.Column="1" 
+                    Margin="10 0 10 10" 
+                    Background="Gray"
+                    Command="{Binding AddActorButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Add Actor </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Add Director button -->
+            <Button Grid.Column="2" 
+                    Margin="10 0 10 10" 
+                    Background="Gray"
+                    Command="{Binding AddDirectorButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Add Director </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="5"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

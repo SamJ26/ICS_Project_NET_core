@@ -6,6 +6,7 @@ using FilmManagment.GUI.ViewModels.Interfaces;
 using FilmManagment.GUI.Wrappers;
 using FilmManagment.GUI.Extensions;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Input;
 using FilmManagment.DAL.Enums;
@@ -30,7 +31,7 @@ namespace FilmManagment.GUI.ViewModels
             usedMediator.Register<NewMessage<FilmWrappedModel>>(CreateNewWrappedModel);
             usedMediator.Register<SelectedMessage<FilmWrappedModel>>(PrepareFilm);
 
-            EditButtonCommand = new RelayCommand(OnEditButtonCommandExecute);
+            EditButtonCommand = new RelayCommand(EnableTextBoxes);
             SaveButtonCommand = new RelayCommand(Save, CanSave);
 
             GenreOptions = EnumExtensions.ConvertEnumToList<Genre>();
@@ -39,7 +40,33 @@ namespace FilmManagment.GUI.ViewModels
         // Commands
         public ICommand EditButtonCommand { get; }
         public ICommand SaveButtonCommand { get; }
+        public ICommand AddRatingButtonCommand { get; }
+        public ICommand AddActorButtonCommand { get; }
+        public ICommand AddDirectorButtonCommand { get; }
+        public ICommand ActorSelectedCommand { get; }
+        public ICommand DirectorSelectedCommand { get; }
 
+
+        public ObservableCollection<FilmActorWrappedModel> Actors { get; set; } = new ObservableCollection<FilmActorWrappedModel>();
+        public ObservableCollection<FilmDirectorWrappedModel> Directors { get; set; } = new ObservableCollection<FilmDirectorWrappedModel>();
+        public ObservableCollection<RatingWrappedModel> Ratings { get; set; } = new ObservableCollection<RatingWrappedModel>();
+        public List<string> GenreOptions { get; set; }
+
+
+        private bool saveButtonReady = false;
+
+
+        private string filmLength { get; set; }
+        public string FilmLength
+        {
+            get => filmLength;
+            set
+            {
+                filmLength = value;
+                Model.LengthInMinutes = TimeSpan.Parse(filmLength);
+                OnPropertyChanged();
+            }
+        }
 
         private FilmWrappedModel model;
         public FilmWrappedModel Model
@@ -81,28 +108,32 @@ namespace FilmManagment.GUI.ViewModels
             set
             {
                 selectedGenre = value;
+                Model.GenreOfFilm = (Genre)GenreOptions.IndexOf(selectedGenre);
                 OnPropertyChanged();
             }
         }
 
-        public List<string> GenreOptions { get; set; }
+        #region Actions to execute on button click
 
-        public ObservableCollection<ActorListModel> Actors { get; set; } = new ObservableCollection<ActorListModel>();
-        public ObservableCollection<DirectorListModel> Directors { get; set; } = new ObservableCollection<DirectorListModel>();
-        public ObservableCollection<RatingListModel> Ratings { get; set; } = new ObservableCollection<RatingListModel>();
-
-
-        private bool saveButtonReady = false;
-
-
-        #region Actions triggered by RelayCommand
-
-        private void OnEditButtonCommandExecute()
+        // Execute on EditButtonCommand
+        private void EnableTextBoxes()
         {
             ReadOnlyTextBoxes = false;
             ComboBoxEnabled = true;
             saveButtonReady = true;
         }
+
+        // Execute on SaveButtonCommand
+        private void Save()
+        {
+            usedFacade.Save(Model);
+            usedMediator.Send(new UpdateMessage<FilmWrappedModel> { Model = Model });
+            ReadOnlyTextBoxes = true;
+            ComboBoxEnabled = false;
+            saveButtonReady = false;
+        }
+
+        #endregion
 
         private bool CanSave()
         {
@@ -118,20 +149,10 @@ namespace FilmManagment.GUI.ViewModels
             return false;
         }
 
-        private void Save()
-        {
-            usedFacade.Save(Model);
-            usedMediator.Send(new UpdateMessage<FilmWrappedModel> { Model = Model });
-            ReadOnlyTextBoxes = true;
-            ComboBoxEnabled = false;
-            saveButtonReady = false;
-        }
-
-        #endregion
-
         public void Load(Guid id)
         {
             Model = usedFacade.GetById(id);
+
             Actors.Clear();
             Directors.Clear();
             Ratings.Clear();
@@ -146,6 +167,7 @@ namespace FilmManagment.GUI.ViewModels
             ComboBoxEnabled = true;
             saveButtonReady = true;
             SelectedGenre = GenreOptions[0];
+            filmLength = Model.LengthInMinutes.ToString();
         }
 
         private void PrepareFilm(SelectedMessage<FilmWrappedModel> film)
@@ -153,7 +175,9 @@ namespace FilmManagment.GUI.ViewModels
             Load(film.Id);
             ReadOnlyTextBoxes = true;
             ComboBoxEnabled = false;
+            saveButtonReady = false;
             SelectedGenre = GenreOptions[GenreOptions.IndexOf(Model.GenreOfFilm.ToString())];
+            filmLength = Model.LengthInMinutes.ToString();
         }
     }
 }

@@ -6,6 +6,7 @@ using FilmManagment.GUI.ViewModels.Interfaces;
 using FilmManagment.GUI.Wrappers;
 using FilmManagment.GUI.Extensions;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Windows.Input;
 using FilmManagment.DAL.Enums;
@@ -18,19 +19,35 @@ namespace FilmManagment.GUI.ViewModels
     public class ActorDetailViewModel : ViewModelBase, IActorDetailViewModel
     {
         private readonly IMediator usedMediator;
-        private readonly ActorFacade usedFacade;
+        private readonly ActorFacade usedActorFacade;
+        private readonly FilmFacade usedFilmFacade;
 
         public ActorDetailViewModel(IMediator mediator,
-                                    ActorFacade facade)
+                                    ActorFacade actorFacade,
+                                    FilmFacade filmFacade)
         {
             usedMediator = mediator;
-            usedFacade = facade;
+            usedActorFacade = actorFacade;
+            usedFilmFacade = filmFacade;
 
             usedMediator.Register<NewMessage<ActorWrappedModel>>(CreateNewWrappedModel);
             usedMediator.Register<SelectedMessage<ActorWrappedModel>>(PrepareActor);
+
+            EditButtonCommand = new RelayCommand(EnableTextEditing);
+            SaveButtonCommand = new RelayCommand(Save, CanSave);
         }
 
+        // Commands
+        public ICommand EditButtonCommand { get; }
+        public ICommand SaveButtonCommand { get; }
+
+        public ObservableCollection<FilmListModel> ActedMovies { get; set; } = new ObservableCollection<FilmListModel>();
+
+
         private bool saveButtonReady = false;
+
+        private FilmListModel selectedFilm;
+
 
         private ActorWrappedModel model;
         public ActorWrappedModel Model
@@ -67,7 +84,10 @@ namespace FilmManagment.GUI.ViewModels
 
         public void Load(Guid id)
         {
-            Model = usedFacade.GetById(id);
+            Model = usedActorFacade.GetById(id);
+            ActedMovies.Clear();
+
+            // TODO: adding films to collection
         }
 
         private void CreateNewWrappedModel(NewMessage<ActorWrappedModel> _)
@@ -83,6 +103,32 @@ namespace FilmManagment.GUI.ViewModels
             Load(actor.Id);
             ReadOnlyTextBoxes = true;
             ComboBoxEnabled = false;
+        }
+
+        private void EnableTextEditing()
+        {
+            ReadOnlyTextBoxes = false;
+            ComboBoxEnabled = true;
+            saveButtonReady = true;
+        }
+
+        private bool CanSave()
+        {
+            if (saveButtonReady &&
+                Model != null &&
+                !string.IsNullOrWhiteSpace(Model.FirstName) &&
+                !string.IsNullOrWhiteSpace(Model.SecondName))
+                return true;
+            return false;
+        }
+
+        private void Save()
+        {
+            usedActorFacade.Save(Model);
+            usedMediator.Send(new UpdateMessage<ActorWrappedModel> { Model = Model });
+            ReadOnlyTextBoxes = true;
+            ComboBoxEnabled = false;
+            saveButtonReady = false;
         }
     }
 }
