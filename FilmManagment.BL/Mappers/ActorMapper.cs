@@ -35,8 +35,6 @@ namespace FilmManagment.BL.Mappers
 					FilmId = filmActorEntity.Id,
 					ActorId = filmActorEntity.ActorId,
 					ActorName = string.Concat(filmActorEntity.Actor.FirstName, " ", filmActorEntity.Actor.SecondName),
-
-					// TODO: here is a bug - Film is null
 					FilmName = filmActorEntity.Film.OriginalName,
 				}).ToArray()
 			};

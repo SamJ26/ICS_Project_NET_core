@@ -30,11 +30,12 @@ namespace FilmManagment.BL.Mappers
 				Age = entity.Age,
 				WikiUrl = entity.WikiUrl,
 				PhotoFilePath = entity.PhotoFilePath,
-				DirectedMovies = entity.DirectedMovies.Select(filmEntity => new FilmDirectorListModel()
+				DirectedMovies = entity.DirectedMovies.Select(filmDirectorEntity => new FilmDirectorListModel()
 				{
-					FilmId = filmEntity.Id,
-					DirectorId = filmEntity.DirectorId,
-					DirectorName = string.Concat(filmEntity.Director.FirstName, " ", filmEntity.Director.SecondName)
+					FilmId = filmDirectorEntity.Id,
+					DirectorId = filmDirectorEntity.DirectorId,
+					DirectorName = string.Concat(filmDirectorEntity.Director.FirstName, " ", filmDirectorEntity.Director.SecondName),
+					FilmName = filmDirectorEntity.Film.OriginalName
 				}).ToArray()
 			};
 		}
