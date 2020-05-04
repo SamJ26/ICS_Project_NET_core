@@ -4,9 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
-             xmlns:local="clr-namespace:FilmManagment.GUI.Views.ListViews"
+             xmlns:viewModels="clr-namespace:FilmManagment.GUI.ViewModels"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450"
+             d:DesignWidth="800">
 
     <Grid x:Name="ListActorLayout"
           Background="#FF353C4D">
@@ -96,13 +97,33 @@
                 </Button.Resources>
             </Button>
 
+            <!-- Refresh button -->
+            <Button Grid.Column="1" 
+                    Grid.Row="3" 
+                    Margin="8" 
+                    Background="Bisque"
+                    Command="{Binding RefreshButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                       <Bold Foreground="Black"> Refresh list </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="10"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
             <!-- Searching box -->
             <TextBox Grid.Column="1" 
                      Grid.Row="4"
                      Padding="5"
                      Background="#EEEE"
-                     Margin="8 5 8 5">
-                What are you looking for?
+                     Margin="8 5 8 5"
+                     Text="{Binding SearchedObject, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             </TextBox>
 
             <!-- Combo box -->
@@ -110,11 +131,11 @@
                       Grid.Row="5"
                       Padding="5"
                       Background="#EEEE"
-                      Margin="8 5 8 5">
-                <ComboBoxItem>All</ComboBoxItem>
-                <ComboBoxItem>Original name</ComboBoxItem>
-                <ComboBoxItem>Czech name</ComboBoxItem>
-                <ComboBoxItem>Country of origin</ComboBoxItem>
+                      Margin="8 5 8 5"
+                      IsReadOnly="True"
+                      ItemsSource="{Binding SearchingOptions}"
+                      SelectedItem="{Binding SelectedOption, Mode=TwoWay}">
+                
             </ComboBox>
 
             <!-- Search button -->
@@ -139,35 +160,40 @@
 
         </Grid>
 
+        <!-- ScrollViewer with list of films -->
         <ScrollViewer Grid.Row="2"
                       Background="#EEEE">
 
             <DataGrid x:Name="FilmsDataGrid"
                       ItemsSource="{Binding Films}"
                       AutoGenerateColumns="False"
-                      Background="#FF353C4D">
-                
+                      ColumnWidth="*"
+                      Background="#FF353C4D"
+                      HeadersVisibility="Column"
+                      IsReadOnly="True">
+
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="SelectionChanged">
                         <i:InvokeCommandAction Command="{Binding FilmSelectedCommand}"
                                                CommandParameter="{Binding ElementName=FilmsDataGrid, Path=SelectedItem}" />
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
-                
+
                 <DataGrid.Columns>
+
                     <DataGridTextColumn Header="Original Name"
                                         Width="*"
                                         Binding="{Binding OriginalName}"/>
+
                     <DataGridTextColumn Header="Czech Name"
                                         Width="*"
                                         Binding="{Binding CzechName}"/>
+
                     <DataGridTextColumn Header="Country Of Origin"
                                         Width="*"
                                         Binding="{Binding CountryOfOrigin}"/>
                 </DataGrid.Columns>
             </DataGrid>
-
         </ScrollViewer>
-
     </Grid>
 </UserControl>

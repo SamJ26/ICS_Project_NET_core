@@ -1,11 +1,11 @@
-﻿using FilmManagment.BL.Models.DetailModels;
+﻿using FilmManagment.BL.Models.ListModels;
 using System;
 
 namespace FilmManagment.GUI.Wrappers
 {
-    public class RatingWrappedModel : ModelWrapperBase<RatingDetailModel>
+    public class RatingWrappedModel : ModelWrapperBase<RatingListModel>
     {
-        public RatingWrappedModel(RatingDetailModel detailModel) : base(detailModel)
+        public RatingWrappedModel(RatingListModel listModel) : base(listModel)
         {
         }
 
@@ -23,16 +23,10 @@ namespace FilmManagment.GUI.Wrappers
             set => SetValue(value);
         }
 
-        public Guid FilmId
-        {
-            get => GetValue<Guid>();
-            set => SetValue(value);
-        }
-
         #endregion
 
-        public static implicit operator RatingWrappedModel(RatingDetailModel detailModel) => new RatingWrappedModel(detailModel);
+        public static implicit operator RatingWrappedModel(RatingListModel listModel) => new RatingWrappedModel(listModel);
 
-        public static implicit operator RatingDetailModel(RatingWrappedModel wrappedModel) => wrappedModel.usedModel;
+        public static implicit operator RatingListModel(RatingWrappedModel wrappedModel) => wrappedModel.usedModel;
     }
 }

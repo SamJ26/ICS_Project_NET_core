@@ -10,6 +10,9 @@ namespace FilmManagment.GUI.Wrappers
     {
         public FilmWrappedModel(FilmDetailModel detailModel) : base(detailModel)
         {
+            InitializeCollectionActors(detailModel);
+            InitializeCollectionDirectors(detailModel);
+            InitializeCollectionRatings(detailModel);
         }
 
         #region Wrapping properties
@@ -32,7 +35,7 @@ namespace FilmManagment.GUI.Wrappers
             set => SetValue(value);
         }
 
-        public string Descriptio
+        public string Description
         {
             get => GetValue<string>();
             set => SetValue(value);
@@ -66,7 +69,7 @@ namespace FilmManagment.GUI.Wrappers
 
         public ObservableCollection<FilmActorWrappedModel> Actors { get; set; }
         public ObservableCollection<FilmDirectorWrappedModel> Directors { get; set; }
-        public ObservableCollection<RatingWrappedListModel> Ratings { get; set; }
+        public ObservableCollection<RatingWrappedModel> Ratings { get; set; }
 
         private void InitializeCollectionActors(FilmDetailModel filmDetailModel)
         {
@@ -96,7 +99,7 @@ namespace FilmManagment.GUI.Wrappers
             {
                 throw new ArgumentException("Property Ratings cannot be null");
             }
-            Ratings = new ObservableCollection<RatingWrappedListModel>(filmDetailModel.Ratings.Select(i => new RatingWrappedListModel(i)));
+            Ratings = new ObservableCollection<RatingWrappedModel>(filmDetailModel.Ratings.Select(i => new RatingWrappedModel(i)));
 
             RegisterCollection(Ratings, filmDetailModel.Ratings);
         }

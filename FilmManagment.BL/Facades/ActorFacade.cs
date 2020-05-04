@@ -28,6 +28,7 @@ namespace FilmManagment.BL.Facades
 		} = new Func<IQueryable<ActorEntity>, IIncludableQueryable<ActorEntity, object>>[]
 		{
 			entities => entities.Include(i => i.ActedMovies)
+								.ThenInclude(i => i.Film)
 		};
 	}
 }

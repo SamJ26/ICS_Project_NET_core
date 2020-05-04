@@ -6,6 +6,6 @@ namespace FilmManagment.GUI.Services.WarningMessageService
 {
     public interface IWarningService
     {
-        void ShowWarning(string warningText);
+        void ShowWarning(Type messageType);
     }
 }

@@ -17,9 +17,9 @@ namespace FilmManagment.BL.Models.DetailModels
 		public TimeSpan LengthInMinutes { get; set; } = TimeSpan.Zero;
 		public double AverageRatingInPercents { get; set; }
 
-		public ICollection<FilmDirectorListModel> Directors { get; set; }
-		public ICollection<FilmActorListModel> Actors { get; set; }
-		public ICollection<RatingListModel> Ratings { get; set; }
+		public ICollection<FilmDirectorListModel> Directors { get; set; } = new List<FilmDirectorListModel>();
+		public ICollection<FilmActorListModel> Actors { get; set; } = new List<FilmActorListModel>();
+		public ICollection<RatingListModel> Ratings { get; set; } = new List<RatingListModel>();
 
 		private sealed class FilmDetailModelEqualityComparer : IEqualityComparer<FilmDetailModel>
 		{

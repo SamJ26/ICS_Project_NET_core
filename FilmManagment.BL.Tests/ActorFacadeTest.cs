@@ -73,7 +73,6 @@ namespace FilmManagment.BL.Tests
 				Age = 50,
 				WikiUrl = "SomeURLPath",
 				PhotoFilePath = "SomePhotoPath",
-				ActedMovies = new List<FilmActorListModel>()
 			};
 
 			var returnedDetailModel = facadeTestUnit.Save(actorDetailModel);
