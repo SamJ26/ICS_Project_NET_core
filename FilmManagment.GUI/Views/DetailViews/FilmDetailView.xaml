@@ -203,37 +203,58 @@
                           Grid.RowSpan="2"
                           Margin="10 0 10 5">
 
-                <ListBox x:Name="ActorsListBox"
-                         Background="#FF72747C"
-                         ItemsSource="{Binding Actors}">
+                <DataGrid x:Name="ActorsDataGrid"
+                          ItemsSource="{Binding Actors}"
+                          AutoGenerateColumns="False"
+                          ColumnWidth="*"
+                          Background="#FF353C4D"
+                          HeadersVisibility="Column"
+                          IsReadOnly="True">
+
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
                             <i:InvokeCommandAction Command="{Binding ActorSelectedCommand}"
-                                                   CommandParameter="{Binding ElementName=ActorsListBox, Path=SelectedItem}" />
+                                                   CommandParameter="{Binding ElementName=ActorsDataGrid, Path=SelectedItem}" />
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0"
-                                       Content="{Binding FirstName}"/>
-                                <Label Grid.Column="1"
-                                       Content="{Binding SecondName}"/>
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Header="Name"
+                                            Width="*"
+                                            Binding="{Binding ActorName}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
             </ScrollViewer>
 
             <ScrollViewer Grid.Column="2"
                           Background="#FF72747C"
                           Grid.RowSpan="2"
                           Margin="10 0 10 5">
-                <!-- TODO: adding elements from database -->
+
+                <DataGrid x:Name="DirectorsDataGrid"
+                          ItemsSource="{Binding Directors}"
+                          AutoGenerateColumns="False"
+                          ColumnWidth="*"
+                          Background="#FF353C4D"
+                          HeadersVisibility="Column"
+                          IsReadOnly="True">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding DirectorSelectedCommand}"
+                                                   CommandParameter="{Binding ElementName=DirectorsDataGrid, Path=SelectedItem}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Header="Name"
+                                            Width="*"
+                                            Binding="{Binding DirectorName}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
             </ScrollViewer>
         </Grid>
 

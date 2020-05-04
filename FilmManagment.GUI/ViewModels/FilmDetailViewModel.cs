@@ -45,6 +45,7 @@ namespace FilmManagment.GUI.ViewModels
         public ICommand AddDirectorButtonCommand { get; }
         public ICommand ActorSelectedCommand { get; }
         public ICommand DirectorSelectedCommand { get; }
+        public ICommand RatingSelectedCommand { get; }
 
 
         public ObservableCollection<FilmActorWrappedModel> Actors { get; set; } = new ObservableCollection<FilmActorWrappedModel>();
@@ -154,9 +155,14 @@ namespace FilmManagment.GUI.ViewModels
             Model = usedFacade.GetById(id);
 
             Actors.Clear();
+            Actors.AddList(Model.Actors);
+
             Directors.Clear();
+            Directors.AddList(Model.Directors);
+
             Ratings.Clear();
-            
+            //Ratings.AddList(Model.Ratings);
+
             // TODO: add actors and directors to observable collections
         }
 
