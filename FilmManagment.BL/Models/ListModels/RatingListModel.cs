@@ -6,6 +6,7 @@ namespace FilmManagment.BL.Models.ListModels
 	public class RatingListModel : ModelBase
 	{
 		public int RatingInPercents { get; set; }
+		public string TextRating { get; set; } = string.Empty;
 
 		private sealed class RatingListModelEqualityComparer : IEqualityComparer<RatingListModel>
 		{
@@ -15,12 +16,13 @@ namespace FilmManagment.BL.Models.ListModels
 				if (ReferenceEquals(x, null)) return false;
 				if (ReferenceEquals(y, null)) return false;
 				if (x.GetType() != y.GetType()) return false;
-				return x.RatingInPercents == y.RatingInPercents;
+				return x.RatingInPercents == y.RatingInPercents
+					   && x.TextRating == y.TextRating;
 			}
 
 			public int GetHashCode(RatingListModel obj)
 			{
-				return HashCode.Combine(obj.RatingInPercents);
+				return HashCode.Combine(obj.RatingInPercents, obj.TextRating);
 			}
 		}
 

@@ -15,7 +15,8 @@ namespace FilmManagment.BL.Mappers
 			return entities?.Select(entity => new RatingListModel()
 			{
 				Id = entity.Id,
-				RatingInPercents = entity.RatingInPercents
+				RatingInPercents = entity.RatingInPercents,
+				TextRating = entity.TextRating,
 			}).ToArray();
 		}
 

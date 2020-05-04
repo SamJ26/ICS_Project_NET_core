@@ -261,63 +261,123 @@
         <Grid Grid.Row="3">
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="0.5*"/>
             </Grid.ColumnDefinitions>
 
             <!-- Add Rating button -->
-            <Button Margin="10 0 10 10" 
+            <Button Margin="10 0 5 10" 
                     Background="Gray"
                     Command="{Binding AddRatingButtonCommand}"
                     CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">
-                    <Bold Foreground="Black"> Add Rating </Bold>
+                    <Bold Foreground="Black"> Add </Bold>
                 </TextBlock>
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" 
-                                Value="5"/>
+                                Value="2"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Remove Rating button -->
+            <Button Grid.Column="1"
+                    Margin="5 0 10 10" 
+                    Background="Gray"
+                    Command="{Binding RemoveRatingButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Remove </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="2"/>
                     </Style>
                 </Button.Resources>
             </Button>
 
             <!-- Add Actor button -->
-            <Button Grid.Column="1" 
-                    Margin="10 0 10 10" 
+            <Button Grid.Column="2" 
+                    Margin="10 0 5 10" 
                     Background="Gray"
                     Command="{Binding AddActorButtonCommand}"
                     CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">
-                    <Bold Foreground="Black"> Add Actor </Bold>
+                    <Bold Foreground="Black"> Add </Bold>
                 </TextBlock>
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" 
-                                Value="5"/>
+                                Value="2"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Remove Actor button -->
+            <Button Grid.Column="3" 
+                    Margin="5 0 10 10" 
+                    Background="Gray"
+                    Command="{Binding RemoveActorButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Remove </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="2"/>
                     </Style>
                 </Button.Resources>
             </Button>
 
             <!-- Add Director button -->
-            <Button Grid.Column="2" 
-                    Margin="10 0 10 10" 
+            <Button Grid.Column="4" 
+                    Margin="10 0 5 10" 
                     Background="Gray"
                     Command="{Binding AddDirectorButtonCommand}"
                     CommandParameter="{Binding}">
                 <TextBlock FontSize="20"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center">
-                    <Bold Foreground="Black"> Add Director </Bold>
+                    <Bold Foreground="Black"> Add </Bold>
                 </TextBlock>
                 <Button.Resources>
                     <Style TargetType="Border">
                         <Setter Property="CornerRadius" 
-                                Value="5"/>
+                                Value="2"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <!-- Remove Director button -->
+            <Button Grid.Column="5" 
+                    Margin="5 0 10 10" 
+                    Background="Gray"
+                    Command="{Binding RemoveDirectorButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center">
+                    <Bold Foreground="Black"> Remove </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="2"/>
                     </Style>
                 </Button.Resources>
             </Button>

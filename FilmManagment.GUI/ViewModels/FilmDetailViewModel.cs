@@ -34,6 +34,9 @@ namespace FilmManagment.GUI.ViewModels
             EditButtonCommand = new RelayCommand(EnableTextBoxes);
             SaveButtonCommand = new RelayCommand(Save, CanSave);
 
+            ActorSelectedCommand = new RelayCommand<FilmActorWrappedModel>(ActorSelected);
+            RemoveActorButtonCommand = new RelayCommand(RemoveActorFromList, RemoveActorEnabled);
+
             GenreOptions = EnumExtensions.ConvertEnumToList<Genre>();
         }
 
@@ -43,6 +46,9 @@ namespace FilmManagment.GUI.ViewModels
         public ICommand AddRatingButtonCommand { get; }
         public ICommand AddActorButtonCommand { get; }
         public ICommand AddDirectorButtonCommand { get; }
+        public ICommand RemoveRatingButtonCommand { get; }
+        public ICommand RemoveActorButtonCommand { get; }
+        public ICommand RemoveDirectorButtonCommand { get; }
         public ICommand ActorSelectedCommand { get; }
         public ICommand DirectorSelectedCommand { get; }
         public ICommand RatingSelectedCommand { get; }
@@ -55,6 +61,12 @@ namespace FilmManagment.GUI.ViewModels
 
 
         private bool saveButtonReady = false;
+        private FilmActorWrappedModel selectedActor;
+        private FilmDirectorWrappedModel selectedDirector;
+        private RatingWrappedModel selectedRating;
+        private bool actorSelected = false;
+        private bool directorSelected = false;
+        private bool ratingSelected = false;
 
 
         private string filmLength { get; set; }
@@ -64,7 +76,6 @@ namespace FilmManagment.GUI.ViewModels
             set
             {
                 filmLength = value;
-                Model.LengthInMinutes = TimeSpan.Parse(filmLength);
                 OnPropertyChanged();
             }
         }
@@ -127,6 +138,7 @@ namespace FilmManagment.GUI.ViewModels
         // Execute on SaveButtonCommand
         private void Save()
         {
+            Model.LengthInMinutes = TimeSpan.Parse(filmLength);
             usedFacade.Save(Model);
             usedMediator.Send(new UpdateMessage<FilmWrappedModel> { Model = Model });
             ReadOnlyTextBoxes = true;
@@ -134,7 +146,26 @@ namespace FilmManagment.GUI.ViewModels
             saveButtonReady = false;
         }
 
+        // Execute on RemoveActorButtonCommand
+        private void RemoveActorFromList()
+        {
+            // TODO: finish
+
+            //var itemInCollection = Model.Actors.SingleOrDefault(actor => actor.Id == selectedActor.Id);
+            //Model.Actors.Remove(itemInCollection);
+            //usedFacade.Save(Model);
+        }
+
+        // Execute on ActorSelectedCommand
+        private void ActorSelected(FilmActorWrappedModel filmActorWrappedModel)
+        {
+            selectedActor = filmActorWrappedModel;
+            actorSelected = true;
+        }
+
         #endregion
+
+        private bool RemoveActorEnabled() => actorSelected ? true : false;
 
         private bool CanSave()
         {
@@ -161,9 +192,7 @@ namespace FilmManagment.GUI.ViewModels
             Directors.AddList(Model.Directors);
 
             Ratings.Clear();
-            //Ratings.AddList(Model.Ratings);
-
-            // TODO: add actors and directors to observable collections
+            Ratings.AddList(Model.Ratings);
         }
 
         private void CreateNewWrappedModel(NewMessage<FilmWrappedModel> _)
