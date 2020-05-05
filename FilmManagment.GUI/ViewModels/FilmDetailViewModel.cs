@@ -154,20 +154,8 @@ namespace FilmManagment.GUI.ViewModels
         // Execute on RemoveActorButtonCommand
         private void RemoveActorFromList()
         {
-            // Removing actor from ObservableCollection - no effect on DB
             Actors.Remove(Actors.Single(item => item.Id == selectedActor.Id));
-
-            // 1. OPTION - untested
-            // Removing film from FilmWrappedModel.Actors collection and than saving -> film no longer points at junction table
-            // The same operation will be executed on ActorWrappedModel.ActedMovies
-            // Problem is that junction entity will be still in DB but no longer used
-            var itemToRemove = Model.Actors.Single(item => item.Id == selectedActor.Id);
-            Model.Actors.Remove(itemToRemove);
-            usedFilmFacade.Save(Model);
-
-            // 2. OPTION - does not work
             usedFilmActorFacade.Delete(selectedActor.Id);
-
         }
 
         // Execute on ActorSelectedCommand

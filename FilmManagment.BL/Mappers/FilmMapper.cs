@@ -3,6 +3,7 @@ using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using FilmManagment.DAL.Entities;
 using FilmManagment.DAL.Factories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -60,7 +61,7 @@ namespace FilmManagment.BL.Mappers
 			newEntity.LengthInMinutes = detailModel.LengthInMinutes;
 			newEntity.Actors = detailModel.Actors.Select(model =>
 			{
-				var newFilmActorEntity = entityFactory.Create<FilmActorEntity>(model.FilmId);
+				var newFilmActorEntity = entityFactory.Create<FilmActorEntity>(Guid.Empty); //
 				newFilmActorEntity.FilmId = detailModel.Id;
 				newFilmActorEntity.ActorId = model.ActorId;
 				return newFilmActorEntity;

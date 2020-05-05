@@ -29,9 +29,6 @@ namespace FilmManagment.DAL
 
 			// Connection between FilmEntity and ActorEntity via table FilmActorEntity
 			modelBuilder.Entity<FilmActorEntity>()
-						.HasKey(i => new { i.FilmId, i.ActorId });
-
-			modelBuilder.Entity<FilmActorEntity>()
 						.HasOne<FilmEntity>(i => i.Film)
 						.WithMany(i => i.Actors)
 						.HasForeignKey(i => i.FilmId)
@@ -44,9 +41,6 @@ namespace FilmManagment.DAL
 						.OnDelete(DeleteBehavior.Cascade);
 
 			// Connection between FilmEntity and DirectorEntity via table FilmDirectorEntity
-			modelBuilder.Entity<FilmDirectorEntity>()
-						.HasKey(i => new { i.FilmId, i.DirectorId });
-
 			modelBuilder.Entity<FilmDirectorEntity>()
 						.HasOne<FilmEntity>(i => i.Film)
 						.WithMany(i => i.Directors)
