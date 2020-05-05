@@ -3,9 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:local="clr-namespace:FilmManagment.GUI.Views.DetailViews"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+             xmlns:viewModels="clr-namespace:FilmManagment.GUI.ViewModels"
              mc:Ignorable="d"
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450"
+             d:DesignWidth="800"
+             d:DataContext="{d:DesignInstance viewModels:ActorDetailViewModel}">
 
     <Grid x:Name="DetailActorLayout"
           Background="#FF353C4D">
@@ -24,23 +27,35 @@
             <StackPanel Grid.Column="0"
                         Grid.Row="0">
 
-                <TextBlock Foreground="Orange" Margin="10 15 0 2"> First Name</TextBlock>
-                <!-- TODO: Binging to FirstName-->
-                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
+                <TextBlock Foreground="Orange" Margin="10 15 0 2"> First Name </TextBlock>
+                <TextBox Padding="5"
+                         Background="#FF72747C"
+                         Margin="10 0 10 5"
+                         IsReadOnly="{Binding Path=ReadOnlyTextBoxes, Mode=OneWay}"
+                         Text="{Binding Model.FirstName, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
 
-                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Second Name</TextBlock>
-                <!-- TODO: Binging to SecondName-->
-                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
+                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Second Name </TextBlock>
+                <TextBox Padding="5"
+                         Background="#FF72747C"
+                         Margin="10 0 10 5"
+                         IsReadOnly="{Binding Path=ReadOnlyTextBoxes, Mode=OneWay}"
+                         Text="{Binding Model.SecondName, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
 
-                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Age</TextBlock>
-                <!-- TODO: Binging to Age-->
-                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
+                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Age </TextBlock>
+                <TextBox Padding="5"
+                         Background="#FF72747C"
+                         Margin="10 0 10 5"
+                         IsReadOnly="{Binding Path=ReadOnlyTextBoxes, Mode=OneWay}"
+                         Text="{Binding Model.Age, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
 
-                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Wiki</TextBlock>
-                <!-- TODO: Binging to WikiUrl-->
-                <TextBox Padding="5" Background="#FF72747C" Margin="10 0 10 5"/>
+                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Wiki </TextBlock>
+                <TextBox Padding="5"
+                         Background="#FF72747C"
+                         Margin="10 0 10 5"
+                         IsReadOnly="{Binding Path=ReadOnlyTextBoxes, Mode=OneWay}"
+                         Text="{Binding Model.WikiUrl, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
 
-                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Acted films</TextBlock>
+                <TextBlock Foreground="Orange" Margin="10 0 0 2"> Acted films </TextBlock>
 
             </StackPanel>
 
@@ -48,7 +63,31 @@
                           Background="#FF72747C"
                           VerticalAlignment="Stretch"
                           Margin="10 0 10 20">
-                <!-- TODO: adding elements from database -->
+
+                <DataGrid x:Name="ActedMoviesDataGrid"
+                          ItemsSource="{Binding ActedMovies}"
+                          AutoGenerateColumns="False"
+                          ColumnWidth="*"
+                          Background="#FF353C4D"
+                          HeadersVisibility="Column"
+                          IsReadOnly="True">
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseDoubleClick">
+                            <i:InvokeCommandAction Command="{Binding FilmSelectedCommand}"
+                                                   CommandParameter="{Binding ElementName=ActedMoviesDataGrid, Path=SelectedItem}" />
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+                    <DataGrid.Columns>
+
+                        <DataGridTextColumn Header="Original name of film"
+                                            Width="*"
+                                            Binding="{Binding FilmName}"/>
+
+                    </DataGrid.Columns>
+                </DataGrid>
+
             </ScrollViewer>
         </Grid>
 
@@ -70,7 +109,9 @@
                 <!-- Edit button -->
                 <Button Grid.Column="0"
                         Margin="5 5 5 20" 
-                        Background="Bisque">
+                        Background="Bisque"
+                        Command="{Binding EditButtonCommand}"
+                        CommandParameter="{Binding}">
                     <TextBlock FontSize="20"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center">
@@ -87,7 +128,9 @@
                 <!-- Save button -->
                 <Button Grid.Column="1"
                         Margin="5 5 10 20" 
-                        Background="Bisque">
+                        Background="Bisque"
+                        Command="{Binding SaveButtonCommand}"
+                        CommandParameter="{Binding}">
                     <TextBlock FontSize="20"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center">

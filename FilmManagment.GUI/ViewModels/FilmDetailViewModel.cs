@@ -19,17 +19,22 @@ namespace FilmManagment.GUI.ViewModels
     public class FilmDetailViewModel : ViewModelBase, IFilmDetailViewModel
     {
         private readonly IMediator usedMediator;
-        private readonly FilmFacade usedFacade;
+        private readonly FilmFacade usedFilmFacade;
+        private readonly FilmActorFacade usedFilmActorFacade;
 
         public FilmDetailViewModel(IMediator mediator,
-                                   FilmFacade facade)
+                                   FilmFacade filmFacade,
+                                   FilmActorFacade filmActorFacade)
             
         {
             usedMediator = mediator;
-            usedFacade = facade;
+            usedFilmFacade = filmFacade;
+            usedFilmActorFacade = filmActorFacade;
 
             usedMediator.Register<NewMessage<FilmWrappedModel>>(CreateNewWrappedModel);
             usedMediator.Register<SelectedMessage<FilmWrappedModel>>(PrepareFilm);
+            mediator.Register<MoveFromDetailToDetail<FilmActorWrappedModel>>(PrepareFilm);
+            mediator.Register<MoveFromDetailToDetail<FilmDirectorWrappedModel>>(PrepareFilm);
 
             EditButtonCommand = new RelayCommand(EnableTextBoxes);
             SaveButtonCommand = new RelayCommand(Save, CanSave);
@@ -139,7 +144,7 @@ namespace FilmManagment.GUI.ViewModels
         private void Save()
         {
             Model.LengthInMinutes = TimeSpan.Parse(filmLength);
-            usedFacade.Save(Model);
+            usedFilmFacade.Save(Model);
             usedMediator.Send(new UpdateMessage<FilmWrappedModel> { Model = Model });
             ReadOnlyTextBoxes = true;
             ComboBoxEnabled = false;
@@ -149,11 +154,20 @@ namespace FilmManagment.GUI.ViewModels
         // Execute on RemoveActorButtonCommand
         private void RemoveActorFromList()
         {
-            // TODO: finish
+            // Removing actor from ObservableCollection - no effect on DB
+            Actors.Remove(Actors.Single(item => item.Id == selectedActor.Id));
 
-            //var itemInCollection = Model.Actors.SingleOrDefault(actor => actor.Id == selectedActor.Id);
-            //Model.Actors.Remove(itemInCollection);
-            //usedFacade.Save(Model);
+            // 1. OPTION
+            // Removing film from FilmWrappedModel.Actors collection and than saving -> film no longer points at junction table
+            // The same operation will be executed on ActorWrappedModel.ActedMovies
+            // Problem is that junction entity will be still in DB but no longer used
+            var itemToRemove = Model.Actors.Single(item => item.Id == selectedActor.Id);
+            Model.Actors.Remove(itemToRemove);
+            usedFilmFacade.Save(Model);
+
+            // 2. OPTION - does not work
+            usedFilmActorFacade.Delete(selectedActor.Id);
+
         }
 
         // Execute on ActorSelectedCommand
@@ -183,7 +197,13 @@ namespace FilmManagment.GUI.ViewModels
 
         public void Load(Guid id)
         {
-            Model = usedFacade.GetById(id);
+            Model = usedFilmFacade.GetById(id);
+
+            ReadOnlyTextBoxes = true;
+            ComboBoxEnabled = false;
+            saveButtonReady = false;
+            SelectedGenre = GenreOptions[GenreOptions.IndexOf(Model.GenreOfFilm.ToString())];
+            filmLength = Model.LengthInMinutes.ToString();
 
             Actors.Clear();
             Actors.AddList(Model.Actors);
@@ -208,11 +228,16 @@ namespace FilmManagment.GUI.ViewModels
         private void PrepareFilm(SelectedMessage<FilmWrappedModel> film)
         {
             Load(film.Id);
-            ReadOnlyTextBoxes = true;
-            ComboBoxEnabled = false;
-            saveButtonReady = false;
-            SelectedGenre = GenreOptions[GenreOptions.IndexOf(Model.GenreOfFilm.ToString())];
-            filmLength = Model.LengthInMinutes.ToString();
+        }
+
+        private void PrepareFilm(MoveFromDetailToDetail<FilmActorWrappedModel> film)
+        {
+            Load(film.Id);
+        }
+
+        private void PrepareFilm(MoveFromDetailToDetail<FilmDirectorWrappedModel> film)
+        {
+            Load(film.Id);
         }
     }
 }

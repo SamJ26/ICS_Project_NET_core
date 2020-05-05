@@ -38,4 +38,12 @@ namespace FilmManagment.GUI.Messages
     public class NO_WarningResultMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
     {
     }
+
+    /// <summary>
+    /// This message will be sent e.g. when you want to move on FilmDetail from ActorDetail via ActedMovies
+    /// </summary>
+    /// <typeparam name="TwrrappedModel"> Selected item which you want to see in detail view </typeparam>
+    public class MoveFromDetailToDetail<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
+    {
+    }
 }

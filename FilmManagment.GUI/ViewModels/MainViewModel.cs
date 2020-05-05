@@ -42,6 +42,9 @@ namespace FilmManagment.GUI.ViewModels
             mediator.Register<NewMessage<ActorWrappedModel>>(AddNewActor);
             mediator.Register<NewMessage<DirectorWrappedModel>>(AddNewDirector);
 
+            mediator.Register<MoveFromDetailToDetail<FilmActorWrappedModel>>(MoveToFilmFromActor);
+            mediator.Register<MoveFromDetailToDetail<FilmDirectorWrappedModel>>(MoveToFilmFromDirector);
+
             selectedView = HomeViewModel;
         }
 
@@ -109,37 +112,30 @@ namespace FilmManagment.GUI.ViewModels
 
         #region ListViews DetailButton actions to execute
 
-        private void OnFilmDetailExecute(DetailButtonPushedMessage<FilmWrappedModel> _)
-        {
-            SelectedView = FilmDetailViewModel;
-        }
+        private void OnFilmDetailExecute(DetailButtonPushedMessage<FilmWrappedModel> _) => SelectedView = FilmDetailViewModel;
 
-        public void OnActorDetailExecute(DetailButtonPushedMessage<ActorWrappedModel> _)
-        {
-            SelectedView = ActorDetailViewModel;
-        }
+        public void OnActorDetailExecute(DetailButtonPushedMessage<ActorWrappedModel> _) => SelectedView = ActorDetailViewModel;
 
-        public void OnDirectorDetailExecute(DetailButtonPushedMessage<DirectorWrappedModel> _)
-        {
-            SelectedView = DirectorDetailViewModel;
-        }
+        public void OnDirectorDetailExecute(DetailButtonPushedMessage<DirectorWrappedModel> _) => SelectedView = DirectorDetailViewModel;
 
         #endregion
 
+        #region ListViews AddButton actions to execute
 
-        private void AddNewFilm(NewMessage<FilmWrappedModel> _)
-        {
-            SelectedView = FilmDetailViewModel;
-        }
+        private void AddNewFilm(NewMessage<FilmWrappedModel> _) => SelectedView = FilmDetailViewModel;
 
-        private void AddNewActor(NewMessage<ActorWrappedModel> _)
-        {
-            SelectedView = ActorDetailViewModel;
-        }
+        private void AddNewActor(NewMessage<ActorWrappedModel> _) => SelectedView = ActorDetailViewModel;
 
-        private void AddNewDirector(NewMessage<DirectorWrappedModel> _)
-        {
-            SelectedView = DirectorDetailViewModel;
-        }
+        private void AddNewDirector(NewMessage<DirectorWrappedModel> _) => SelectedView = DirectorDetailViewModel;
+
+        #endregion
+
+        #region Move from detail to detail
+
+        private void MoveToFilmFromActor(MoveFromDetailToDetail<FilmActorWrappedModel> _) => SelectedView = FilmDetailViewModel;
+
+        private void MoveToFilmFromDirector(MoveFromDetailToDetail<FilmDirectorWrappedModel> _) => SelectedView = FilmDetailViewModel;
+
+        #endregion
     }
 }

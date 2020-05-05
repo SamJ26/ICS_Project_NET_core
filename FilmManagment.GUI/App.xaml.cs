@@ -69,11 +69,13 @@ namespace FilmManagment.GUI
             services.AddTransient<FilmFacade>();
             services.AddTransient<DirectorFacade>();
             services.AddTransient<RatingFacade>();
+            services.AddTransient<FilmActorFacade>();
 
             services.AddTransient<Repository<FilmEntity>>();
             services.AddTransient<Repository<ActorEntity>>();
             services.AddTransient<Repository<DirectorEntity>>();
             services.AddTransient<Repository<RatingEntity>>();
+            services.AddTransient<Repository<FilmActorEntity>>();
 
             services.AddSingleton<UnitOfWork>();
 
