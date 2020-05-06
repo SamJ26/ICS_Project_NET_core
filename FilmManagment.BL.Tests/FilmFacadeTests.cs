@@ -75,6 +75,7 @@ namespace FilmManagment.BL.Tests
 
 			// Synchronizing informations which are automatically assigned by EF during updating DB
 			filmDetail.Id = returnedDetailModel.Id;
+			filmDetail.Actors.ElementAt(0).Id = returnedDetailModel.Actors.ElementAt(0).Id;
 			filmDetail.Actors.ElementAt(0).FilmId = returnedDetailModel.Actors.ElementAt(0).FilmId;
 			filmDetail.Actors.ElementAt(0).ActorName = returnedDetailModel.Actors.ElementAt(0).ActorName;
 			filmDetail.Actors.ElementAt(0).FilmName = returnedDetailModel.Actors.ElementAt(0).FilmName;

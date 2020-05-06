@@ -32,7 +32,8 @@ namespace FilmManagment.BL.Mappers
 				PhotoFilePath = entity.PhotoFilePath,
 				ActedMovies = entity.ActedMovies.Select(filmActorEntity => new FilmActorListModel()
 				{
-					FilmId = filmActorEntity.Id,
+					Id = filmActorEntity.Id,
+					FilmId = filmActorEntity.FilmId,
 					ActorId = filmActorEntity.ActorId,
 					ActorName = string.Concat(filmActorEntity.Actor.FirstName, " ", filmActorEntity.Actor.SecondName),
 					FilmName = filmActorEntity.Film.OriginalName,

@@ -105,6 +105,7 @@ namespace FilmManagment.GUI.ViewModels
             Model = new ActorDetailModel();
             ReadOnlyTextBoxes = false;
             saveButtonReady = true;
+            ActedMovies.Clear();
         }
 
         private void PrepareActor(SelectedMessage<ActorWrappedModel> actor)

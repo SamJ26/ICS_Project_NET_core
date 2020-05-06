@@ -61,7 +61,7 @@ namespace FilmManagment.BL.Mappers
 			newEntity.LengthInMinutes = detailModel.LengthInMinutes;
 			newEntity.Actors = detailModel.Actors.Select(model =>
 			{
-				var newFilmActorEntity = entityFactory.Create<FilmActorEntity>(Guid.Empty); //
+				var newFilmActorEntity = entityFactory.Create<FilmActorEntity>(model.Id);
 				newFilmActorEntity.FilmId = detailModel.Id;
 				newFilmActorEntity.ActorId = model.ActorId;
 				return newFilmActorEntity;
@@ -69,7 +69,7 @@ namespace FilmManagment.BL.Mappers
 			}).ToList();
 			newEntity.Directors = detailModel.Directors.Select(model =>
 			{
-				var newFilmDirectorEntity = entityFactory.Create<FilmDirectorEntity>(model.FilmId);
+				var newFilmDirectorEntity = entityFactory.Create<FilmDirectorEntity>(model.Id);
 				newFilmDirectorEntity.FilmId = detailModel.Id;
 				newFilmDirectorEntity.DirectorId = model.DirectorId;
 				return newFilmDirectorEntity;

@@ -105,6 +105,7 @@ namespace FilmManagment.GUI.ViewModels
             Model = new DirectorDetailModel();
             ReadOnlyTextBoxes = false;
             saveButtonReady = true;
+            DirectedMovies.Clear();
         }
 
         private void PrepareDirector(SelectedMessage<DirectorWrappedModel> director)
