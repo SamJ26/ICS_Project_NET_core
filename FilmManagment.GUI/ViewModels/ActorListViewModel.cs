@@ -141,6 +141,8 @@ namespace FilmManagment.GUI.ViewModels
             usedFacade.Delete(selectedActor.Id);
             Load();
             selectedActor = null;
+
+            // TODO: sent message to update listViews in whole app
         }
 
         private void UpdateActors(IMessage _)

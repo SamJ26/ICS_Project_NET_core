@@ -50,7 +50,7 @@ namespace FilmManagment.GUI.ViewModels
             mediator.Register<MoveFromDetailToDetailMessage<FilmDirectorWrappedModel>>(PrepareFilm);
 
             mediator.Register<AddPersonToFilmMessage<ActorWrappedModel>>(AddActorToFilm);
-            //mediator.Register<AddPersonToFilmMessage<DirectorWrappedModel>>(AddDirectorToFilm);
+            mediator.Register<AddPersonToFilmMessage<DirectorWrappedModel>>(AddDirectorToFilm);
 
             EditButtonCommand = new RelayCommand(EnableTextBoxes);
             SaveButtonCommand = new RelayCommand(Save, CanSave);
@@ -61,6 +61,7 @@ namespace FilmManagment.GUI.ViewModels
 
             DirectorSelectedCommand = new RelayCommand<FilmDirectorWrappedModel>(DirectorSelected);
             RemoveDirectorButtonCommand = new RelayCommand(RemoveDirectorFromList, RemoveDirectorEnabled);
+            AddDirectorButtonCommand = new RelayCommand(ShowDirectors);
 
             GenreOptions = EnumExtensions.ConvertEnumToList<Genre>();
         }
@@ -188,7 +189,7 @@ namespace FilmManagment.GUI.ViewModels
         // Execute on AddActorButtonCommand
         private void ShowActors() => usedConnectionService.ShowSelectiveWindow(usedSelectActorViewModel);
 
-        // Execute on RemoveActorButtonCommand
+        // Execute on RemoveDirectorButtonCommand
         private void RemoveDirectorFromList()
         {
             Directors.Remove(Directors.Single(item => item.Id == selectedDirector.Id));
@@ -201,6 +202,9 @@ namespace FilmManagment.GUI.ViewModels
             selectedDirector = filmDirectorWrappedModel;
             directorSelected = true;
         }
+
+        // Execute on AddDirectorButtonCommand
+        private void ShowDirectors() => usedConnectionService.ShowSelectiveWindow(usedSelectDirectorViewModel);
 
         #endregion
 
@@ -215,7 +219,21 @@ namespace FilmManagment.GUI.ViewModels
             Model.Actors.Add(filmActorListModel);
             usedFilmFacade.Save(Model);
 
-            // TODO: solve actorList refresh
+            // TODO: solve reloading list after adding actor
+        }
+
+        private void AddDirectorToFilm(AddPersonToFilmMessage<DirectorWrappedModel> selectedDirector)
+        {
+            var filmDirectorListModel = new FilmDirectorListModel()
+            {
+                DirectorId = selectedDirector.Id,
+                FilmId = Model.Id,
+                FilmName = Model.OriginalName,
+            };
+            Model.Directors.Add(filmDirectorListModel);
+            usedFilmFacade.Save(Model);
+
+            // TODO: solve reloading list after adding actor
         }
 
         private bool RemoveActorEnabled() => actorSelected ? true : false;
@@ -246,11 +264,6 @@ namespace FilmManagment.GUI.ViewModels
             SelectedGenre = GenreOptions[GenreOptions.IndexOf(Model.GenreOfFilm.ToString())];
             filmLength = Model.LengthInMinutes.ToString();
 
-            LoadLists();
-        }
-
-        private void LoadLists()
-        {
             Actors.Clear();
             Actors.AddList(Model.Actors);
 

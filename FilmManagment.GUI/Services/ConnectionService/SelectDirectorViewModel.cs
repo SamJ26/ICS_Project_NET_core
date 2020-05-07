@@ -29,6 +29,7 @@ namespace FilmManagment.GUI.Services.ConnectionService
         public ICommand ItemSelectedCommand { get; }
 
         public ObservableCollection<DirectorListModel> ListItems { get; set; } = new ObservableCollection<DirectorListModel>();
+        public string Description { get; } = "Use double click to select directors";
 
         private void ItemSelected(DirectorListModel directorListModel)
         {

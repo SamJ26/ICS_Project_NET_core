@@ -3,9 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:FilmManagment.GUI.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450"
+             d:DesignWidth="800">
     
     <Border Padding="2">
         <StackPanel Background="#FF353C4D">
@@ -27,9 +27,10 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <StackPanel Grid.Column="1">
-                    <TextBox Padding="2" Background="#EEEE" Margin=" 0 0 0 10">
-                        What are you looking for?
-                    </TextBox>
+                    <TextBox Padding="2"
+                             Background="#EEEE"
+                             Margin=" 0 0 0 10"
+                             Text="{Binding SearchedObject, Mode=TwoWay}"/>
                 </StackPanel>
             </Grid>
 
@@ -43,14 +44,14 @@
                 </Grid.ColumnDefinitions>
 
                 <StackPanel Grid.Column="1">
-                    <ComboBox SelectedIndex="0" Padding="2">
-                        <ComboBoxItem>All</ComboBoxItem>
-                        <ComboBoxItem>Films</ComboBoxItem>
-                        <ComboBoxItem>Actors</ComboBoxItem>
-                        <ComboBoxItem>Directors</ComboBoxItem>
-                    </ComboBox>
+                    <ComboBox SelectedIndex="0"
+                              Padding="2"
+                              IsReadOnly="True"
+                              ItemsSource="{Binding SearchingOptions}"
+                              SelectedItem="{Binding SelectedOption, Mode=TwoWay}"/>
                 </StackPanel>
-                <StackPanel Grid.Column="2" Margin="10 0 0 20">
+                <StackPanel Grid.Column="2"
+                            Margin="10 0 0 20">
                     <Button Content="Search"/>
                 </StackPanel>
             </Grid>

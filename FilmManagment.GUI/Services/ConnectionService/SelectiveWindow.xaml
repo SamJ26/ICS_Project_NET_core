@@ -10,9 +10,21 @@
         Height="300"
         Width="400"
         WindowStartupLocation="CenterScreen">
-    
-    <Grid>
-        <ScrollViewer Grid.Row="2"
+
+    <Grid Background="#FF353C4D">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0"
+                   Foreground="White"
+                   Margin="5"
+                   FontSize="10"
+                   Text="{Binding Description, Mode=OneWay}"/>
+
+        <ScrollViewer Grid.Row="1"
                       Background="#EEEE">
 
             <DataGrid x:Name="ActorsList"

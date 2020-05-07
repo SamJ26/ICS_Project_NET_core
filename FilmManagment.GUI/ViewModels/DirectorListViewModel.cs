@@ -141,6 +141,8 @@ namespace FilmManagment.GUI.ViewModels
             usedFacade.Delete(selectedDirector.Id);
             Load();
             selectedDirector = null;
+
+            // TODO: sent message to update listViews in whole app
         }
 
         private void UpdateDirectors(IMessage _)
