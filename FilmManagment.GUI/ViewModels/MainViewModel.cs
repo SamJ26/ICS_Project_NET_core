@@ -42,8 +42,8 @@ namespace FilmManagment.GUI.ViewModels
             mediator.Register<NewMessage<ActorWrappedModel>>(AddNewActor);
             mediator.Register<NewMessage<DirectorWrappedModel>>(AddNewDirector);
 
-            mediator.Register<MoveFromDetailToDetail<FilmActorWrappedModel>>(MoveToFilmFromActor);
-            mediator.Register<MoveFromDetailToDetail<FilmDirectorWrappedModel>>(MoveToFilmFromDirector);
+            mediator.Register<MoveFromDetailToDetailMessage<FilmActorWrappedModel>>(MoveToFilmFromActor);
+            mediator.Register<MoveFromDetailToDetailMessage<FilmDirectorWrappedModel>>(MoveToFilmFromDirector);
 
             selectedView = HomeViewModel;
         }
@@ -132,9 +132,9 @@ namespace FilmManagment.GUI.ViewModels
 
         #region Move from detail to detail
 
-        private void MoveToFilmFromActor(MoveFromDetailToDetail<FilmActorWrappedModel> _) => SelectedView = FilmDetailViewModel;
+        private void MoveToFilmFromActor(MoveFromDetailToDetailMessage<FilmActorWrappedModel> _) => SelectedView = FilmDetailViewModel;
 
-        private void MoveToFilmFromDirector(MoveFromDetailToDetail<FilmDirectorWrappedModel> _) => SelectedView = FilmDetailViewModel;
+        private void MoveToFilmFromDirector(MoveFromDetailToDetailMessage<FilmDirectorWrappedModel> _) => SelectedView = FilmDetailViewModel;
 
         #endregion
     }

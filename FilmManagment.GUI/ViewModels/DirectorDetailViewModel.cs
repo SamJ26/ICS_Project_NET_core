@@ -71,7 +71,7 @@ namespace FilmManagment.GUI.ViewModels
         // Execute on FilmSelectedCommand
         private void MoveToFilmDetail(FilmDirectorWrappedModel filmDirectorWrappedModel)
         {
-            usedMediator.Send(new MoveFromDetailToDetail<FilmDirectorWrappedModel> { Id = filmDirectorWrappedModel.FilmId });
+            usedMediator.Send(new MoveFromDetailToDetailMessage<FilmDirectorWrappedModel> { Id = filmDirectorWrappedModel.FilmId });
         }
 
         // Execute on EditButtonCommand

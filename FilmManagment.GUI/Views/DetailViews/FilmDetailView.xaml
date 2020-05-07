@@ -85,7 +85,7 @@
                 <TextBox Padding="5"
                          Background="#FF72747C"
                          Margin="10 0 10 5"
-                         IsReadOnly="{Binding Path=ReadOnlyTextBoxes, Mode=OneWay}"
+                         IsReadOnly="True"
                          Text="{Binding Model.AverageRatingInPercents, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
 
             </StackPanel>

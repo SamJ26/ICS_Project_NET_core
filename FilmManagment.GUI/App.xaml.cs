@@ -19,6 +19,7 @@ using FilmManagment.BL.Mappers;
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using FilmManagment.GUI.Services.ConnectionService;
 
 namespace FilmManagment.GUI
 {
@@ -50,6 +51,10 @@ namespace FilmManagment.GUI
             services.AddSingleton<IWarningViewModel, WarningViewModel>();
             services.AddSingleton<IWarningService, WarningService>();
 
+            services.AddSingleton<ISelectActorViewModel, SelectActorViewModel>();
+            services.AddSingleton<ISelectDirectorViewModel, SelectDirectorViewModel>();
+            services.AddSingleton<IConnectionService, ConnectionService>();
+
             services.AddSingleton<IHomeViewModel, HomeViewModel>();
             services.AddSingleton<IFilmListViewModel, FilmListViewModel>();
             services.AddSingleton<IActorListViewModel, ActorListViewModel>();
@@ -70,12 +75,14 @@ namespace FilmManagment.GUI
             services.AddTransient<DirectorFacade>();
             services.AddTransient<RatingFacade>();
             services.AddTransient<FilmActorFacade>();
+            services.AddTransient<FilmDirectorFacade>();
 
             services.AddTransient<Repository<FilmEntity>>();
             services.AddTransient<Repository<ActorEntity>>();
             services.AddTransient<Repository<DirectorEntity>>();
             services.AddTransient<Repository<RatingEntity>>();
             services.AddTransient<Repository<FilmActorEntity>>();
+            services.AddTransient<Repository<FilmDirectorEntity>>();
 
             services.AddSingleton<UnitOfWork>();
 

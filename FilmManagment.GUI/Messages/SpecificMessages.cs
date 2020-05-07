@@ -40,10 +40,18 @@ namespace FilmManagment.GUI.Messages
     }
 
     /// <summary>
-    /// This message will be sent e.g. when you want to move on FilmDetail from ActorDetail via ActedMovies
+    /// This message will be sent e.g. when you want to move on FilmDetail from ActorDetail via Actor.ActedMovies
     /// </summary>
     /// <typeparam name="TwrrappedModel"> Selected item which you want to see in detail view </typeparam>
-    public class MoveFromDetailToDetail<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
+    public class MoveFromDetailToDetailMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
+    {
+    }
+
+    /// <summary>
+    /// This message will be sent to FilmDetailViewModel when user select actor or director in SelectiveWindow
+    /// </summary>
+    /// <typeparam name="TwrrappedModel"> Type of selected person ( DirectorWrappedModel / ActorWrappedModel ) </typeparam>
+    public class AddPersonToFilmMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
     {
     }
 }
