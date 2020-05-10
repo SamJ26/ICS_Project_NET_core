@@ -27,13 +27,16 @@ namespace FilmManagment.GUI.ViewModels
         private readonly ISelectActorViewModel usedSelectActorViewModel;
         private readonly ISelectDirectorViewModel usedSelectDirectorViewModel;
 
+        //private readonly DirectorFacade directorFacade;
+
         public FilmDetailViewModel(IMediator mediator,
                                    FilmFacade filmFacade,
                                    FilmActorFacade filmActorFacade,
                                    FilmDirectorFacade filmDirectorFacade,
                                    IConnectionService connectionService,
                                    ISelectActorViewModel selectActorViewModel,
-                                   ISelectDirectorViewModel selectDirectorViewModel)
+                                   ISelectDirectorViewModel selectDirectorViewModel
+            )
             
         {
             usedMediator = mediator;
@@ -215,6 +218,7 @@ namespace FilmManagment.GUI.ViewModels
                 ActorId = selectedActor.Id,
                 FilmId = Model.Id,
                 FilmName = Model.OriginalName,
+                ActorName = selectedActor.PersonName
             };
             Model.Actors.Add(filmActorListModel);
             usedFilmFacade.Save(Model);
@@ -229,6 +233,7 @@ namespace FilmManagment.GUI.ViewModels
                 DirectorId = selectedDirector.Id,
                 FilmId = Model.Id,
                 FilmName = Model.OriginalName,
+                DirectorName = selectedDirector.PersonName
             };
             Model.Directors.Add(filmDirectorListModel);
             usedFilmFacade.Save(Model);

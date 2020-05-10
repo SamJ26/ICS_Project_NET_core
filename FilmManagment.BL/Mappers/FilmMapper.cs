@@ -11,10 +11,17 @@ namespace FilmManagment.BL.Mappers
 {
 	public class FilmMapper : IMapper<FilmEntity, FilmListModel, FilmDetailModel>
 	{
+		private readonly IEntityFactory entityFactory;
+
 		private FilmDirectorMapper FilmDirectorMapper { get; set; } = new FilmDirectorMapper();
 		private FilmActorMapper FilmActorMapper { get; set; } = new FilmActorMapper();
 
 		private IMapper<RatingEntity, RatingListModel, RatingDetailModel> RatingMapper { get; set; } = new RatingMapper();
+
+		public FilmMapper(IEntityFactory entityFactory)
+		{
+			this.entityFactory = entityFactory;
+		}
 
 		public IEnumerable<FilmListModel> Map(IEnumerable<FilmEntity> entities)
 		{
@@ -47,6 +54,7 @@ namespace FilmManagment.BL.Mappers
 			};
 		}
 
+		// ERROR: here is a bug - when mapping new FilmActorEntity, random FilmActorEnitity.Id is returned
 		public FilmEntity Map(FilmDetailModel detailModel, IEntityFactory entityFactory)
 		{
 			var newEntity = (entityFactory ??= new CreateNewEntityFactory()).Create<FilmEntity>(detailModel.Id);
@@ -59,23 +67,31 @@ namespace FilmManagment.BL.Mappers
 			newEntity.ImageFilePath = detailModel.ImageFilePath;
 			newEntity.GenreOfFilm = detailModel.GenreOfFilm;
 			newEntity.LengthInMinutes = detailModel.LengthInMinutes;
-			newEntity.Actors = detailModel.Actors.Select(model =>
-			{
-				var newFilmActorEntity = entityFactory.Create<FilmActorEntity>(model.Id);
-				newFilmActorEntity.FilmId = detailModel.Id;
-				newFilmActorEntity.ActorId = model.ActorId;
-				return newFilmActorEntity;
 
-			}).ToList();
+			// This works different than code for newEntity.Directors !!!!
+			
 			newEntity.Directors = detailModel.Directors.Select(model =>
 			{
 				var newFilmDirectorEntity = entityFactory.Create<FilmDirectorEntity>(model.Id);
 				newFilmDirectorEntity.FilmId = detailModel.Id;
 				newFilmDirectorEntity.DirectorId = model.DirectorId;
+				newFilmDirectorEntity.Director = null;
+				newFilmDirectorEntity.Film = null;
 				return newFilmDirectorEntity;
 
 			}).ToList();
 
+			newEntity.Actors = detailModel.Actors.Select(model =>
+			{
+				var newFilmActorEntity = this.entityFactory.Create<FilmActorEntity>(model.Id);
+				newFilmActorEntity.FilmId = detailModel.Id;
+				newFilmActorEntity.ActorId = model.ActorId;
+				newFilmActorEntity.Actor = null;
+				newFilmActorEntity.Film = null;
+				return newFilmActorEntity;
+
+			}).ToList();
+			// Here the ID in FilmActorEntity is changed from zeros to random value !!!!
 			return newEntity;
 		}
 	}

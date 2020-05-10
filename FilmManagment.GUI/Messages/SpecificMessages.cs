@@ -1,4 +1,5 @@
 ﻿using FilmManagment.BL;
+using Microsoft.Xaml.Behaviors.Media;
 
 namespace FilmManagment.GUI.Messages
 { 
@@ -53,5 +54,6 @@ namespace FilmManagment.GUI.Messages
     /// <typeparam name="TwrrappedModel"> Type of selected person ( DirectorWrappedModel / ActorWrappedModel ) </typeparam>
     public class AddPersonToFilmMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
     {
+        public string PersonName { get; set; } = string.Empty;
     }
 }

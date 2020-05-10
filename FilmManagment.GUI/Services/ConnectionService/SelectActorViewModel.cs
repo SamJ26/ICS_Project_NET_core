@@ -33,7 +33,11 @@ namespace FilmManagment.GUI.Services.ConnectionService
 
         private void ItemSelected(ActorListModel actorListModel)
         {
-            usedMediator.Send(new AddPersonToFilmMessage<ActorWrappedModel>() { Id = actorListModel.Id });
+            usedMediator.Send(new AddPersonToFilmMessage<ActorWrappedModel>()
+            {
+                Id = actorListModel.Id,
+                PersonName = string.Concat(actorListModel.FirstName, " ", actorListModel.SecondName)
+            });
         }
 
         private void LoadList()
