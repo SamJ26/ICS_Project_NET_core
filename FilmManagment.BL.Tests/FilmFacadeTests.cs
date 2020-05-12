@@ -30,9 +30,8 @@ namespace FilmManagment.BL.Tests
 			var unitOfWork = new UnitOfWork(dbContextFactory);
 			repository = new Repository<FilmEntity>(unitOfWork);
 			mapper = new FilmMapper();
-			var entityFactory = new CreateNewEntityFactory();
 
-			facadeTestUnit = new FilmFacade(unitOfWork, repository, mapper, entityFactory);
+			facadeTestUnit = new FilmFacade(unitOfWork, repository, mapper);
 		}
 
 		[Fact]

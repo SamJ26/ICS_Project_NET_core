@@ -56,4 +56,10 @@ namespace FilmManagment.GUI.Messages
     {
         public string PersonName { get; set; } = string.Empty;
     }
+
+    public class AddRatingToFilmMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
+    {
+        public string TextRating { get; set; } = string.Empty;
+        public int RatingInPercents { get; set; } = 0;
+    }
 }

@@ -27,8 +27,6 @@ namespace FilmManagment.GUI.ViewModels
         private readonly ISelectActorViewModel usedSelectActorViewModel;
         private readonly ISelectDirectorViewModel usedSelectDirectorViewModel;
 
-        //private readonly DirectorFacade directorFacade;
-
         public FilmDetailViewModel(IMediator mediator,
                                    FilmFacade filmFacade,
                                    FilmActorFacade filmActorFacade,
@@ -82,8 +80,17 @@ namespace FilmManagment.GUI.ViewModels
         public ICommand DirectorSelectedCommand { get; }
         public ICommand RatingSelectedCommand { get; }
 
+        private ObservableCollection<FilmActorWrappedModel> actors = new ObservableCollection<FilmActorWrappedModel>();
+        public ObservableCollection<FilmActorWrappedModel> Actors
+        {
+            get => actors;
+            set
+            {
+                actors = value;
+                OnPropertyChanged();
+            }
+        }
 
-        public ObservableCollection<FilmActorWrappedModel> Actors { get; set; } = new ObservableCollection<FilmActorWrappedModel>();
         public ObservableCollection<FilmDirectorWrappedModel> Directors { get; set; } = new ObservableCollection<FilmDirectorWrappedModel>();
         public ObservableCollection<RatingWrappedModel> Ratings { get; set; } = new ObservableCollection<RatingWrappedModel>();
         public List<string> GenreOptions { get; set; }
@@ -175,13 +182,6 @@ namespace FilmManagment.GUI.ViewModels
             saveButtonReady = false;
         }
 
-        // Execute on RemoveActorButtonCommand
-        private void RemoveActorFromList()
-        {
-            Actors.Remove(Actors.Single(item => item.Id == selectedActor.Id));
-            usedFilmActorFacade.Delete(selectedActor.Id);
-        }
-
         // Execute on ActorSelectedCommand
         private void ActorSelected(FilmActorWrappedModel filmActorWrappedModel)
         {
@@ -189,15 +189,15 @@ namespace FilmManagment.GUI.ViewModels
             actorSelected = true;
         }
 
+        // Execute on RemoveActorButtonCommand
+        private void RemoveActorFromList()
+        {
+            Actors.Remove(Actors.Single(item => item.Id == selectedActor.Id));
+            usedFilmActorFacade.Delete(selectedActor.Id);
+        }
+
         // Execute on AddActorButtonCommand
         private void ShowActors() => usedConnectionService.ShowSelectiveWindow(usedSelectActorViewModel);
-
-        // Execute on RemoveDirectorButtonCommand
-        private void RemoveDirectorFromList()
-        {
-            Directors.Remove(Directors.Single(item => item.Id == selectedDirector.Id));
-            usedFilmDirectorFacade.Delete(selectedDirector.Id);
-        }
 
         // Execute on DirectorSelectedCommand
         private void DirectorSelected(FilmDirectorWrappedModel filmDirectorWrappedModel)
@@ -206,44 +206,90 @@ namespace FilmManagment.GUI.ViewModels
             directorSelected = true;
         }
 
+        // Execute on RemoveDirectorButtonCommand
+        private void RemoveDirectorFromList()
+        {
+            Directors.Remove(Directors.Single(item => item.Id == selectedDirector.Id));
+            usedFilmDirectorFacade.Delete(selectedDirector.Id);
+        }
+
         // Execute on AddDirectorButtonCommand
         private void ShowDirectors() => usedConnectionService.ShowSelectiveWindow(usedSelectDirectorViewModel);
+
+        // Execute on RatingSelectedCommand
+        private void RatingSelected()
+        {
+
+        }
+
+        // Execute on RemoveRatingButtonCommand
+        private void RemoveRatingFromList()
+        {
+
+        }
+
+        // Execute on AddRatingButtonCommand
+        private void ShowRatingCreationWindow()
+        {
+
+        }
 
         #endregion
 
         private void AddActorToFilm(AddPersonToFilmMessage<ActorWrappedModel> selectedActor)
         {
-            var filmActorListModel = new FilmActorListModel()
+            if (Model.Actors.All(item => item.ActorId != selectedActor.Id))
             {
-                ActorId = selectedActor.Id,
-                FilmId = Model.Id,
-                FilmName = Model.OriginalName,
-                ActorName = selectedActor.PersonName
-            };
-            Model.Actors.Add(filmActorListModel);
-            usedFilmFacade.Save(Model);
+                var filmActorListModel = new FilmActorListModel()
+                {
+                    ActorId = selectedActor.Id,
+                    FilmId = Model.Id,
+                    FilmName = Model.OriginalName,
+                    ActorName = selectedActor.PersonName
+                };
+                Model.Actors.Add(filmActorListModel);
+                usedFilmFacade.Save(Model);
 
-            // TODO: solve reloading list after adding actor
+                Load(Model.Id);
+            }
         }
 
         private void AddDirectorToFilm(AddPersonToFilmMessage<DirectorWrappedModel> selectedDirector)
         {
-            var filmDirectorListModel = new FilmDirectorListModel()
+            if (Model.Directors.All(item => item.DirectorId != selectedDirector.Id))
             {
-                DirectorId = selectedDirector.Id,
-                FilmId = Model.Id,
-                FilmName = Model.OriginalName,
-                DirectorName = selectedDirector.PersonName
+                var filmDirectorListModel = new FilmDirectorListModel()
+                {
+                    DirectorId = selectedDirector.Id,
+                    FilmId = Model.Id,
+                    FilmName = Model.OriginalName,
+                    DirectorName = selectedDirector.PersonName
+                };
+                Model.Directors.Add(filmDirectorListModel);
+                usedFilmFacade.Save(Model);
+
+                Load(Model.Id);
+            }
+        }
+
+        private void AddRatingToFilm(AddRatingToFilmMessage<RatingWrappedModel> newRating)
+        {
+            var ratingListModel = new RatingListModel()
+            {
+                RatingInPercents = newRating.RatingInPercents,
+                TextRating = newRating.TextRating
             };
-            Model.Directors.Add(filmDirectorListModel);
+            Model.Ratings.Add(ratingListModel);
             usedFilmFacade.Save(Model);
 
-            // TODO: solve reloading list after adding actor
+            Load(Model.Id);
         }
 
         private bool RemoveActorEnabled() => actorSelected ? true : false;
 
         private bool RemoveDirectorEnabled() => directorSelected ? true : false;
+
+        private bool RemoveRatingEnabled() => ratingSelected ? true : false;
 
         private bool CanSave()
         {

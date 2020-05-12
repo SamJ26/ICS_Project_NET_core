@@ -16,9 +16,8 @@ namespace FilmManagment.BL.Facades
 	{
 		public ActorFacade(UnitOfWork aUnitOfWork,
 						   Repository<ActorEntity> aRepository,
-						   IMapper<ActorEntity, ActorListModel, ActorDetailModel> aMapper,
-						   IEntityFactory aEntityFactory)
-						   : base(aUnitOfWork, aRepository, aMapper, aEntityFactory)
+						   IMapper<ActorEntity, ActorListModel, ActorDetailModel> aMapper)
+						   : base(aUnitOfWork, aRepository, aMapper)
 		{
 		}
 
