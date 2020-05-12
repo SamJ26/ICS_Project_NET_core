@@ -1,0 +1,60 @@
+﻿<Window x:Class="FilmManagment.GUI.Services.RatingCreationService.RatingServiceWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FilmManagment.GUI.Services.RatingCreationService"
+        mc:Ignorable="d"
+        Title="RatingServiceWindow"
+        Height="350"
+        Width="500"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid Background="#FF353C4D">
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="25"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0"
+                   Margin="5"
+                   FontSize="11"
+                   Text="Rating in percents:"
+                   Foreground="Orange"/>
+        
+        <TextBox Grid.Row="1"
+                 Width="120"
+                 HorizontalAlignment="Left"
+                 Margin="5 0"
+                 Foreground="White"
+                 Background="#FF353C4D"
+                 Padding="5"
+                 FontSize="11"
+                 Text="{Binding RatingInPercents, Mode=OneWay}"/>
+
+        <Button Grid.Row="1"
+                Margin="5 0"
+                Width="100"
+                HorizontalAlignment="Right"
+                Content="Save"
+                Click="Close_window"
+                Command="{Binding SaveButtonCommand, Mode=OneWay}"/>
+
+        <TextBlock Grid.Row="2"
+                   Margin="5"
+                   FontSize="11"
+                   Text="Text rating:"
+                   Foreground="Orange"/>
+        
+        <TextBox Grid.Row="3"
+                 Margin="5 0 5 10"
+                 Foreground="White"
+                 Background="#FF353C4D"
+                 Padding="5"
+                 FontSize="11"
+                 Text="{Binding TextRating, Mode=OneWay}"/>
+    </Grid>
+</Window>

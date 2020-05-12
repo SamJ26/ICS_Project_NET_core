@@ -20,6 +20,7 @@ using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using FilmManagment.GUI.Services.ConnectionService;
+using FilmManagment.GUI.Services.RatingCreationService;
 
 namespace FilmManagment.GUI
 {
@@ -54,6 +55,9 @@ namespace FilmManagment.GUI
             services.AddSingleton<ISelectActorViewModel, SelectActorViewModel>();
             services.AddSingleton<ISelectDirectorViewModel, SelectDirectorViewModel>();
             services.AddSingleton<IConnectionService, ConnectionService>();
+
+            services.AddSingleton<IRatingServiceViewModel, RatingServiceViewModel>();
+            services.AddSingleton<IRatingCreationService, RatingCreationService>();
 
             services.AddSingleton<IHomeViewModel, HomeViewModel>();
             services.AddSingleton<IFilmListViewModel, FilmListViewModel>();

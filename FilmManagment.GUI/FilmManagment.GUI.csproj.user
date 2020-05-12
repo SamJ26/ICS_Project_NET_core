@@ -10,6 +10,9 @@
     <Compile Update="Services\ConnectionService\SelectiveWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Services\RatingCreationService\RatingServiceWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Services\WarningMessageService\WarningWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -37,6 +40,9 @@
   </ItemGroup>
   <ItemGroup>
     <Page Update="Services\ConnectionService\SelectiveWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Services\RatingCreationService\RatingServiceWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Services\WarningMessageService\WarningWindow.xaml">

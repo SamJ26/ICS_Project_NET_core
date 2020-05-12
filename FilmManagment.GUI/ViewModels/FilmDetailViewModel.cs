@@ -14,6 +14,7 @@ using FilmManagment.DAL.Enums;
 using FilmManagment.GUI.Commands;
 using System.Collections.ObjectModel;
 using FilmManagment.BL.Models.ListModels;
+using FilmManagment.GUI.Services.RatingCreationService;
 
 namespace FilmManagment.GUI.ViewModels
 {
@@ -26,6 +27,7 @@ namespace FilmManagment.GUI.ViewModels
         private readonly IConnectionService usedConnectionService;
         private readonly ISelectActorViewModel usedSelectActorViewModel;
         private readonly ISelectDirectorViewModel usedSelectDirectorViewModel;
+        private readonly IRatingCreationService usedRatingCreationService;
 
         public FilmDetailViewModel(IMediator mediator,
                                    FilmFacade filmFacade,
@@ -33,9 +35,8 @@ namespace FilmManagment.GUI.ViewModels
                                    FilmDirectorFacade filmDirectorFacade,
                                    IConnectionService connectionService,
                                    ISelectActorViewModel selectActorViewModel,
-                                   ISelectDirectorViewModel selectDirectorViewModel
-            )
-            
+                                   ISelectDirectorViewModel selectDirectorViewModel,
+                                   IRatingCreationService ratingCreationService)     
         {
             usedMediator = mediator;
             usedFilmFacade = filmFacade;
@@ -44,6 +45,7 @@ namespace FilmManagment.GUI.ViewModels
             usedConnectionService = connectionService;
             usedSelectActorViewModel = selectActorViewModel;
             usedSelectDirectorViewModel = selectDirectorViewModel;
+            usedRatingCreationService = ratingCreationService;
 
             mediator.Register<NewMessage<FilmWrappedModel>>(CreateNewWrappedModel);
             mediator.Register<SelectedMessage<FilmWrappedModel>>(PrepareFilm);
@@ -64,6 +66,8 @@ namespace FilmManagment.GUI.ViewModels
             RemoveDirectorButtonCommand = new RelayCommand(RemoveDirectorFromList, RemoveDirectorEnabled);
             AddDirectorButtonCommand = new RelayCommand(ShowDirectors);
 
+            AddRatingButtonCommand = new RelayCommand(ShowRatingCreationWindow);
+
             GenreOptions = EnumExtensions.ConvertEnumToList<Genre>();
         }
 
@@ -80,17 +84,8 @@ namespace FilmManagment.GUI.ViewModels
         public ICommand DirectorSelectedCommand { get; }
         public ICommand RatingSelectedCommand { get; }
 
-        private ObservableCollection<FilmActorWrappedModel> actors = new ObservableCollection<FilmActorWrappedModel>();
-        public ObservableCollection<FilmActorWrappedModel> Actors
-        {
-            get => actors;
-            set
-            {
-                actors = value;
-                OnPropertyChanged();
-            }
-        }
 
+        public ObservableCollection<FilmActorWrappedModel> Actors { get; set; } = new ObservableCollection<FilmActorWrappedModel>();
         public ObservableCollection<FilmDirectorWrappedModel> Directors { get; set; } = new ObservableCollection<FilmDirectorWrappedModel>();
         public ObservableCollection<RatingWrappedModel> Ratings { get; set; } = new ObservableCollection<RatingWrappedModel>();
         public List<string> GenreOptions { get; set; }
@@ -229,10 +224,7 @@ namespace FilmManagment.GUI.ViewModels
         }
 
         // Execute on AddRatingButtonCommand
-        private void ShowRatingCreationWindow()
-        {
-
-        }
+        private void ShowRatingCreationWindow() => usedRatingCreationService.ShowWindow();
 
         #endregion
 

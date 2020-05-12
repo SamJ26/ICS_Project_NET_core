@@ -13,13 +13,17 @@ namespace FilmManagment.GUI.Wrappers
         {     
         }
 
-        // TODO: here must be probably also TextRating property !
-
         #region Wrapping properties
 
         public int RatingInPercents
         {
             get => GetValue<int>();
+            set => SetValue(value);
+        }
+
+        public string TextRating
+        {
+            get => GetValue<string>();
             set => SetValue(value);
         }
 
