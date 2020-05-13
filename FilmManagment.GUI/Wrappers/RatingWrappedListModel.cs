@@ -31,6 +31,6 @@ namespace FilmManagment.GUI.Wrappers
 
         public static implicit operator RatingWrappedListModel(RatingListModel listModel) => new RatingWrappedListModel(listModel);
 
-        public static implicit operator RatingListModel(RatingWrappedListModel wrappedModel) => wrappedModel.usedModel;
+        public static implicit operator RatingListModel(RatingWrappedListModel wrappedModel) => wrappedModel.UsedModel;
     }
 }

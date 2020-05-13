@@ -71,6 +71,7 @@ namespace FilmManagment.GUI
             services.AddSingleton<IMapper<FilmEntity, FilmListModel, FilmDetailModel>, FilmMapper>();
             services.AddSingleton<IMapper<ActorEntity, ActorListModel, ActorDetailModel>, ActorMapper>();
             services.AddSingleton<IMapper<DirectorEntity, DirectorListModel, DirectorDetailModel>, DirectorMapper>();
+            services.AddSingleton<IMapper<RatingEntity, RatingListModel, RatingDetailModel>, RatingMapper>();
 
             services.AddTransient<ActorFacade>();
             services.AddTransient<FilmFacade>();

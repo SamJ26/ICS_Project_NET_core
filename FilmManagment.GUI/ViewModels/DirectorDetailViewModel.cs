@@ -15,16 +15,18 @@ namespace FilmManagment.GUI.ViewModels
     public class DirectorDetailViewModel : ViewModelBase, IDirectorDetailViewModel
     {
         private readonly IMediator usedMediator;
-        private readonly DirectorFacade usedActorFacade;
+        private readonly DirectorFacade usedDirectorFacade;
 
         public DirectorDetailViewModel(IMediator mediator,
-                                       DirectorFacade actorFacade)
+                                       DirectorFacade directorFacade)
         {
             usedMediator = mediator;
-            usedActorFacade = actorFacade;
+            usedDirectorFacade = directorFacade;
 
             usedMediator.Register<NewMessage<DirectorWrappedModel>>(CreateNewWrappedModel);
             usedMediator.Register<SelectedMessage<DirectorWrappedModel>>(PrepareDirector);
+
+            usedMediator.Register<MoveFromDetailToDetailMessage<DirectorWrappedModel>>(ShowDetailInfo);
 
             FilmSelectedCommand = new RelayCommand<FilmDirectorWrappedModel>(MoveToFilmDetail);
             EditButtonCommand = new RelayCommand(EnableTextEditing);
@@ -40,8 +42,6 @@ namespace FilmManagment.GUI.ViewModels
 
 
         private bool saveButtonReady = false;
-
-        private FilmActorWrappedModel selectedFilm;
 
 
         private DirectorWrappedModel model;
@@ -84,7 +84,7 @@ namespace FilmManagment.GUI.ViewModels
         // Execute on SaveButtonCommand
         private void Save()
         {
-            usedActorFacade.Save(Model);
+            usedDirectorFacade.Save(Model);
             usedMediator.Send(new UpdateMessage<DirectorWrappedModel> { Model = Model });
             ReadOnlyTextBoxes = true;
             saveButtonReady = false;
@@ -94,11 +94,12 @@ namespace FilmManagment.GUI.ViewModels
 
         public void Load(Guid id)
         {
-            Model = usedActorFacade.GetById(id);
-
+            Model = usedDirectorFacade.GetById(id);
             DirectedMovies.Clear();
             DirectedMovies.AddList(Model.DirectedMovies);
         }
+
+        private void ShowDetailInfo(MoveFromDetailToDetailMessage<DirectorWrappedModel> director) => Load(director.Id);
 
         private void CreateNewWrappedModel(NewMessage<DirectorWrappedModel> _)
         {

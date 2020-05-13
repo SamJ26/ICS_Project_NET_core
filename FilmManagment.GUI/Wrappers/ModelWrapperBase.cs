@@ -11,13 +11,13 @@ namespace FilmManagment.GUI.Wrappers
 {
     public abstract class ModelWrapperBase<TModel> : ViewModelBase, IId where TModel : IId
     {
-        public TModel usedModel { get; }
+        public TModel UsedModel { get; }
 
         protected ModelWrapperBase(TModel model)
         {
             if (model == null)
                 throw new ArgumentException("Null reference: " + nameof(model));
-            usedModel = model;
+            UsedModel = model;
         }
 
         public Guid Id
@@ -28,17 +28,17 @@ namespace FilmManagment.GUI.Wrappers
 
         protected PropertyType GetValue<PropertyType>([CallerMemberName] string propertyName = null)
         {
-            var propertyInfo = usedModel.GetType().GetProperty(propertyName);
-            return (PropertyType)propertyInfo.GetValue(usedModel);
+            var propertyInfo = UsedModel.GetType().GetProperty(propertyName);
+            return (PropertyType)propertyInfo.GetValue(UsedModel);
         }
 
         protected void SetValue<PropertyType>(PropertyType value, [CallerMemberName] string propertyName = null)
         {
-            var propertyInfo = usedModel.GetType().GetProperty(propertyName);
-            var propertyValue = propertyInfo.GetValue(usedModel);
+            var propertyInfo = UsedModel.GetType().GetProperty(propertyName);
+            var propertyValue = propertyInfo.GetValue(UsedModel);
             if ( !Equals(propertyInfo,propertyValue))
             {
-                propertyInfo.SetValue(usedModel, value);
+                propertyInfo.SetValue(UsedModel, value);
                 OnPropertyChanged();
             }
         }
@@ -50,7 +50,7 @@ namespace FilmManagment.GUI.Wrappers
             wrappedCollection.CollectionChanged += (s, e) =>
             {
                 modelCollection.Clear();
-                foreach (var model in wrappedCollection.Select(i => i.usedModel))
+                foreach (var model in wrappedCollection.Select(i => i.UsedModel))
                 {
                     modelCollection.Add(model);
                 }

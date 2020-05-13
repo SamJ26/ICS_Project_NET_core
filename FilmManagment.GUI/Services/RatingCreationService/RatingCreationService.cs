@@ -15,8 +15,10 @@ namespace FilmManagment.GUI.Services.RatingCreationService
 
         public void ShowWindow()
         {
-            var window = new RatingServiceWindow();
-            window.DataContext = ratingServiceViewModel;
+            var window = new RatingServiceWindow
+            {
+                DataContext = ratingServiceViewModel
+            };
             window.ShowDialog();
         }
     }

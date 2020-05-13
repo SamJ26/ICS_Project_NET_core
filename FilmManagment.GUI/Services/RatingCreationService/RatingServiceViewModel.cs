@@ -14,12 +14,34 @@ namespace FilmManagment.GUI.Services.RatingCreationService
         {
             usedMediator = mediator;
             SaveButtonCommand = new RelayCommand(SaveRating, CanSave);
-        }
 
+            ratingInPercents = 0;
+            textRating = string.Empty;
+        }
+ 
         public ICommand SaveButtonCommand { get; set; }
 
-        public int RatingInPercents { get; set; }
-        public string TextRating { get; set; }
+        private int ratingInPercents;
+        public int RatingInPercents
+        {
+            get => ratingInPercents;
+            set
+            {
+                ratingInPercents = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string textRating;
+        public string TextRating
+        {
+            get => textRating;
+            set
+            {
+                textRating = value;
+                OnPropertyChanged();
+            }
+        }
 
         private void SaveRating()
         {
@@ -28,6 +50,8 @@ namespace FilmManagment.GUI.Services.RatingCreationService
                 TextRating = this.TextRating,
                 RatingInPercents = this.RatingInPercents
             });
+            ratingInPercents = 0;
+            textRating = string.Empty;
         }
 
         private bool CanSave() => (RatingInPercents != 0 && !string.IsNullOrWhiteSpace(TextRating)) ? true : false;

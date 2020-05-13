@@ -10,16 +10,14 @@ namespace FilmManagment.GUI.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly IMediator usedMediator;
-
-        public MainViewModel(IHomeViewModel homeViewModel,
+        public MainViewModel(IMediator mediator,
+                             IHomeViewModel homeViewModel,
                              IFilmListViewModel filmListViewModel,
                              IActorListViewModel actorListViewModel,
                              IDirectorListViewModel directorListViewModel,
                              IFilmDetailViewModel filmDetailViewModel,
                              IActorDetailViewModel actorDetailViewModel,
-                             IDirectorDetailViewModel directorDetailViewModel,
-                             IMediator mediator)
+                             IDirectorDetailViewModel directorDetailViewModel)
         {
             HomeViewModel = homeViewModel;
             FilmListViewModel = filmListViewModel;
@@ -45,6 +43,9 @@ namespace FilmManagment.GUI.ViewModels
             mediator.Register<MoveFromDetailToDetailMessage<FilmActorWrappedModel>>(MoveToFilmFromActor);
             mediator.Register<MoveFromDetailToDetailMessage<FilmDirectorWrappedModel>>(MoveToFilmFromDirector);
 
+            mediator.Register<MoveFromDetailToDetailMessage<ActorWrappedModel>>(MoveToActorFromFilm);
+            mediator.Register<MoveFromDetailToDetailMessage<DirectorWrappedModel>>(MoveToDirectorFromFilm);
+
             selectedView = HomeViewModel;
         }
 
@@ -59,7 +60,7 @@ namespace FilmManagment.GUI.ViewModels
             }
         }
 
-        // Commands for buttons
+        // Commands
         public ICommand HomeButtonCommand { get; }
         public ICommand FilmsButtonCommand { get; }
         public ICommand ActorsButtonCommand { get; }
@@ -135,6 +136,10 @@ namespace FilmManagment.GUI.ViewModels
         private void MoveToFilmFromActor(MoveFromDetailToDetailMessage<FilmActorWrappedModel> _) => SelectedView = FilmDetailViewModel;
 
         private void MoveToFilmFromDirector(MoveFromDetailToDetailMessage<FilmDirectorWrappedModel> _) => SelectedView = FilmDetailViewModel;
+
+        private void MoveToActorFromFilm(MoveFromDetailToDetailMessage<ActorWrappedModel> _) => SelectedView = ActorDetailViewModel;
+
+        private void MoveToDirectorFromFilm(MoveFromDetailToDetailMessage<DirectorWrappedModel> _) => SelectedView = DirectorDetailViewModel;
 
         #endregion
     }

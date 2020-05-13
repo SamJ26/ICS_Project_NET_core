@@ -57,6 +57,10 @@ namespace FilmManagment.GUI.Messages
         public string PersonName { get; set; } = string.Empty;
     }
 
+    /// <summary>
+    /// This is message will be sent to FilmDetailViewModel when user press Save button on RatingServiceWindow
+    /// </summary>
+    /// <typeparam name="TwrrappedModel"> Always RatingWrappedModel </typeparam>
     public class AddRatingToFilmMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
     {
         public string TextRating { get; set; } = string.Empty;

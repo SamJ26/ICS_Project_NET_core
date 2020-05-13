@@ -33,7 +33,7 @@
                  Background="#FF353C4D"
                  Padding="5"
                  FontSize="11"
-                 Text="{Binding RatingInPercents, Mode=OneWay}"/>
+                 Text="{Binding RatingInPercents, UpdateSourceTrigger=PropertyChanged}"/>
 
         <Button Grid.Row="1"
                 Margin="5 0"
@@ -55,6 +55,6 @@
                  Background="#FF353C4D"
                  Padding="5"
                  FontSize="11"
-                 Text="{Binding TextRating, Mode=OneWay}"/>
+                 Text="{Binding TextRating, UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>
