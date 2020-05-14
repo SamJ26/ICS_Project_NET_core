@@ -54,6 +54,7 @@ namespace FilmManagment.GUI.ViewModels
             mediator.Register<SelectedMessage<FilmWrappedModel>>(PrepareFilm);
             mediator.Register<MoveFromDetailToDetailMessage<FilmActorWrappedModel>>(PrepareFilm);
             mediator.Register<MoveFromDetailToDetailMessage<FilmDirectorWrappedModel>>(PrepareFilm);
+            mediator.Register<MoveFromDetailToDetailMessage<FilmWrappedModel>>(PrepareFilm);
             mediator.Register<AddPersonToFilmMessage<ActorWrappedModel>>(AddActorToFilm);
             mediator.Register<AddPersonToFilmMessage<DirectorWrappedModel>>(AddDirectorToFilm);
             mediator.Register<AddRatingToFilmMessage<RatingWrappedListModel>>(AddRatingToFilm);
@@ -357,5 +358,7 @@ namespace FilmManagment.GUI.ViewModels
         private void PrepareFilm(MoveFromDetailToDetailMessage<FilmActorWrappedModel> film) => Load(film.Id);
 
         private void PrepareFilm(MoveFromDetailToDetailMessage<FilmDirectorWrappedModel> film) => Load(film.Id);
+
+        private void PrepareFilm(MoveFromDetailToDetailMessage<FilmWrappedModel> film) => Load(film.Id);
     }
 }
