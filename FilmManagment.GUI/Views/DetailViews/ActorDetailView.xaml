@@ -95,42 +95,38 @@
                     </i:Interaction.Triggers>
 
                     <DataGrid.Columns>
-
                         <DataGridTextColumn Header="Original name of film"
                                             Width="*"
                                             Binding="{Binding FilmName}"/>
-
                     </DataGrid.Columns>
                 </DataGrid>
-
             </ScrollViewer>
         </Grid>
 
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
-                <RowDefinition Height="4*"/>
+                <RowDefinition Height="8*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
-            <!-- TODO: Add binging to PhotoFilePath -->
             <Image Margin="10"
                    Source="{Binding Model.PhotoFilePath, UpdateSourceTrigger=PropertyChanged}"/>
             
-
-            <Grid Grid.Row="2">
+            <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Edit button -->
                 <Button Grid.Column="0"
-                        Margin="5 5 2 20" 
+                        Margin="10 5 3 5" 
                         Background="Bisque"
                         Command="{Binding EditButtonCommand}"
                         CommandParameter="{Binding}">
-                    <TextBlock FontSize="20"
+                    <TextBlock FontSize="17"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center">
                             <Bold Foreground="Black"> Edit </Bold>
@@ -138,33 +134,14 @@
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" 
-                                    Value="10"/>
-                        </Style>
-                    </Button.Resources>
-                </Button>
-
-                <!-- Save button -->
-                <Button Grid.Column="1"
-                        Margin="2 5 2 20" 
-                        Background="Bisque"
-                        Command="{Binding SaveButtonCommand}"
-                        CommandParameter="{Binding}">
-                    <TextBlock FontSize="20"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center">
-                            <Bold Foreground="Black"> Save </Bold>
-                    </TextBlock>
-                    <Button.Resources>
-                        <Style TargetType="Border">
-                            <Setter Property="CornerRadius" 
-                                    Value="10"/>
+                                    Value="3"/>
                         </Style>
                     </Button.Resources>
                 </Button>
 
                 <!-- Update photo button -->
-                <Button Grid.Column="2"
-                        Margin="2 5 10 20" 
+                <Button Grid.Column="1"
+                        Margin="3 5 10 5" 
                         Background="Bisque"
                         Command="{Binding UpdatePhotoButtonCommand}"
                         CommandParameter="{Binding}">
@@ -178,12 +155,30 @@
                     <Button.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" 
-                                    Value="10"/>
+                                    Value="3"/>
                         </Style>
                     </Button.Resources>
                 </Button>
-                
             </Grid>
+                
+            <!-- Save button -->
+            <Button Grid.Row="2"
+                    Margin="10 5 10 0" 
+                    Background="Bisque"
+                    Command="{Binding SaveButtonCommand}"
+                    CommandParameter="{Binding}">
+                <TextBlock FontSize="20"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center">
+                        <Bold Foreground="Black"> Save </Bold>
+                </TextBlock>
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" 
+                                Value="3"/>
+                    </Style>
+                </Button.Resources>
+            </Button>
         </Grid>
     </Grid>
 </UserControl>

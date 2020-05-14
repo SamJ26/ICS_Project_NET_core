@@ -10,6 +10,7 @@ using System.Windows.Input;
 using FilmManagment.GUI.Commands;
 using System.Collections.ObjectModel;
 using FilmManagment.GUI.Services.FileBrowserService;
+using FilmManagment.GUI.Services.WebService;
 
 namespace FilmManagment.GUI.ViewModels
 {
@@ -18,14 +19,17 @@ namespace FilmManagment.GUI.ViewModels
         private readonly IMediator usedMediator;
         private readonly ActorFacade usedActorFacade;
         private readonly IFileBrowserService usedFileBrowserService;
+        private readonly IOpenWebPageService usedOpenWebPageService;
 
         public ActorDetailViewModel(IMediator mediator,
                                     ActorFacade actorFacade,
-                                    IFileBrowserService fileBrowserSerice)
+                                    IFileBrowserService fileBrowserSerice,
+                                    IOpenWebPageService openWebPageService)
         {
             usedMediator = mediator;
             usedActorFacade = actorFacade;
             usedFileBrowserService = fileBrowserSerice;
+            usedOpenWebPageService = openWebPageService;
 
             usedMediator.Register<NewMessage<ActorWrappedModel>>(CreateNewWrappedModel);
             usedMediator.Register<SelectedMessage<ActorWrappedModel>>(PrepareActor);
@@ -36,6 +40,7 @@ namespace FilmManagment.GUI.ViewModels
             EditButtonCommand = new RelayCommand(EnableEditing);
             SaveButtonCommand = new RelayCommand(Save, CanSave);
             UpdatePhotoButtonCommand = new RelayCommand(UpdatePhoto, UpdatePhotoEnabled);
+            OpenWikiButtonCommand = new RelayCommand(OpenWiki, OpenWikiEnabled);
         }
 
         // Commands
@@ -43,6 +48,7 @@ namespace FilmManagment.GUI.ViewModels
         public ICommand EditButtonCommand { get; }
         public ICommand SaveButtonCommand { get; }
         public ICommand UpdatePhotoButtonCommand { get; }
+        public ICommand OpenWikiButtonCommand { get; }
 
         public ObservableCollection<FilmActorWrappedModel> ActedMovies { get; set; } = new ObservableCollection<FilmActorWrappedModel>();
 
@@ -109,10 +115,17 @@ namespace FilmManagment.GUI.ViewModels
             Model.PhotoFilePath = filePath;
             OnPropertyChanged("Model");
         }
+        private void OpenWiki()
+        {
+            if (!usedOpenWebPageService.OpenUri(Model.WikiUrl))
+                throw new ArgumentException("Unable to open uri adress!");
+        }
 
         #endregion
 
         private bool UpdatePhotoEnabled() => updatePhotoButtonEnabled ? true : false;
+
+        private bool OpenWikiEnabled() => !string.IsNullOrEmpty(Model.WikiUrl) && !string.IsNullOrWhiteSpace(Model.WikiUrl) ? true : false;
 
         public void Load(Guid id)
         {

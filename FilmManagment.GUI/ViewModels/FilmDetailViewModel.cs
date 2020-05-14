@@ -316,9 +316,9 @@ namespace FilmManagment.GUI.ViewModels
                 !string.IsNullOrWhiteSpace(Model.OriginalName) &&
                 !string.IsNullOrWhiteSpace(Model.CzechName) &&
                 !string.IsNullOrWhiteSpace(Model.CountryOfOrigin) &&
-                !string.IsNullOrWhiteSpace(Model.Description) &&
+                //!string.IsNullOrWhiteSpace(Model.Description) &&          // TODO
                 Model.GenreOfFilm != Genre.Undefined &&
-                Model.LengthInMinutes != TimeSpan.Zero)
+                !FilmLength.Equals("00:00:00"))
                 return true;
             return false;
         }
