@@ -49,11 +49,26 @@
                          Text="{Binding Model.Age, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
 
                 <TextBlock Foreground="Orange" Margin="10 0 0 2"> Wiki </TextBlock>
-                <TextBox Padding="5"
-                         Background="#FF72747C"
-                         Margin="10 0 10 5"
-                         IsReadOnly="{Binding Path=ReadOnlyTextBoxes, Mode=OneWay}"
-                         Text="{Binding Model.WikiUrl, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="2*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBox Padding="5"
+                             Background="#FF72747C"
+                             Margin="10 0 10 5"
+                             IsReadOnly="{Binding Path=ReadOnlyTextBoxes, Mode=OneWay}"
+                             Text="{Binding Model.WikiUrl, UpdateSourceTrigger=PropertyChanged}" Foreground="White"/>
+
+                    <Button Grid.Column="1"
+                            Content="Open wiki"
+                            Margin="0 0 10 5"
+                            Background="Gray"
+                            FontSize="15"
+                            Command="{Binding OpenWikiButtonCommand}"/>
+                </Grid>
 
                 <TextBlock Foreground="Orange" Margin="10 0 0 2"> Acted films </TextBlock>
 
@@ -98,17 +113,20 @@
             </Grid.RowDefinitions>
 
             <!-- TODO: Add binging to PhotoFilePath -->
-            <Image Margin="10"/>
+            <Image Margin="10"
+                   Source="{Binding Model.PhotoFilePath, UpdateSourceTrigger=PropertyChanged}"/>
+            
 
-            <Grid Grid.Row="1">
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
                 <!-- Edit button -->
                 <Button Grid.Column="0"
-                        Margin="5 5 5 20" 
+                        Margin="5 5 2 20" 
                         Background="Bisque"
                         Command="{Binding EditButtonCommand}"
                         CommandParameter="{Binding}">
@@ -127,7 +145,7 @@
 
                 <!-- Save button -->
                 <Button Grid.Column="1"
-                        Margin="5 5 10 20" 
+                        Margin="2 5 2 20" 
                         Background="Bisque"
                         Command="{Binding SaveButtonCommand}"
                         CommandParameter="{Binding}">
@@ -144,6 +162,27 @@
                     </Button.Resources>
                 </Button>
 
+                <!-- Update photo button -->
+                <Button Grid.Column="2"
+                        Margin="2 5 10 20" 
+                        Background="Bisque"
+                        Command="{Binding UpdatePhotoButtonCommand}"
+                        CommandParameter="{Binding}">
+                    <TextBlock FontSize="17"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center">
+                        <Bold Foreground="Black"> Update photo </Bold>
+                    </TextBlock>
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" 
+                                    Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                
             </Grid>
         </Grid>
     </Grid>
