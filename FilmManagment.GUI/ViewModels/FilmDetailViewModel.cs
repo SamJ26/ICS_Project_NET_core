@@ -52,9 +52,9 @@ namespace FilmManagment.GUI.ViewModels
 
             mediator.Register<NewMessage<FilmWrappedModel>>(CreateNewWrappedModel);
             mediator.Register<SelectedMessage<FilmWrappedModel>>(PrepareFilm);
-            mediator.Register<MoveFromDetailToDetailMessage<FilmActorWrappedModel>>(PrepareFilm);
-            mediator.Register<MoveFromDetailToDetailMessage<FilmDirectorWrappedModel>>(PrepareFilm);
-            mediator.Register<MoveFromDetailToDetailMessage<FilmWrappedModel>>(PrepareFilm);
+            mediator.Register<MoveToDetailMessage<FilmActorWrappedModel>>(PrepareFilm);
+            mediator.Register<MoveToDetailMessage<FilmDirectorWrappedModel>>(PrepareFilm);
+            mediator.Register<MoveToDetailMessage<FilmWrappedModel>>(PrepareFilm);
             mediator.Register<AddPersonToFilmMessage<ActorWrappedModel>>(AddActorToFilm);
             mediator.Register<AddPersonToFilmMessage<DirectorWrappedModel>>(AddDirectorToFilm);
             mediator.Register<AddRatingToFilmMessage<RatingWrappedListModel>>(AddRatingToFilm);
@@ -247,13 +247,13 @@ namespace FilmManagment.GUI.ViewModels
 
         private void MoveToActorDetail(FilmActorWrappedModel selectedFilmActorWrappedModel)
         {
-            usedMediator.Send(new MoveFromDetailToDetailMessage<ActorWrappedModel> { Id = selectedFilmActorWrappedModel.ActorId });
+            usedMediator.Send(new MoveToDetailMessage<ActorWrappedModel> { Id = selectedFilmActorWrappedModel.ActorId });
             selectedActor = null;
         }
 
         private void MoveToDirectorDetail(FilmDirectorWrappedModel selectedFilmDirectorWrappedModel)
         {
-            usedMediator.Send(new MoveFromDetailToDetailMessage<DirectorWrappedModel> { Id = selectedFilmDirectorWrappedModel.DirectorId });
+            usedMediator.Send(new MoveToDetailMessage<DirectorWrappedModel> { Id = selectedFilmDirectorWrappedModel.DirectorId });
             selectedDirector = null;
         }
 
@@ -355,10 +355,10 @@ namespace FilmManagment.GUI.ViewModels
 
         private void PrepareFilm(SelectedMessage<FilmWrappedModel> film) => Load(film.Id);
 
-        private void PrepareFilm(MoveFromDetailToDetailMessage<FilmActorWrappedModel> film) => Load(film.Id);
+        private void PrepareFilm(MoveToDetailMessage<FilmActorWrappedModel> film) => Load(film.Id);
 
-        private void PrepareFilm(MoveFromDetailToDetailMessage<FilmDirectorWrappedModel> film) => Load(film.Id);
+        private void PrepareFilm(MoveToDetailMessage<FilmDirectorWrappedModel> film) => Load(film.Id);
 
-        private void PrepareFilm(MoveFromDetailToDetailMessage<FilmWrappedModel> film) => Load(film.Id);
+        private void PrepareFilm(MoveToDetailMessage<FilmWrappedModel> film) => Load(film.Id);
     }
 }

@@ -26,7 +26,7 @@ namespace FilmManagment.GUI.ViewModels
             usedMediator.Register<NewMessage<ActorWrappedModel>>(CreateNewWrappedModel);
             usedMediator.Register<SelectedMessage<ActorWrappedModel>>(PrepareActor);
 
-            usedMediator.Register<MoveFromDetailToDetailMessage<ActorWrappedModel>>(ShowDetailInfo);
+            usedMediator.Register<MoveToDetailMessage<ActorWrappedModel>>(ShowDetailInfo);
 
             FilmSelectedCommand = new RelayCommand<FilmActorWrappedModel>(MoveToFilmDetail);
             EditButtonCommand = new RelayCommand(EnableTextEditing);
@@ -71,7 +71,7 @@ namespace FilmManagment.GUI.ViewModels
         // Execute on FilmSelectedCommand
         private void MoveToFilmDetail(FilmActorWrappedModel filmActorWrappedModel)
         {
-            usedMediator.Send(new MoveFromDetailToDetailMessage<FilmActorWrappedModel> { Id = filmActorWrappedModel.FilmId });
+            usedMediator.Send(new MoveToDetailMessage<FilmActorWrappedModel> { Id = filmActorWrappedModel.FilmId });
         }
 
         // Execute on EditButtonCommand
@@ -100,7 +100,7 @@ namespace FilmManagment.GUI.ViewModels
             ActedMovies.AddList(Model.ActedMovies);
         }
 
-        private void ShowDetailInfo(MoveFromDetailToDetailMessage<ActorWrappedModel> actor) => Load(actor.Id);
+        private void ShowDetailInfo(MoveToDetailMessage<ActorWrappedModel> actor) => Load(actor.Id);
 
         private void CreateNewWrappedModel(NewMessage<ActorWrappedModel> _)
         {

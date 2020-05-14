@@ -95,13 +95,13 @@ namespace FilmManagment.GUI.ViewModels
         private void ShowDetail(FoundItem selectedItem)
         {
             if (selectedItem.FoundObject.Equals(FoundObjectType.Actor))
-                usedMediator.Send(new MoveFromDetailToDetailMessage<ActorWrappedModel>() { Id = selectedItem.Id });
+                usedMediator.Send(new MoveToDetailMessage<ActorWrappedModel>() { Id = selectedItem.Id });
 
             else if (selectedItem.FoundObject.Equals(FoundObjectType.Director))
-                usedMediator.Send(new MoveFromDetailToDetailMessage<DirectorWrappedModel>() { Id = selectedItem.Id });
+                usedMediator.Send(new MoveToDetailMessage<DirectorWrappedModel>() { Id = selectedItem.Id });
 
             else if (selectedItem.FoundObject.Equals(FoundObjectType.Film))
-                usedMediator.Send(new MoveFromDetailToDetailMessage<FilmWrappedModel>() { Id = selectedItem.Id });
+                usedMediator.Send(new MoveToDetailMessage<FilmWrappedModel>() { Id = selectedItem.Id });
 
             else
                 throw new ArgumentException("Unknown Enum type!");

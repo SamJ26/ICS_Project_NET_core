@@ -44,7 +44,7 @@ namespace FilmManagment.GUI.Messages
     /// This message will be sent e.g. when you want to move on FilmDetail from ActorDetail via Actor.ActedMovies
     /// </summary>
     /// <typeparam name="TwrrappedModel"> Selected item which you want to see in detail view </typeparam>
-    public class MoveFromDetailToDetailMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
+    public class MoveToDetailMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
     {
     }
 

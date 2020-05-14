@@ -40,12 +40,12 @@ namespace FilmManagment.GUI.ViewModels
             mediator.Register<NewMessage<ActorWrappedModel>>(AddNewActor);
             mediator.Register<NewMessage<DirectorWrappedModel>>(AddNewDirector);
 
-            mediator.Register<MoveFromDetailToDetailMessage<FilmActorWrappedModel>>(MoveToFilmFromActor);
-            mediator.Register<MoveFromDetailToDetailMessage<FilmDirectorWrappedModel>>(MoveToFilmFromDirector);
+            mediator.Register<MoveToDetailMessage<FilmActorWrappedModel>>(MoveToFilmFromActor);
+            mediator.Register<MoveToDetailMessage<FilmDirectorWrappedModel>>(MoveToFilmFromDirector);
 
-            mediator.Register<MoveFromDetailToDetailMessage<ActorWrappedModel>>(MoveToActorFromFilm);
-            mediator.Register<MoveFromDetailToDetailMessage<DirectorWrappedModel>>(MoveToDirectorFromFilm);
-            mediator.Register<MoveFromDetailToDetailMessage<FilmWrappedModel>>(MoveToFilm);
+            mediator.Register<MoveToDetailMessage<ActorWrappedModel>>(MoveToActorFromFilm);
+            mediator.Register<MoveToDetailMessage<DirectorWrappedModel>>(MoveToDirectorFromFilm);
+            mediator.Register<MoveToDetailMessage<FilmWrappedModel>>(MoveToFilm);
 
             selectedView = HomeViewModel;
         }
@@ -134,15 +134,15 @@ namespace FilmManagment.GUI.ViewModels
 
         #region Move from detail to detail
 
-        private void MoveToFilmFromActor(MoveFromDetailToDetailMessage<FilmActorWrappedModel> _) => SelectedView = FilmDetailViewModel;
+        private void MoveToFilmFromActor(MoveToDetailMessage<FilmActorWrappedModel> _) => SelectedView = FilmDetailViewModel;
 
-        private void MoveToFilmFromDirector(MoveFromDetailToDetailMessage<FilmDirectorWrappedModel> _) => SelectedView = FilmDetailViewModel;
+        private void MoveToFilmFromDirector(MoveToDetailMessage<FilmDirectorWrappedModel> _) => SelectedView = FilmDetailViewModel;
 
-        private void MoveToActorFromFilm(MoveFromDetailToDetailMessage<ActorWrappedModel> _) => SelectedView = ActorDetailViewModel;
+        private void MoveToActorFromFilm(MoveToDetailMessage<ActorWrappedModel> _) => SelectedView = ActorDetailViewModel;
 
-        private void MoveToDirectorFromFilm(MoveFromDetailToDetailMessage<DirectorWrappedModel> _) => SelectedView = DirectorDetailViewModel;
+        private void MoveToDirectorFromFilm(MoveToDetailMessage<DirectorWrappedModel> _) => SelectedView = DirectorDetailViewModel;
 
-        private void MoveToFilm(MoveFromDetailToDetailMessage<FilmWrappedModel> _) => selectedView = FilmDetailViewModel;
+        private void MoveToFilm(MoveToDetailMessage<FilmWrappedModel> _) => selectedView = FilmDetailViewModel;
 
         #endregion
     }
