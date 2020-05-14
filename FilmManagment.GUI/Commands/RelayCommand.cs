@@ -20,6 +20,10 @@ namespace FilmManagment.GUI.Commands
         {
         }
 
+        public RelayCommand()
+        {
+        }
+
         public bool CanExecute(object parameter)
         {
             return canExecuteAction?.Invoke(parameter) ?? true;

@@ -3,6 +3,7 @@ using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using FilmManagment.DAL.Entities;
 using FilmManagment.DAL.Factories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -58,20 +59,32 @@ namespace FilmManagment.BL.Mappers
 			newEntity.ImageFilePath = detailModel.ImageFilePath;
 			newEntity.GenreOfFilm = detailModel.GenreOfFilm;
 			newEntity.LengthInMinutes = detailModel.LengthInMinutes;
+			
+			newEntity.Directors = detailModel.Directors.Select(model =>
+			{
+				var newFilmDirectorEntity = entityFactory.Create<FilmDirectorEntity>(model.Id);
+				newFilmDirectorEntity.FilmId = detailModel.Id;
+				newFilmDirectorEntity.DirectorId = model.DirectorId;
+				return newFilmDirectorEntity;
+
+			}).ToList();
+
 			newEntity.Actors = detailModel.Actors.Select(model =>
 			{
-				var newFilmActorEntity = entityFactory.Create<FilmActorEntity>(model.FilmId);
+				var newFilmActorEntity = entityFactory.Create<FilmActorEntity>(model.Id);
 				newFilmActorEntity.FilmId = detailModel.Id;
 				newFilmActorEntity.ActorId = model.ActorId;
 				return newFilmActorEntity;
 
 			}).ToList();
-			newEntity.Directors = detailModel.Directors.Select(model =>
+
+			newEntity.Ratings = detailModel.Ratings.Select(model =>
 			{
-				var newFilmDirectorEntity = entityFactory.Create<FilmDirectorEntity>(model.FilmId);
-				newFilmDirectorEntity.FilmId = detailModel.Id;
-				newFilmDirectorEntity.DirectorId = model.DirectorId;
-				return newFilmDirectorEntity;
+				var newRatingEntity = entityFactory.Create<RatingEntity>(model.Id);
+				newRatingEntity.FilmId = detailModel.Id;
+				newRatingEntity.RatingInPercents = model.RatingInPercents;
+				newRatingEntity.TextRating = model.TextRating;
+				return newRatingEntity;
 
 			}).ToList();
 

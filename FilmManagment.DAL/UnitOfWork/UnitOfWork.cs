@@ -9,6 +9,7 @@ namespace FilmManagment.DAL.UnitOfWork
 		public DbContext DbContext { get; set; }
 
 		public IDbContextFactory<AppDbContext> localDbContextFactory;
+		public EntityFactory usedEntityFactory;
 
 		public UnitOfWork(IDbContextFactory<AppDbContext> dbContextFactory)
 		{
@@ -18,6 +19,7 @@ namespace FilmManagment.DAL.UnitOfWork
 		public UnitOfWork Create()
 		{
 			DbContext = localDbContextFactory.CreateDbContext();
+			usedEntityFactory = new EntityFactory((AppDbContext)DbContext);
 			return this;
 		}
 

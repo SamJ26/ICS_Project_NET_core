@@ -17,17 +17,14 @@ namespace FilmManagment.BL.Facades
 		where TDetailModel : ModelBase, new()
 	{
 		private readonly IMapper<TEntity, TListModel, TDetailModel> mapper;
-		private readonly IEntityFactory entityFactory;
 		private readonly Repository<TEntity> repository;
 		private readonly UnitOfWork usedUnitOfWork;
 
 		protected CrudFacadeBase(UnitOfWork aUnitOfWork,
 								 Repository<TEntity> aRepository,
-								 IMapper<TEntity, TListModel, TDetailModel> aMapper,
-								 IEntityFactory aEntityFactory)
+								 IMapper<TEntity, TListModel, TDetailModel> aMapper)
 		{
 			mapper = aMapper;
-			entityFactory = aEntityFactory;
 			repository = aRepository;
 			usedUnitOfWork = aUnitOfWork;
 		}
@@ -75,7 +72,7 @@ namespace FilmManagment.BL.Facades
 		{
 			using (var unitOfWork = usedUnitOfWork.Create())
 			{
-				var entity = mapper.Map(model, entityFactory);
+				var entity = mapper.Map(model, unitOfWork.usedEntityFactory);
 				entity = repository.InsertOrUpdate(entity);
 				usedUnitOfWork.Commit();
 

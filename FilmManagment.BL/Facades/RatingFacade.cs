@@ -12,9 +12,8 @@ namespace FilmManagment.BL.Facades
 	{
 		public RatingFacade(UnitOfWork aUnitOfWork,
 							Repository<RatingEntity> aRepository,
-							IMapper<RatingEntity, RatingListModel, RatingDetailModel> aMapper,
-							IEntityFactory aEntityFactory)
-							: base(aUnitOfWork, aRepository, aMapper, aEntityFactory)
+							IMapper<RatingEntity, RatingListModel, RatingDetailModel> aMapper)
+							: base(aUnitOfWork, aRepository, aMapper)
 		{
 		}
 	}

@@ -61,6 +61,6 @@ namespace FilmManagment.GUI.Wrappers
 
         public static implicit operator ActorWrappedModel(ActorDetailModel detailModel) => new ActorWrappedModel(detailModel);
 
-        public static implicit operator ActorDetailModel(ActorWrappedModel wrappedModel) => wrappedModel.usedModel;
+        public static implicit operator ActorDetailModel(ActorWrappedModel wrappedModel) => wrappedModel.UsedModel;
     }
 }

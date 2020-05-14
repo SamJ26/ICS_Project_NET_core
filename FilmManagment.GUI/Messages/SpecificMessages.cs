@@ -1,4 +1,5 @@
 ﻿using FilmManagment.BL;
+using Microsoft.Xaml.Behaviors.Media;
 
 namespace FilmManagment.GUI.Messages
 { 
@@ -37,5 +38,32 @@ namespace FilmManagment.GUI.Messages
     /// </summary>
     public class NO_WarningResultMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
     {
+    }
+
+    /// <summary>
+    /// This message will be sent e.g. when you want to move on FilmDetail from ActorDetail via Actor.ActedMovies
+    /// </summary>
+    /// <typeparam name="TwrrappedModel"> Selected item which you want to see in detail view </typeparam>
+    public class MoveToDetailMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
+    {
+    }
+
+    /// <summary>
+    /// This message will be sent to FilmDetailViewModel when user select actor or director in SelectiveWindow
+    /// </summary>
+    /// <typeparam name="TwrrappedModel"> Type of selected person ( DirectorWrappedModel / ActorWrappedModel ) </typeparam>
+    public class AddPersonToFilmMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
+    {
+        public string PersonName { get; set; } = string.Empty;
+    }
+
+    /// <summary>
+    /// This is message will be sent to FilmDetailViewModel when user press Save button on RatingServiceWindow
+    /// </summary>
+    /// <typeparam name="TwrrappedModel"> Always RatingWrappedModel </typeparam>
+    public class AddRatingToFilmMessage<TwrrappedModel> : Message<TwrrappedModel> where TwrrappedModel : IId
+    {
+        public string TextRating { get; set; } = string.Empty;
+        public int RatingInPercents { get; set; } = 0;
     }
 }
