@@ -12,8 +12,8 @@
         d:DataContext="{d:DesignInstance viewModels:MainViewModel}"
         DataContext="{Binding MainViewModel}"
         Title="MainWindow"
-        Height="550"
-        Width="900"
+        Height="600"
+        Width="950"
         WindowStartupLocation="CenterScreen">
 
     <Grid Background="#FF353C4D">

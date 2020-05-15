@@ -33,7 +33,6 @@ namespace FilmManagment.GUI.ViewModels
 
             usedMediator.Register<NewMessage<ActorWrappedModel>>(CreateNewWrappedModel);
             usedMediator.Register<SelectedMessage<ActorWrappedModel>>(PrepareActor);
-
             usedMediator.Register<MoveToDetailMessage<ActorWrappedModel>>(ShowDetailInfo);
 
             FilmSelectedCommand = new RelayCommand<FilmActorWrappedModel>(MoveToFilmDetail);
@@ -80,7 +79,7 @@ namespace FilmManagment.GUI.ViewModels
             }
         }
 
-        #region Actions to execute on button click
+        #region Actions triggered by RelayCommand
 
         // Execute on FilmSelectedCommand
         private void MoveToFilmDetail(FilmActorWrappedModel filmActorWrappedModel)
@@ -115,6 +114,8 @@ namespace FilmManagment.GUI.ViewModels
             Model.PhotoFilePath = filePath;
             OnPropertyChanged("Model");
         }
+
+        // Execute on OpenWikiButtonCommand
         private void OpenWiki()
         {
             if (!usedOpenWebPageService.OpenUri(Model.WikiUrl))
