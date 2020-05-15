@@ -15,6 +15,8 @@ using FilmManagment.GUI.Commands;
 using System.Collections.ObjectModel;
 using FilmManagment.BL.Models.ListModels;
 using FilmManagment.GUI.Services.RatingCreationService;
+using FilmManagment.GUI.Services.FileBrowserService;
+using System.IO;
 
 namespace FilmManagment.GUI.ViewModels
 {
@@ -29,6 +31,7 @@ namespace FilmManagment.GUI.ViewModels
         private readonly ISelectActorViewModel usedSelectActorViewModel;
         private readonly ISelectDirectorViewModel usedSelectDirectorViewModel;
         private readonly IRatingCreationService usedRatingCreationService;
+        private readonly IFileBrowserService usedFileBrowserService;
 
         public FilmDetailViewModel(IMediator mediator,
                                    FilmFacade filmFacade,
@@ -38,7 +41,8 @@ namespace FilmManagment.GUI.ViewModels
                                    IConnectionService connectionService,
                                    ISelectActorViewModel selectActorViewModel,
                                    ISelectDirectorViewModel selectDirectorViewModel,
-                                   IRatingCreationService ratingCreationService)     
+                                   IRatingCreationService ratingCreationService,
+                                   IFileBrowserService fileBrowserService)     
         {
             usedMediator = mediator;
             usedFilmFacade = filmFacade;
@@ -49,6 +53,7 @@ namespace FilmManagment.GUI.ViewModels
             usedSelectActorViewModel = selectActorViewModel;
             usedSelectDirectorViewModel = selectDirectorViewModel;
             usedRatingCreationService = ratingCreationService;
+            usedFileBrowserService = fileBrowserService;
 
             mediator.Register<NewMessage<FilmWrappedModel>>(CreateNewWrappedModel);
             mediator.Register<SelectedMessage<FilmWrappedModel>>(PrepareFilm);
@@ -59,7 +64,7 @@ namespace FilmManagment.GUI.ViewModels
             mediator.Register<AddPersonToFilmMessage<DirectorWrappedModel>>(AddDirectorToFilm);
             mediator.Register<AddRatingToFilmMessage<RatingWrappedListModel>>(AddRatingToFilm);
 
-            EditButtonCommand = new RelayCommand(EnableTextBoxes);
+            EditButtonCommand = new RelayCommand(EnableEditing);
             SaveButtonCommand = new RelayCommand(Save, CanSave);
             ActorSelectedCommand = new RelayCommand<FilmActorWrappedModel>(ActorSelected);
             RemoveActorButtonCommand = new RelayCommand(RemoveActorFromList, RemoveActorEnabled);
@@ -70,9 +75,9 @@ namespace FilmManagment.GUI.ViewModels
             RatingSelectedCommand = new RelayCommand<RatingWrappedModel>(RatingSelected);
             RemoveRatingButtonCommand = new RelayCommand(RemoveRatingFromList, RemoveRatingEnabled);
             AddRatingButtonCommand = new RelayCommand(ShowRatingCreationWindow);
-
             ActorListDoubleClickCommand = new RelayCommand<FilmActorWrappedModel>(MoveToActorDetail);
             DirectorListDoubleClickCommand = new RelayCommand<FilmDirectorWrappedModel>(MoveToDirectorDetail);
+            UpdatePhotoButtonCommand = new RelayCommand(UpdatePhoto, UpdatePhotoEnabled);
 
             GenreOptions = EnumExtensions.ConvertEnumToList<Genre>();
         }
@@ -89,8 +94,9 @@ namespace FilmManagment.GUI.ViewModels
         public ICommand ActorSelectedCommand { get; }
         public ICommand DirectorSelectedCommand { get; }
         public ICommand RatingSelectedCommand { get; }
-        public ICommand ActorListDoubleClickCommand { get;  }
-        public ICommand DirectorListDoubleClickCommand { get;  }
+        public ICommand ActorListDoubleClickCommand { get; }
+        public ICommand DirectorListDoubleClickCommand { get; }
+        public ICommand UpdatePhotoButtonCommand { get; }
 
 
         public ObservableCollection<FilmActorWrappedModel> Actors { get; set; } = new ObservableCollection<FilmActorWrappedModel>();
@@ -99,10 +105,12 @@ namespace FilmManagment.GUI.ViewModels
         public List<string> GenreOptions { get; set; }
 
 
-        private bool saveButtonReady = false;
+        private bool saveButtoEnabled = false;
+        private bool updatePhotoButtonEnabled = false;
         private FilmActorWrappedModel selectedActor;
         private FilmDirectorWrappedModel selectedDirector;
         private RatingWrappedModel selectedRating;
+        private readonly string defaultFilePath = @"C:\Users\Samuel\Pictures\Saved Pictures";
 
 
         #region Properties with private fields
@@ -165,14 +173,15 @@ namespace FilmManagment.GUI.ViewModels
 
         #endregion
 
-        #region Actions to execute on button click
+        #region Basic buttons
 
         // Execute on EditButtonCommand
-        private void EnableTextBoxes()
+        private void EnableEditing()
         {
             ReadOnlyTextBoxes = false;
             ComboBoxEnabled = true;
-            saveButtonReady = true;
+            saveButtoEnabled = true;
+            updatePhotoButtonEnabled = true;
         }
 
         // Execute on SaveButtonCommand
@@ -183,7 +192,18 @@ namespace FilmManagment.GUI.ViewModels
             usedMediator.Send(new UpdateMessage<FilmWrappedModel> { Model = Model });
             ReadOnlyTextBoxes = true;
             ComboBoxEnabled = false;
-            saveButtonReady = false;
+            saveButtoEnabled = false;
+            updatePhotoButtonEnabled = false;
+        }
+
+        // Execute on UpdatePhotoButtonCommand
+        private void UpdatePhoto()
+        {
+            string filePath = usedFileBrowserService.OpenFileDialog(defaultFilePath);
+            if (string.IsNullOrEmpty(filePath))
+                throw new ArgumentNullException("File path can not be null or empty!");
+            Model.ImageFilePath = filePath;
+            OnPropertyChanged("Model");
         }
 
         #endregion
@@ -303,6 +323,8 @@ namespace FilmManagment.GUI.ViewModels
             Load(Model.Id);
         }
 
+        private bool UpdatePhotoEnabled() => updatePhotoButtonEnabled ? true : false;
+
         private bool RemoveActorEnabled() => selectedActor != null ? true : false;
 
         private bool RemoveDirectorEnabled() => selectedDirector != null ? true : false;
@@ -311,14 +333,14 @@ namespace FilmManagment.GUI.ViewModels
 
         private bool CanSave()
         {
-            if (saveButtonReady &&
+            if (saveButtoEnabled &&
                 Model != null &&
                 !string.IsNullOrWhiteSpace(Model.OriginalName) &&
                 !string.IsNullOrWhiteSpace(Model.CzechName) &&
                 !string.IsNullOrWhiteSpace(Model.CountryOfOrigin) &&
                 !string.IsNullOrWhiteSpace(Model.Description) &&
                 Model.GenreOfFilm != Genre.Undefined &&
-                Model.LengthInMinutes != TimeSpan.Zero)
+                !FilmLength.Equals("00:00:00"))
                 return true;
             return false;
         }
@@ -329,7 +351,7 @@ namespace FilmManagment.GUI.ViewModels
 
             ReadOnlyTextBoxes = true;
             ComboBoxEnabled = false;
-            saveButtonReady = false;
+            saveButtoEnabled = false;
             SelectedGenre = GenreOptions[GenreOptions.IndexOf(Model.GenreOfFilm.ToString())];
             filmLength = Model.LengthInMinutes.ToString();
 
@@ -348,7 +370,7 @@ namespace FilmManagment.GUI.ViewModels
             Model = new FilmDetailModel();
             ReadOnlyTextBoxes = false;
             ComboBoxEnabled = true;
-            saveButtonReady = true;
+            saveButtoEnabled = true;
             SelectedGenre = GenreOptions[0];
             filmLength = Model.LengthInMinutes.ToString();
         }

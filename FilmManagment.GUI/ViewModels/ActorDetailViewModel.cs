@@ -9,6 +9,8 @@ using System;
 using System.Windows.Input;
 using FilmManagment.GUI.Commands;
 using System.Collections.ObjectModel;
+using FilmManagment.GUI.Services.FileBrowserService;
+using FilmManagment.GUI.Services.WebService;
 
 namespace FilmManagment.GUI.ViewModels
 {
@@ -16,32 +18,43 @@ namespace FilmManagment.GUI.ViewModels
     {
         private readonly IMediator usedMediator;
         private readonly ActorFacade usedActorFacade;
+        private readonly IFileBrowserService usedFileBrowserService;
+        private readonly IOpenWebPageService usedOpenWebPageService;
 
         public ActorDetailViewModel(IMediator mediator,
-                                    ActorFacade actorFacade)
+                                    ActorFacade actorFacade,
+                                    IFileBrowserService fileBrowserSerice,
+                                    IOpenWebPageService openWebPageService)
         {
             usedMediator = mediator;
             usedActorFacade = actorFacade;
+            usedFileBrowserService = fileBrowserSerice;
+            usedOpenWebPageService = openWebPageService;
 
             usedMediator.Register<NewMessage<ActorWrappedModel>>(CreateNewWrappedModel);
             usedMediator.Register<SelectedMessage<ActorWrappedModel>>(PrepareActor);
-
             usedMediator.Register<MoveToDetailMessage<ActorWrappedModel>>(ShowDetailInfo);
 
             FilmSelectedCommand = new RelayCommand<FilmActorWrappedModel>(MoveToFilmDetail);
-            EditButtonCommand = new RelayCommand(EnableTextEditing);
+            EditButtonCommand = new RelayCommand(EnableEditing);
             SaveButtonCommand = new RelayCommand(Save, CanSave);
+            UpdatePhotoButtonCommand = new RelayCommand(UpdatePhoto, UpdatePhotoEnabled);
+            OpenWikiButtonCommand = new RelayCommand(OpenWiki, OpenWikiEnabled);
         }
 
         // Commands
         public ICommand FilmSelectedCommand { get; }
         public ICommand EditButtonCommand { get; }
         public ICommand SaveButtonCommand { get; }
+        public ICommand UpdatePhotoButtonCommand { get; }
+        public ICommand OpenWikiButtonCommand { get; }
 
         public ObservableCollection<FilmActorWrappedModel> ActedMovies { get; set; } = new ObservableCollection<FilmActorWrappedModel>();
 
 
-        private bool saveButtonReady = false;
+        private bool saveButtonEnabled = false;
+        private bool updatePhotoButtonEnabled = false;
+        private readonly string defaultFilePath = @"C:\Users\Samuel\Pictures\Saved Pictures";
 
 
         private ActorWrappedModel model;
@@ -66,7 +79,7 @@ namespace FilmManagment.GUI.ViewModels
             }
         }
 
-        #region Actions to execute on button click
+        #region Actions triggered by RelayCommand
 
         // Execute on FilmSelectedCommand
         private void MoveToFilmDetail(FilmActorWrappedModel filmActorWrappedModel)
@@ -75,10 +88,11 @@ namespace FilmManagment.GUI.ViewModels
         }
 
         // Execute on EditButtonCommand
-        private void EnableTextEditing()
+        private void EnableEditing()
         {
             ReadOnlyTextBoxes = false;
-            saveButtonReady = true;
+            saveButtonEnabled = true;
+            updatePhotoButtonEnabled = true;
         }
 
         // Execute on SaveButtonCommand
@@ -87,10 +101,32 @@ namespace FilmManagment.GUI.ViewModels
             usedActorFacade.Save(Model);
             usedMediator.Send(new UpdateMessage<ActorWrappedModel> { Model = Model });
             ReadOnlyTextBoxes = true;
-            saveButtonReady = false;
+            saveButtonEnabled = false;
+            updatePhotoButtonEnabled = false;
+        }
+
+        // Execute on UpdatePhotoButtonCommand
+        private void UpdatePhoto()
+        {
+            string filePath = usedFileBrowserService.OpenFileDialog(defaultFilePath);
+            if (string.IsNullOrEmpty(filePath))
+                throw new ArgumentNullException("File path can not be null or empty!");
+            Model.PhotoFilePath = filePath;
+            OnPropertyChanged("Model");
+        }
+
+        // Execute on OpenWikiButtonCommand
+        private void OpenWiki()
+        {
+            if (!usedOpenWebPageService.OpenUri(Model.WikiUrl))
+                throw new ArgumentException("Unable to open uri adress!");
         }
 
         #endregion
+
+        private bool UpdatePhotoEnabled() => updatePhotoButtonEnabled ? true : false;
+
+        private bool OpenWikiEnabled() => !string.IsNullOrEmpty(Model.WikiUrl) && !string.IsNullOrWhiteSpace(Model.WikiUrl) ? true : false;
 
         public void Load(Guid id)
         {
@@ -106,7 +142,7 @@ namespace FilmManagment.GUI.ViewModels
         {
             Model = new ActorDetailModel();
             ReadOnlyTextBoxes = false;
-            saveButtonReady = true;
+            saveButtonEnabled = true;
             ActedMovies.Clear();
         }
 
@@ -118,7 +154,7 @@ namespace FilmManagment.GUI.ViewModels
 
         private bool CanSave()
         {
-            if (saveButtonReady &&
+            if (saveButtonEnabled &&
                 Model != null &&
                 !string.IsNullOrWhiteSpace(Model.FirstName) &&
                 !string.IsNullOrWhiteSpace(Model.SecondName) &&
