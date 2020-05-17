@@ -56,9 +56,7 @@ namespace FilmManagment.GUI.ViewModels
 
 
         public ObservableCollection<FilmListModel> Films { get; set; } = new ObservableCollection<FilmListModel>();
-        public string SearchedObject { get; set; }
         public List<string> SearchingOptions { get; set; }
-        public string SelectedOption { get; set; }
 
 
         private readonly string defaultSearchingBoxMessage = "What are you looking for?";
@@ -67,6 +65,28 @@ namespace FilmManagment.GUI.ViewModels
 
         private ICollection<FilmListModel> foundFilms;
 
+
+        private string searchedObject;
+        public string SearchedObject
+        {
+            get => searchedObject;
+            set
+            {
+                searchedObject = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string selectedOption;
+        public string SelectedOption
+        {
+            get => selectedOption;
+            set
+            {
+                selectedOption = value;
+                OnPropertyChanged();
+            }
+        }
 
         #region Actions triggered by RelayCommand
 
@@ -98,6 +118,7 @@ namespace FilmManagment.GUI.ViewModels
         private void Refresh()
         {
             selectedFilm = null;
+            SearchedObject = defaultSearchingBoxMessage;
             Load();
         }
 
@@ -150,6 +171,10 @@ namespace FilmManagment.GUI.ViewModels
             // Searching according to Country of origin
             else if(SelectedOption == SearchingOptions.ElementAt(2))
                 return query.Where(film => film.CountryOfOrigin == SearchedObject).ToList();
+
+            // Searching according to Description
+            else if (SelectedOption == SearchingOptions.ElementAt(3))
+                return query.Where(film => film.Description.Contains(SearchedObject)).ToList();
 
             // Default: Searching according to Original name
             else
