@@ -87,7 +87,7 @@ namespace FilmManagment.GUI.ViewModels
             }
         }
 
-        #region Actions to execute on button click
+        #region Actions triggered by RelayCommnad
 
         // Execute on ActorSelectedCommand
         private void SendActorSelectedMessage(ActorListModel actorListModel)
@@ -141,8 +141,7 @@ namespace FilmManagment.GUI.ViewModels
             usedFacade.Delete(selectedActor.Id);
             Load();
             selectedActor = null;
-
-            // TODO: sent message to update listViews in whole app
+            usedMediator.Send(new DeleteMessage<ActorWrappedModel>());
         }
 
         private void UpdateActors(IMessage _)

@@ -69,19 +69,12 @@
 
                 <TextBlock Foreground="Orange" Margin="10 15 0 2"> Genre Of Film</TextBlock>
                 <ComboBox Padding="5"
-                          Background="#FF72747C"
                           Height="28"
                           Margin="10 0 10 5"
                           IsReadOnly="True"
                           IsEnabled="{Binding Path=ComboBoxEnabled, Mode=OneWay}"
                           ItemsSource="{Binding GenreOptions}"
                           SelectedItem="{Binding SelectedGenre, Mode=TwoWay}">
-                    <ComboBox.ItemContainerStyle>
-                        <Style TargetType="ComboBoxItem">
-                            <Setter Property="Background" Value="#FF72747C"/>
-                            <Setter Property="BorderBrush" Value="#FF72747C"/>
-                        </Style>
-                    </ComboBox.ItemContainerStyle>
                 </ComboBox>
 
                 <TextBlock Foreground="Orange" Margin="10 0 0 2"> Length of film</TextBlock>

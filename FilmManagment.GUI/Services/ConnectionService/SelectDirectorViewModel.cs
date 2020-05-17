@@ -21,6 +21,9 @@ namespace FilmManagment.GUI.Services.ConnectionService
             usedMediator = mediator;
             usedFacade = facade;
 
+            usedMediator.Register<DeleteMessage<DirectorWrappedModel>>(ReloadList);
+            usedMediator.Register<UpdateMessage<DirectorWrappedModel>>(ReloadList);
+
             ItemSelectedCommand = new RelayCommand<DirectorListModel>(ItemSelected);
 
             LoadList();
@@ -46,5 +49,9 @@ namespace FilmManagment.GUI.Services.ConnectionService
             var directorsFromDB = usedFacade.GetAllList();
             ListItems.AddList(directorsFromDB);
         }
+
+        private void ReloadList(DeleteMessage<DirectorWrappedModel> _) => LoadList();
+
+        private void ReloadList(UpdateMessage<DirectorWrappedModel> _) => LoadList();
     }
 }

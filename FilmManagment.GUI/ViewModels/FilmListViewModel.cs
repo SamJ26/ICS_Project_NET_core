@@ -32,15 +32,15 @@ namespace FilmManagment.GUI.ViewModels
             mediator.Register<NO_WarningResultMessage<FilmWrappedModel>>(UpdateFilms);
             mediator.Register<UpdateMessage<FilmWrappedModel>>(UpdateFilms);
 
-            FilmSelectedCommand = new RelayCommand<FilmListModel>(OnFilmSelectedCommandExecute);
-            AddButtonCommand = new RelayCommand(OnAddButtonCommandExecute);
-            DeleteButtonCommand = new RelayCommand(OnDeleteButtonCommandExecute, IsEnabled_DeleteButton);
-            DetailButtonCommand = new RelayCommand(OnDetailButtonCommandExecute, IsEnabled_DetailButton);
-            RefreshButtonCommand = new RelayCommand(OnRefreshButtonCommandExecute);
-            SearchButtonCommand = new RelayCommand(OnSearchButtonCommandExecute);
+            FilmSelectedCommand = new RelayCommand<FilmListModel>(SendFilmSelectedMessage);
+            AddButtonCommand = new RelayCommand(SendFilmNewMessage);
+            DeleteButtonCommand = new RelayCommand(ExecuteWarning, IsEnabled_DeleteButton);
+            DetailButtonCommand = new RelayCommand(SendDetailButtonPushedMessage, IsEnabled_DetailButton);
+            RefreshButtonCommand = new RelayCommand(Refresh);
+            SearchButtonCommand = new RelayCommand(StartSearching);
 
-            SearchedObject = "What are you looking for?";
-            SearchingOptions = new List<string>() { "Origninal name", "Czech name", "Country of origin" };
+            SearchedObject = defaultSearchingBoxMessage;
+            SearchingOptions = new List<string>() { "Origninal name", "Czech name", "Country of origin", "Description" };
             SelectedOption = SearchingOptions[0];
 
             Load();
@@ -61,6 +61,8 @@ namespace FilmManagment.GUI.ViewModels
         public string SelectedOption { get; set; }
 
 
+        private readonly string defaultSearchingBoxMessage = "What are you looking for?";
+
         private FilmListModel selectedFilm;
 
         private ICollection<FilmListModel> foundFilms;
@@ -68,33 +70,39 @@ namespace FilmManagment.GUI.ViewModels
 
         #region Actions triggered by RelayCommand
 
-        private void OnFilmSelectedCommandExecute(FilmListModel filmListModel)
+        //Execute on FilmSelectedCommand
+        private void SendFilmSelectedMessage(FilmListModel filmListModel)
         {
             usedMediator.Send(new SelectedMessage<FilmWrappedModel> { Id = filmListModel.Id });
             selectedFilm = filmListModel;
         }
 
-        private void OnAddButtonCommandExecute()
+        //Execute on AddButtonCommand
+        private void SendFilmNewMessage()
         {
             selectedFilm = null;
             usedMediator.Send(new NewMessage<FilmWrappedModel>());
         }
 
-        private void OnDeleteButtonCommandExecute() => usedWarningService.ShowWarning(typeof(FilmWrappedModel));
+        //Execute on DeleteButtonCommand
+        private void ExecuteWarning() => usedWarningService.ShowWarning(typeof(FilmWrappedModel));
 
-        private void OnDetailButtonCommandExecute()
+        //Execute on DetailButtonCommand
+        private void SendDetailButtonPushedMessage()
         {
             selectedFilm = null;
             usedMediator.Send(new DetailButtonPushedMessage<FilmWrappedModel>());
         }
 
-        private void OnRefreshButtonCommandExecute()
+        //Execute on RefreshButtonCommand
+        private void Refresh()
         {
             selectedFilm = null;
             Load();
-        } 
+        }
 
-        private void OnSearchButtonCommandExecute()
+        //Execute on SearchButtonCommand
+        private void StartSearching()
         {
             selectedFilm = null;
             if ( !string.IsNullOrEmpty(SearchedObject) && !string.IsNullOrWhiteSpace(SearchedObject))
