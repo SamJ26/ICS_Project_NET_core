@@ -54,7 +54,6 @@ namespace FilmManagment.GUI.ViewModels
 
         private bool saveButtonEnabled = false;
         private bool updatePhotoButtonEnabled = false;
-        private readonly string defaultFilePath = @"C:\Users\Samuel\Pictures\Saved Pictures";
 
 
         private DirectorWrappedModel model;
@@ -108,7 +107,7 @@ namespace FilmManagment.GUI.ViewModels
         // Execute on UpdatePhotoButtonCommand
         private void UpdatePhoto()
         {
-            string filePath = usedFileBrowserService.OpenFileDialog(defaultFilePath);
+            string filePath = usedFileBrowserService.OpenFileDialog();
             if (string.IsNullOrEmpty(filePath))
                 throw new ArgumentNullException("File path can not be null or empty!");
             Model.PhotoFilePath = filePath;
