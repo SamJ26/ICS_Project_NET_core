@@ -54,10 +54,6 @@ namespace FilmManagment.GUI.Commands
 
         public bool CanExecute(object parameter)
         {
-            // Another way to do it
-            // Tmodel typedParameter = (Tmodel)parameter;
-            // if (typedParameter is Tmodel)
-
             if (parameter is Tmodel typedParameter)
                 return canExecuteAction?.Invoke(typedParameter) ?? true;
             return false;

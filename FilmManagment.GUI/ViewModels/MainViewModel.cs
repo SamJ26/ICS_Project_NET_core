@@ -142,7 +142,7 @@ namespace FilmManagment.GUI.ViewModels
 
         private void MoveToDirectorFromFilm(MoveToDetailMessage<DirectorWrappedModel> _) => SelectedView = DirectorDetailViewModel;
 
-        private void MoveToFilm(MoveToDetailMessage<FilmWrappedModel> _) => selectedView = FilmDetailViewModel;
+        private void MoveToFilm(MoveToDetailMessage<FilmWrappedModel> _) => SelectedView = FilmDetailViewModel;
 
         #endregion
     }

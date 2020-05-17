@@ -192,6 +192,10 @@
                     <DataGridTextColumn Header="Country Of Origin"
                                         Width="*"
                                         Binding="{Binding CountryOfOrigin}"/>
+
+                    <DataGridTextColumn Header="Description"
+                                        Width="*"
+                                        Binding="{Binding Description}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </ScrollViewer>

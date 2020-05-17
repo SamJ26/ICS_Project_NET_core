@@ -6,7 +6,7 @@ namespace FilmManagment.GUI.Services.FileBrowserService
 {
     public class FileBrowserService : IFileBrowserService
     {
-        public string OpenFileDialog(string defaultPath)
+        public string OpenFileDialog()
         {
             Microsoft.Win32.OpenFileDialog dialogWindow = new Microsoft.Win32.OpenFileDialog();
             bool? isOpened = dialogWindow.ShowDialog();

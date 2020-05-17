@@ -110,7 +110,6 @@ namespace FilmManagment.GUI.ViewModels
         private FilmActorWrappedModel selectedActor;
         private FilmDirectorWrappedModel selectedDirector;
         private RatingWrappedModel selectedRating;
-        private readonly string defaultFilePath = @"C:\Users\Samuel\Pictures\Saved Pictures";
 
 
         #region Properties with private fields
@@ -199,7 +198,7 @@ namespace FilmManagment.GUI.ViewModels
         // Execute on UpdatePhotoButtonCommand
         private void UpdatePhoto()
         {
-            string filePath = usedFileBrowserService.OpenFileDialog(defaultFilePath);
+            string filePath = usedFileBrowserService.OpenFileDialog();
             if (string.IsNullOrEmpty(filePath))
                 throw new ArgumentNullException("File path can not be null or empty!");
             Model.ImageFilePath = filePath;
@@ -373,6 +372,9 @@ namespace FilmManagment.GUI.ViewModels
             saveButtoEnabled = true;
             SelectedGenre = GenreOptions[0];
             filmLength = Model.LengthInMinutes.ToString();
+            Actors.Clear();
+            Directors.Clear();
+            Ratings.Clear();
         }
 
         private void PrepareFilm(SelectedMessage<FilmWrappedModel> film) => Load(film.Id);
