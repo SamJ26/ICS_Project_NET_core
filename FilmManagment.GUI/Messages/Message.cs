@@ -3,18 +3,18 @@ using System;
 
 namespace FilmManagment.GUI.Messages
 {
-    public abstract class Message<TwrappedModel> : IMessage where TwrappedModel : IId
-    {
-        private Guid? id;
+	public abstract class Message<TwrappedModel> : IMessage where TwrappedModel : IId
+	{
+		private Guid? id;
 
-        public TwrappedModel Model;
+		public TwrappedModel Model;
 
-        public Guid Id
-        {
-            get => id ?? Model.Id;
-            set => id = value;
-        }
+		public Guid Id
+		{
+			get => id ?? Model.Id;
+			set => id = value;
+		}
 
-        public Guid TargetId { get; set; }
-    }
+		public Guid TargetId { get; set; }
+	}
 }

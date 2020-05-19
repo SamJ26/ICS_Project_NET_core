@@ -1,8 +1,5 @@
-﻿using FilmManagment.DAL;
-using FilmManagment.DAL.Entities;
-using FilmManagment.DAL.Factories;
+﻿using FilmManagment.DAL.Entities;
 using FilmManagment.DAL.UnitOfWork;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
 

@@ -2,7 +2,6 @@
 using FilmManagment.BL.Models;
 using FilmManagment.BL.Repositories;
 using FilmManagment.DAL.Entities;
-using FilmManagment.DAL.Factories;
 using FilmManagment.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore.Query;
 using System;
@@ -76,7 +75,7 @@ namespace FilmManagment.BL.Facades
 				entity = repository.InsertOrUpdate(entity);
 				usedUnitOfWork.Commit();
 
-				return GetById(entity.Id);							//To fill properties not mapped from model to entity
+				return GetById(entity.Id);                          //To fill properties not mapped from model to entity
 			}
 		}
 	}

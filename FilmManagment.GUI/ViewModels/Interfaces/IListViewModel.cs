@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FilmManagment.GUI.ViewModels.Interfaces
+﻿namespace FilmManagment.GUI.ViewModels.Interfaces
 {
-    public interface IListViewModel : IViewModel
-    {
-        void Load();
-    }
+	public interface IListViewModel : IViewModel
+	{
+		void Load();
+	}
 }

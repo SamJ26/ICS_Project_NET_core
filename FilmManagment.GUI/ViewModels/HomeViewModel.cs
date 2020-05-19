@@ -15,171 +15,171 @@ using System.Windows.Input;
 
 namespace FilmManagment.GUI.ViewModels
 {
-    public class HomeViewModel : ViewModelBase, IHomeViewModel
-    {
-        private readonly IMediator usedMediator;
-        private readonly FilmFacade usedFilmFacade;
-        private readonly ActorFacade usedActorFacade;
-        private readonly DirectorFacade usedDirectorFacade;
+	public class HomeViewModel : ViewModelBase, IHomeViewModel
+	{
+		private readonly IMediator usedMediator;
+		private readonly FilmFacade usedFilmFacade;
+		private readonly ActorFacade usedActorFacade;
+		private readonly DirectorFacade usedDirectorFacade;
 
-        public HomeViewModel(IMediator mediator,
-                             FilmFacade filmFacade,
-                             ActorFacade actorFacade,
-                             DirectorFacade directorFacade)
-        {
-            usedMediator = mediator;
-            usedFilmFacade = filmFacade;
-            usedActorFacade = actorFacade;
-            usedDirectorFacade = directorFacade;
+		public HomeViewModel(IMediator mediator,
+							 FilmFacade filmFacade,
+							 ActorFacade actorFacade,
+							 DirectorFacade directorFacade)
+		{
+			usedMediator = mediator;
+			usedFilmFacade = filmFacade;
+			usedActorFacade = actorFacade;
+			usedDirectorFacade = directorFacade;
 
-            SearchButtonCommand = new RelayCommand(StartSearching);
-            FoundItemSelected = new RelayCommand<FoundItem>(ShowDetail);
-            CloseListCommand = new RelayCommand(HideFoundItems);
+			SearchButtonCommand = new RelayCommand(StartSearching);
+			FoundItemSelected = new RelayCommand<FoundItem>(ShowDetail);
+			CloseListCommand = new RelayCommand(HideFoundItems);
 
-            SearchedObject = defaultSearchingBoxMessage;
-            SearchingOptions = new List<string>() { "All", "Films", "Actors", "Directors" };
-            SelectedOption = SearchingOptions[0];
-            IsVisible = false;
-        }
+			SearchedObject = defaultSearchingBoxMessage;
+			SearchingOptions = new List<string>() { "All", "Films", "Actors", "Directors" };
+			SelectedOption = SearchingOptions[0];
+			IsVisible = false;
+		}
 
-        public ICommand SearchButtonCommand { get; }
-        public ICommand FoundItemSelected { get; }
-        public ICommand CloseListCommand { get; }
+		public ICommand SearchButtonCommand { get; }
+		public ICommand FoundItemSelected { get; }
+		public ICommand CloseListCommand { get; }
 
-        public ObservableCollection<FoundItem> FoundItems { get; set; } = new ObservableCollection<FoundItem>();
-        public List<string> SearchingOptions { get; set; }
-
-
-        private readonly string defaultSearchingBoxMessage = "What are you looking for?";
+		public ObservableCollection<FoundItem> FoundItems { get; set; } = new ObservableCollection<FoundItem>();
+		public List<string> SearchingOptions { get; set; }
 
 
-        private bool isVisible;
-        public bool IsVisible
-        {
-            get => isVisible;
-            set
-            {
-                isVisible = value;
-                OnPropertyChanged();
-            }
-        }
+		private readonly string defaultSearchingBoxMessage = "What are you looking for?";
 
-        private string searchedObject;
-        public string SearchedObject
-        {
-            get => searchedObject;
-            set
-            {
-                searchedObject = value;
-                OnPropertyChanged();
-            }
-        }
 
-        private string selectedOption;
-        public string SelectedOption
-        {
-            get => selectedOption;
-            set
-            {
-                selectedOption = value;
-                OnPropertyChanged();
-            }
-        }
+		private bool isVisible;
+		public bool IsVisible
+		{
+			get => isVisible;
+			set
+			{
+				isVisible = value;
+				OnPropertyChanged();
+			}
+		}
 
-        private void HideFoundItems()
-        {
-            FoundItems.Clear();
-            IsVisible = false;
-        }
+		private string searchedObject;
+		public string SearchedObject
+		{
+			get => searchedObject;
+			set
+			{
+				searchedObject = value;
+				OnPropertyChanged();
+			}
+		}
 
-        private void ShowDetail(FoundItem selectedItem)
-        {
-            if (selectedItem.FoundObject.Equals(FoundObjectType.Actor))
-                usedMediator.Send(new MoveToDetailMessage<ActorWrappedModel>() { Id = selectedItem.Id });
+		private string selectedOption;
+		public string SelectedOption
+		{
+			get => selectedOption;
+			set
+			{
+				selectedOption = value;
+				OnPropertyChanged();
+			}
+		}
 
-            else if (selectedItem.FoundObject.Equals(FoundObjectType.Director))
-                usedMediator.Send(new MoveToDetailMessage<DirectorWrappedModel>() { Id = selectedItem.Id });
+		private void HideFoundItems()
+		{
+			FoundItems.Clear();
+			IsVisible = false;
+		}
 
-            else if (selectedItem.FoundObject.Equals(FoundObjectType.Film))
-                usedMediator.Send(new MoveToDetailMessage<FilmWrappedModel>() { Id = selectedItem.Id });
+		private void ShowDetail(FoundItem selectedItem)
+		{
+			if (selectedItem.FoundObject.Equals(FoundObjectType.Actor))
+				usedMediator.Send(new MoveToDetailMessage<ActorWrappedModel>() { Id = selectedItem.Id });
 
-            else
-                throw new ArgumentException("Unknown Enum type!");
-        }
+			else if (selectedItem.FoundObject.Equals(FoundObjectType.Director))
+				usedMediator.Send(new MoveToDetailMessage<DirectorWrappedModel>() { Id = selectedItem.Id });
 
-        private void StartSearching()
-        {
-            FoundItems.Clear();
+			else if (selectedItem.FoundObject.Equals(FoundObjectType.Film))
+				usedMediator.Send(new MoveToDetailMessage<FilmWrappedModel>() { Id = selectedItem.Id });
 
-            // Searching in Films according to Origninal and Czech name
-            if (SelectedOption == SearchingOptions.ElementAt(1))
-            {
-                var query = usedFilmFacade.GetAllList();
-                FoundItems.AddList(ConvertFilmListModels(query.Where(item => item.OriginalName == searchedObject || item.CzechName == searchedObject)));
-            }
+			else
+				throw new ArgumentException("Unknown Enum type!");
+		}
 
-            // Searching in Actors according to First and Second name
-            else if (SelectedOption == SearchingOptions.ElementAt(2))
-            {
-                var query = usedActorFacade.GetAllList();
-                FoundItems.AddList(ConvertActorListModel(query.Where(item => item.FirstName == searchedObject || item.SecondName == searchedObject)));
-            }
+		private void StartSearching()
+		{
+			FoundItems.Clear();
 
-            // Searching in Directors according to First and Second name
-            else if (SelectedOption == SearchingOptions.ElementAt(3))
-            {
-                var query = usedDirectorFacade.GetAllList();
-                FoundItems.AddList(ConvertDirectorListModel(query.Where(item => item.FirstName == searchedObject || item.SecondName == searchedObject)));
-            }
+			// Searching in Films according to Origninal and Czech name
+			if (SelectedOption == SearchingOptions.ElementAt(1))
+			{
+				var query = usedFilmFacade.GetAllList();
+				FoundItems.AddList(ConvertFilmListModels(query.Where(item => item.OriginalName == searchedObject || item.CzechName == searchedObject)));
+			}
 
-            // Default searching in whole DB
-            else
-            {
-                var filmQuery = usedFilmFacade.GetAllList();
-                var actorQuery = usedActorFacade.GetAllList();
-                var directorQuery = usedDirectorFacade.GetAllList();
+			// Searching in Actors according to First and Second name
+			else if (SelectedOption == SearchingOptions.ElementAt(2))
+			{
+				var query = usedActorFacade.GetAllList();
+				FoundItems.AddList(ConvertActorListModel(query.Where(item => item.FirstName == searchedObject || item.SecondName == searchedObject)));
+			}
 
-                FoundItems.AddList(ConvertFilmListModels(filmQuery.Where(item => item.OriginalName == searchedObject || item.CzechName == searchedObject)));
-                FoundItems.AddList(ConvertActorListModel(actorQuery.Where(item => item.FirstName == searchedObject || item.SecondName == searchedObject)));
-                FoundItems.AddList(ConvertDirectorListModel(directorQuery.Where(item => item.FirstName == searchedObject || item.SecondName == searchedObject)));
-            }
+			// Searching in Directors according to First and Second name
+			else if (SelectedOption == SearchingOptions.ElementAt(3))
+			{
+				var query = usedDirectorFacade.GetAllList();
+				FoundItems.AddList(ConvertDirectorListModel(query.Where(item => item.FirstName == searchedObject || item.SecondName == searchedObject)));
+			}
 
-            SearchedObject = defaultSearchingBoxMessage;
-            SelectedOption = SearchingOptions[0];
-            IsVisible = true;
-        }
+			// Default searching in whole DB
+			else
+			{
+				var filmQuery = usedFilmFacade.GetAllList();
+				var actorQuery = usedActorFacade.GetAllList();
+				var directorQuery = usedDirectorFacade.GetAllList();
 
-        private IEnumerable<FoundItem> ConvertFilmListModels(IEnumerable<FilmListModel> films)
-        {
-            return films.Select(film => new FoundItem
-            {
-                Id = film.Id,
-                FirstNameOrOriginalName = film.OriginalName,
-                SecondNameOrCzechName = film.CzechName,
-                FoundObject = FoundObjectType.Film
-            });
-        }
+				FoundItems.AddList(ConvertFilmListModels(filmQuery.Where(item => item.OriginalName == searchedObject || item.CzechName == searchedObject)));
+				FoundItems.AddList(ConvertActorListModel(actorQuery.Where(item => item.FirstName == searchedObject || item.SecondName == searchedObject)));
+				FoundItems.AddList(ConvertDirectorListModel(directorQuery.Where(item => item.FirstName == searchedObject || item.SecondName == searchedObject)));
+			}
 
-        private IEnumerable<FoundItem> ConvertActorListModel(IEnumerable<ActorListModel> actors)
-        {
-            return actors.Select(actor => new FoundItem
-            {
-                Id = actor.Id,
-                FirstNameOrOriginalName = actor.FirstName,
-                SecondNameOrCzechName = actor.SecondName,
-                FoundObject = FoundObjectType.Actor
-            });
-        }
+			SearchedObject = defaultSearchingBoxMessage;
+			SelectedOption = SearchingOptions[0];
+			IsVisible = true;
+		}
 
-        private IEnumerable<FoundItem> ConvertDirectorListModel(IEnumerable<DirectorListModel> directors)
-        {
-            return directors.Select(director => new FoundItem
-            {
-                Id = director.Id,
-                FirstNameOrOriginalName = director.FirstName,
-                SecondNameOrCzechName = director.SecondName,
-                FoundObject = FoundObjectType.Director
-            });
-        }
-    }
+		private IEnumerable<FoundItem> ConvertFilmListModels(IEnumerable<FilmListModel> films)
+		{
+			return films.Select(film => new FoundItem
+			{
+				Id = film.Id,
+				FirstNameOrOriginalName = film.OriginalName,
+				SecondNameOrCzechName = film.CzechName,
+				FoundObject = FoundObjectType.Film
+			});
+		}
+
+		private IEnumerable<FoundItem> ConvertActorListModel(IEnumerable<ActorListModel> actors)
+		{
+			return actors.Select(actor => new FoundItem
+			{
+				Id = actor.Id,
+				FirstNameOrOriginalName = actor.FirstName,
+				SecondNameOrCzechName = actor.SecondName,
+				FoundObject = FoundObjectType.Actor
+			});
+		}
+
+		private IEnumerable<FoundItem> ConvertDirectorListModel(IEnumerable<DirectorListModel> directors)
+		{
+			return directors.Select(director => new FoundItem
+			{
+				Id = director.Id,
+				FirstNameOrOriginalName = director.FirstName,
+				SecondNameOrCzechName = director.SecondName,
+				FoundObject = FoundObjectType.Director
+			});
+		}
+	}
 }

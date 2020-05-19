@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace FilmManagment.GUI.Services.FileBrowserService
+﻿namespace FilmManagment.GUI.Services.FileBrowserService
 {
-    public class FileBrowserService : IFileBrowserService
-    {
-        public string OpenFileDialog()
-        {
-            Microsoft.Win32.OpenFileDialog dialogWindow = new Microsoft.Win32.OpenFileDialog();
-            bool? isOpened = dialogWindow.ShowDialog();
-            if (isOpened == true)
-            {
-                string selectedFilePath = dialogWindow.FileName;
-                return selectedFilePath;
-            }
-            return null;
-        }
-    }
+	public class FileBrowserService : IFileBrowserService
+	{
+		public string OpenFileDialog()
+		{
+			Microsoft.Win32.OpenFileDialog dialogWindow = new Microsoft.Win32.OpenFileDialog();
+			bool? isOpened = dialogWindow.ShowDialog();
+			if (isOpened == true)
+			{
+				string selectedFilePath = dialogWindow.FileName;
+				return selectedFilePath;
+			}
+			return null;
+		}
+	}
 }

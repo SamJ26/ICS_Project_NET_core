@@ -2,10 +2,10 @@
 
 namespace FilmManagment.GUI.ViewModels.Interfaces
 {
-    public interface IDetailViewModel<TDetailWrappedModel> : IViewModel
-    {
-        TDetailWrappedModel Model { get; set; }
+	public interface IDetailViewModel<TDetailWrappedModel> : IViewModel
+	{
+		TDetailWrappedModel Model { get; set; }
 
-        void Load(Guid id);
-    }
+		void Load(Guid id);
+	}
 }

@@ -1,13 +1,10 @@
 ﻿using FilmManagment.BL.Facades;
-using FilmManagment.BL.Factories;
 using FilmManagment.BL.Mappers;
 using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using FilmManagment.BL.Repositories;
-using FilmManagment.DAL;
 using FilmManagment.DAL.Entities;
 using FilmManagment.DAL.Enums;
-using FilmManagment.DAL.Factories;
 using FilmManagment.DAL.Seeds;
 using FilmManagment.DAL.Tests;
 using FilmManagment.DAL.UnitOfWork;
