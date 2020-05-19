@@ -10,48 +10,48 @@ using System.Windows.Input;
 
 namespace FilmManagment.GUI.Services.ConnectionService
 {
-    public class SelectActorViewModel : ViewModelBase, ISelectActorViewModel
-    {
-        private readonly IMediator usedMediator;
-        private readonly ActorFacade usedFacade;
+	public class SelectActorViewModel : ViewModelBase, ISelectActorViewModel
+	{
+		private readonly IMediator usedMediator;
+		private readonly ActorFacade usedFacade;
 
-        public SelectActorViewModel(IMediator mediator,
-                                    ActorFacade facade)
-        {
-            usedMediator = mediator;
-            usedFacade = facade;
+		public SelectActorViewModel(IMediator mediator,
+									ActorFacade facade)
+		{
+			usedMediator = mediator;
+			usedFacade = facade;
 
-            usedMediator.Register<DeleteMessage<ActorWrappedModel>>(ReloadList);
-            usedMediator.Register<UpdateMessage<ActorWrappedModel>>(ReloadList);
+			usedMediator.Register<DeleteMessage<ActorWrappedModel>>(ReloadList);
+			usedMediator.Register<UpdateMessage<ActorWrappedModel>>(ReloadList);
 
-            ItemSelectedCommand = new RelayCommand<ActorListModel>(ItemSelected);
+			ItemSelectedCommand = new RelayCommand<ActorListModel>(ItemSelected);
 
-            LoadList();
-        }
+			LoadList();
+		}
 
-        public ICommand ItemSelectedCommand { get; }
+		public ICommand ItemSelectedCommand { get; }
 
-        public ObservableCollection<ActorListModel> ListItems { get; set; } = new ObservableCollection<ActorListModel>();
-        public string Description { get; } = "Use double click to select actors";
+		public ObservableCollection<ActorListModel> ListItems { get; set; } = new ObservableCollection<ActorListModel>();
+		public string Description { get; } = "Use double click to select actors";
 
-        private void ItemSelected(ActorListModel actorListModel)
-        {
-            usedMediator.Send(new AddPersonToFilmMessage<ActorWrappedModel>()
-            {
-                Id = actorListModel.Id,
-                PersonName = string.Concat(actorListModel.FirstName, " ", actorListModel.SecondName)
-            });
-        }
+		private void ItemSelected(ActorListModel actorListModel)
+		{
+			usedMediator.Send(new AddPersonToFilmMessage<ActorWrappedModel>()
+			{
+				Id = actorListModel.Id,
+				PersonName = string.Concat(actorListModel.FirstName, " ", actorListModel.SecondName)
+			});
+		}
 
-        private void LoadList()
-        {
-            ListItems.Clear();
-            var actorsFromDB = usedFacade.GetAllList();
-            ListItems.AddList(actorsFromDB);
-        }
+		private void LoadList()
+		{
+			ListItems.Clear();
+			var actorsFromDB = usedFacade.GetAllList();
+			ListItems.AddList(actorsFromDB);
+		}
 
-        private void ReloadList(DeleteMessage<ActorWrappedModel> _) => LoadList();
+		private void ReloadList(DeleteMessage<ActorWrappedModel> _) => LoadList();
 
-        private void ReloadList(UpdateMessage<ActorWrappedModel> _) => LoadList();
-    }
+		private void ReloadList(UpdateMessage<ActorWrappedModel> _) => LoadList();
+	}
 }

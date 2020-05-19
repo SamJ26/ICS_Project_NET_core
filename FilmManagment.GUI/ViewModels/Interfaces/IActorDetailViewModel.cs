@@ -2,7 +2,7 @@
 
 namespace FilmManagment.GUI.ViewModels.Interfaces
 {
-    public interface IActorDetailViewModel : IDetailViewModel<ActorWrappedModel>
-    {
-    }
+	public interface IActorDetailViewModel : IDetailViewModel<ActorWrappedModel>
+	{
+	}
 }

@@ -3,7 +3,6 @@ using FilmManagment.BL.Models.DetailModels;
 using FilmManagment.BL.Models.ListModels;
 using FilmManagment.BL.Repositories;
 using FilmManagment.DAL.Entities;
-using FilmManagment.DAL.Factories;
 using FilmManagment.DAL.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;

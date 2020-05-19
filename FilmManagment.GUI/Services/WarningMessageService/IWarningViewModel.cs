@@ -3,8 +3,8 @@ using System;
 
 namespace FilmManagment.GUI.Services.WarningMessageService
 {
-    public interface IWarningViewModel : IViewModel
-    {
-        Type MessageType { get; set; }
-    }
+	public interface IWarningViewModel : IViewModel
+	{
+		Type MessageType { get; set; }
+	}
 }

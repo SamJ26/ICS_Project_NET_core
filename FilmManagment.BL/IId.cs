@@ -2,8 +2,8 @@
 
 namespace FilmManagment.BL
 {
-    public interface IId
-    {
-        Guid Id { get; set; }
-    }
+	public interface IId
+	{
+		Guid Id { get; set; }
+	}
 }

@@ -5,62 +5,62 @@ using System.Linq;
 
 namespace FilmManagment.GUI.Wrappers
 {
-    public class ActorWrappedModel : ModelWrapperBase<ActorDetailModel>
-    {
-        public ActorWrappedModel(ActorDetailModel detailModel) : base(detailModel)
-        {
-            InitializeCollectionActedMovies(detailModel);
-        }
+	public class ActorWrappedModel : ModelWrapperBase<ActorDetailModel>
+	{
+		public ActorWrappedModel(ActorDetailModel detailModel) : base(detailModel)
+		{
+			InitializeCollectionActedMovies(detailModel);
+		}
 
-        #region Wrapping properties
+		#region Wrapping properties
 
-        public string FirstName
-        {
-            get => GetValue<string>();
-            set => SetValue(value);
-        }
+		public string FirstName
+		{
+			get => GetValue<string>();
+			set => SetValue(value);
+		}
 
-        public string SecondName
-        {
-            get => GetValue<string>();
-            set => SetValue(value);
-        }
+		public string SecondName
+		{
+			get => GetValue<string>();
+			set => SetValue(value);
+		}
 
-        public int Age
-        {
-            get => GetValue<int>();
-            set => SetValue(value);
-        }
+		public int Age
+		{
+			get => GetValue<int>();
+			set => SetValue(value);
+		}
 
-        public string WikiUrl
-        {
-            get => GetValue<string>();
-            set => SetValue(value);
-        }
+		public string WikiUrl
+		{
+			get => GetValue<string>();
+			set => SetValue(value);
+		}
 
-        public string PhotoFilePath
-        {
-            get => GetValue<string>();
-            set => SetValue(value);
-        }
+		public string PhotoFilePath
+		{
+			get => GetValue<string>();
+			set => SetValue(value);
+		}
 
-        #endregion
+		#endregion
 
-        public ObservableCollection<FilmActorWrappedModel> ActedMovies { get; set; }
+		public ObservableCollection<FilmActorWrappedModel> ActedMovies { get; set; }
 
-        private void InitializeCollectionActedMovies(ActorDetailModel actorDetailModel)
-        {
-            if (actorDetailModel.ActedMovies == null)
-            {
-                throw new ArgumentException("ActedMovies cannot be null");
-            }
-            ActedMovies = new ObservableCollection<FilmActorWrappedModel>(actorDetailModel.ActedMovies.Select(i => new FilmActorWrappedModel(i)));
+		private void InitializeCollectionActedMovies(ActorDetailModel actorDetailModel)
+		{
+			if (actorDetailModel.ActedMovies == null)
+			{
+				throw new ArgumentException("ActedMovies cannot be null");
+			}
+			ActedMovies = new ObservableCollection<FilmActorWrappedModel>(actorDetailModel.ActedMovies.Select(i => new FilmActorWrappedModel(i)));
 
-            RegisterCollection(ActedMovies, actorDetailModel.ActedMovies);
-        }
+			RegisterCollection(ActedMovies, actorDetailModel.ActedMovies);
+		}
 
-        public static implicit operator ActorWrappedModel(ActorDetailModel detailModel) => new ActorWrappedModel(detailModel);
+		public static implicit operator ActorWrappedModel(ActorDetailModel detailModel) => new ActorWrappedModel(detailModel);
 
-        public static implicit operator ActorDetailModel(ActorWrappedModel wrappedModel) => wrappedModel.UsedModel;
-    }
+		public static implicit operator ActorDetailModel(ActorWrappedModel wrappedModel) => wrappedModel.UsedModel;
+	}
 }
