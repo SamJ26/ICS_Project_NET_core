@@ -199,10 +199,11 @@ namespace FilmManagment.GUI.ViewModels
         private void UpdatePhoto()
         {
             string filePath = usedFileBrowserService.OpenFileDialog();
-            if (string.IsNullOrEmpty(filePath))
-                throw new ArgumentNullException("File path can not be null or empty!");
-            Model.ImageFilePath = filePath;
-            OnPropertyChanged("Model");
+            if (!string.IsNullOrEmpty(filePath) && !string.IsNullOrWhiteSpace(filePath))
+            {
+                Model.ImageFilePath = filePath;
+                OnPropertyChanged("Model");
+            }
         }
 
         #endregion
