@@ -119,7 +119,10 @@ namespace FilmManagment.GUI.ViewModels
 		private void OpenWiki()
 		{
 			if (!usedOpenWebPageService.OpenUri(Model.WikiUrl))
-				throw new ArgumentException("Unable to open uri adress!");
+			{
+				Model.WikiUrl = "ERROR: invalid URI";
+				OnPropertyChanged("Model");
+			}
 		}
 
 		#endregion
